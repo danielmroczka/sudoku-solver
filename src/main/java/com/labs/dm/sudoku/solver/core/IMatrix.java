@@ -9,10 +9,13 @@ import java.util.Iterator;
  *
  * @author daniel
  */
-public interface IMatrix {
+public interface IMatrix extends Iterable<Integer> {
 
     int EMPTY_VALUE = 0;
     
+    /**
+     * Number of rows and columns
+     */
     int SIZE = 9;
 
     /**
@@ -40,8 +43,16 @@ public interface IMatrix {
      */
     boolean isSolved();
 
+    /**
+     * Fills all cells with empty value.
+     */
     void clear();
 
+    /**
+     * Fills all cells with provided value.
+     * 
+     * @param value 
+     */
     void fillWithValue(int value);
     
     Iterator<Integer> iterator();

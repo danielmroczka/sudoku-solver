@@ -64,6 +64,7 @@ public class Matrix implements IMatrix {
 
     }
 
+    @Override
     public final Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
             private int currentIndex = 0;
