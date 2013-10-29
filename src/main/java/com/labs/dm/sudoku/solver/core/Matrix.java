@@ -13,16 +13,16 @@ import java.util.Set;
  * @author daniel
  */
 public class Matrix implements IMatrix {
-    
+
     private final int[][] tab;
-    
+
     private final Set<Integer>[][] possibleValues;
-    
+
     public Matrix() {
         tab = new int[SIZE][SIZE];
         possibleValues = new HashSet[SIZE][SIZE];
     }
-    
+
     public Matrix(int... items) {
         this();
         if (items.length % SIZE != 0) {
@@ -30,43 +30,35 @@ public class Matrix implements IMatrix {
         }
         //TODO: load data
     }
-    
+
     @Override
     public int getCellValue(int row, int col) {
         validateInputIndex(row, col);
         return tab[row][col];
     }
-    
+
     @Override
     public void setCellValue(int row, int col, int value) {
         validateInputIndex(row, col);
+        validateInputValue(value);
         tab[row][col] = value;
     }
-    
-    private void validateInputIndex(int row, int col) {
-        if (row < 0 || row > SIZE - 1) {
-            throw new IllegalArgumentException("Invalid row index");
-        }
-        if (col < 0 || col > SIZE - 1) {
-            throw new IllegalArgumentException("Invalid column index");
-        }
-    }
-    
+
     @Override
     public String toString() {
         return super.toString();
     }
-    
+
     @Override
     public boolean isSolved() {
         return false;
     }
-    
+
     @Override
     public void clear() {
         fillWithValue(EMPTY_VALUE);
     }
-    
+
     @Override
     public void fillWithValue(int value) {
         for (int row = 0; row < SIZE; row++) {
@@ -75,28 +67,43 @@ public class Matrix implements IMatrix {
             }
         }
     }
-    
+
     @Override
     public final Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
             private int currentIndex = 0;
-            
+
             @Override
             public boolean hasNext() {
                 return currentIndex < SIZE * SIZE;
             }
-            
+
             @Override
             public Integer next() {
                 int value = getCellValue(currentIndex / SIZE, currentIndex % SIZE);
                 currentIndex++;
                 return value;
             }
-            
+
             @Override
             public void remove() {
             }
         };
     }
-    
+
+    private void validateInputIndex(int row, int col) {
+        if (row < 0 || row > SIZE - 1) {
+            throw new IllegalArgumentException("Invalid row index");
+        }
+        if (col < 0 || col > SIZE - 1) {
+            throw new IllegalArgumentException("Invalid column index");
+        }
+    }
+
+    private void validateInputValue(int value) {
+        if (value < 0 || value > SIZE) {
+            throw new IllegalArgumentException("Invalid input value");
+        }
+    }
+
 }

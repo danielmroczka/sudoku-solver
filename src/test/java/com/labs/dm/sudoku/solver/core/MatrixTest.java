@@ -4,9 +4,9 @@
 package com.labs.dm.sudoku.solver.core;
 
 import java.util.Iterator;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -28,10 +28,14 @@ public class MatrixTest {
 
     @Test
     public void testSetCellValue() {
-        matrix.setCellValue(0, 0, 9);
-        assertEquals(9, matrix.getCellValue(0, 0));
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int col = 0; col < IMatrix.SIZE; col++) {
+                matrix.setCellValue(row, col, 9);
+                assertEquals(9, matrix.getCellValue(row, col));
+            }
+        }
     }
-    
+
     @Test
     public void shouldIterateForAllItems() {
         Iterator it = matrix.iterator();
@@ -40,8 +44,26 @@ public class MatrixTest {
             it.next();
             counter++;
         }
-        
-        assertEquals(81, counter);
+
+        assertEquals(IMatrix.SIZE * IMatrix.SIZE, counter);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotAcceptValueGreaterThanNine() {
+        matrix.setCellValue(0, 0, 10);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotAcceptValueLessThanZero() {
+        matrix.setCellValue(0, 0, -1);
+    }
+    
+    @Test
+    public void shouldAcceptValue0to9() {
+        for (int value  = 0; value <= 9; value++) {
+            matrix.setCellValue(0, 0, value);
+        }
+    }
+    
 
 }

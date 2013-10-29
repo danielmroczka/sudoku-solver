@@ -3,7 +3,6 @@ package com.labs.dm.sudoku.solver.io;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 
 import java.io.*;
-import java.util.Scanner;
 
 public class MatrixLoader {
 

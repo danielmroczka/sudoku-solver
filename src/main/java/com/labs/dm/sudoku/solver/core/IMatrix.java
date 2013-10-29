@@ -3,8 +3,6 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
-import java.util.Iterator;
-
 /**
  *
  * @author daniel
