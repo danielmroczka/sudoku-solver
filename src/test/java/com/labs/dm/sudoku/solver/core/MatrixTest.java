@@ -57,13 +57,20 @@ public class MatrixTest {
     public void shouldNotAcceptValueLessThanZero() {
         matrix.setCellValue(0, 0, -1);
     }
-    
+
     @Test
     public void shouldAcceptValue0to9() {
-        for (int value  = 0; value <= 9; value++) {
+        for (int value = 0; value <= 9; value++) {
             matrix.setCellValue(0, 0, value);
         }
     }
-    
+
+    @Test
+    public void loadFromArray() {
+        int[] tab = new int[81];
+        tab[10] = 5;
+        ((Matrix) matrix).loadFromArray(tab);
+        assertEquals(5, matrix.getCellValue(1, 1));
+    }
 
 }

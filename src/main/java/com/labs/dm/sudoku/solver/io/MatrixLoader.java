@@ -1,16 +1,20 @@
 package com.labs.dm.sudoku.solver.io;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
-
-import java.io.*;
+import com.labs.dm.sudoku.solver.core.Matrix;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class MatrixLoader {
 
     public IMatrix loadTable(String fileName) throws IOException {
         String inputText = readFileAsString(fileName);
-        int[] tab = convertToIntTable(table(inputText));
-        //Matrix matrix = new Matrix(tab);
-        return null;
+        int[] tab = convertToIntTable(toTable(inputText));
+        IMatrix matrix = new Matrix(tab);
+        return matrix;
     }
 
     protected int[] convertToIntTable(String[] stringTab) {
@@ -23,27 +27,23 @@ public class MatrixLoader {
         return intTab;
     }
 
-    protected String[] table(String input) {
-        String[] split = input.split("[\n,]");
-
-        return split;
+    protected String[] toTable(String input) {
+        return input.split("[\n,]");
     }
 
-    protected String readFileAsString(String filePath) throws java.io.IOException {
-        StringBuilder fileData = new StringBuilder(9);
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new InputStreamReader(this.getClass().getClassLoader().getResourceAsStream(filePath)));
+    protected String readFileAsString(String filePath) throws IOException {
+        StringBuilder fileData = new StringBuilder(IMatrix.SIZE);
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
+        if (inputStream == null) {
+            throw new FileNotFoundException();
+        }
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             char[] buf = new char[1024];
-            int numRead = 0;
+            int numRead;
             while ((numRead = reader.read(buf)) != -1) {
                 String readData = String.valueOf(buf, 0, numRead);
                 fileData.append(readData);
-                buf = new char[1024];
-            }
-        } finally {
-            if (reader != null) {
-                reader.close();
+                buf = new char[128];
             }
         }
         return fileData.toString();

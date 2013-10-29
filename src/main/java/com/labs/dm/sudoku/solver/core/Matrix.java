@@ -25,10 +25,7 @@ public class Matrix implements IMatrix {
 
     public Matrix(int... items) {
         this();
-        if (items.length % SIZE != 0) {
-            throw new IllegalArgumentException("Ïncorrect input array length!");
-        }
-        //TODO: load data
+        loadFromArray(items);
     }
 
     @Override
@@ -68,6 +65,18 @@ public class Matrix implements IMatrix {
         }
     }
 
+    protected final void loadFromArray(int... items) {
+        if (items.length != SIZE * SIZE) {
+            throw new IllegalArgumentException("Ïncorrect input array length!");
+        }        
+        int index = 0;
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                setCellValue(row, col, items[index++]);
+            }
+        }
+    }
+
     @Override
     public final Iterator<Integer> iterator() {
         return new Iterator<Integer>() {
@@ -93,17 +102,29 @@ public class Matrix implements IMatrix {
 
     private void validateInputIndex(int row, int col) {
         if (row < 0 || row > SIZE - 1) {
-            throw new IllegalArgumentException("Invalid row index");
+            throw new IllegalArgumentException("Invalid row index=" + row);
         }
         if (col < 0 || col > SIZE - 1) {
-            throw new IllegalArgumentException("Invalid column index");
+            throw new IllegalArgumentException("Invalid column index=" + col);
         }
     }
 
     private void validateInputValue(int value) {
         if (value < 0 || value > SIZE) {
-            throw new IllegalArgumentException("Invalid input value");
+            throw new IllegalArgumentException("Invalid input value=" + value);
         }
+    }
+
+    @Override
+    public boolean isEmpty() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (getCellValue(row, col) != EMPTY_VALUE) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

@@ -41,6 +41,8 @@ public interface IMatrix extends Iterable<Integer> {
      */
     boolean isSolved();
 
+    boolean isEmpty();
+    
     /**
      * Fills all cells with empty value.
      */
