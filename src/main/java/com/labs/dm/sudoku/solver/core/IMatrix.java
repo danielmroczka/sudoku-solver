@@ -54,6 +54,5 @@ public interface IMatrix extends Iterable<Integer> {
      * @param value 
      */
     void fillWithValue(int value);
-    
-    Iterator<Integer> iterator();
+
 }
