@@ -10,7 +10,7 @@ package com.labs.dm.sudoku.solver.core;
 public interface IMatrix extends Iterable<Integer> {
 
     int EMPTY_VALUE = 0;
-    
+
     /**
      * Number of rows and columns
      */
@@ -42,7 +42,7 @@ public interface IMatrix extends Iterable<Integer> {
     boolean isSolved();
 
     boolean isEmpty();
-    
+
     /**
      * Fills all cells with empty value.
      */
@@ -50,9 +50,34 @@ public interface IMatrix extends Iterable<Integer> {
 
     /**
      * Fills all cells with provided value.
-     * 
-     * @param value 
+     *
+     * @param value
      */
     void fillWithValue(int value);
+
+    /**
+     * Returns SIZE element array items from rowGroup and colGroup
+     *
+     * @param rowGroup range value 0..2
+     * @param colGroup range value 0..2
+     * @return
+     */
+    int[] getElemsInBox(int rowGroup, int colGroup);
+
+    /**
+     * Returns SIZE element array items form col
+     *
+     * @param col range value 0..8
+     * @return
+     */
+    int[] getElemsInCol(int col);
+
+    /**
+     * Returns SIZE element array items form row
+     *
+     * @param row range value 0..8
+     * @return
+     */
+    int[] getElemsInRow(int row);
 
 }

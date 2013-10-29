@@ -68,7 +68,7 @@ public class Matrix implements IMatrix {
     protected final void loadFromArray(int... items) {
         if (items.length != SIZE * SIZE) {
             throw new IllegalArgumentException("Ïncorrect input array length!");
-        }        
+        }
         int index = 0;
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
@@ -125,6 +125,33 @@ public class Matrix implements IMatrix {
             }
         }
         return true;
+    }
+
+    @Override
+    public int[] getElemsInRow(int row) {
+        return tab[row];
+    }
+
+    @Override
+    public int[] getElemsInCol(int col) {
+        int[] result = new int[SIZE];
+        for (int row = 0; row < SIZE; row++) {
+            result[row] = getCellValue(row, col);
+        }
+        return result;
+    }
+
+    @Override
+    public int[] getElemsInBox(int rowGroup, int colGroup) {
+        int index = 0;
+        final int boxSize = 3;
+        int[] result = new int[SIZE];
+        for (int row = rowGroup * boxSize; row < (rowGroup * boxSize) + boxSize; row++) {
+            for (int col = colGroup * boxSize; col < (rowGroup * boxSize) + boxSize; col++) {
+                result[index++] = getCellValue(row, col);
+            }
+        }
+        return result;
     }
 
 }

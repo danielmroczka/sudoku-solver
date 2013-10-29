@@ -4,6 +4,8 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Open Singles Algorithm.
@@ -16,30 +18,40 @@ public class OpenSingles implements IAlgorithm {
 
     @Override
     public void execute(IMatrix matrix) {
-        for (int col = 0; col < IMatrix.SIZE; col++) {
-            for (int row = 0; row < 3; row++) {
-//                ICell[] cells = matrix.getCellsInBox(row, col);
-//
-//                Set<Integer> values = new HashSet<Integer>();
-//                ICell emptyCell = null;
-//
-//                for (ICell cell : cells) {
-//                    if (cell.isSet()) {
-//                        values.add(cell.getValue());
-//                    } else {
-//                        emptyCell = cell;
-//                    }
-//                }
-//
-//                if (values.size() == 8) {
-//                    for (int i = 1; i < 10; i++) {
-//                        if (!values.contains(i)) {
-//                            emptyCell.setValue(i);
-//                        }
-//                    }
-//                }
+        fillOpenSinglesInRows(matrix);
+        fillOpenSinglesInCols(matrix);
+        fillOpenSinglesInBoxes(matrix);
+    }
+
+    //TODO
+    private boolean fillOpenSinglesInRows(IMatrix matrix) {
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            Set<Integer> values = new HashSet<>();
+            int[] rows = matrix.getElemsInRow(row);
+            int counter = 0;
+            int firstIndex = -1;
+            for (int index = 0; index < rows.length; index++) {
+                if (counter > 0) {
+                    return false;
+                }
+                if (rows[index] == IMatrix.EMPTY_VALUE) {
+                    counter++;
+                    firstIndex = index;
+                }
             }
+
         }
+
+        return false;
+
+    }
+
+    private boolean fillOpenSinglesInCols(IMatrix matrix) {
+        return false;
+    }
+
+    private boolean fillOpenSinglesInBoxes(IMatrix matrix) {
+        return false;
     }
 
 }
