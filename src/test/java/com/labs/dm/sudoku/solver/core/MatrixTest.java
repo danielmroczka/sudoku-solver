@@ -6,6 +6,8 @@ package com.labs.dm.sudoku.solver.core;
 import java.util.Iterator;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -114,4 +116,23 @@ public class MatrixTest {
         assertArrayEquals(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, box0);
         assertArrayEquals(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, box2);
     }
+    
+    @Test
+    public void shouldNewMatrixBeEmpty() {
+        assertTrue(matrix.isEmpty());
+    }
+    
+    @Test
+    public void shouldChangedMatrixBeNotEmpty() {
+        matrix.setCellValue(5, 5, 1);
+        assertFalse(matrix.isEmpty());
+    }
+    
+    @Test
+    public void shouldClearMatrix() {
+        matrix.setCellValue(5, 5, 1);
+        matrix.clear();
+        assertTrue(matrix.isEmpty());
+    }
+    
 }
