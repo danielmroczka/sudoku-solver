@@ -14,7 +14,7 @@ public class MainCLI {
 
     public static void main(String[] args) throws IOException {
         if (args.length != 1) {
-            throw new RuntimeException("Input file name is missing!");
+            throw new IllegalArgumentException("Input file name is missing!");
         }
         MatrixLoader loader = new MatrixLoader();
         IMatrix matrix = loader.loadTable(args[0]);

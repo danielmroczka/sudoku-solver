@@ -46,6 +46,12 @@ public class OpenSinglesTest {
         Assert.assertArrayEquals(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 0}, input);
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenInputInvalid() {
+        int[] input = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        assertFalse(singles.fillOpenSingles(input));
+    }
+
     @Test
     public void testOpenSingleInCol() {
         matrix.setCols(4, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8});
