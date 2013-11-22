@@ -13,6 +13,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <scm>
+        <developerConnection>git@github.com:danielmroczka/sudoku-solver.git</developerConnection>
+        <connection>git@github.com:danielmroczka/sudoku-solver.git</connection>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

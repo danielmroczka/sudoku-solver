@@ -43,7 +43,25 @@ public class Matrix implements IMatrix {
 
     @Override
     public String toString() {
-        return super.toString();
+        StringBuilder sb = new StringBuilder();
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                sb.append(getCellValue(row, col));
+                if (col < SIZE - 1) {
+                    if (col % 3 == 2) {
+                        sb.append(" | ");
+                    } else {
+                        sb.append(" ");
+                    }
+                }
+            }
+            sb.append("\n");
+            if (row % 3 == 2 && row < SIZE - 1) {
+                sb.append("---------------------\n");
+            }
+
+        }
+        return sb.toString();
     }
 
     @Override
@@ -144,14 +162,35 @@ public class Matrix implements IMatrix {
     @Override
     public int[] getElemsInBox(int rowGroup, int colGroup) {
         int index = 0;
-        final int boxSize = 3;
         int[] result = new int[SIZE];
-        for (int row = rowGroup * boxSize; row < (rowGroup * boxSize) + boxSize; row++) {
-            for (int col = colGroup * boxSize; col < (rowGroup * boxSize) + boxSize; col++) {
+        for (int row = rowGroup * BOX_SIZE; row < (rowGroup * BOX_SIZE) + BOX_SIZE; row++) {
+            for (int col = colGroup * BOX_SIZE; col < (colGroup * BOX_SIZE) + BOX_SIZE; col++) {
                 result[index++] = getCellValue(row, col);
             }
         }
         return result;
+    }
+
+    @Override
+    public void setCols(int col, int[] cols) {
+        for (int row = 0; row < SIZE; row++) {
+            setCellValue(row, col, cols[row]);
+        }
+    }
+
+    @Override
+    public void setRows(int row, int[] rows) {
+        tab[row] = rows;
+    }
+
+    @Override
+    public void setBox(int rowGroup, int colGroup, int[] box) {
+        int index = 0;
+        for (int row = rowGroup * BOX_SIZE; row < (rowGroup * BOX_SIZE) + BOX_SIZE; row++) {
+            for (int col = colGroup * BOX_SIZE; col < (colGroup * BOX_SIZE) + BOX_SIZE; col++) {
+                setCellValue(row, col, box[index++]);
+            }
+        }
     }
 
 }

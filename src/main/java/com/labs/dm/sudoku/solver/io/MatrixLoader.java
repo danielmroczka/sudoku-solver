@@ -8,6 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Class
+ *
+ * @author daniel
+ */
 public class MatrixLoader {
 
     public IMatrix loadTable(String fileName) throws IOException {

@@ -116,23 +116,41 @@ public class MatrixTest {
         assertArrayEquals(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, box0);
         assertArrayEquals(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, box2);
     }
-    
+
     @Test
     public void shouldNewMatrixBeEmpty() {
         assertTrue(matrix.isEmpty());
     }
-    
+
     @Test
     public void shouldChangedMatrixBeNotEmpty() {
         matrix.setCellValue(5, 5, 1);
         assertFalse(matrix.isEmpty());
     }
-    
+
     @Test
     public void shouldClearMatrix() {
         matrix.setCellValue(5, 5, 1);
         matrix.clear();
         assertTrue(matrix.isEmpty());
     }
-    
+
+    @Test
+    public void shouldSetCols() {
+        int[] sampleSet = new int[]{9, 1, 2, 3, 4, 5, 6, 7, 8};
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            matrix.setCols(row, sampleSet);
+            assertArrayEquals(sampleSet, matrix.getElemsInCol(row));
+        }
+    }
+
+    @Test
+    public void shouldSetRows() {
+        int[] sampleSet = new int[]{9, 1, 2, 3, 4, 5, 6, 7, 8};
+        for (int col = 0; col < IMatrix.SIZE; col++) {
+            matrix.setRows(col, sampleSet);
+            assertArrayEquals(sampleSet, matrix.getElemsInRow(col));
+        }
+    }
+
 }
