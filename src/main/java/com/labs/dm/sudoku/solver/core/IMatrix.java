@@ -117,4 +117,19 @@ public interface IMatrix extends Iterable<Integer> {
 
     Set<Integer>[][] getPossibleValues();
 
+    /**
+     * Returns SIZE*SIZE elements array starting from first row, iterate through columns and go to next row.
+     * 
+     * Matrix: 
+     * 1,2,3
+     * 4,5,6
+     * 7,8,9
+     * 
+     * Result:
+     * 1,2,3,4,5,6,7,8,9
+     * 
+     * @return 
+     */
+    int[] toArray();
+
 }

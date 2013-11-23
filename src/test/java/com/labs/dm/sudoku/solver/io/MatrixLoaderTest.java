@@ -4,7 +4,10 @@
 package com.labs.dm.sudoku.solver.io;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.core.Matrix;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -31,9 +34,34 @@ public class MatrixLoaderTest {
     @Test
     public void shouldLoadTable() throws Exception {
         //WHEN
-        IMatrix result = loader.loadTable("patterns/empty.txt");
+        IMatrix result = loader.load("patterns/empty.txt");
         //THEN
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void shouldSaveTable() throws IOException {
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.setCellValue(4, 4, 4);
+        //WHEN
+        loader.save(matrix, "target/test/output.txt");
+        //THEN
+        IMatrix readMatrix = loader.load("target/test/output.txt");
+        assertArrayEquals(matrix.toArray(), readMatrix.toArray());
+    }
+
+    @Test
+    public void shouldOutputFileHasCorrectSize() throws IOException {
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        //WHEN
+        loader.save(matrix, "target/test/output.txt");
+        //THEN
+        File file = new File("target/test/output.txt");
+        assertTrue(file.exists());
+        int expectedSize = IMatrix.SIZE * (2 * IMatrix.SIZE - 1) + +System.lineSeparator().length() * (IMatrix.SIZE - 1);
+        assertEquals(expectedSize, file.length());
     }
 
     @Test(expected = FileNotFoundException.class)

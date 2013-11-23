@@ -78,14 +78,14 @@ public class OpenSinglesTest {
 
     @Test
     public void testFromFile() throws IOException {
-        matrix = new MatrixLoader().loadTable("patterns/alg/opensingles/001.txt");
+        matrix = new MatrixLoader().load("patterns/alg/opensingles/001.txt");
         singles.execute(matrix);
         assertTrue(matrix.isSolved());
     }
 
     @Test
     public void testFromFile2() throws IOException {
-        matrix = new MatrixLoader().loadTable("patterns/alg/opensingles/002.txt");
+        matrix = new MatrixLoader().load("patterns/alg/opensingles/002.txt");
         singles.execute(matrix);
         assertTrue(matrix.isSolved());
     }

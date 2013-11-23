@@ -17,8 +17,8 @@ public class MainCLI {
             throw new IllegalArgumentException("Input file name is missing!");
         }
         MatrixLoader loader = new MatrixLoader();
-        IMatrix matrix = loader.loadTable(args[0]);
+        IMatrix matrix = loader.load(args[0]);
 
-        System.out.println("Loaded matrix: " + matrix);
+        System.out.println("Loaded matrix: \n" + matrix);
     }
 }

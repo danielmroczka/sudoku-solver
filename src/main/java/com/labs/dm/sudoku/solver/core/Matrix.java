@@ -148,6 +148,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public int[] getElemsInRow(int row) {
+        validateInputIndex(row);
         return tab[row];
     }
 
@@ -163,6 +164,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public int[] getElemsInBox(int rowGroup, int colGroup) {
+        validateInputIndex(rowGroup, colGroup, BOX_SIZE);
         int index = 0;
         int[] result = new int[SIZE];
         for (int row = rowGroup * BOX_SIZE; row < (rowGroup * BOX_SIZE) + BOX_SIZE; row++) {
@@ -201,6 +203,17 @@ public class Matrix implements IMatrix {
     @Override
     public Set<Integer>[][] getPossibleValues() {
         return possibleValues;
+    }
+    
+    @Override
+    public int[] toArray() {
+        int[] result = new int[SIZE*SIZE];
+         for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                result[row + (SIZE*col)] = getCellValue(row, col);
+            }
+        }
+         return result;
     }
 
     @Override

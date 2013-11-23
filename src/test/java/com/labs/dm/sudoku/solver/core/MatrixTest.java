@@ -158,9 +158,9 @@ public class MatrixTest {
         matrix.setCols(0, new int[]{1, 2, 3});
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowExceptionInvalidRows() {
-        matrix.setRows(0, new int[]{1, 2, 3});
+    @Test
+    public void shouldReturnToArraz() {
+        assertEquals(81, matrix.toArray().length);
     }
 
 }
