@@ -5,6 +5,7 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
