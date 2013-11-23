@@ -18,7 +18,7 @@ public class MainCLI {
         }
         MatrixLoader loader = new MatrixLoader();
         IMatrix matrix = loader.loadTable(args[0]);
-        
+
         System.out.println("Loaded matrix: " + matrix);
     }
 }

@@ -22,4 +22,9 @@ public class MainCLITest {
         MainCLI.main(new String[]{"not.existed.file"});
     }
 
+    @Test
+    public void shouldAcceptValidInput1() throws Exception {
+        MainCLI.main(new String[]{"patterns/easy1.txt"});
+    }
+
 }
