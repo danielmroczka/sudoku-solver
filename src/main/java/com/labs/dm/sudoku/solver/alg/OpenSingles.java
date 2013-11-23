@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Open Singles Algorithm.
- *
+ * 
  * @see http://www.learn-sudoku.com/open-singles.html
  *
  * @author daniel

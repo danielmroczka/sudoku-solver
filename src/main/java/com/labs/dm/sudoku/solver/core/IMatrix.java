@@ -25,7 +25,7 @@ public interface IMatrix extends Iterable<Integer> {
      *
      * @param row
      * @param col
-     * @return
+     * @return value
      */
     int getCellValue(int row, int col);
 
@@ -39,12 +39,18 @@ public interface IMatrix extends Iterable<Integer> {
     void setCellValue(int row, int col, int value);
 
     /**
-     * Returns true if matrix is solved.
+     * Returns true if matrix is solved. Matrix is solved when all elements are
+     * valid and are not empty
      *
      * @return
      */
     boolean isSolved();
 
+    /**
+     * Returns true if all elements in matrix are empty
+     *
+     * @return
+     */
     boolean isEmpty();
 
     /**
@@ -110,5 +116,5 @@ public interface IMatrix extends Iterable<Integer> {
     void setBox(int row, int col, int[] box);
 
     Set<Integer>[][] getPossibleValues();
-    
+
 }

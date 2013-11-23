@@ -42,29 +42,6 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder(100);
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                sb.append(getCellValue(row, col));
-                if (col < SIZE - 1) {
-                    if (col % 3 == 2) {
-                        sb.append(" | ");
-                    } else {
-                        sb.append(" ");
-                    }
-                }
-            }
-            sb.append("\n");
-            if (row % 3 == 2 && row < SIZE - 1) {
-                sb.append("------+-------+------\n");
-            }
-
-        }
-        return sb.toString();
-    }
-
-    @Override
     public boolean isSolved() {
         return getSetElems() == SIZE * SIZE;
     }
@@ -130,18 +107,37 @@ public class Matrix implements IMatrix {
         };
     }
 
-    private void validateInputIndex(int row, int col) {
-        if (row < 0 || row > SIZE - 1) {
+    private void validateInputIndex(int row, int col, int range) {
+        if (row < 0 || row > range) {
             throw new IllegalArgumentException("Invalid row index=" + row);
         }
-        if (col < 0 || col > SIZE - 1) {
+        if (col < 0 || col > range) {
             throw new IllegalArgumentException("Invalid column index=" + col);
         }
     }
 
-    private void validateInputValue(int value) {
+    private void validateInputIndex(int row, int col) {
+        validateInputIndex(row, col, SIZE - 1);
+    }
+
+    private void validateInputIndex(int index) {
+        if (index < 0 || index > SIZE - 1) {
+            throw new IllegalArgumentException("Invalid index=" + index);
+        }
+    }
+
+    private void validateInputValue(final int value) {
         if (value < 0 || value > SIZE) {
             throw new IllegalArgumentException("Invalid input value=" + value);
+        }
+    }
+
+    private void validateInputArray(final int[] array) {
+        if (array == null || array.length != SIZE) {
+            throw new IllegalArgumentException("Invalid input array size");
+        }
+        for (int value : array) {
+            validateInputValue(value);
         }
     }
 
@@ -157,6 +153,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public int[] getElemsInCol(int col) {
+        validateInputIndex(col);
         int[] result = new int[SIZE];
         for (int row = 0; row < SIZE; row++) {
             result[row] = getCellValue(row, col);
@@ -178,6 +175,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public void setCols(int col, int[] cols) {
+        validateInputArray(cols);
         for (int row = 0; row < SIZE; row++) {
             setCellValue(row, col, cols[row]);
         }
@@ -185,11 +183,13 @@ public class Matrix implements IMatrix {
 
     @Override
     public void setRows(int row, int[] rows) {
+        validateInputArray(rows);
         tab[row] = rows;
     }
 
     @Override
     public void setBox(int rowGroup, int colGroup, int[] box) {
+        validateInputArray(box);
         int index = 0;
         for (int row = rowGroup * BOX_SIZE; row < (rowGroup * BOX_SIZE) + BOX_SIZE; row++) {
             for (int col = colGroup * BOX_SIZE; col < (colGroup * BOX_SIZE) + BOX_SIZE; col++) {
@@ -201,6 +201,29 @@ public class Matrix implements IMatrix {
     @Override
     public Set<Integer>[][] getPossibleValues() {
         return possibleValues;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(100);
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                sb.append(getCellValue(row, col));
+                if (col < SIZE - 1) {
+                    if (col % 3 == 2) {
+                        sb.append(" | ");
+                    } else {
+                        sb.append(" ");
+                    }
+                }
+            }
+            sb.append("\n");
+            if (row % 3 == 2 && row < SIZE - 1) {
+                sb.append("------+-------+------\n");
+            }
+
+        }
+        return sb.toString();
     }
 
 }

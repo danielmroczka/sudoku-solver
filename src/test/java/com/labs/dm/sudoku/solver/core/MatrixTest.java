@@ -153,4 +153,14 @@ public class MatrixTest {
         }
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionInvalidCols() {
+        matrix.setCols(0, new int[]{1, 2, 3});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldThrowExceptionInvalidRows() {
+        matrix.setRows(0, new int[]{1, 2, 3});
+    }
+
 }
