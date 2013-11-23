@@ -21,7 +21,11 @@ public class MatrixLoader {
         IMatrix matrix = new Matrix(tab);
         return matrix;
     }
-
+    
+    public void saveTable(IMatrix matrix, String fileName) throws IOException {
+        //TODO
+    }
+    
     protected int[] convertToIntTable(String[] stringTab) {
         int[] intTab = new int[stringTab.length];
 
@@ -33,7 +37,9 @@ public class MatrixLoader {
     }
 
     protected String[] toTable(String input) {
-        return input.split("[\n,]");
+        input = input.trim();
+        input = input.replaceAll("[\\s*,\\s*]+", ",").replaceAll("[\\s]+", ",");
+        return input.split("[\n\t,;]");
     }
 
     protected String readFileAsString(String filePath) throws IOException {
