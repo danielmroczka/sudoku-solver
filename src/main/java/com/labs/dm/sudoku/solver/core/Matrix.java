@@ -249,7 +249,7 @@ public class Matrix implements IMatrix {
         return true;
     }
 
-    private void validateCols(Set<Integer> set) throws IllegalStateException {
+    private void validateCols(Set<Integer> set) {
         for (int col = 0; col < SIZE; col++) {
             int[] cols = getElemsInCol(col);
             for (int c : cols) {
@@ -262,7 +262,7 @@ public class Matrix implements IMatrix {
         }
     }
 
-    private void validateRows(Set<Integer> set) throws IllegalStateException {
+    private void validateRows(Set<Integer> set) {
         for (int row = 0; row < SIZE; row++) {
             int[] rows = getElemsInRow(row);
             for (int r : rows) {
@@ -274,7 +274,10 @@ public class Matrix implements IMatrix {
             set.clear();
         }
     }
-    
-    
+
+    @Override
+    public boolean isCellSet(int row, int col) {
+        return getCellValue(row, col) != EMPTY_VALUE;
+    }
 
 }

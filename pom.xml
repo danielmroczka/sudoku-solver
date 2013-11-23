@@ -4,9 +4,7 @@
 
     <groupId>com.labs.dm</groupId>
     <artifactId>sudoku-solver</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
+    <version>0.0.2-SNAPSHOT</version>
     <name>sudoku-solver</name>
 
     <properties>
