@@ -3,6 +3,8 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import java.util.Set;
+
 /**
  *
  * @author daniel
@@ -107,4 +109,6 @@ public interface IMatrix extends Iterable<Integer> {
      */
     void setBox(int row, int col, int[] box);
 
+    Set<Integer>[][] getPossibleValues();
+    
 }

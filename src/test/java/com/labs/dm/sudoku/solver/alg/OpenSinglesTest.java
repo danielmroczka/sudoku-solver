@@ -5,6 +5,8 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
+import com.labs.dm.sudoku.solver.io.MatrixLoader;
+import java.io.IOException;
 import org.junit.Assert;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -72,5 +74,19 @@ public class OpenSinglesTest {
         singles.execute(matrix);
         System.out.println(matrix);
         Assert.assertArrayEquals(new int[]{9, 1, 2, 3, 4, 5, 6, 7, 8}, matrix.getElemsInBox(1, 1));
+    }
+
+    @Test
+    public void testFromFile() throws IOException {
+        matrix = new MatrixLoader().loadTable("patterns/alg/opensingles/001.txt");
+        singles.execute(matrix);
+        assertTrue(matrix.isSolved());
+    }
+
+    @Test
+    public void testFromFile2() throws IOException {
+        matrix = new MatrixLoader().loadTable("patterns/alg/opensingles/002.txt");
+        singles.execute(matrix);
+        assertTrue(matrix.isSolved());
     }
 }

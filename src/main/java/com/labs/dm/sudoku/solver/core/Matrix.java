@@ -43,7 +43,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(100);
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 sb.append(getCellValue(row, col));
@@ -57,7 +57,7 @@ public class Matrix implements IMatrix {
             }
             sb.append("\n");
             if (row % 3 == 2 && row < SIZE - 1) {
-                sb.append("---------------------\n");
+                sb.append("------+-------+------\n");
             }
 
         }
@@ -66,7 +66,19 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isSolved() {
-        return false;
+        return getSetElems() == SIZE * SIZE;
+    }
+
+    private int getSetElems() {
+        int counter = 0;
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (getCellValue(row, col) != EMPTY_VALUE) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
     }
 
     @Override
@@ -135,14 +147,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isEmpty() {
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                if (getCellValue(row, col) != EMPTY_VALUE) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return getSetElems() == 0;
     }
 
     @Override
@@ -191,6 +196,11 @@ public class Matrix implements IMatrix {
                 setCellValue(row, col, box[index++]);
             }
         }
+    }
+
+    @Override
+    public Set<Integer>[][] getPossibleValues() {
+        return possibleValues;
     }
 
 }

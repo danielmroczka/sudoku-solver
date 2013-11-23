@@ -22,7 +22,7 @@ public class MatrixLoaderTest {
     @Test
     public void shouldReadFileAsString() throws Exception {
         //WHEN
-        String result = loader.readFileAsString("empty.txt");
+        String result = loader.readFileAsString("patterns/empty.txt");
         //THEN
         assertNotNull(result);
         //assertEquals((9 + 8) * 9 + 8 * 2, result.length());
@@ -31,7 +31,7 @@ public class MatrixLoaderTest {
     @Test
     public void shouldLoadTable() throws Exception {
         //WHEN
-        IMatrix result = loader.loadTable("empty.txt");
+        IMatrix result = loader.loadTable("patterns/empty.txt");
         //THEN
         assertTrue(result.isEmpty());
     }    
