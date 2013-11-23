@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 /**
  * Class
@@ -18,13 +19,12 @@ import java.io.InputStreamReader;
  */
 public class MatrixLoader {
 
-    private final String defaultDelimiter = ",";
+    private final static String DEFAULT_DELIMITER = ",";
 
     public IMatrix load(String fileName) throws IOException {
         String inputText = readFileAsString(fileName);
         int[] tab = convertToIntTable(toTable(inputText));
-        IMatrix matrix = new Matrix(tab);
-        return matrix;
+        return new Matrix(tab);
     }
 
     public void save(IMatrix matrix, String fileName) throws IOException {
@@ -33,7 +33,7 @@ public class MatrixLoader {
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 sb.append(matrix.getCellValue(row, col));
                 if (col < IMatrix.SIZE - 1) {
-                    sb.append(defaultDelimiter);
+                    sb.append(DEFAULT_DELIMITER);
                 }
             }
             if (row < IMatrix.SIZE - 1) {
@@ -45,7 +45,7 @@ public class MatrixLoader {
             file.getParentFile().mkdirs();
         }
         try (FileOutputStream fos = new FileOutputStream(fileName)) {
-            fos.write(sb.toString().getBytes());
+            fos.write(sb.toString().getBytes(Charset.defaultCharset()));
         }
     }
 

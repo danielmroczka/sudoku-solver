@@ -3,6 +3,8 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import com.labs.dm.sudoku.solver.io.MatrixLoader;
+import java.io.IOException;
 import java.util.Iterator;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -161,6 +163,39 @@ public class MatrixTest {
     @Test
     public void shouldReturnToArraz() {
         assertEquals(81, matrix.toArray().length);
+    }
+
+    @Test
+    public void shouldValidateEmptyMatrix() {
+        assertTrue(matrix.validate());
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void shouldNotValidateInvalidCol() {
+        matrix.setCols(4, new int[]{1, 2, 3, 4, 4, 6, 7, 8, 9});
+        matrix.validate();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void shouldNotValidateInvalidRow() {
+        matrix.setRows(4, new int[]{1, 2, 3, 4, 4, 6, 7, 8, 9});
+        matrix.validate();
+    }
+
+    @Test
+    public void shouldValidateSolvedMatrix() throws IOException {
+        matrix = new MatrixLoader().load("patterns/solved.txt");
+        assertTrue(matrix.validate());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getCellValueBelowRange() {
+        matrix.getCellValue(-1, -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getCellValueAboveRange() {
+        matrix.getCellValue(10, 10);
     }
 
 }

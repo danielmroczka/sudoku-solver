@@ -58,7 +58,12 @@
                 <configuration>
                     <repoToken>UfOQCr8rB9p8e1X4ly5U5zbeumr35DBvt</repoToken>
                 </configuration>
-            </plugin>                       
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>                                   
         </plugins>
     </build>
 </project>

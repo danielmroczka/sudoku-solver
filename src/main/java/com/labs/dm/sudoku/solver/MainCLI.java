@@ -3,6 +3,7 @@
  */
 package com.labs.dm.sudoku.solver;
 
+import com.labs.dm.sudoku.solver.alg.Flow;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import java.io.IOException;
@@ -18,7 +19,9 @@ public class MainCLI {
         }
         MatrixLoader loader = new MatrixLoader();
         IMatrix matrix = loader.load(args[0]);
-
+        Flow flow = new Flow();
+        flow.execute(matrix);
+        loader.save(matrix, args[0] + ".solved");
         System.out.println("Loaded matrix: \n" + matrix);
     }
 }

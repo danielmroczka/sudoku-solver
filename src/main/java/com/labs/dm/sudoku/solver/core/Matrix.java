@@ -46,7 +46,8 @@ public class Matrix implements IMatrix {
         return getSetElems() == SIZE * SIZE;
     }
 
-    private int getSetElems() {
+    @Override
+    public int getSetElems() {
         int counter = 0;
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
@@ -103,6 +104,7 @@ public class Matrix implements IMatrix {
 
             @Override
             public void remove() {
+                //Do nothing
             }
         };
     }
@@ -204,16 +206,16 @@ public class Matrix implements IMatrix {
     public Set<Integer>[][] getPossibleValues() {
         return possibleValues;
     }
-    
+
     @Override
     public int[] toArray() {
-        int[] result = new int[SIZE*SIZE];
-         for (int row = 0; row < SIZE; row++) {
+        int[] result = new int[SIZE * SIZE];
+        for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                result[row + (SIZE*col)] = getCellValue(row, col);
+                result[row + (SIZE * col)] = getCellValue(row, col);
             }
         }
-         return result;
+        return result;
     }
 
     @Override
@@ -230,13 +232,49 @@ public class Matrix implements IMatrix {
                     }
                 }
             }
-            sb.append("\n");
+            sb.append(System.lineSeparator());
             if (row % 3 == 2 && row < SIZE - 1) {
-                sb.append("------+-------+------\n");
+                sb.append("------+-------+------").append(System.lineSeparator());
             }
 
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean validate() {
+        Set<Integer> set = new HashSet<>();
+        validateRows(set);
+        validateCols(set);
+        return true;
+    }
+
+    private void validateCols(Set<Integer> set) throws IllegalStateException {
+        for (int col = 0; col < SIZE; col++) {
+            int[] cols = getElemsInCol(col);
+            for (int c : cols) {
+                validateInputValue(c);
+                if (!set.add(c) && c != EMPTY_VALUE) {
+                    throw new IllegalStateException("Value " + c + " is not unique in col: " + col);
+                }
+            }
+            set.clear();
+        }
+    }
+
+    private void validateRows(Set<Integer> set) throws IllegalStateException {
+        for (int row = 0; row < SIZE; row++) {
+            int[] rows = getElemsInRow(row);
+            for (int r : rows) {
+                validateInputValue(r);
+                if (!set.add(r) && r != EMPTY_VALUE) {
+                    throw new IllegalStateException("Value " + r + " is not unique in row: " + row);
+                }
+            }
+            set.clear();
+        }
+    }
+    
+    
 
 }

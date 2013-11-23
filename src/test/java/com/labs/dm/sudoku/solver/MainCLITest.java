@@ -24,7 +24,7 @@ public class MainCLITest {
 
     @Test
     public void shouldAcceptValidInput1() throws Exception {
-        MainCLI.main(new String[]{"patterns/easy1.txt"});
+        MainCLI.main(new String[]{"patterns/alg/opensingles/002.txt"});
     }
 
 }
