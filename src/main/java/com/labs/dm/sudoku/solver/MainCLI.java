@@ -21,7 +21,7 @@ public class MainCLI {
         IMatrix matrix = loader.load(args[0]);
         Flow flow = new Flow();
         flow.execute(matrix);
-        loader.save(matrix, args[0] + ".solved");
+        loader.save(matrix, "target/" + args[0] + ".solved");
         System.out.println("Loaded matrix: \n" + matrix);
     }
 }

@@ -3,6 +3,7 @@
  */
 package com.labs.dm.sudoku.solver;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import org.junit.Test;
 
@@ -25,6 +26,7 @@ public class MainCLITest {
     @Test
     public void shouldAcceptValidInput1() throws Exception {
         MainCLI.main(new String[]{"patterns/alg/opensingles/002.txt"});
+        
     }
 
 }

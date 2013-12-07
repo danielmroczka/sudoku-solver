@@ -21,7 +21,7 @@ public class OpenSingles implements IAlgorithm {
     public void execute(IMatrix matrix) {
         fillOpenSinglesInRows(matrix);
         fillOpenSinglesInCols(matrix);
-        fillOpenSinglesInBoxes(matrix);
+        fillOpenSinglesInBlocks(matrix);
     }
 
     private void fillOpenSinglesInRows(IMatrix matrix) {
@@ -42,12 +42,12 @@ public class OpenSingles implements IAlgorithm {
         }
     }
 
-    private void fillOpenSinglesInBoxes(IMatrix matrix) {
-        for (int rowGroup = 0; rowGroup < IMatrix.BOX_SIZE; rowGroup ++) {
-            for (int colGroup = 0; colGroup < IMatrix.BOX_SIZE; colGroup ++) {
-                int[] box = matrix.getElemsInBox(rowGroup, colGroup);
-                if (fillOpenSingles(box)) {
-                    matrix.setBox(rowGroup, colGroup, box);
+    private void fillOpenSinglesInBlocks(IMatrix matrix) {
+        for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup ++) {
+            for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup ++) {
+                int[] block = matrix.getElemsInBlock(rowGroup, colGroup);
+                if (fillOpenSingles(block)) {
+                    matrix.setBlock(rowGroup, colGroup, block);
                 }
             }
         }

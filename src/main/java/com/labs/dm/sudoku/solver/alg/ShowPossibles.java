@@ -25,14 +25,14 @@ public class ShowPossibles implements IAlgorithm {
                 
                 int[] cols = matrix.getElemsInCol(col);
                 int[] rows = matrix.getElemsInRow(row);
-                int[] boxes = matrix.getElemsInBox(row/3, col/3);
+                int[] blocks = matrix.getElemsInBlock(row/3, col/3);
                 for (int i: cols) {
                     set.remove(i);
                 }
                 for (int i: rows) {
                     set.remove(i);
                 }
-                for (int i: boxes) {
+                for (int i: blocks) {
                     set.remove(i);
                 }
                 

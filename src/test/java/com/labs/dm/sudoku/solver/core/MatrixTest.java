@@ -103,7 +103,7 @@ public class MatrixTest {
     }
 
     @Test
-    public void getElemsFromBox() {
+    public void getElemsFromBlock() {
         int index = 1;
         for (int row = 3; row < 6; row++) {
             for (int col = 3; col < 6; col++) {
@@ -111,12 +111,12 @@ public class MatrixTest {
             }
         }
 
-        int[] box1 = matrix.getElemsInBox(1, 1);
-        int[] box0 = matrix.getElemsInBox(0, 0);
-        int[] box2 = matrix.getElemsInBox(2, 2);
-        assertArrayEquals(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, box1);
-        assertArrayEquals(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, box0);
-        assertArrayEquals(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, box2);
+        int[] block0 = matrix.getElemsInBlock(0, 0);
+        int[] block1 = matrix.getElemsInBlock(1, 1);
+        int[] block2 = matrix.getElemsInBlock(2, 2);
+        assertArrayEquals(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, block0);
+        assertArrayEquals(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}, block1);
+        assertArrayEquals(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0}, block2);
     }
 
     @Test

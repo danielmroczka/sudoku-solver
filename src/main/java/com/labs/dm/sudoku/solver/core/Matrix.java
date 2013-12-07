@@ -165,12 +165,12 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public int[] getElemsInBox(int rowGroup, int colGroup) {
-        validateInputIndex(rowGroup, colGroup, BOX_SIZE);
+    public int[] getElemsInBlock(int rowGroup, int colGroup) {
+        validateInputIndex(rowGroup, colGroup, BLOCK_SIZE);
         int index = 0;
         int[] result = new int[SIZE];
-        for (int row = rowGroup * BOX_SIZE; row < (rowGroup * BOX_SIZE) + BOX_SIZE; row++) {
-            for (int col = colGroup * BOX_SIZE; col < (colGroup * BOX_SIZE) + BOX_SIZE; col++) {
+        for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup * BLOCK_SIZE) + BLOCK_SIZE; row++) {
+            for (int col = colGroup * BLOCK_SIZE; col < (colGroup * BLOCK_SIZE) + BLOCK_SIZE; col++) {
                 result[index++] = getCellValue(row, col);
             }
         }
@@ -192,12 +192,12 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public void setBox(int rowGroup, int colGroup, int[] box) {
-        validateInputArray(box);
+    public void setBlock(int rowGroup, int colGroup, int[] block) {
+        validateInputArray(block);
         int index = 0;
-        for (int row = rowGroup * BOX_SIZE; row < (rowGroup * BOX_SIZE) + BOX_SIZE; row++) {
-            for (int col = colGroup * BOX_SIZE; col < (colGroup * BOX_SIZE) + BOX_SIZE; col++) {
-                setCellValue(row, col, box[index++]);
+        for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup * BLOCK_SIZE) + BLOCK_SIZE; row++) {
+            for (int col = colGroup * BLOCK_SIZE; col < (colGroup * BLOCK_SIZE) + BLOCK_SIZE; col++) {
+                setCellValue(row, col, block[index++]);
             }
         }
     }

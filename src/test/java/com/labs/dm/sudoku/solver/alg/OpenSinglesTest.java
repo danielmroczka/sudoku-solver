@@ -69,11 +69,11 @@ public class OpenSinglesTest {
     }
 
     @Test
-    public void testOpenSingleInBox() {
-        matrix.setBox(1, 1, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8});
+    public void testOpenSingleInBlock() {
+        matrix.setBlock(1, 1, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8});
         singles.execute(matrix);
         System.out.println(matrix);
-        Assert.assertArrayEquals(new int[]{9, 1, 2, 3, 4, 5, 6, 7, 8}, matrix.getElemsInBox(1, 1));
+        Assert.assertArrayEquals(new int[]{9, 1, 2, 3, 4, 5, 6, 7, 8}, matrix.getElemsInBlock(1, 1));
     }
 
     @Test

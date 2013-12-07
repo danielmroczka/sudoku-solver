@@ -18,7 +18,7 @@ public interface IMatrix extends Iterable<Integer> {
      */
     int SIZE = 9;
 
-    final int BOX_SIZE = SIZE / 3;
+    final int BLOCK_SIZE = SIZE / 3;
 
     /**
      * Returns cell value from provided position
@@ -72,7 +72,7 @@ public interface IMatrix extends Iterable<Integer> {
      * @param colGroup range value 0..2
      * @return
      */
-    int[] getElemsInBox(int rowGroup, int colGroup);
+    int[] getElemsInBlock(int rowGroup, int colGroup);
 
     /**
      * Returns SIZE element array items form col
@@ -107,13 +107,13 @@ public interface IMatrix extends Iterable<Integer> {
     void setRows(int row, int[] rows);
 
     /**
-     * Sets elements in box
+     * Sets elements in block
      *
      * @param row
      * @param col
-     * @param box
+     * @param block
      */
-    void setBox(int row, int col, int[] box);
+    void setBlock(int row, int col, int[] block);
 
     Set<Integer>[][] getPossibleValues();
 
