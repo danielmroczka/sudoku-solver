@@ -1,11 +1,12 @@
 /*
  * Copyright daniel.mroczka@gmail.com. All rights reserved. 
  */
-
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
+import java.util.Arrays;
+import java.util.HashSet;
 import static org.junit.Assert.assertEquals;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,9 +16,8 @@ import org.junit.Test;
  * @author daniel
  */
 public class HiddenPairsTest {
-    
+
     private final HiddenPairs hiddenPairs = new HiddenPairs();
-    private final ShowPossibles pos = new ShowPossibles();
 
     @Test
     @Ignore
@@ -27,11 +27,14 @@ public class HiddenPairsTest {
         matrix.setCellValue(3, 3, 3);
         matrix.setCellValue(3, 5, 1);
         matrix.setCellValue(4, 4, 2);
-        pos.execute(matrix);
+
+        matrix.setPossibleValues(5, 3, new HashSet<>(Arrays.asList(new Integer[]{6, 7, 8, 9})));
+        matrix.setPossibleValues(5, 4, new HashSet<>(Arrays.asList(new Integer[]{7, 8})));
+        matrix.setPossibleValues(5, 5, new HashSet<>(Arrays.asList(new Integer[]{6, 8, 9})));
         //WHEN
         hiddenPairs.execute(matrix);
         //THEN
-        assertEquals(2, matrix.getPossibleValues(5,3).size());
+        assertEquals(2, matrix.getPossibleValues(5, 3).size());
     }
-    
+
 }

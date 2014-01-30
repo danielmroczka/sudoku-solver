@@ -8,6 +8,7 @@ import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -38,7 +39,7 @@ public class ShowPossiblesTest {
     public void shouldSet2() throws IOException {
         matrix = new MatrixLoader().load("patterns/easy1.txt");
         alg.execute(matrix);
-        Set<Integer> set = matrix.getPossibleValues(4,4);
+        Collection<Integer> set = matrix.getPossibleValues(4,4);
         assertEquals(3, set.size());
         assertTrue(set.contains(5));
         assertTrue(set.contains(7));

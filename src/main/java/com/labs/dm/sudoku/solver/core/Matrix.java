@@ -3,6 +3,7 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -16,7 +17,7 @@ public class Matrix implements IMatrix {
 
     private final int[][] tab;
 
-    private final Set<Integer>[][] possibleValues;
+    private final Collection<Integer>[][] possibleValues;
 
     public Matrix() {
         tab = new int[SIZE][SIZE];
@@ -203,7 +204,7 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public Set<Integer> getPossibleValues(int row, int col) {
+    public Collection<Integer> getPossibleValues(int row, int col) {
         return possibleValues[row][col];
     }
 
@@ -281,7 +282,7 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public void setPossibleValues(int row, int col, Set<Integer> set) {
+    public void setPossibleValues(int row, int col, Collection<Integer> set) {
         possibleValues[row][col] = set;
     }
 

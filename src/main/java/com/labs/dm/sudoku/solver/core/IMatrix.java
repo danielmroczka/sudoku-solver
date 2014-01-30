@@ -3,6 +3,7 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import java.util.Collection;
 import java.util.Set;
 
 /**
@@ -115,9 +116,9 @@ public interface IMatrix extends Iterable<Integer> {
      */
     void setBlock(int row, int col, int[] block);
 
-    Set<Integer> getPossibleValues(int row, int col);
+    Collection<Integer> getPossibleValues(int row, int col);
     
-    void setPossibleValues(int row, int col, Set<Integer> set);
+    void setPossibleValues(int row, int col, Collection<Integer> set);
 
     /**
      * Returns SIZE*SIZE elements array starting from first row, iterate through
