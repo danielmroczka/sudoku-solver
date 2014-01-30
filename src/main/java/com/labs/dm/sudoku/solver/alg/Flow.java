@@ -15,16 +15,23 @@ public class Flow {
         IAlgorithm openSingles = new OpenSingles();
         IAlgorithm loneSingles = new LoneSingles();
         int prevCount = matrix.getSetElems();
+        int chance = 3;
         while (!matrix.isSolved()) {
-           openSingles.execute(matrix);
-           showPossibles.execute(matrix);
-           loneSingles.execute(matrix);
-           if (prevCount == matrix.getSetElems()) {
-               break;
-           } else {
-               prevCount = matrix.getSetElems();
-           }
+            System.out.println("Matrix is valid=" + matrix.validate());
+            openSingles.execute(matrix);
+            showPossibles.execute(matrix);
+            loneSingles.execute(matrix);
+            System.out.println("Flow=" + prevCount);
+            
+            if (prevCount == matrix.getSetElems()) {
+                chance--;
+                if (chance == 0) {
+                    break;
+                }
+            }
+            prevCount = matrix.getSetElems();
+            chance=3;
         }
     }
-    
+
 }

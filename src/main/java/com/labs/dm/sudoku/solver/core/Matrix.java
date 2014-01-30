@@ -203,8 +203,8 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public Set<Integer>[][] getPossibleValues() {
-        return possibleValues;
+    public Set<Integer> getPossibleValues(int row, int col) {
+        return possibleValues[row][col];
     }
 
     @Override
@@ -278,6 +278,11 @@ public class Matrix implements IMatrix {
     @Override
     public boolean isCellSet(int row, int col) {
         return getCellValue(row, col) != EMPTY_VALUE;
+    }
+
+    @Override
+    public void setPossibleValues(int row, int col, Set<Integer> set) {
+        possibleValues[row][col] = set;
     }
 
 }

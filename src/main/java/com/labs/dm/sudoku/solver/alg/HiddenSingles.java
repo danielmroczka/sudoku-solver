@@ -17,21 +17,30 @@ public class HiddenSingles implements IAlgorithm {
 
     @Override
     public void execute(IMatrix matrix) {
+        
+        init(matrix);
         findInRows(matrix);
         findInCols(matrix);
         findInBlock(matrix);
     }
 
     private void findInBlock(IMatrix matrix) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     private void findInCols(IMatrix matrix) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int col = 0; col < IMatrix.SIZE; col++) {
+            //int[] cols = matrix.getElemsInCol(col);
+        }
     }
 
     private void findInRows(IMatrix matrix) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void init(IMatrix matrix) {
+        //if (matrix.getPossibleValues() == null) {
+            
+       // }
     }
 
 }

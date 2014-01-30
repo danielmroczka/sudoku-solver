@@ -115,7 +115,9 @@ public interface IMatrix extends Iterable<Integer> {
      */
     void setBlock(int row, int col, int[] block);
 
-    Set<Integer>[][] getPossibleValues();
+    Set<Integer> getPossibleValues(int row, int col);
+    
+    void setPossibleValues(int row, int col, Set<Integer> set);
 
     /**
      * Returns SIZE*SIZE elements array starting from first row, iterate through

@@ -3,7 +3,6 @@
  */
 package com.labs.dm.sudoku.solver;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import org.junit.Test;
 

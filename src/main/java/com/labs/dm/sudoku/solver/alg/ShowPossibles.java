@@ -36,7 +36,7 @@ public class ShowPossibles implements IAlgorithm {
                     set.remove(i);
                 }
                 
-                matrix.getPossibleValues()[row][col] = set;
+                matrix.setPossibleValues(row, col, set);
             }
         }
     }

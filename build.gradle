@@ -1,6 +1,7 @@
 apply plugin: 'java'
+apply plugin: 'sonar'
 
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -14,4 +15,16 @@ sourceSets {
 	main {
 		output.dir = 'target'
     }
- }
+}
+
+sonar {
+    server {
+        url = "localhost:9000"
+    }
+    database {
+        url = "jdbc:mysql://my.server.com/sonar"
+        driverClassName = "com.mysql.jdbc.Driver"
+        username = "Fred Flintstone"
+        password = "very clever"
+    }
+}
