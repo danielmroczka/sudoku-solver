@@ -4,10 +4,8 @@
 package com.labs.dm.sudoku.solver.core;
 
 import java.util.Collection;
-import java.util.Set;
 
 /**
- *
  * @author daniel
  */
 public interface IMatrix extends Iterable<Integer> {
@@ -19,7 +17,7 @@ public interface IMatrix extends Iterable<Integer> {
      */
     int SIZE = 9;
 
-    final int BLOCK_SIZE = SIZE / 3;
+    int BLOCK_SIZE = SIZE / 3;
 
     /**
      * Returns cell value from provided position
@@ -117,15 +115,15 @@ public interface IMatrix extends Iterable<Integer> {
     void setBlock(int row, int col, int[] block);
 
     Collection<Integer> getPossibleValues(int row, int col);
-    
+
     void setPossibleValues(int row, int col, Collection<Integer> set);
 
     /**
      * Returns SIZE*SIZE elements array starting from first row, iterate through
      * columns and go to next row.
-     *
+     * <p>
      * Matrix: 1,2,3 4,5,6 7,8,9
-     *
+     * <p>
      * Result: 1,2,3,4,5,6,7,8,9
      *
      * @return
@@ -135,7 +133,7 @@ public interface IMatrix extends Iterable<Integer> {
     boolean validate();
 
     int getSetElems();
-    
+
     boolean isCellSet(int row, int col);
 
 }

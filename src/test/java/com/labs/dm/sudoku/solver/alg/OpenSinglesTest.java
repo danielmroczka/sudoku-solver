@@ -6,15 +6,16 @@ package com.labs.dm.sudoku.solver.alg;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
-import java.io.IOException;
 import org.junit.Assert;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 /**
- *
  * @author daniel
  */
 public class OpenSinglesTest {

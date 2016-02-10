@@ -3,11 +3,11 @@
  */
 package com.labs.dm.sudoku.solver;
 
-import java.io.FileNotFoundException;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
+
 /**
- *
  * @author daniel
  */
 public class MainCLITest {
@@ -25,7 +25,7 @@ public class MainCLITest {
     @Test
     public void shouldAcceptValidInput1() throws Exception {
         MainCLI.main(new String[]{"patterns/alg/opensingles/002.txt"});
-        
+
     }
 
 }

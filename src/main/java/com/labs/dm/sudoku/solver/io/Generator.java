@@ -4,10 +4,11 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 
 public class Generator {
-    
+
     public static void main(String[] args) {
         new Generator().generate(68);
     }
+
     public IMatrix generate(int filledCount) {
         if (filledCount < 1 || filledCount > 81) {
             throw new IllegalArgumentException("Incorrect argument. Valid values are between 1 and 81");
@@ -32,7 +33,7 @@ public class Generator {
             try {
                 validate = matrix.validate();
             } catch (IllegalStateException e) {
-                
+
             }
 
             if (validate) {
@@ -48,5 +49,5 @@ public class Generator {
         return matrix;
     }
 
-   
+
 }

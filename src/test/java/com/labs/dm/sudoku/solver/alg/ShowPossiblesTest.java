@@ -6,22 +6,22 @@ package com.labs.dm.sudoku.solver.alg;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Set;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 /**
- *
  * @author daniel
  */
 public class ShowPossiblesTest {
 
-    private final ShowPossibles alg = new ShowPossibles();
+    private final IAlgorithm alg = new ShowPossibles();
     private IMatrix matrix;
 
     @Before
@@ -32,14 +32,14 @@ public class ShowPossiblesTest {
     @Test
     public void shouldSet() {
         alg.execute(matrix);
-        assertEquals(9, matrix.getPossibleValues(4,4).size());
+        assertEquals(9, matrix.getPossibleValues(4, 4).size());
     }
 
     @Test
     public void shouldSet2() throws IOException {
         matrix = new MatrixLoader().load("patterns/easy1.txt");
         alg.execute(matrix);
-        Collection<Integer> set = matrix.getPossibleValues(4,4);
+        Collection<Integer> set = matrix.getPossibleValues(4, 4);
         assertEquals(3, set.size());
         assertTrue(set.contains(5));
         assertTrue(set.contains(7));
@@ -50,7 +50,7 @@ public class ShowPossiblesTest {
     public void shouldSet1() throws IOException {
         matrix = new MatrixLoader().load("patterns/solved.txt");
         alg.execute(matrix);
-        assertEquals(0, matrix.getPossibleValues(4,4).size());
+        assertEquals(0, matrix.getPossibleValues(4, 4).size());
     }
 
     @Test
@@ -59,6 +59,6 @@ public class ShowPossiblesTest {
         Arrays.fill(ones, 1);
         matrix = new Matrix(ones);
         alg.execute(matrix);
-        assertEquals(8, matrix.getPossibleValues(4,4).size());
+        assertEquals(8, matrix.getPossibleValues(4, 4).size());
     }
 }

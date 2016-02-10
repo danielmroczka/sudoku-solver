@@ -5,12 +5,13 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import java.util.HashSet;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import java.util.HashSet;
+
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author daniel
  */
 public class LoneSinglesTest {
@@ -23,10 +24,10 @@ public class LoneSinglesTest {
         IMatrix matrix = new Matrix();
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                if (matrix.getPossibleValues(row,col) == null) {
-                    matrix.setPossibleValues(row,col,new HashSet<Integer>());
+                if (matrix.getPossibleValues(row, col) == null) {
+                    matrix.setPossibleValues(row, col, new HashSet<Integer>());
                 }
-                matrix.getPossibleValues(row,col).add(1);
+                matrix.getPossibleValues(row, col).add(1);
             }
         }
         //WHEN

@@ -8,11 +8,10 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import org.junit.Test;
 
 /**
- *
  * @author daniel
  */
 public class HiddenSinglesTest {
-    
+
     @Test
     public void testExecute() {
         System.out.println("execute");
@@ -20,7 +19,7 @@ public class HiddenSinglesTest {
         HiddenSingles instance = new HiddenSingles();
         instance.execute(matrix);
         // TODO review the generated test code and remove the default call to fail.
-      //  fail("The test case is a prototype.");
+        //  fail("The test case is a prototype.");
     }
-    
+
 }

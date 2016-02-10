@@ -4,11 +4,13 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
-import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
  * @author daniel
@@ -22,20 +24,21 @@ public class ShowPossibles implements IAlgorithm {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 Set<Integer> set = new HashSet<>(fullSet);
-                
+
                 int[] cols = matrix.getElemsInCol(col);
                 int[] rows = matrix.getElemsInRow(row);
-                int[] blocks = matrix.getElemsInBlock(row/3, col/3);
-                for (int i: cols) {
+                int[] blocks = matrix.getElemsInBlock(row / 3, col / 3);
+
+                for (int i : cols) {
                     set.remove(i);
                 }
-                for (int i: rows) {
+                for (int i : rows) {
                     set.remove(i);
                 }
-                for (int i: blocks) {
+                for (int i : blocks) {
                     set.remove(i);
                 }
-                
+
                 matrix.setPossibleValues(row, col, set);
             }
         }

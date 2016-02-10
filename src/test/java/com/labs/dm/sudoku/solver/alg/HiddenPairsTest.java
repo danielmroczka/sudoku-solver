@@ -5,14 +5,15 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import java.util.Arrays;
-import java.util.HashSet;
-import static org.junit.Assert.assertEquals;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author daniel
  */
 public class HiddenPairsTest {

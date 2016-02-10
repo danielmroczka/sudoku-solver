@@ -5,17 +5,15 @@ package com.labs.dm.sudoku.solver.io;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
- *
  * @author daniel
  */
 public class MatrixLoaderTest {

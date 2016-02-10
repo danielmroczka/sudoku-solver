@@ -22,7 +22,7 @@ public class Flow {
             showPossibles.execute(matrix);
             loneSingles.execute(matrix);
             System.out.println("Flow=" + prevCount);
-            
+
             if (prevCount == matrix.getSetElems()) {
                 chance--;
                 if (chance == 0) {
@@ -30,7 +30,7 @@ public class Flow {
                 }
             }
             prevCount = matrix.getSetElems();
-            chance=3;
+            chance = 3;
         }
     }
 

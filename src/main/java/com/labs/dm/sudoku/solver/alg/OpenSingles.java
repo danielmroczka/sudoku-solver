@@ -4,15 +4,15 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Open Singles Algorithm.
- * 
- * @see http://www.learn-sudoku.com/open-singles.html
  *
  * @author daniel
+ * @see http://www.learn-sudoku.com/open-singles.html
  */
 public class OpenSingles implements IAlgorithm {
 
@@ -42,8 +42,8 @@ public class OpenSingles implements IAlgorithm {
     }
 
     private void fillOpenSinglesInBlocks(IMatrix matrix) {
-        for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup ++) {
-            for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup ++) {
+        for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
+            for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
                 int[] block = matrix.getElemsInBlock(rowGroup, colGroup);
                 if (fillOpenSingles(block)) {
                     matrix.setBlock(rowGroup, colGroup, block);
