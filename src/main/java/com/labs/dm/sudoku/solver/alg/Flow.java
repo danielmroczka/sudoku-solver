@@ -30,7 +30,7 @@ public class Flow {
                 }
             }
             prevCount = matrix.getSetElems();
-            chance = 3;
+            //chance = 3;
         }
     }
 
