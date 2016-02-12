@@ -11,11 +11,11 @@ dependencies {
     testCompile 'junit:junit:4.11'
 }
 
-sourceSets {
+/*sourceSets {
 	main {
-		output.dir = 'target'
+		output = 'target'
     }
-}
+}*/
 
 sonar {
     server {
