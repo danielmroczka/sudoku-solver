@@ -14,6 +14,7 @@ public class Flow {
         IAlgorithm showPossibles = new ShowPossibles();
         IAlgorithm openSingles = new OpenSingles();
         IAlgorithm loneSingles = new LoneSingles();
+        IAlgorithm nakedPairs = new NakedPairs();
         int prevCount = matrix.getSetElems();
         int chance = 3;
         while (!matrix.isSolved()) {
@@ -21,6 +22,7 @@ public class Flow {
             openSingles.execute(matrix);
             showPossibles.execute(matrix);
             loneSingles.execute(matrix);
+            nakedPairs.execute(matrix);
             System.out.println("Flow=" + prevCount);
 
             if (prevCount == matrix.getSetElems()) {
