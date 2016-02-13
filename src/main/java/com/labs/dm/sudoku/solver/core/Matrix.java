@@ -1,5 +1,5 @@
 /*
- * Copyright daniel.mroczka@gmail.com. All rights reserved. 
+ * Copyright Daniel Mroczka. All rights reserved.
  */
 package com.labs.dm.sudoku.solver.core;
 
@@ -22,6 +22,15 @@ public class Matrix implements IMatrix {
     public Matrix() {
         tab = new int[SIZE][SIZE];
         possibleValues = new HashSet[SIZE][SIZE];
+        initCandidates();
+    }
+
+    private void initCandidates() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                setPossibleValues(row, col, new HashSet<Integer>());
+            }
+        }
     }
 
     public Matrix(int... items) {
@@ -40,6 +49,26 @@ public class Matrix implements IMatrix {
         validateInputIndex(row, col);
         validateInputValue(value);
         tab[row][col] = value;
+        getPossibleValues(row, col).clear();
+        removeCandidates(row, col, value);
+    }
+
+    private void removeCandidates(int row, int col, int value) {
+        if (value > 0 && value < 10) {
+            for (int r = 0; r < SIZE; r++) {
+                getPossibleValues(r, col).remove(value);
+            }
+            for (int c = 0; c < SIZE; c++) {
+                getPossibleValues(row, c).remove(value);
+            }
+            int rowStart = (row / 3) * IMatrix.BLOCK_SIZE;
+            int colStart = (col / 3) * IMatrix.BLOCK_SIZE;
+            for (int rowGroup = rowStart; rowGroup < rowStart + IMatrix.BLOCK_SIZE; rowGroup++) {
+                for (int colGroup = colStart; colGroup < colStart + IMatrix.BLOCK_SIZE; colGroup++) {
+                    getPossibleValues(rowGroup, colGroup).remove(value);
+                }
+            }
+        }
     }
 
     @Override
@@ -52,7 +81,7 @@ public class Matrix implements IMatrix {
         int counter = 0;
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                if (getCellValue(row, col) != EMPTY_VALUE) {
+                if (isCellSet(row, col)) {
                     counter++;
                 }
             }

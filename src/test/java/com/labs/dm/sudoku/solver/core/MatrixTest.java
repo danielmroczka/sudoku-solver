@@ -1,5 +1,5 @@
 /*
- * Copyright daniel.mroczka@gmail.com. All rights reserved. 
+ * Copyright Daniel Mroczka. All rights reserved.
  */
 package com.labs.dm.sudoku.solver.core;
 
@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 
 import static org.junit.Assert.*;
@@ -35,6 +37,18 @@ public class MatrixTest {
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 matrix.setCellValue(row, col, 9);
                 assertEquals(9, matrix.getCellValue(row, col));
+                assertTrue(matrix.getPossibleValues(row, col).isEmpty());
+            }
+        }
+    }
+
+    @Test
+    public void testSetCellValueRemoveCandidates() {
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int col = 0; col < IMatrix.SIZE; col++) {
+                matrix.setPossibleValues(row, col, new HashSet<>(Arrays.asList(new Integer[]{1,2,3})));
+                matrix.setCellValue(row, col, 1);
+                assertTrue(matrix.getPossibleValues(row, col).isEmpty());
             }
         }
     }
@@ -59,6 +73,11 @@ public class MatrixTest {
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotAcceptValueLessThanZero() {
         matrix.setCellValue(0, 0, -1);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotAcceptPositionOutOfRange() {
+        matrix.setCellValue(10, 10, 1);
     }
 
     @Test

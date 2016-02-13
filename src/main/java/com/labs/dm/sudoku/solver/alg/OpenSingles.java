@@ -1,5 +1,5 @@
 /*
- * Copyright daniel.mroczka@gmail.com. All rights reserved. 
+ * Copyright Daniel Mroczka. All rights reserved.
  */
 package com.labs.dm.sudoku.solver.alg;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * Open Singles Algorithm.
  *
  * @author daniel
- * @see http://www.learn-sudoku.com/open-singles.html
+ * http://www.learn-sudoku.com/open-singles.html
  */
 public class OpenSingles implements IAlgorithm {
 

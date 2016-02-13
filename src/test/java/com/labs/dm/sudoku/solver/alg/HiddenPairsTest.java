@@ -1,13 +1,15 @@
 /*
- * Copyright daniel.mroczka@gmail.com. All rights reserved. 
+ * Copyright Daniel Mroczka. All rights reserved.
  */
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
+import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -36,6 +38,18 @@ public class HiddenPairsTest {
         hiddenPairs.execute(matrix);
         //THEN
         assertEquals(2, matrix.getPossibleValues(5, 3).size());
+    }
+
+    @Test
+    public void test() throws IOException {
+        MatrixLoader loader = new MatrixLoader();
+        IMatrix matrix = loader.load("src/test/resources/patterns/hiddenPair.txt");
+        IAlgorithm alg = new HiddenPairs();
+        IAlgorithm cand = new GenerateCandidates();
+
+        cand.execute(matrix);
+        System.out.println(matrix.toString());
+        alg.execute(matrix);
     }
 
 }

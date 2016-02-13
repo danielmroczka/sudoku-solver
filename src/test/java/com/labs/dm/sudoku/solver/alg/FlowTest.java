@@ -1,5 +1,5 @@
 /*
- * Copyright daniel.mroczka@gmail.com. All rights reserved. 
+ * Copyright Daniel Mroczka. All rights reserved.
  */
 
 package com.labs.dm.sudoku.solver.alg;
