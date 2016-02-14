@@ -52,6 +52,8 @@ public interface IMatrix extends Iterable<Integer> {
      */
     boolean isEmpty();
 
+    int getCandidates();
+
     /**
      * Fills all cells with empty value.
      */
@@ -129,6 +131,8 @@ public interface IMatrix extends Iterable<Integer> {
      * @return
      */
     int[] toArray();
+
+    String printCandidates();
 
     boolean validate();
 

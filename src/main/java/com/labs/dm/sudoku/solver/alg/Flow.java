@@ -19,41 +19,41 @@ public class Flow {
         IAlgorithm hiddenPairs = new HiddenPairs();
 
         int prevCount = matrix.getSetElems();
-        int chance = 3;
-        showPossibles.execute(matrix);
-        while (!matrix.isSolved()) {
-            System.out.println("Matrix is valid=" + matrix.validate());
-            System.out.println("Matrix elems count = " + matrix.getSetElems());
-            openSingles.execute(matrix);
-            System.out.println("Matrix is valid=" + matrix.validate());
-            System.out.println("Matrix elems count = " + matrix.getSetElems());
-            //showPossibles.execute(matrix);
-            loneSingles.execute(matrix);
-            System.out.println("Matrix is valid=" + matrix.validate());
-            System.out.println("Matrix elems count = " + matrix.getSetElems());
-            //showPossibles.execute(matrix);
-            nakedPairs.execute(matrix);
-            System.out.println("Matrix is valid=" + matrix.validate());
-            System.out.println("Matrix elems count = " + matrix.getSetElems());
-            //showPossibles.execute(matrix);
-            //hiddenSingles.execute(matrix);
-            System.out.println("Matrix is valid=" + matrix.validate());
-            System.out.println("Matrix elems count = " + matrix.getSetElems());
-            //showPossibles.execute(matrix);
-            hiddenPairs.execute(matrix);
-            System.out.println("Matrix is valid=" + matrix.validate());
 
-            System.out.println("Flow=" + prevCount);
+        int chance = 5;
+        showPossibles.execute(matrix);
+        System.out.println("Candidates = " + matrix.getCandidates());
+        matrix.validate();
+        System.out.println("Set cells = " +  matrix.getSetElems());
+       // System.out.println(matrix);
+       // System.out.println(matrix.printCandidates());
+        while (!matrix.isSolved()) {
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+            nakedPairs.execute(matrix);
+            hiddenPairs.execute(matrix);
+            hiddenSingles.execute(matrix);
+
+
+            System.out.println("Candidates = " + matrix.getCandidates());
+            matrix.validate();
+            System.out.println("Set cells = " +  matrix.getSetElems());
 
             if (prevCount == matrix.getSetElems()) {
                 chance--;
                 if (chance == 0) {
                     break;
                 }
+            } else {
+                chance = 5;
             }
             prevCount = matrix.getSetElems();
             //chance = 3;
         }
+
+        System.out.println(matrix);
+        System.out.println(matrix.printCandidates());
+        matrix.validate();
     }
 
 }

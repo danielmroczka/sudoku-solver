@@ -25,7 +25,7 @@ public class NakedPairs implements IAlgorithm {
                 Map<Collection<Integer>, Integer> map = new HashMap<>();
                 for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
                     for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
-                        onFind(matrix, map, row, col);
+                        count(matrix, map, row, col);
                     }
                 }
 
@@ -33,7 +33,7 @@ public class NakedPairs implements IAlgorithm {
                     if (entry.getValue() == 2) {
                         for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
                             for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
-                                if (!Collections.disjoint(matrix.getPossibleValues(row, col), entry.getKey())) {
+                                if (!matrix.getPossibleValues(row, col).equals(entry.getKey()) && !Collections.disjoint(matrix.getPossibleValues(row, col), entry.getKey())) {
                                     matrix.getPossibleValues(row, col).removeAll(entry.getKey());
                                 }
                             }
@@ -44,29 +44,30 @@ public class NakedPairs implements IAlgorithm {
         }
     }
 
-    private void onFind(IMatrix matrix, Map<Collection<Integer>, Integer> map, int row, int col) {
-        if (matrix.getPossibleValues(row, col).size() == 2) {
-            Integer val = map.get(matrix.getPossibleValues(row, col));
+    private void count(IMatrix matrix, Map<Collection<Integer>, Integer> map, int row, int col) {
+        Collection<Integer> key = matrix.getPossibleValues(row, col);
+        if (key.size() == 2) {
+            Integer val = map.get(key);
             if (val == null) {
                 val = 0;
             }
-            map.put(new HashSet<>(matrix.getPossibleValues(row, col)), ++val);
+            map.put(new HashSet<>(key), ++val);
         }
     }
 
     private void findNakedPairsInRows(IMatrix matrix) {
-
         for (int row = 0; row < IMatrix.SIZE; row++) {
             Map<Collection<Integer>, Integer> map = new HashMap<>();
-            for (int col = 0; col < matrix.SIZE; col++) {
-                onFind(matrix, map, row, col);
+            for (int col = 0; col < IMatrix.SIZE; col++) {
+                count(matrix, map, row, col);
             }
 
             for (Map.Entry<Collection<Integer>, Integer> entry : map.entrySet()) {
                 if (entry.getValue() == 2) {
-                    for (int col = 0; col < matrix.SIZE; col++) {
-                        if (!Collections.disjoint(matrix.getPossibleValues(row, col), entry.getKey())) {
-                            matrix.getPossibleValues(row, col).removeAll(entry.getKey());
+                    for (int col = 0; col < IMatrix.SIZE; col++) {
+                        Collection<Integer> candidates = matrix.getPossibleValues(row, col);
+                        if (!candidates.equals(entry.getKey()) && !Collections.disjoint(candidates, entry.getKey())) {
+                            candidates.removeAll(entry.getKey());
                         }
                     }
                 }
@@ -76,16 +77,16 @@ public class NakedPairs implements IAlgorithm {
     }
 
     private void findNakedPairsInCols(IMatrix matrix) {
-        for (int col = 0; col < matrix.SIZE; col++) {
+        for (int col = 0; col < IMatrix.SIZE; col++) {
             Map<Collection<Integer>, Integer> map = new HashMap<>();
-            for (int row = 0; row < matrix.SIZE; row++) {
-                onFind(matrix, map, row, col);
+            for (int row = 0; row < IMatrix.SIZE; row++) {
+                count(matrix, map, row, col);
             }
 
             for (Map.Entry<Collection<Integer>, Integer> entry : map.entrySet()) {
                 if (entry.getValue() == 2) {
-                    for (int row = 0; row < matrix.SIZE; row++) {
-                        if (!Collections.disjoint(matrix.getPossibleValues(row, col), entry.getKey())) {
+                    for (int row = 0; row < IMatrix.SIZE; row++) {
+                        if (!matrix.getPossibleValues(row, col).equals(entry.getKey()) && !Collections.disjoint(matrix.getPossibleValues(row, col), entry.getKey())) {
                             matrix.getPossibleValues(row, col).removeAll(entry.getKey());
                         }
                     }

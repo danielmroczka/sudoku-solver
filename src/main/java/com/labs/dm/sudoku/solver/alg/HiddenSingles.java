@@ -63,9 +63,9 @@ public class HiddenSingles implements IAlgorithm {
     }
 
     private void findInCols(IMatrix matrix) {
-        for (int col = 0; col < matrix.SIZE; col++) {
+        for (int col = 0; col < IMatrix.SIZE; col++) {
             Map<Integer, Integer> counter = new HashMap<>();
-            for (int row = 0; row < matrix.SIZE; row++) {
+            for (int row = 0; row < IMatrix.SIZE; row++) {
                 onFind(matrix, counter, row, col);
             }
 

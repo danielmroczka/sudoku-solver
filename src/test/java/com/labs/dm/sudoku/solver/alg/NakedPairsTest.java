@@ -2,7 +2,6 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -39,14 +38,13 @@ public class NakedPairsTest {
         assertEquals(3, matrix.getPossibleValues(0, 0).size());
         assertEquals(4, matrix.getPossibleValues(0, 2).size());
         assertEquals(3, matrix.getPossibleValues(0, 3).size());
-        assertEquals(0, matrix.getPossibleValues(0, 5).size());
-        assertEquals(0, matrix.getPossibleValues(0, 6).size());
+        assertEquals(2, matrix.getPossibleValues(0, 5).size());
+        assertEquals(2, matrix.getPossibleValues(0, 6).size());
         assertEquals(1, matrix.getPossibleValues(0, 8).size());
 
     }
 
     @Test
-    @Ignore
     public void executeBlock() throws Exception {
         //GIVEN
         IMatrix matrix = new Matrix();
@@ -66,11 +64,11 @@ public class NakedPairsTest {
         nakedPairs.execute(matrix);
         //THEN
         assertEquals(3, matrix.getPossibleValues(4, 3).size());
-        assertEquals(4, matrix.getPossibleValues(0, 2).size());
-        assertEquals(3, matrix.getPossibleValues(0, 3).size());
-        assertEquals(0, matrix.getPossibleValues(0, 5).size());
-        assertEquals(0, matrix.getPossibleValues(0, 6).size());
-        assertEquals(1, matrix.getPossibleValues(0, 8).size());
+        assertEquals(4, matrix.getPossibleValues(4, 4).size());
+        assertEquals(3, matrix.getPossibleValues(4, 5).size());
+        assertEquals(2, matrix.getPossibleValues(5, 3).size());
+        assertEquals(2, matrix.getPossibleValues(5, 4).size());
+        assertEquals(1, matrix.getPossibleValues(5, 5).size());
 
     }
 }

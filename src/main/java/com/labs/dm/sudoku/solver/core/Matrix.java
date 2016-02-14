@@ -90,6 +90,17 @@ public class Matrix implements IMatrix {
     }
 
     @Override
+    public int getCandidates() {
+        int counter = 0;
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                counter += getPossibleValues(row, col).size();
+            }
+        }
+        return counter;
+    }
+
+    @Override
     public void clear() {
         fillWithValue(EMPTY_VALUE);
     }
@@ -266,6 +277,21 @@ public class Matrix implements IMatrix {
             if (row % 3 == 2 && row < SIZE - 1) {
                 sb.append("------+-------+------").append(System.lineSeparator());
             }
+
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public String printCandidates() {
+        StringBuilder sb = new StringBuilder(100);
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                sb.append("(" + row + ", " + col + ") - " + getCellValue(row, col) + " ");
+                sb.append(getPossibleValues(row, col));
+                sb.append(System.lineSeparator());
+            }
+            sb.append("------").append(System.lineSeparator());
 
         }
         return sb.toString();

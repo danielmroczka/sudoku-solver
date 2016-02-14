@@ -72,7 +72,9 @@ public class OpenSingles implements IAlgorithm {
             if (tab[elem] == IMatrix.EMPTY_VALUE) {
                 position = elem;
             } else {
-                set.remove(set.indexOf(tab[elem]));
+                if (set.indexOf(tab[elem]) != -1) {
+                    set.remove(set.indexOf(tab[elem]));
+                }
             }
         }
 
