@@ -73,11 +73,11 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isSolved() {
-        return getSetElems() == SIZE * SIZE;
+        return getSolvedItems() == SIZE * SIZE;
     }
 
     @Override
-    public int getSetElems() {
+    public int getSolvedItems() {
         int counter = 0;
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
@@ -186,7 +186,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isEmpty() {
-        return getSetElems() == 0;
+        return getSolvedItems() == 0;
     }
 
     @Override
@@ -262,6 +262,8 @@ public class Matrix implements IMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(100);
+        sb.append("Solved= " + getSolvedItems() + ", candidates= " + getCandidates());
+        sb.append(System.lineSeparator());
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 sb.append(getCellValue(row, col));
@@ -341,4 +343,27 @@ public class Matrix implements IMatrix {
         possibleValues[row][col] = set;
     }
 
+    @Override
+    public int occurenciesInRow(int row, int value) {
+        int cnt = 0;
+        for (int col = 0; col < IMatrix.SIZE; col++) {
+            if (getPossibleValues(row, col).contains(value)) {
+                cnt++;
+            }
+        }
+
+        return cnt;
+    }
+
+    @Override
+    public int occurenciesInCol(int col, int value) {
+        int cnt = 0;
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            if (getPossibleValues(row, col).contains(value)) {
+                cnt++;
+            }
+        }
+
+        return cnt;
+    }
 }

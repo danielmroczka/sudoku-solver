@@ -12,7 +12,7 @@ import java.util.List;
  * Open Singles Algorithm.
  *
  * @author daniel
- * http://www.learn-sudoku.com/open-singles.html
+ *         http://www.learn-sudoku.com/open-singles.html
  */
 public class OpenSingles implements IAlgorithm {
 

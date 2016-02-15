@@ -25,7 +25,7 @@ public class FlowTest {
         Flow flow = new Flow();
         IMatrix matrix = new MatrixLoader().load("patterns/alg/opensingles/002.txt");
         flow.execute(matrix);
-        assertEquals(81, matrix.getSetElems());
+        assertEquals(81, matrix.getSolvedItems());
     }
 
     @Test

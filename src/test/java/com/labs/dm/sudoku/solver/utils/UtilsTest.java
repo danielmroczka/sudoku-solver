@@ -5,9 +5,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.labs.dm.sudoku.solver.utils.Utils.combination;
-import static com.labs.dm.sudoku.solver.utils.Utils.factorial;
-import static org.junit.Assert.assertEquals;
+import static com.labs.dm.sudoku.solver.utils.Utils.*;
+import static org.junit.Assert.*;
 
 /**
  * Created by daniel on 2016-02-13.
@@ -28,10 +27,16 @@ public class UtilsTest {
 
 
     @Test
-    public void pairs() throws Exception {
-        List<Integer> list1 = Arrays.asList(new Integer[]{1,2,3,4});
+    public void testPairs() throws Exception {
+        List<Integer> list1 = Arrays.asList(new Integer[]{1, 2, 3, 4});
 
-        List<List<Integer>> result  = Utils.pairs(list1);
+        List<List<Integer>> result = pairs(list1);
         assertEquals(6, result.size());
+    }
+
+    @Test
+    public void testTheSameBlock() throws Exception {
+        assertTrue(theSameBlock(0, 2));
+        assertFalse(theSameBlock(0, 3));
     }
 }

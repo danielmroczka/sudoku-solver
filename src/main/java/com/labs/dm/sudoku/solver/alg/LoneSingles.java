@@ -11,7 +11,7 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
  * Lone Singles Algorithm Implementation
  *
  * @author daniel
- * http://www.learn-sudoku.com/lone-singles.html
+ *         http://www.learn-sudoku.com/lone-singles.html
  */
 public class LoneSingles implements IAlgorithm {
 

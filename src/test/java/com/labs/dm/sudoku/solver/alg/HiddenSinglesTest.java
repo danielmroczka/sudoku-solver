@@ -29,16 +29,16 @@ public class HiddenSinglesTest {
         matrix.setCellValue(0, 7, 8);
         matrix.setCellValue(0, 8, 9);
 
-        matrix.setPossibleValues(0, 0, new HashSet<>(Arrays.asList(new Integer[]{7,5,3})));
-        matrix.setPossibleValues(0, 2, new HashSet<>(Arrays.asList(new Integer[]{1,3})));
-        matrix.setPossibleValues(0, 5, new HashSet<>(Arrays.asList(new Integer[]{1,5})));
-        matrix.setPossibleValues(0, 6, new HashSet<>(Arrays.asList(new Integer[]{1,5,3})));
+        matrix.setPossibleValues(0, 0, new HashSet<>(Arrays.asList(new Integer[]{7, 5, 3})));
+        matrix.setPossibleValues(0, 2, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
+        matrix.setPossibleValues(0, 5, new HashSet<>(Arrays.asList(new Integer[]{1, 5})));
+        matrix.setPossibleValues(0, 6, new HashSet<>(Arrays.asList(new Integer[]{1, 5, 3})));
 
         IAlgorithm hiddenSingles = new HiddenSingles();
         //WHEN
         hiddenSingles.execute(matrix);
         //THEN
-        assertEquals(7, matrix.getCellValue(0,0));
+        assertEquals(7, matrix.getCellValue(0, 0));
         assertTrue(matrix.validate());
     }
 
@@ -52,10 +52,10 @@ public class HiddenSinglesTest {
         matrix.setCellValue(4, 3, 8);
         matrix.setCellValue(4, 4, 9);
 
-        matrix.setPossibleValues(4, 5, new HashSet<>(Arrays.asList(new Integer[]{7,5,3})));
-        matrix.setPossibleValues(5, 3, new HashSet<>(Arrays.asList(new Integer[]{1,3})));
-        matrix.setPossibleValues(5, 4, new HashSet<>(Arrays.asList(new Integer[]{1,5})));
-        matrix.setPossibleValues(5, 5, new HashSet<>(Arrays.asList(new Integer[]{1,5,3})));
+        matrix.setPossibleValues(4, 5, new HashSet<>(Arrays.asList(new Integer[]{7, 5, 3})));
+        matrix.setPossibleValues(5, 3, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
+        matrix.setPossibleValues(5, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 5})));
+        matrix.setPossibleValues(5, 5, new HashSet<>(Arrays.asList(new Integer[]{1, 5, 3})));
 
         IAlgorithm hiddenSingles = new HiddenSingles();
         //WHEN

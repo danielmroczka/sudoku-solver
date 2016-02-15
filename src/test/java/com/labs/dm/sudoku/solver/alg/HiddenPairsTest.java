@@ -22,7 +22,7 @@ public class HiddenPairsTest {
     private final HiddenPairs hiddenPairs = new HiddenPairs();
 
     @Test
-   // @Ignore
+    // @Ignore
     public void testExecute() {
         //GIVEN
         IMatrix matrix = new Matrix();

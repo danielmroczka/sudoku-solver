@@ -17,29 +17,42 @@ public class Flow {
         IAlgorithm nakedPairs = new NakedPairs();
         IAlgorithm hiddenSingles = new HiddenSingles();
         IAlgorithm hiddenPairs = new HiddenPairs();
+        IAlgorithm xWing = new XWing();
 
-        int prevCount = matrix.getSetElems();
+        int prevCount = matrix.getSolvedItems();
 
         int chance = 5;
         showPossibles.execute(matrix);
         System.out.println("Candidates = " + matrix.getCandidates());
         matrix.validate();
-        System.out.println("Set cells = " +  matrix.getSetElems());
-       // System.out.println(matrix);
-       // System.out.println(matrix.printCandidates());
+        System.out.println("Set cells = " + matrix.getSolvedItems());
+        // System.out.println(matrix);
+        // System.out.println(matrix.printCandidates());
         while (!matrix.isSolved()) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
             nakedPairs.execute(matrix);
+
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+
             hiddenPairs.execute(matrix);
+
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+
             hiddenSingles.execute(matrix);
 
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+
+            //xWing.execute(matrix);
 
             System.out.println("Candidates = " + matrix.getCandidates());
             matrix.validate();
-            System.out.println("Set cells = " +  matrix.getSetElems());
+            System.out.println("Set cells = " + matrix.getSolvedItems());
 
-            if (prevCount == matrix.getSetElems()) {
+            if (prevCount == matrix.getSolvedItems()) {
                 chance--;
                 if (chance == 0) {
                     break;
@@ -47,7 +60,7 @@ public class Flow {
             } else {
                 chance = 5;
             }
-            prevCount = matrix.getSetElems();
+            prevCount = matrix.getSolvedItems();
             //chance = 3;
         }
 

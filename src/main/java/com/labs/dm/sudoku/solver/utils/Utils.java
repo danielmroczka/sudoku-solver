@@ -20,14 +20,14 @@ public class Utils {
     }
 
     public static int combination(int n, int k) {
-         return factorial(n) / (factorial(k) * factorial(n-k));
+        return factorial(n) / (factorial(k) * factorial(n - k));
     }
 
     public static List<List<Integer>> pairs(List<Integer> list) {
         List<List<Integer>> result = new ArrayList<>();
-        for (int i=0; i<list.size(); i++) {
-            for (int j=i; j<list.size(); j++) {
-                if (i==j) continue;
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = i; j < list.size(); j++) {
+                if (i == j) continue;
                 List<Integer> tab = new ArrayList<>();
                 tab.add(list.get(i));
                 tab.add(list.get(j));
@@ -36,5 +36,9 @@ public class Utils {
         }
 
         return result;
+    }
+
+    public static boolean theSameBlock(int val1, int val2) {
+        return val1 / 3 == val2 / 3;
     }
 }

@@ -59,6 +59,6 @@ public class GenerateCandidatesTest {
         Arrays.fill(ones, 1);
         matrix = new Matrix(ones);
         alg.execute(matrix);
-       // assertEquals(8, matrix.getPossibleValues(4, 4).size());
+        // assertEquals(8, matrix.getPossibleValues(4, 4).size());
     }
 }

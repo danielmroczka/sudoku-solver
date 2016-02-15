@@ -24,12 +24,12 @@ public class NakedPairsTest {
 
         //MatrixUtils.initCandiates(matrix);
 
-        matrix.setPossibleValues(0, 0, new HashSet<>(Arrays.asList(new Integer[]{1,2,4,5})));
-        matrix.setPossibleValues(0, 2, new HashSet<>(Arrays.asList(new Integer[]{1,2,4,5,7})));
-        matrix.setPossibleValues(0, 3, new HashSet<>(Arrays.asList(new Integer[]{2,4,5,7})));
-        matrix.setPossibleValues(0, 5, new HashSet<>(Arrays.asList(new Integer[]{2,3})));
-        matrix.setPossibleValues(0, 6, new HashSet<>(Arrays.asList(new Integer[]{2,3})));
-        matrix.setPossibleValues(0, 8, new HashSet<>(Arrays.asList(new Integer[]{2,3,5})));
+        matrix.setPossibleValues(0, 0, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5})));
+        matrix.setPossibleValues(0, 2, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5, 7})));
+        matrix.setPossibleValues(0, 3, new HashSet<>(Arrays.asList(new Integer[]{2, 4, 5, 7})));
+        matrix.setPossibleValues(0, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
+        matrix.setPossibleValues(0, 6, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
+        matrix.setPossibleValues(0, 8, new HashSet<>(Arrays.asList(new Integer[]{2, 3, 5})));
 
         IAlgorithm nakedPairs = new NakedPairs();
         //WHEN
@@ -52,12 +52,12 @@ public class NakedPairsTest {
         matrix.setCellValue(3, 4, 6);
         matrix.setCellValue(3, 5, 8);
 
-        matrix.setPossibleValues(4, 3, new HashSet<>(Arrays.asList(new Integer[]{1,2,4,5})));
-        matrix.setPossibleValues(4, 4, new HashSet<>(Arrays.asList(new Integer[]{1,2,4,5,7})));
-        matrix.setPossibleValues(4, 5, new HashSet<>(Arrays.asList(new Integer[]{2,4,5,7})));
-        matrix.setPossibleValues(5, 3, new HashSet<>(Arrays.asList(new Integer[]{2,3})));
-        matrix.setPossibleValues(5, 4, new HashSet<>(Arrays.asList(new Integer[]{2,3})));
-        matrix.setPossibleValues(5, 5, new HashSet<>(Arrays.asList(new Integer[]{2,3,5})));
+        matrix.setPossibleValues(4, 3, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5})));
+        matrix.setPossibleValues(4, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5, 7})));
+        matrix.setPossibleValues(4, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 4, 5, 7})));
+        matrix.setPossibleValues(5, 3, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
+        matrix.setPossibleValues(5, 4, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
+        matrix.setPossibleValues(5, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 3, 5})));
 
         IAlgorithm nakedPairs = new NakedPairs();
         //WHEN

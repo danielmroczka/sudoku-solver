@@ -136,8 +136,11 @@ public interface IMatrix extends Iterable<Integer> {
 
     boolean validate();
 
-    int getSetElems();
+    int getSolvedItems();
 
     boolean isCellSet(int row, int col);
 
+    int occurenciesInRow(int row, int value);
+
+    int occurenciesInCol(int col, int value);
 }
