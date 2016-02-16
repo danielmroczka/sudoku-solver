@@ -8,7 +8,7 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 
 /**
  * Omission algorithm implementation
- * <p>
+ * <p/>
  * http://www.learn-sudoku.com/omission.html
  *
  * @author daniel

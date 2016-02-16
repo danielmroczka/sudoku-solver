@@ -10,7 +10,7 @@ import java.util.*;
 
 /**
  * Hidden Pairs algorithm implementation
- * <p>
+ * <p/>
  * http://www.learn-sudoku.com/hidden-pairs.html
  *
  * @author daniel
@@ -23,38 +23,6 @@ public class HiddenPairs implements IAlgorithm {
         findHiddenPairsInCols(matrix);
         findHiddenPairsInBlock(matrix);
     }
-
-
-/*
-    for(
-    int rowGroup = 0;
-    rowGroup<IMatrix.BLOCK_SIZE;rowGroup++)
-
-    {
-        for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
-            Map<Collection<Integer>, Integer> map = new HashMap<>();
-            for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
-                    count(matrix, map, row, col);
-                }
-            }
-
-            for (Map.Entry<Collection<Integer>, Integer> entry : map.entrySet()) {
-                if (entry.getValue() == 2) {
-                    for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                        for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
-                            if (!matrix.getPossibleValues(row, col).equals(entry.getKey()) && !Collections.disjoint(matrix.getPossibleValues(row, col), entry.getKey())) {
-                                matrix.getPossibleValues(row, col).removeAll(entry.getKey());
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-}
-*/
 
     private void findHiddenPairsInBlock(IMatrix matrix) {
         for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
@@ -137,17 +105,17 @@ public class HiddenPairs implements IAlgorithm {
             for (Map.Entry<List<Integer>, Integer> entry : mapWithOccurencies.entrySet()) {
                 if (entry.getValue() == 2) {
                     List<Integer> pairs = entry.getKey();
-                    int found = 0, unique = 0;
+                    int foundAny = 0, foundAll = 0;
                     for (int colTemp = 0; colTemp < IMatrix.SIZE; colTemp++) {
                         Collection<Integer> candidates = matrix.getPossibleValues(row, colTemp);
                         if (candidates.contains(pairs.get(0)) || candidates.contains(pairs.get(1))) {
-                            found++;
+                            foundAny++;
                         }
                         if (candidates.containsAll(pairs)) {
-                            unique++;
+                            foundAll++;
                         }
                     }
-                    if (unique == 2 && found == 2) {
+                    if (foundAll == 2 && foundAny == 2) {
                         for (int colTemp = 0; colTemp < IMatrix.SIZE; colTemp++) {
                             Collection<Integer> candidates = matrix.getPossibleValues(row, colTemp);
                             if (candidates.containsAll(pairs)) {

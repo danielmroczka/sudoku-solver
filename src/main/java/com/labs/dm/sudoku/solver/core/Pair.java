@@ -4,18 +4,18 @@ package com.labs.dm.sudoku.solver.core;
  * Created by daniel on 2016-02-15.
  */
 public class Pair {
-    private int x, y;
+    private int col, row;
 
-    public Pair(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Pair(int row, int col) {
+        this.col = col;
+        this.row = row;
     }
 
-    public int getX() {
-        return x;
+    public int getCol() {
+        return col;
     }
 
-    public int getY() {
-        return y;
+    public int getRow() {
+        return row;
     }
 }

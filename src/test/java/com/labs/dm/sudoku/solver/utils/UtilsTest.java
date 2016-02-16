@@ -37,6 +37,8 @@ public class UtilsTest {
     @Test
     public void testTheSameBlock() throws Exception {
         assertTrue(theSameBlock(0, 2));
+        assertTrue(theSameBlock(0, 1, 2));
         assertFalse(theSameBlock(0, 3));
+        assertFalse(theSameBlock(0, 2, 3, 8));
     }
 }

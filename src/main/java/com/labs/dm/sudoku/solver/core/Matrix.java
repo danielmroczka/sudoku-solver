@@ -3,10 +3,7 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class represents main matrix
@@ -90,7 +87,7 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public int getCandidates() {
+    public int getCandidatesCount() {
         int counter = 0;
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
@@ -262,7 +259,7 @@ public class Matrix implements IMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(100);
-        sb.append("Solved= " + getSolvedItems() + ", candidates= " + getCandidates());
+        sb.append("Solved= " + getSolvedItems() + ", candidates= " + getCandidatesCount());
         sb.append(System.lineSeparator());
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
@@ -365,5 +362,10 @@ public class Matrix implements IMatrix {
         }
 
         return cnt;
+    }
+
+    @Override
+    public void addCandidates(int row, int col, Integer[] array) {
+        getPossibleValues(row, col).addAll(new HashSet<>(Arrays.asList(array)));
     }
 }

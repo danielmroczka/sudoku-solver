@@ -38,7 +38,13 @@ public class Utils {
         return result;
     }
 
-    public static boolean theSameBlock(int val1, int val2) {
-        return val1 / 3 == val2 / 3;
+    public static boolean theSameBlock(Integer... val) {
+        int v = val[0] / 3;
+        boolean res = true;
+        for (int i : val) {
+            res = res && i / 3 == v;
+            v = i / 3;
+        }
+        return res;
     }
 }

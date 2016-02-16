@@ -17,6 +17,9 @@ public interface IMatrix extends Iterable<Integer> {
      */
     int SIZE = 9;
 
+    /**
+     * Size of the block
+     */
     int BLOCK_SIZE = SIZE / 3;
 
     /**
@@ -52,7 +55,12 @@ public interface IMatrix extends Iterable<Integer> {
      */
     boolean isEmpty();
 
-    int getCandidates();
+    /**
+     * Return count of all candidates
+     *
+     * @return
+     */
+    int getCandidatesCount();
 
     /**
      * Fills all cells with empty value.
@@ -116,6 +124,13 @@ public interface IMatrix extends Iterable<Integer> {
      */
     void setBlock(int row, int col, int[] block);
 
+    /**
+     * Get collection of candidats for selected cell
+     *
+     * @param row
+     * @param col
+     * @return
+     */
     Collection<Integer> getPossibleValues(int row, int col);
 
     void setPossibleValues(int row, int col, Collection<Integer> set);
@@ -123,9 +138,9 @@ public interface IMatrix extends Iterable<Integer> {
     /**
      * Returns SIZE*SIZE elements array starting from first row, iterate through
      * columns and go to next row.
-     * <p>
+     * <p/>
      * Matrix: 1,2,3 4,5,6 7,8,9
-     * <p>
+     * <p/>
      * Result: 1,2,3,4,5,6,7,8,9
      *
      * @return
@@ -143,4 +158,6 @@ public interface IMatrix extends Iterable<Integer> {
     int occurenciesInRow(int row, int value);
 
     int occurenciesInCol(int col, int value);
+
+    void addCandidates(int row, int col, Integer[] array);
 }

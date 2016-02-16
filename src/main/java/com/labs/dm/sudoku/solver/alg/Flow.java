@@ -18,12 +18,13 @@ public class Flow {
         IAlgorithm hiddenSingles = new HiddenSingles();
         IAlgorithm hiddenPairs = new HiddenPairs();
         IAlgorithm xWing = new XWing();
+        IAlgorithm reduction = new Reduction();
 
         int prevCount = matrix.getSolvedItems();
 
         int chance = 5;
         showPossibles.execute(matrix);
-        System.out.println("Candidates = " + matrix.getCandidates());
+        System.out.println("Candidates = " + matrix.getCandidatesCount());
         matrix.validate();
         System.out.println("Set cells = " + matrix.getSolvedItems());
         // System.out.println(matrix);
@@ -32,25 +33,11 @@ public class Flow {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
             nakedPairs.execute(matrix);
-
-            loneSingles.execute(matrix);
-            openSingles.execute(matrix);
-
             hiddenPairs.execute(matrix);
-
-            loneSingles.execute(matrix);
-            openSingles.execute(matrix);
-
             hiddenSingles.execute(matrix);
+            reduction.execute(matrix);
+            xWing.execute(matrix);
 
-            loneSingles.execute(matrix);
-            openSingles.execute(matrix);
-
-            //xWing.execute(matrix);
-
-            System.out.println("Candidates = " + matrix.getCandidates());
-            matrix.validate();
-            System.out.println("Set cells = " + matrix.getSolvedItems());
 
             if (prevCount == matrix.getSolvedItems()) {
                 chance--;
@@ -63,6 +50,11 @@ public class Flow {
             prevCount = matrix.getSolvedItems();
             //chance = 3;
         }
+
+        System.out.println("Candidates = " + matrix.getCandidatesCount());
+        matrix.validate();
+        System.out.println("Set cells = " + matrix.getSolvedItems());
+
 
         System.out.println(matrix);
         System.out.println(matrix.printCandidates());

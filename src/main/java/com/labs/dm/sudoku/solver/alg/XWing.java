@@ -14,7 +14,6 @@ public class XWing implements IAlgorithm {
     }
 
     private void removeInRows(IMatrix matrix) {
-        int reduced = 0;
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
 
@@ -41,14 +40,14 @@ public class XWing implements IAlgorithm {
                                     continue;
                                 }
 
-                                boolean matchedInFirstRow = matrix.getPossibleValues(row, tempCol).contains(cand);
+                                boolean matchedInFirstRow = matrix.getPossibleValues(tempRow, col).contains(cand);
                                 boolean matchedInSecondRow = matrix.getPossibleValues(tempRow, tempCol).contains(cand);
 
                                 if (matchedInFirstRow && matchedInSecondRow) {
                                     for (int c = 0; c < IMatrix.SIZE; c++) {
                                         if (c != col && c != tempCol) {
-                                            if (matrix.getPossibleValues(row, c).remove(cand)) reduced++;
-                                            if (matrix.getPossibleValues(tempRow, c).remove(cand)) reduced++;
+                                            matrix.getPossibleValues(row, c).remove(cand);
+                                            matrix.getPossibleValues(tempRow, c).remove(cand);
                                         }
                                     }
                                 }
@@ -57,14 +56,10 @@ public class XWing implements IAlgorithm {
                     }
                 }
             }
-
         }
-
-        System.out.println("Reduced in rows: " + reduced);
     }
 
     private void removeInCols(IMatrix matrix) {
-        int reduced = 0;
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
 
@@ -91,18 +86,14 @@ public class XWing implements IAlgorithm {
                                     continue;
                                 }
 
-                                boolean matchedInFirstCol = matrix.getPossibleValues(tempRow, col).contains(cand);
+                                boolean matchedInFirstCol = matrix.getPossibleValues(row, tempCol).contains(cand);
                                 boolean matchedInSecondCol = matrix.getPossibleValues(tempRow, tempCol).contains(cand);
 
                                 if (matchedInFirstCol && matchedInSecondCol) {
                                     for (int r = 0; r < IMatrix.SIZE; r++) {
                                         if (r != row && r != tempRow) {
-                                            if (matrix.getPossibleValues(r, col).remove(cand)) {
-                                                reduced++;
-                                            }
-                                            if (matrix.getPossibleValues(r, tempCol).remove(cand)) {
-                                                reduced++;
-                                            }
+                                            matrix.getPossibleValues(r, col).remove(cand);
+                                            matrix.getPossibleValues(r, tempCol).remove(cand);
                                         }
                                     }
                                 }
@@ -111,10 +102,6 @@ public class XWing implements IAlgorithm {
                     }
                 }
             }
-
         }
-        System.out.println("Reduced in cols: " + reduced);
-
     }
-
 }
