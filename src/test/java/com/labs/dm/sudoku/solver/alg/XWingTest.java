@@ -6,8 +6,6 @@ import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -19,8 +17,6 @@ public class XWingTest {
 
     private IAlgorithm alg = new XWing();
     private IAlgorithm cand = new GenerateCandidates();
-    private IAlgorithm alg1 = new OpenSingles();
-    private IAlgorithm alg2 = new LoneSingles();
 
     @Test
     public void shouldTestEmptyMarix() {
@@ -33,43 +29,43 @@ public class XWingTest {
     public void testInRow() {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setPossibleValues(0, 0, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(0, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(0, 6, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(4, 0, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(4, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(4, 6, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
+        matrix.addCandidates(0, 0, new Integer[]{1, 3});
+        matrix.addCandidates(0, 4, new Integer[]{1, 3});
+        matrix.addCandidates(0, 6, new Integer[]{1, 3});
+        matrix.addCandidates(4, 0, new Integer[]{1, 3});
+        matrix.addCandidates(4, 4, new Integer[]{1, 3});
+        matrix.addCandidates(4, 6, new Integer[]{1, 3});
         //WHEN
         alg.execute(matrix);
         //THEN
-        assertEquals(0, matrix.getPossibleValues(0, 6).size());
-        assertEquals(0, matrix.getPossibleValues(4, 6).size());
-        assertEquals(2, matrix.getPossibleValues(0, 0).size());
-        assertEquals(2, matrix.getPossibleValues(0, 4).size());
-        assertEquals(2, matrix.getPossibleValues(4, 0).size());
-        assertEquals(2, matrix.getPossibleValues(4, 4).size());
+        assertEquals(0, matrix.getCandidates(0, 6).size());
+        assertEquals(0, matrix.getCandidates(4, 6).size());
+        assertEquals(2, matrix.getCandidates(0, 0).size());
+        assertEquals(2, matrix.getCandidates(0, 4).size());
+        assertEquals(2, matrix.getCandidates(4, 0).size());
+        assertEquals(2, matrix.getCandidates(4, 4).size());
     }
 
     @Test
     public void testInCol() {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setPossibleValues(0, 0, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(4, 0, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(6, 0, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(0, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(4, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setPossibleValues(6, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
+        matrix.addCandidates(0, 0, new Integer[]{1, 3});
+        matrix.addCandidates(4, 0, new Integer[]{1, 3});
+        matrix.addCandidates(6, 0, new Integer[]{1, 3});
+        matrix.addCandidates(0, 4, new Integer[]{1, 3});
+        matrix.addCandidates(4, 4, new Integer[]{1, 3});
+        matrix.addCandidates(6, 4, new Integer[]{1, 3});
         //WHEN
         alg.execute(matrix);
 
         //THEN
-        assertEquals(0, matrix.getPossibleValues(6, 0).size());
-        assertEquals(0, matrix.getPossibleValues(6, 4).size());
-        assertEquals(2, matrix.getPossibleValues(4, 0).size());
-        assertEquals(2, matrix.getPossibleValues(4, 4).size());
-        assertEquals(2, matrix.getPossibleValues(0, 0).size());
-        assertEquals(2, matrix.getPossibleValues(0, 4).size());
+        assertEquals(0, matrix.getCandidates(6, 0).size());
+        assertEquals(0, matrix.getCandidates(6, 4).size());
+        assertEquals(2, matrix.getCandidates(4, 0).size());
+        assertEquals(2, matrix.getCandidates(4, 4).size());
+        assertEquals(2, matrix.getCandidates(0, 0).size());
+        assertEquals(2, matrix.getCandidates(0, 4).size());
     }
 
     @Test
@@ -78,7 +74,7 @@ public class XWingTest {
         cand.execute(matrix);
         assertTrue(matrix.getCandidatesCount() <= 98);
         alg.execute(matrix);
-        assertTrue(matrix.getCandidatesCount() <= 98);
+        assertTrue(matrix.getCandidatesCount() <= 89);
     }
 
 }

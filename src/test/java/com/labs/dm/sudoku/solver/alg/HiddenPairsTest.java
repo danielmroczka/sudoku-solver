@@ -30,16 +30,16 @@ public class HiddenPairsTest {
         matrix.setCellValue(0, 5, 1);
         matrix.setCellValue(0, 4, 2);
 
-        matrix.setPossibleValues(0, 1, new HashSet<>(Arrays.asList(new Integer[]{6, 7, 8, 9})));
-        matrix.setPossibleValues(0, 6, new HashSet<>(Arrays.asList(new Integer[]{7, 8})));
-        matrix.setPossibleValues(0, 7, new HashSet<>(Arrays.asList(new Integer[]{6, 8, 9})));
+        matrix.setCandidates(0, 1, new HashSet<>(Arrays.asList(new Integer[]{6, 7, 8, 9})));
+        matrix.setCandidates(0, 6, new HashSet<>(Arrays.asList(new Integer[]{7, 8})));
+        matrix.setCandidates(0, 7, new HashSet<>(Arrays.asList(new Integer[]{6, 8, 9})));
         //WHEN
         hiddenPairs.execute(matrix);
         System.out.println(matrix.printCandidates());
         hiddenPairs.execute(matrix);
         //THEN
-        assertEquals(2, matrix.getPossibleValues(0, 1).size());
-        assertEquals(2, matrix.getPossibleValues(0, 7).size());
+        assertEquals(2, matrix.getCandidates(0, 1).size());
+        assertEquals(2, matrix.getCandidates(0, 7).size());
     }
 
     @Test

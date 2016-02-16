@@ -39,9 +39,9 @@ public class HiddenSingles implements IAlgorithm {
                     if (entry.getValue() == 1) {
                         for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
                             for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
-                                if (matrix.getPossibleValues(row, col).contains(entry.getKey())) {
+                                if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                                     matrix.setCellValue(row, col, entry.getKey());
-                                    matrix.getPossibleValues(row, col).clear();
+                                    matrix.getCandidates(row, col).clear();
                                 }
                             }
                         }
@@ -52,7 +52,7 @@ public class HiddenSingles implements IAlgorithm {
     }
 
     private void onFind(IMatrix matrix, Map<Integer, Integer> counter, int row, int col) {
-        Collection<Integer> candidates = matrix.getPossibleValues(row, col);
+        Collection<Integer> candidates = matrix.getCandidates(row, col);
         for (int item : candidates) {
             Integer value = counter.get(item);
             if (value == null) {
@@ -72,9 +72,9 @@ public class HiddenSingles implements IAlgorithm {
             for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
                 if (entry.getValue() == 1) {
                     for (int row = 0; row < IMatrix.SIZE; row++) {
-                        if (matrix.getPossibleValues(row, col).contains(entry.getKey())) {
+                        if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                             matrix.setCellValue(row, col, entry.getKey());
-                            matrix.getPossibleValues(row, col).clear();
+                            matrix.getCandidates(row, col).clear();
                         }
                     }
                 }
@@ -92,9 +92,9 @@ public class HiddenSingles implements IAlgorithm {
             for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
                 if (entry.getValue() == 1) {
                     for (int col = 0; col < IMatrix.SIZE; col++) {
-                        if (matrix.getPossibleValues(row, col).contains(entry.getKey())) {
+                        if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                             matrix.setCellValue(row, col, entry.getKey());
-                            matrix.getPossibleValues(row, col).clear();
+                            matrix.getCandidates(row, col).clear();
                         }
                     }
                 }

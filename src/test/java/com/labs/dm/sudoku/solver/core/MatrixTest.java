@@ -37,7 +37,7 @@ public class MatrixTest {
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 matrix.setCellValue(row, col, 9);
                 assertEquals(9, matrix.getCellValue(row, col));
-                assertTrue(matrix.getPossibleValues(row, col).isEmpty());
+                assertTrue(matrix.getCandidates(row, col).isEmpty());
             }
         }
     }
@@ -46,9 +46,9 @@ public class MatrixTest {
     public void testSetCellValueRemoveCandidates() {
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                matrix.setPossibleValues(row, col, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 3})));
+                matrix.setCandidates(row, col, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 3})));
                 matrix.setCellValue(row, col, 1);
-                assertTrue(matrix.getPossibleValues(row, col).isEmpty());
+                assertTrue(matrix.getCandidates(row, col).isEmpty());
             }
         }
     }

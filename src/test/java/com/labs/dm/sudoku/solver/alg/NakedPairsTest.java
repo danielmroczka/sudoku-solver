@@ -24,23 +24,23 @@ public class NakedPairsTest {
 
         //MatrixUtils.initCandiates(matrix);
 
-        matrix.setPossibleValues(0, 0, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5})));
-        matrix.setPossibleValues(0, 2, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5, 7})));
-        matrix.setPossibleValues(0, 3, new HashSet<>(Arrays.asList(new Integer[]{2, 4, 5, 7})));
-        matrix.setPossibleValues(0, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
-        matrix.setPossibleValues(0, 6, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
-        matrix.setPossibleValues(0, 8, new HashSet<>(Arrays.asList(new Integer[]{2, 3, 5})));
+        matrix.setCandidates(0, 0, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5})));
+        matrix.setCandidates(0, 2, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5, 7})));
+        matrix.setCandidates(0, 3, new HashSet<>(Arrays.asList(new Integer[]{2, 4, 5, 7})));
+        matrix.setCandidates(0, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
+        matrix.setCandidates(0, 6, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
+        matrix.setCandidates(0, 8, new HashSet<>(Arrays.asList(new Integer[]{2, 3, 5})));
 
         IAlgorithm nakedPairs = new NakedPairs();
         //WHEN
         nakedPairs.execute(matrix);
         //THEN
-        assertEquals(3, matrix.getPossibleValues(0, 0).size());
-        assertEquals(4, matrix.getPossibleValues(0, 2).size());
-        assertEquals(3, matrix.getPossibleValues(0, 3).size());
-        assertEquals(2, matrix.getPossibleValues(0, 5).size());
-        assertEquals(2, matrix.getPossibleValues(0, 6).size());
-        assertEquals(1, matrix.getPossibleValues(0, 8).size());
+        assertEquals(3, matrix.getCandidates(0, 0).size());
+        assertEquals(4, matrix.getCandidates(0, 2).size());
+        assertEquals(3, matrix.getCandidates(0, 3).size());
+        assertEquals(2, matrix.getCandidates(0, 5).size());
+        assertEquals(2, matrix.getCandidates(0, 6).size());
+        assertEquals(1, matrix.getCandidates(0, 8).size());
 
     }
 
@@ -52,23 +52,23 @@ public class NakedPairsTest {
         matrix.setCellValue(3, 4, 6);
         matrix.setCellValue(3, 5, 8);
 
-        matrix.setPossibleValues(4, 3, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5})));
-        matrix.setPossibleValues(4, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5, 7})));
-        matrix.setPossibleValues(4, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 4, 5, 7})));
-        matrix.setPossibleValues(5, 3, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
-        matrix.setPossibleValues(5, 4, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
-        matrix.setPossibleValues(5, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 3, 5})));
+        matrix.setCandidates(4, 3, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5})));
+        matrix.setCandidates(4, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5, 7})));
+        matrix.setCandidates(4, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 4, 5, 7})));
+        matrix.setCandidates(5, 3, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
+        matrix.setCandidates(5, 4, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
+        matrix.setCandidates(5, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 3, 5})));
 
         IAlgorithm nakedPairs = new NakedPairs();
         //WHEN
         nakedPairs.execute(matrix);
         //THEN
-        assertEquals(3, matrix.getPossibleValues(4, 3).size());
-        assertEquals(4, matrix.getPossibleValues(4, 4).size());
-        assertEquals(3, matrix.getPossibleValues(4, 5).size());
-        assertEquals(2, matrix.getPossibleValues(5, 3).size());
-        assertEquals(2, matrix.getPossibleValues(5, 4).size());
-        assertEquals(1, matrix.getPossibleValues(5, 5).size());
+        assertEquals(3, matrix.getCandidates(4, 3).size());
+        assertEquals(4, matrix.getCandidates(4, 4).size());
+        assertEquals(3, matrix.getCandidates(4, 5).size());
+        assertEquals(2, matrix.getCandidates(5, 3).size());
+        assertEquals(2, matrix.getCandidates(5, 4).size());
+        assertEquals(1, matrix.getCandidates(5, 5).size());
 
     }
 }

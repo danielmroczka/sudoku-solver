@@ -125,15 +125,15 @@ public interface IMatrix extends Iterable<Integer> {
     void setBlock(int row, int col, int[] block);
 
     /**
-     * Get collection of candidats for selected cell
+     * Get collection of candidates for selected cell
      *
      * @param row
      * @param col
      * @return
      */
-    Collection<Integer> getPossibleValues(int row, int col);
+    Collection<Integer> getCandidates(int row, int col);
 
-    void setPossibleValues(int row, int col, Collection<Integer> set);
+    void setCandidates(int row, int col, Collection<Integer> set);
 
     /**
      * Returns SIZE*SIZE elements array starting from first row, iterate through

@@ -25,7 +25,7 @@ public class Matrix implements IMatrix {
     private void initCandidates() {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                setPossibleValues(row, col, new HashSet<Integer>());
+                setCandidates(row, col, new HashSet<Integer>());
             }
         }
     }
@@ -46,23 +46,23 @@ public class Matrix implements IMatrix {
         validateInputIndex(row, col);
         validateInputValue(value);
         tab[row][col] = value;
-        getPossibleValues(row, col).clear();
+        getCandidates(row, col).clear();
         removeCandidates(row, col, value);
     }
 
     private void removeCandidates(int row, int col, int value) {
         if (value > 0 && value < 10) {
             for (int r = 0; r < SIZE; r++) {
-                getPossibleValues(r, col).remove(value);
+                getCandidates(r, col).remove(value);
             }
             for (int c = 0; c < SIZE; c++) {
-                getPossibleValues(row, c).remove(value);
+                getCandidates(row, c).remove(value);
             }
             int rowStart = (row / 3) * IMatrix.BLOCK_SIZE;
             int colStart = (col / 3) * IMatrix.BLOCK_SIZE;
             for (int rowGroup = rowStart; rowGroup < rowStart + IMatrix.BLOCK_SIZE; rowGroup++) {
                 for (int colGroup = colStart; colGroup < colStart + IMatrix.BLOCK_SIZE; colGroup++) {
-                    getPossibleValues(rowGroup, colGroup).remove(value);
+                    getCandidates(rowGroup, colGroup).remove(value);
                 }
             }
         }
@@ -91,7 +91,7 @@ public class Matrix implements IMatrix {
         int counter = 0;
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                counter += getPossibleValues(row, col).size();
+                counter += getCandidates(row, col).size();
             }
         }
         return counter;
@@ -241,7 +241,7 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public Collection<Integer> getPossibleValues(int row, int col) {
+    public Collection<Integer> getCandidates(int row, int col) {
         return possibleValues[row][col];
     }
 
@@ -259,7 +259,7 @@ public class Matrix implements IMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(100);
-        sb.append("Solved= " + getSolvedItems() + ", candidates= " + getCandidatesCount());
+        sb.append("Solved= ").append(getSolvedItems()).append(", candidates= ").append(getCandidatesCount());
         sb.append(System.lineSeparator());
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
@@ -286,8 +286,8 @@ public class Matrix implements IMatrix {
         StringBuilder sb = new StringBuilder(100);
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                sb.append("(" + row + ", " + col + ") - " + getCellValue(row, col) + " ");
-                sb.append(getPossibleValues(row, col));
+                sb.append("(").append(row).append(", ").append(col).append(") - ").append(getCellValue(row, col)).append(" ");
+                sb.append(getCandidates(row, col));
                 sb.append(System.lineSeparator());
             }
             sb.append("------").append(System.lineSeparator());
@@ -336,7 +336,7 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public void setPossibleValues(int row, int col, Collection<Integer> set) {
+    public void setCandidates(int row, int col, Collection<Integer> set) {
         possibleValues[row][col] = set;
     }
 
@@ -344,7 +344,7 @@ public class Matrix implements IMatrix {
     public int occurenciesInRow(int row, int value) {
         int cnt = 0;
         for (int col = 0; col < IMatrix.SIZE; col++) {
-            if (getPossibleValues(row, col).contains(value)) {
+            if (getCandidates(row, col).contains(value)) {
                 cnt++;
             }
         }
@@ -356,7 +356,7 @@ public class Matrix implements IMatrix {
     public int occurenciesInCol(int col, int value) {
         int cnt = 0;
         for (int row = 0; row < IMatrix.SIZE; row++) {
-            if (getPossibleValues(row, col).contains(value)) {
+            if (getCandidates(row, col).contains(value)) {
                 cnt++;
             }
         }
@@ -366,6 +366,6 @@ public class Matrix implements IMatrix {
 
     @Override
     public void addCandidates(int row, int col, Integer[] array) {
-        getPossibleValues(row, col).addAll(new HashSet<>(Arrays.asList(array)));
+        getCandidates(row, col).addAll(new HashSet<>(Arrays.asList(array)));
     }
 }

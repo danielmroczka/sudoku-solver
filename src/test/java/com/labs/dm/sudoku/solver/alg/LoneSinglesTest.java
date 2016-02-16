@@ -26,7 +26,7 @@ public class LoneSinglesTest {
 
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                matrix.getPossibleValues(row, col).add(resolvedMatrix.getCellValue(row, col));
+                matrix.getCandidates(row, col).add(resolvedMatrix.getCellValue(row, col));
             }
         }
         //WHEN

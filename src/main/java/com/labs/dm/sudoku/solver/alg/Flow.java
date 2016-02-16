@@ -27,8 +27,6 @@ public class Flow {
         System.out.println("Candidates = " + matrix.getCandidatesCount());
         matrix.validate();
         System.out.println("Set cells = " + matrix.getSolvedItems());
-        // System.out.println(matrix);
-        // System.out.println(matrix.printCandidates());
         while (!matrix.isSolved()) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -37,7 +35,6 @@ public class Flow {
             hiddenSingles.execute(matrix);
             reduction.execute(matrix);
             xWing.execute(matrix);
-
 
             if (prevCount == matrix.getSolvedItems()) {
                 chance--;
@@ -48,7 +45,6 @@ public class Flow {
                 chance = 5;
             }
             prevCount = matrix.getSolvedItems();
-            //chance = 3;
         }
 
         System.out.println("Candidates = " + matrix.getCandidatesCount());

@@ -31,7 +31,7 @@ public class HiddenPairs implements IAlgorithm {
                 for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
                     for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
                         List<Integer> l = new ArrayList<>();
-                        l.addAll(matrix.getPossibleValues(row, col));
+                        l.addAll(matrix.getCandidates(row, col));
                         list.add(l);
                     }
                 }
@@ -56,7 +56,7 @@ public class HiddenPairs implements IAlgorithm {
             List<List<Integer>> list = new ArrayList<>();
             for (int row = 0; row < IMatrix.SIZE; row++) {
                 List<Integer> l = new ArrayList<>();
-                l.addAll(matrix.getPossibleValues(row, col));
+                l.addAll(matrix.getCandidates(row, col));
                 list.add(l);
             }
 
@@ -67,7 +67,7 @@ public class HiddenPairs implements IAlgorithm {
                     List<Integer> pairs = entry.getKey();
                     int found = 0, unique = 0;
                     for (int rowTemp = 0; rowTemp < IMatrix.SIZE; rowTemp++) {
-                        Collection<Integer> candidates = matrix.getPossibleValues(rowTemp, col);
+                        Collection<Integer> candidates = matrix.getCandidates(rowTemp, col);
                         if (candidates.contains(pairs.get(0)) || candidates.contains(pairs.get(1))) {
                             found++;
                         }
@@ -77,7 +77,7 @@ public class HiddenPairs implements IAlgorithm {
                     }
                     if (unique == 2 && found == 2) {
                         for (int rowTemp = 0; rowTemp < IMatrix.SIZE; rowTemp++) {
-                            Collection<Integer> candidates = matrix.getPossibleValues(rowTemp, col);
+                            Collection<Integer> candidates = matrix.getCandidates(rowTemp, col);
                             if (candidates.containsAll(pairs)) {
                                 candidates.retainAll(pairs);
                             }
@@ -93,7 +93,7 @@ public class HiddenPairs implements IAlgorithm {
             List<List<Integer>> list = new ArrayList<>();
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 List<Integer> candidates = new ArrayList<>();
-                candidates.addAll(matrix.getPossibleValues(row, col));
+                candidates.addAll(matrix.getCandidates(row, col));
                 if (!candidates.isEmpty()) {
                     list.add(candidates);
                 }
@@ -107,7 +107,7 @@ public class HiddenPairs implements IAlgorithm {
                     List<Integer> pairs = entry.getKey();
                     int foundAny = 0, foundAll = 0;
                     for (int colTemp = 0; colTemp < IMatrix.SIZE; colTemp++) {
-                        Collection<Integer> candidates = matrix.getPossibleValues(row, colTemp);
+                        Collection<Integer> candidates = matrix.getCandidates(row, colTemp);
                         if (candidates.contains(pairs.get(0)) || candidates.contains(pairs.get(1))) {
                             foundAny++;
                         }
@@ -117,7 +117,7 @@ public class HiddenPairs implements IAlgorithm {
                     }
                     if (foundAll == 2 && foundAny == 2) {
                         for (int colTemp = 0; colTemp < IMatrix.SIZE; colTemp++) {
-                            Collection<Integer> candidates = matrix.getPossibleValues(row, colTemp);
+                            Collection<Integer> candidates = matrix.getCandidates(row, colTemp);
                             if (candidates.containsAll(pairs)) {
                                 candidates.retainAll(pairs);
                             }

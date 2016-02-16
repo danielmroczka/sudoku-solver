@@ -36,7 +36,7 @@ public class Reduction implements IAlgorithm {
                         List<Pair> list = new ArrayList<>();
                         for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
                             for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                                if (matrix.getPossibleValues(row, col).contains(entry.getKey())) {
+                                if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                                     list.add(new Pair(row, col));
                                 }
                             }
@@ -60,7 +60,9 @@ public class Reduction implements IAlgorithm {
                                         f = false;
                                     }
                                 }
-                                //if (f) matrix.getPossibleValues(row, item.getCol()).remove(entry.getKey());
+                                if (f) {
+                                    matrix.getCandidates(row, item.getCol()).remove(entry.getKey());
+                                }
                             }
                         }
 
@@ -73,7 +75,9 @@ public class Reduction implements IAlgorithm {
                                         f = false;
                                     }
                                 }
-                                // if (f) matrix.getPossibleValues(item.getRow(), col).remove(entry.getKey());
+                                if (f) {
+                                    matrix.getCandidates(item.getRow(), col).remove(entry.getKey());
+                                }
                             }
                         }
                     }
@@ -90,7 +94,7 @@ public class Reduction implements IAlgorithm {
         List<Integer> pos = new ArrayList<>();
         for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
             for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                if (matrix.getPossibleValues(row, col).contains(key)) {
+                if (matrix.getCandidates(row, col).contains(key)) {
                     pos.add(row);
                 }
             }
@@ -116,7 +120,7 @@ public class Reduction implements IAlgorithm {
     private List<Integer> getPositions(IMatrix matrix, int col, int key) {
         List<Integer> pos = new ArrayList<>();
         for (int row = 0; row < IMatrix.SIZE; row++) {
-            if (matrix.getPossibleValues(row, col).contains(key)) {
+            if (matrix.getCandidates(row, col).contains(key)) {
                 pos.add(row);
             }
         }
@@ -126,7 +130,7 @@ public class Reduction implements IAlgorithm {
     private List<Integer> getPositions2(IMatrix matrix, int row, int key) {
         List<java.lang.Integer> pos = new ArrayList<>();
         for (int col = 0; col < IMatrix.SIZE; col++) {
-            if (matrix.getPossibleValues(row, col).contains(key)) {
+            if (matrix.getCandidates(row, col).contains(key)) {
                 pos.add(col);
             }
         }
@@ -153,7 +157,7 @@ public class Reduction implements IAlgorithm {
 
         for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
             for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                for (int key : matrix.getPossibleValues(row, col)) {
+                for (int key : matrix.getCandidates(row, col)) {
                     map.inc(key);
                 }
 
@@ -166,7 +170,7 @@ public class Reduction implements IAlgorithm {
     private CounterHashMap getOccurenceInColMap(IMatrix matrix, int col) {
         CounterHashMap map = new CounterHashMap();
         for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int key : matrix.getPossibleValues(row, col)) {
+            for (int key : matrix.getCandidates(row, col)) {
                 map.inc(key);
             }
         }
@@ -176,7 +180,7 @@ public class Reduction implements IAlgorithm {
     private CounterHashMap getOccurenceInRowMap(IMatrix matrix, int row) {
         CounterHashMap map = new CounterHashMap();
         for (int col = 0; col < IMatrix.SIZE; col++) {
-            for (int key : matrix.getPossibleValues(row, col)) {
+            for (int key : matrix.getCandidates(row, col)) {
                 map.inc(key);
             }
         }
@@ -187,8 +191,9 @@ public class Reduction implements IAlgorithm {
         int rowBlock = pos.get(0);
         for (int rowTemp = 3 * (rowBlock / 3); rowTemp < 3 * (rowBlock / 3) + 3; rowTemp++) {
             for (int colTemp = 3 * (col / 3); colTemp < 3 * (col / 3) + 3; colTemp++) {
-                if (colTemp != col && matrix.getPossibleValues(rowTemp, colTemp).contains(key)) {
-                    matrix.getPossibleValues(rowTemp, colTemp).remove(key);
+                if (colTemp != col && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
+                    System.out.println("Removing Col " + rowTemp + ", " + colTemp + ", " + key);
+                    matrix.getCandidates(rowTemp, colTemp).remove(key);
                 }
             }
         }
@@ -198,8 +203,9 @@ public class Reduction implements IAlgorithm {
         int colBlock = pos.get(0);
         for (int colTemp = 3 * (colBlock / 3); colTemp < 3 * (colBlock / 3) + 3; colTemp++) {
             for (int rowTemp = 3 * (row / 3); rowTemp < 3 * (row / 3) + 3; rowTemp++) {
-                if (rowTemp != row && matrix.getPossibleValues(rowTemp, colTemp).contains(key)) {
-                    matrix.getPossibleValues(rowTemp, colTemp).remove(key);
+                if (rowTemp != row && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
+                    System.out.println("Removing Row " + rowTemp + ", " + colTemp + ", " + key);
+                    matrix.getCandidates(rowTemp, colTemp).remove(key);
                 }
             }
         }

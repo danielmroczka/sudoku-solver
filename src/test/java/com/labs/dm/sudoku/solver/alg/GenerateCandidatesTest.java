@@ -32,14 +32,14 @@ public class GenerateCandidatesTest {
     @Test
     public void shouldSet() {
         alg.execute(matrix);
-        assertEquals(9, matrix.getPossibleValues(4, 4).size());
+        assertEquals(9, matrix.getCandidates(4, 4).size());
     }
 
     @Test
     public void shouldSet2() throws IOException {
         matrix = new MatrixLoader().load("patterns/easy1.txt");
         alg.execute(matrix);
-        Collection<Integer> set = matrix.getPossibleValues(4, 4);
+        Collection<Integer> set = matrix.getCandidates(4, 4);
         assertEquals(3, set.size());
         assertTrue(set.contains(5));
         assertTrue(set.contains(7));
@@ -50,7 +50,7 @@ public class GenerateCandidatesTest {
     public void shouldSet1() throws IOException {
         matrix = new MatrixLoader().load("patterns/solved.txt");
         alg.execute(matrix);
-        assertEquals(0, matrix.getPossibleValues(4, 4).size());
+        assertEquals(0, matrix.getCandidates(4, 4).size());
     }
 
     @Test
@@ -59,6 +59,6 @@ public class GenerateCandidatesTest {
         Arrays.fill(ones, 1);
         matrix = new Matrix(ones);
         alg.execute(matrix);
-        // assertEquals(8, matrix.getPossibleValues(4, 4).size());
+        // assertEquals(8, matrix.getCandidates(4, 4).size());
     }
 }

@@ -24,7 +24,7 @@ public class GenerateCandidates implements IAlgorithm {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if (matrix.isCellSet(row, col)) {
-                    matrix.setPossibleValues(row, col, new HashSet<Integer>());
+                    matrix.setCandidates(row, col, new HashSet<Integer>());
                     continue;
                 }
                 Set<Integer> set = new HashSet<>(fullSet);
@@ -43,7 +43,7 @@ public class GenerateCandidates implements IAlgorithm {
                     set.remove(i);
                 }
 
-                matrix.setPossibleValues(row, col, set);
+                matrix.setCandidates(row, col, set);
             }
         }
     }
