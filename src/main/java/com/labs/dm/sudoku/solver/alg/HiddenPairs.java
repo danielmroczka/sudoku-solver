@@ -44,7 +44,29 @@ public class HiddenPairs implements IAlgorithm {
                         List<Integer> pairs = entry.getKey();
                         int found = 0, unique = 0;
 
-                        //TODO implement
+                        for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
+                            for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
+                                Collection<Integer> candidates = matrix.getCandidates(row, col);
+                                if (candidates.contains(pairs.get(0)) || candidates.contains(pairs.get(1))) {
+                                    found++;
+                                }
+                                if (candidates.containsAll(pairs)) {
+                                    unique++;
+                                }
+                            }
+                        }
+
+                        if (unique == 2 && found == 2) {
+
+                            for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
+                                for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
+                                    Collection<Integer> candidates = matrix.getCandidates(row, col);
+                                    if (candidates.containsAll(pairs)) {
+                                        candidates.retainAll(pairs);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

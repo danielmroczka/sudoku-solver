@@ -28,6 +28,7 @@ public class Flow {
         matrix.validate();
         System.out.println("Set cells = " + matrix.getSolvedItems());
         while (!matrix.isSolved()) {
+            System.out.println("flow execution " + matrix.getCandidatesCount());
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
             nakedPairs.execute(matrix);
@@ -35,7 +36,7 @@ public class Flow {
             hiddenSingles.execute(matrix);
             reduction.execute(matrix);
             xWing.execute(matrix);
-
+            matrix.validate();
             if (prevCount == matrix.getSolvedItems()) {
                 chance--;
                 if (chance == 0) {
@@ -50,11 +51,8 @@ public class Flow {
         System.out.println("Candidates = " + matrix.getCandidatesCount());
         matrix.validate();
         System.out.println("Set cells = " + matrix.getSolvedItems());
-
-
         System.out.println(matrix);
         System.out.println(matrix.printCandidates());
-        matrix.validate();
     }
 
 }

@@ -64,9 +64,6 @@ public class MatrixLoader {
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
         if (inputStream == null) {
             inputStream = new FileInputStream(filePath);
-            if (inputStream == null) {
-                throw new FileNotFoundException();
-            }
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             char[] buf = new char[1024];

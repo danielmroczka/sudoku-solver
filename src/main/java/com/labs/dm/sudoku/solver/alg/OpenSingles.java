@@ -5,9 +5,6 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Open Singles Algorithm.
  *
@@ -63,24 +60,21 @@ public class OpenSingles implements IAlgorithm {
             throw new IllegalArgumentException("Invalid array size.");
         }
 
-        List<Integer> set = new ArrayList<>();
-        int position = -1;
-        for (int elem = 1; elem <= IMatrix.SIZE; elem++) {
-            set.add(elem);
-        }
+        int position = -1, cnt = 0, sum = 0;
         for (int elem = 0; elem < tab.length; elem++) {
             if (tab[elem] == IMatrix.EMPTY_VALUE) {
-                position = elem;
-            } else {
-                if (set.indexOf(tab[elem]) != -1) {
-                    set.remove(set.indexOf(tab[elem]));
+                if (++cnt > 1) {
+                    return false;
                 }
+                position = elem;
             }
+            sum += tab[elem];
         }
 
-        if (set.size() == 1) {
-            tab[position] = set.get(0);
+        if (position >= 0) {
+            tab[position] = 45 - sum;
+            return true;
         }
-        return set.size() == 1;
+        return false;
     }
 }

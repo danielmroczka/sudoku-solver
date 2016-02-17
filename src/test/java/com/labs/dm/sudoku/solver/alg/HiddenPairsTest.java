@@ -9,8 +9,6 @@ import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +20,6 @@ public class HiddenPairsTest {
     private final HiddenPairs hiddenPairs = new HiddenPairs();
 
     @Test
-    // @Ignore
     public void testExecute() {
         //GIVEN
         IMatrix matrix = new Matrix();
@@ -30,16 +27,37 @@ public class HiddenPairsTest {
         matrix.setCellValue(0, 5, 1);
         matrix.setCellValue(0, 4, 2);
 
-        matrix.setCandidates(0, 1, new HashSet<>(Arrays.asList(new Integer[]{6, 7, 8, 9})));
-        matrix.setCandidates(0, 6, new HashSet<>(Arrays.asList(new Integer[]{7, 8})));
-        matrix.setCandidates(0, 7, new HashSet<>(Arrays.asList(new Integer[]{6, 8, 9})));
+        matrix.addCandidates(0, 1, new Integer[]{6, 7, 8, 9});
+        matrix.addCandidates(0, 6, new Integer[]{7, 8});
+        matrix.addCandidates(0, 7, new Integer[]{6, 8, 9});
         //WHEN
-        hiddenPairs.execute(matrix);
-        System.out.println(matrix.printCandidates());
         hiddenPairs.execute(matrix);
         //THEN
         assertEquals(2, matrix.getCandidates(0, 1).size());
         assertEquals(2, matrix.getCandidates(0, 7).size());
+    }
+
+    @Test
+    public void testBlock() {
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.setCellValue(0, 0, 3);
+        matrix.setCellValue(0, 2, 1);
+        matrix.setCellValue(1, 1, 2);
+
+        matrix.addCandidates(0, 1, new Integer[]{4, 5, 8});
+        matrix.addCandidates(1, 0, new Integer[]{4, 5, 7});
+        matrix.addCandidates(1, 2, new Integer[]{4, 5});
+        matrix.addCandidates(2, 0, new Integer[]{6, 7, 8, 9});
+        matrix.addCandidates(2, 1, new Integer[]{7, 8});
+        matrix.addCandidates(2, 2, new Integer[]{6, 8, 9});
+        //WHEN
+        int candidates = matrix.getCandidatesCount();
+        hiddenPairs.execute(matrix);
+        //THEN
+        assertEquals(2, matrix.getCandidates(2, 0).size());
+        assertEquals(2, matrix.getCandidates(2, 2).size());
+        // assertEquals(candidates-3, matrix.getCandidatesCount());
     }
 
     @Test
@@ -50,7 +68,6 @@ public class HiddenPairsTest {
         IAlgorithm cand = new GenerateCandidates();
 
         cand.execute(matrix);
-        System.out.println(matrix.toString());
         alg.execute(matrix);
     }
 

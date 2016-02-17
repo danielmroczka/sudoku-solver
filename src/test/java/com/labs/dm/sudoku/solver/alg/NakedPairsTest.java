@@ -4,9 +4,6 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -24,12 +21,12 @@ public class NakedPairsTest {
 
         //MatrixUtils.initCandiates(matrix);
 
-        matrix.setCandidates(0, 0, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5})));
-        matrix.setCandidates(0, 2, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5, 7})));
-        matrix.setCandidates(0, 3, new HashSet<>(Arrays.asList(new Integer[]{2, 4, 5, 7})));
-        matrix.setCandidates(0, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
-        matrix.setCandidates(0, 6, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
-        matrix.setCandidates(0, 8, new HashSet<>(Arrays.asList(new Integer[]{2, 3, 5})));
+        matrix.addCandidates(0, 0, new Integer[]{1, 2, 4, 5});
+        matrix.addCandidates(0, 2, new Integer[]{1, 2, 4, 5, 7});
+        matrix.addCandidates(0, 3, new Integer[]{2, 4, 5, 7});
+        matrix.addCandidates(0, 5, new Integer[]{2, 3});
+        matrix.addCandidates(0, 6, new Integer[]{2, 3});
+        matrix.addCandidates(0, 8, new Integer[]{2, 3, 5});
 
         IAlgorithm nakedPairs = new NakedPairs();
         //WHEN
@@ -52,12 +49,12 @@ public class NakedPairsTest {
         matrix.setCellValue(3, 4, 6);
         matrix.setCellValue(3, 5, 8);
 
-        matrix.setCandidates(4, 3, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5})));
-        matrix.setCandidates(4, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 4, 5, 7})));
-        matrix.setCandidates(4, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 4, 5, 7})));
-        matrix.setCandidates(5, 3, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
-        matrix.setCandidates(5, 4, new HashSet<>(Arrays.asList(new Integer[]{2, 3})));
-        matrix.setCandidates(5, 5, new HashSet<>(Arrays.asList(new Integer[]{2, 3, 5})));
+        matrix.addCandidates(4, 3, new Integer[]{1, 2, 4, 5});
+        matrix.addCandidates(4, 4, new Integer[]{1, 2, 4, 5, 7});
+        matrix.addCandidates(4, 5, new Integer[]{2, 4, 5, 7});
+        matrix.addCandidates(5, 3, new Integer[]{2, 3});
+        matrix.addCandidates(5, 4, new Integer[]{2, 3});
+        matrix.addCandidates(5, 5, new Integer[]{2, 3, 5});
 
         IAlgorithm nakedPairs = new NakedPairs();
         //WHEN

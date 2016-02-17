@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * @author daniel
@@ -33,13 +33,6 @@ public class LoneSinglesTest {
         loneSingles.execute(matrix);
         //THEN
         matrix.validate();
-
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
-                assertEquals(resolvedMatrix.getCellValue(row, col), matrix.getCellValue(row, col));
-            }
-        }
-
-        // assertEquals(resolvedMatrix, matrix);
+        assertArrayEquals(resolvedMatrix.toArray(), matrix.toArray());
     }
 }

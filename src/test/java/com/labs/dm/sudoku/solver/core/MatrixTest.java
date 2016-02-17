@@ -8,8 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Iterator;
 
 import static org.junit.Assert.*;
@@ -46,7 +44,7 @@ public class MatrixTest {
     public void testSetCellValueRemoveCandidates() {
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                matrix.setCandidates(row, col, new HashSet<>(Arrays.asList(new Integer[]{1, 2, 3})));
+                matrix.addCandidates(row, col, new Integer[]{1, 2, 3});
                 matrix.setCellValue(row, col, 1);
                 assertTrue(matrix.getCandidates(row, col).isEmpty());
             }

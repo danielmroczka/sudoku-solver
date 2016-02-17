@@ -52,7 +52,7 @@ public class Reduction implements IAlgorithm {
                         }
 
                         if (theSameCol) {
-                            System.out.println("Removing " + entry.getKey() + " in col = " + item.getCol());
+                            //System.out.println("Removing " + entry.getKey() + " in col = " + item.getCol());
                             for (int row = 0; row < IMatrix.SIZE; row++) {
                                 boolean f = true;
                                 for (Pair p : list) {
@@ -67,15 +67,15 @@ public class Reduction implements IAlgorithm {
                         }
 
                         if (theSameRow) {
-                            System.out.println("Removing " + entry.getKey() + " in row = " + item.getRow());
+                            //System.out.println("Removing " + entry.getKey() + " in row = " + item.getRow());
                             for (int col = 0; col < IMatrix.SIZE; col++) {
-                                boolean f = true;
+                                boolean found = true;
                                 for (Pair p : list) {
                                     if (p.getCol() == col) {
-                                        f = false;
+                                        found = false;
                                     }
                                 }
-                                if (f) {
+                                if (found) {
                                     matrix.getCandidates(item.getRow(), col).remove(entry.getKey());
                                 }
                             }
@@ -84,22 +84,6 @@ public class Reduction implements IAlgorithm {
                 }
             }
         }
-    }
-
-    private void removeInBlockCol(IMatrix matrix, int rowGroup, int colGroup, Integer key, List<Integer> pos) {
-        System.out.println("TODO");
-    }
-
-    private List<Integer> getPositions(IMatrix matrix, int rowGroup, int colGroup, Integer key) {
-        List<Integer> pos = new ArrayList<>();
-        for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
-            for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                if (matrix.getCandidates(row, col).contains(key)) {
-                    pos.add(row);
-                }
-            }
-        }
-        return pos;
     }
 
     private void reduceInCols(IMatrix matrix) {
@@ -192,7 +176,7 @@ public class Reduction implements IAlgorithm {
         for (int rowTemp = 3 * (rowBlock / 3); rowTemp < 3 * (rowBlock / 3) + 3; rowTemp++) {
             for (int colTemp = 3 * (col / 3); colTemp < 3 * (col / 3) + 3; colTemp++) {
                 if (colTemp != col && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
-                    System.out.println("Removing Col " + rowTemp + ", " + colTemp + ", " + key);
+                    //System.out.println("Removing Col " + rowTemp + ", " + colTemp + ", " + key);
                     matrix.getCandidates(rowTemp, colTemp).remove(key);
                 }
             }
@@ -204,7 +188,7 @@ public class Reduction implements IAlgorithm {
         for (int colTemp = 3 * (colBlock / 3); colTemp < 3 * (colBlock / 3) + 3; colTemp++) {
             for (int rowTemp = 3 * (row / 3); rowTemp < 3 * (row / 3) + 3; rowTemp++) {
                 if (rowTemp != row && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
-                    System.out.println("Removing Row " + rowTemp + ", " + colTemp + ", " + key);
+                    //System.out.println("Removing Row " + rowTemp + ", " + colTemp + ", " + key);
                     matrix.getCandidates(rowTemp, colTemp).remove(key);
                 }
             }

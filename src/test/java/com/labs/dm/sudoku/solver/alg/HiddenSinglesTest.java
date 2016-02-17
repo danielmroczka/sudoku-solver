@@ -8,9 +8,6 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -29,10 +26,10 @@ public class HiddenSinglesTest {
         matrix.setCellValue(0, 7, 8);
         matrix.setCellValue(0, 8, 9);
 
-        matrix.setCandidates(0, 0, new HashSet<>(Arrays.asList(new Integer[]{7, 5, 3})));
-        matrix.setCandidates(0, 2, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setCandidates(0, 5, new HashSet<>(Arrays.asList(new Integer[]{1, 5})));
-        matrix.setCandidates(0, 6, new HashSet<>(Arrays.asList(new Integer[]{1, 5, 3})));
+        matrix.addCandidates(0, 0, new Integer[]{7, 5, 3});
+        matrix.addCandidates(0, 2, new Integer[]{1, 3});
+        matrix.addCandidates(0, 5, new Integer[]{1, 5});
+        matrix.addCandidates(0, 6, new Integer[]{1, 5, 3});
 
         IAlgorithm hiddenSingles = new HiddenSingles();
         //WHEN
@@ -52,10 +49,10 @@ public class HiddenSinglesTest {
         matrix.setCellValue(4, 3, 8);
         matrix.setCellValue(4, 4, 9);
 
-        matrix.setCandidates(4, 5, new HashSet<>(Arrays.asList(new Integer[]{7, 5, 3})));
-        matrix.setCandidates(5, 3, new HashSet<>(Arrays.asList(new Integer[]{1, 3})));
-        matrix.setCandidates(5, 4, new HashSet<>(Arrays.asList(new Integer[]{1, 5})));
-        matrix.setCandidates(5, 5, new HashSet<>(Arrays.asList(new Integer[]{1, 5, 3})));
+        matrix.addCandidates(4, 5, new Integer[]{7, 5, 3});
+        matrix.addCandidates(5, 3, new Integer[]{1, 3});
+        matrix.addCandidates(5, 4, new Integer[]{1, 5});
+        matrix.addCandidates(5, 5, new Integer[]{1, 5, 3});
 
         IAlgorithm hiddenSingles = new HiddenSingles();
         //WHEN

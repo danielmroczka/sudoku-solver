@@ -28,7 +28,7 @@ public class UtilsTest {
 
     @Test
     public void testPairs() throws Exception {
-        List<Integer> list1 = Arrays.asList(new Integer[]{1, 2, 3, 4});
+        List<Integer> list1 = Arrays.asList(1, 2, 3, 4);
 
         List<List<Integer>> result = pairs(list1);
         assertEquals(6, result.size());
