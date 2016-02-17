@@ -41,7 +41,7 @@ public class MatrixLoaderTest {
     public void shouldSaveTable() throws IOException {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setCellValue(4, 4, 4);
+        matrix.setValueAt(4, 4, 4);
         //WHEN
         loader.save(matrix, "target/test/output.txt");
         //THEN

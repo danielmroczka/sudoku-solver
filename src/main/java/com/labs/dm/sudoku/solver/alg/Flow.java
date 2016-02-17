@@ -52,7 +52,7 @@ public class Flow {
         matrix.validate();
         System.out.println("Set cells = " + matrix.getSolvedItems());
         System.out.println(matrix);
-        System.out.println(matrix.printCandidates());
+        // System.out.println(matrix.printCandidates());
     }
 
 }

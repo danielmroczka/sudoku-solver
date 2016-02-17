@@ -15,9 +15,9 @@ public class NakedPairsTest {
     public void execute() throws Exception {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setCellValue(0, 1, 9);
-        matrix.setCellValue(0, 4, 6);
-        matrix.setCellValue(0, 7, 8);
+        matrix.setValueAt(0, 1, 9);
+        matrix.setValueAt(0, 4, 6);
+        matrix.setValueAt(0, 7, 8);
 
         //MatrixUtils.initCandiates(matrix);
 
@@ -45,9 +45,9 @@ public class NakedPairsTest {
     public void executeBlock() throws Exception {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setCellValue(3, 3, 9);
-        matrix.setCellValue(3, 4, 6);
-        matrix.setCellValue(3, 5, 8);
+        matrix.setValueAt(3, 3, 9);
+        matrix.setValueAt(3, 4, 6);
+        matrix.setValueAt(3, 5, 8);
 
         matrix.addCandidates(4, 3, new Integer[]{1, 2, 4, 5});
         matrix.addCandidates(4, 4, new Integer[]{1, 2, 4, 5, 7});

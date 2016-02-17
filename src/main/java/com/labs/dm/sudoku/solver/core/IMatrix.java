@@ -29,7 +29,7 @@ public interface IMatrix extends Iterable<Integer> {
      * @param col
      * @return value
      */
-    int getCellValue(int row, int col);
+    int getValueAt(int row, int col);
 
     /**
      * Sets cell value at provided position
@@ -38,7 +38,9 @@ public interface IMatrix extends Iterable<Integer> {
      * @param col
      * @param value
      */
-    void setCellValue(int row, int col, int value);
+    void setValueAt(int row, int col, int value);
+
+    void removeCandidate(int row, int col, int value);
 
     /**
      * Returns true if matrix is solved. Matrix is solved when all elements are
@@ -160,4 +162,8 @@ public interface IMatrix extends Iterable<Integer> {
     int occurenciesInCol(int col, int value);
 
     void addCandidates(int row, int col, Integer[] array);
+
+    int getSetElemInCol(int col);
+
+    int getSetElemInRow(int col);
 }

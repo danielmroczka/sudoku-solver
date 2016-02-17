@@ -40,7 +40,7 @@ public class HiddenSingles implements IAlgorithm {
                         for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
                             for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
                                 if (matrix.getCandidates(row, col).contains(entry.getKey())) {
-                                    matrix.setCellValue(row, col, entry.getKey());
+                                    matrix.setValueAt(row, col, entry.getKey());
                                     matrix.getCandidates(row, col).clear();
                                 }
                             }
@@ -73,7 +73,7 @@ public class HiddenSingles implements IAlgorithm {
                 if (entry.getValue() == 1) {
                     for (int row = 0; row < IMatrix.SIZE; row++) {
                         if (matrix.getCandidates(row, col).contains(entry.getKey())) {
-                            matrix.setCellValue(row, col, entry.getKey());
+                            matrix.setValueAt(row, col, entry.getKey());
                             matrix.getCandidates(row, col).clear();
                         }
                     }
@@ -93,7 +93,7 @@ public class HiddenSingles implements IAlgorithm {
                 if (entry.getValue() == 1) {
                     for (int col = 0; col < IMatrix.SIZE; col++) {
                         if (matrix.getCandidates(row, col).contains(entry.getKey())) {
-                            matrix.setCellValue(row, col, entry.getKey());
+                            matrix.setValueAt(row, col, entry.getKey());
                             matrix.getCandidates(row, col).clear();
                         }
                     }

@@ -36,33 +36,42 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public int getCellValue(int row, int col) {
+    public int getValueAt(int row, int col) {
         validateInputIndex(row, col);
         return tab[row][col];
     }
 
     @Override
-    public void setCellValue(int row, int col, int value) {
+    public void setValueAt(int row, int col, int value) {
+        //System.out.println("setValue(" + value + ") at: " + row + ", " + col);
         validateInputIndex(row, col);
         validateInputValue(value);
         tab[row][col] = value;
-        getCandidates(row, col).clear();
         removeCandidates(row, col, value);
     }
 
+    @Override
+    public void removeCandidate(int row, int col, int value) {
+        if (getCandidates(row, col).remove(value)) {
+            //System.out.println("removeCandidate(" + value + ") at: " + row + ", " + col);
+        }
+    }
+
     private void removeCandidates(int row, int col, int value) {
+        getCandidates(row, col).clear();
+
         if (value > 0 && value < 10) {
             for (int r = 0; r < SIZE; r++) {
-                getCandidates(r, col).remove(value);
+                removeCandidate(r, col, value);
             }
             for (int c = 0; c < SIZE; c++) {
-                getCandidates(row, c).remove(value);
+                removeCandidate(row, c, value);
             }
             int rowStart = (row / 3) * IMatrix.BLOCK_SIZE;
             int colStart = (col / 3) * IMatrix.BLOCK_SIZE;
             for (int rowGroup = rowStart; rowGroup < rowStart + IMatrix.BLOCK_SIZE; rowGroup++) {
                 for (int colGroup = colStart; colGroup < colStart + IMatrix.BLOCK_SIZE; colGroup++) {
-                    getCandidates(rowGroup, colGroup).remove(value);
+                    removeCandidate(rowGroup, colGroup, value);
                 }
             }
         }
@@ -106,7 +115,7 @@ public class Matrix implements IMatrix {
     public void fillWithValue(int value) {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                setCellValue(row, col, value);
+                setValueAt(row, col, value);
             }
         }
     }
@@ -118,7 +127,7 @@ public class Matrix implements IMatrix {
         int index = 0;
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                setCellValue(row, col, items[index++]);
+                setValueAt(row, col, items[index++]);
             }
         }
     }
@@ -135,7 +144,7 @@ public class Matrix implements IMatrix {
 
             @Override
             public Integer next() {
-                int value = getCellValue(currentIndex / SIZE, currentIndex % SIZE);
+                int value = getValueAt(currentIndex / SIZE, currentIndex % SIZE);
                 currentIndex++;
                 return value;
             }
@@ -197,7 +206,7 @@ public class Matrix implements IMatrix {
         validateInputIndex(col);
         int[] result = new int[SIZE];
         for (int row = 0; row < SIZE; row++) {
-            result[row] = getCellValue(row, col);
+            result[row] = getValueAt(row, col);
         }
         return result;
     }
@@ -209,7 +218,7 @@ public class Matrix implements IMatrix {
         int[] result = new int[SIZE];
         for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup * BLOCK_SIZE) + BLOCK_SIZE; row++) {
             for (int col = colGroup * BLOCK_SIZE; col < (colGroup * BLOCK_SIZE) + BLOCK_SIZE; col++) {
-                result[index++] = getCellValue(row, col);
+                result[index++] = getValueAt(row, col);
             }
         }
         return result;
@@ -219,7 +228,7 @@ public class Matrix implements IMatrix {
     public void setCols(int col, int[] cols) {
         validateInputArray(cols);
         for (int row = 0; row < SIZE; row++) {
-            setCellValue(row, col, cols[row]);
+            setValueAt(row, col, cols[row]);
         }
     }
 
@@ -235,7 +244,7 @@ public class Matrix implements IMatrix {
         int index = 0;
         for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup * BLOCK_SIZE) + BLOCK_SIZE; row++) {
             for (int col = colGroup * BLOCK_SIZE; col < (colGroup * BLOCK_SIZE) + BLOCK_SIZE; col++) {
-                setCellValue(row, col, block[index++]);
+                setValueAt(row, col, block[index++]);
             }
         }
     }
@@ -250,7 +259,7 @@ public class Matrix implements IMatrix {
         int[] result = new int[SIZE * SIZE];
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                result[row + (SIZE * col)] = getCellValue(row, col);
+                result[row + (SIZE * col)] = getValueAt(row, col);
             }
         }
         return result;
@@ -263,7 +272,7 @@ public class Matrix implements IMatrix {
         sb.append(System.lineSeparator());
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                sb.append(getCellValue(row, col));
+                sb.append(getValueAt(row, col));
                 if (col < SIZE - 1) {
                     if (col % 3 == 2) {
                         sb.append(" | ");
@@ -286,7 +295,7 @@ public class Matrix implements IMatrix {
         StringBuilder sb = new StringBuilder(100);
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                sb.append("(").append(row).append(", ").append(col).append(") - ").append(getCellValue(row, col)).append(" ");
+                sb.append("(").append(row).append(", ").append(col).append(") - ").append(getValueAt(row, col)).append(" ");
                 sb.append(getCandidates(row, col));
                 sb.append(System.lineSeparator());
             }
@@ -332,7 +341,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isCellSet(int row, int col) {
-        return getCellValue(row, col) != EMPTY_VALUE;
+        return getValueAt(row, col) != EMPTY_VALUE;
     }
 
     @Override
@@ -367,5 +376,27 @@ public class Matrix implements IMatrix {
     @Override
     public void addCandidates(int row, int col, Integer[] array) {
         getCandidates(row, col).addAll(new HashSet<>(Arrays.asList(array)));
+    }
+
+    @Override
+    public int getSetElemInCol(int col) {
+        int count = 0;
+        for (int v : getElemsInCol(col)) {
+            if (isSetValue(v)) count++;
+        }
+        return count;
+    }
+
+    @Override
+    public int getSetElemInRow(int col) {
+        int count = 0;
+        for (int v : getElemsInRow(col)) {
+            if (isSetValue(v)) count++;
+        }
+        return count;
+    }
+
+    private boolean isSetValue(int val) {
+        return val > 0 && val < 10;
     }
 }

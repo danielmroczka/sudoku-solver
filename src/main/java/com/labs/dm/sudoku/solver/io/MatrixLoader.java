@@ -25,7 +25,7 @@ public class MatrixLoader {
         StringBuilder sb = new StringBuilder(100);
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                sb.append(matrix.getCellValue(row, col));
+                sb.append(matrix.getValueAt(row, col));
                 if (col < IMatrix.SIZE - 1) {
                     sb.append(DEFAULT_DELIMITER);
                 }

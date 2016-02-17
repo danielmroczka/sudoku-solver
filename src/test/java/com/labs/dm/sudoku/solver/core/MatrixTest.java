@@ -26,15 +26,15 @@ public class MatrixTest {
 
     @Test
     public void testGetCellValue() {
-        assertEquals(IMatrix.EMPTY_VALUE, matrix.getCellValue(0, 0));
+        assertEquals(IMatrix.EMPTY_VALUE, matrix.getValueAt(0, 0));
     }
 
     @Test
     public void testSetCellValue() {
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                matrix.setCellValue(row, col, 9);
-                assertEquals(9, matrix.getCellValue(row, col));
+                matrix.setValueAt(row, col, 9);
+                assertEquals(9, matrix.getValueAt(row, col));
                 assertTrue(matrix.getCandidates(row, col).isEmpty());
             }
         }
@@ -45,7 +45,7 @@ public class MatrixTest {
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 matrix.addCandidates(row, col, new Integer[]{1, 2, 3});
-                matrix.setCellValue(row, col, 1);
+                matrix.setValueAt(row, col, 1);
                 assertTrue(matrix.getCandidates(row, col).isEmpty());
             }
         }
@@ -65,23 +65,23 @@ public class MatrixTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotAcceptValueGreaterThanNine() {
-        matrix.setCellValue(0, 0, 10);
+        matrix.setValueAt(0, 0, 10);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotAcceptValueLessThanZero() {
-        matrix.setCellValue(0, 0, -1);
+        matrix.setValueAt(0, 0, -1);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldNotAcceptPositionOutOfRange() {
-        matrix.setCellValue(10, 10, 1);
+        matrix.setValueAt(10, 10, 1);
     }
 
     @Test
     public void shouldAcceptValue0to9() {
         for (int value = 0; value <= 9; value++) {
-            matrix.setCellValue(0, 0, value);
+            matrix.setValueAt(0, 0, value);
         }
     }
 
@@ -90,13 +90,13 @@ public class MatrixTest {
         int[] tab = new int[81];
         tab[10] = 5;
         ((Matrix) matrix).loadFromArray(tab);
-        assertEquals(5, matrix.getCellValue(1, 1));
+        assertEquals(5, matrix.getValueAt(1, 1));
     }
 
     @Test
     public void getElemsFromRow() {
         for (int col = 0; col < 9; col++) {
-            matrix.setCellValue(0, col, col + 1);
+            matrix.setValueAt(0, col, col + 1);
         }
         int[] rows0 = matrix.getElemsInRow(0);
         int[] rows1 = matrix.getElemsInRow(1);
@@ -108,7 +108,7 @@ public class MatrixTest {
     @Test
     public void getElemsFromCol() {
         for (int row = 0; row < 9; row++) {
-            matrix.setCellValue(row, 0, row + 1);
+            matrix.setValueAt(row, 0, row + 1);
         }
         int[] cols0 = matrix.getElemsInCol(0);
         int[] cols1 = matrix.getElemsInCol(1);
@@ -122,7 +122,7 @@ public class MatrixTest {
         int index = 1;
         for (int row = 3; row < 6; row++) {
             for (int col = 3; col < 6; col++) {
-                matrix.setCellValue(row, col, index++);
+                matrix.setValueAt(row, col, index++);
             }
         }
 
@@ -141,13 +141,13 @@ public class MatrixTest {
 
     @Test
     public void shouldChangedMatrixBeNotEmpty() {
-        matrix.setCellValue(5, 5, 1);
+        matrix.setValueAt(5, 5, 1);
         assertFalse(matrix.isEmpty());
     }
 
     @Test
     public void shouldClearMatrix() {
-        matrix.setCellValue(5, 5, 1);
+        matrix.setValueAt(5, 5, 1);
         matrix.clear();
         assertTrue(matrix.isEmpty());
     }
@@ -205,12 +205,12 @@ public class MatrixTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void getCellValueBelowRange() {
-        matrix.getCellValue(-1, -1);
+        matrix.getValueAt(-1, -1);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void getCellValueAboveRange() {
-        matrix.getCellValue(10, 10);
+        matrix.getValueAt(10, 10);
     }
 
 }

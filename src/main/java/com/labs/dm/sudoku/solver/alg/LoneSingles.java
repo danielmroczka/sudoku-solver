@@ -20,9 +20,8 @@ public class LoneSingles implements IAlgorithm {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if (!matrix.isCellSet(row, col) && matrix.getCandidates(row, col).size() == 1) {
-                    Integer[] p = matrix.getCandidates(row, col).toArray(new Integer[0]);
-                    int value = p[0];
-                    matrix.setCellValue(row, col, value);
+                    Integer[] p = matrix.getCandidates(row, col).toArray(new Integer[1]);
+                    matrix.setValueAt(row, col, p[0]);
                 }
             }
         }

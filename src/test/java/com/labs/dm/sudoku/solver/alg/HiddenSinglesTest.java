@@ -20,11 +20,11 @@ public class HiddenSinglesTest {
     public void testExecute() {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setCellValue(0, 1, 6);
-        matrix.setCellValue(0, 3, 4);
-        matrix.setCellValue(0, 4, 2);
-        matrix.setCellValue(0, 7, 8);
-        matrix.setCellValue(0, 8, 9);
+        matrix.setValueAt(0, 1, 6);
+        matrix.setValueAt(0, 3, 4);
+        matrix.setValueAt(0, 4, 2);
+        matrix.setValueAt(0, 7, 8);
+        matrix.setValueAt(0, 8, 9);
 
         matrix.addCandidates(0, 0, new Integer[]{7, 5, 3});
         matrix.addCandidates(0, 2, new Integer[]{1, 3});
@@ -35,7 +35,7 @@ public class HiddenSinglesTest {
         //WHEN
         hiddenSingles.execute(matrix);
         //THEN
-        assertEquals(7, matrix.getCellValue(0, 0));
+        assertEquals(7, matrix.getValueAt(0, 0));
         assertTrue(matrix.validate());
     }
 
@@ -43,11 +43,11 @@ public class HiddenSinglesTest {
     public void testExecuteBlock() {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setCellValue(3, 3, 6);
-        matrix.setCellValue(3, 4, 4);
-        matrix.setCellValue(3, 5, 2);
-        matrix.setCellValue(4, 3, 8);
-        matrix.setCellValue(4, 4, 9);
+        matrix.setValueAt(3, 3, 6);
+        matrix.setValueAt(3, 4, 4);
+        matrix.setValueAt(3, 5, 2);
+        matrix.setValueAt(4, 3, 8);
+        matrix.setValueAt(4, 4, 9);
 
         matrix.addCandidates(4, 5, new Integer[]{7, 5, 3});
         matrix.addCandidates(5, 3, new Integer[]{1, 3});
@@ -58,7 +58,7 @@ public class HiddenSinglesTest {
         //WHEN
         hiddenSingles.execute(matrix);
         //THEN
-        //assertEquals(7, matrix.getCellValue(4,5));
+        //assertEquals(7, matrix.getValueAt(4,5));
         assertTrue(matrix.validate());
     }
 

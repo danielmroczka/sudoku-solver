@@ -22,12 +22,12 @@ public class Generator {
             int row = idx / 9;
             int col = idx % 9;
 
-            if (matrix.getCellValue(row, col) != IMatrix.EMPTY_VALUE) {
+            if (matrix.getValueAt(row, col) != IMatrix.EMPTY_VALUE) {
                 continue;
             }
 
             int value = (int) (Math.random() * 9) + 1;
-            matrix.setCellValue(row, col, value);
+            matrix.setValueAt(row, col, value);
 
             boolean validate = false;
             try {
@@ -40,7 +40,7 @@ public class Generator {
                 System.out.println("Step=" + probe);
                 probe++;
             } else {
-                matrix.setCellValue(row, col, IMatrix.EMPTY_VALUE);
+                matrix.setValueAt(row, col, IMatrix.EMPTY_VALUE);
             }
 
         }

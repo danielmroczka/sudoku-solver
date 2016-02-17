@@ -3,7 +3,6 @@ package com.labs.dm.sudoku.solver.alg;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -25,7 +24,6 @@ public class ValidationTest {
     }
 
     @Test
-    @Ignore
     public void validateXWing() throws IOException {
         for (int i = 0; i < COUNT; i++) {
             new LoneSingles().execute(matrix);
