@@ -26,6 +26,7 @@
     </dependencies>
 
     <build>
+        <finalName>sudoku-solver</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
