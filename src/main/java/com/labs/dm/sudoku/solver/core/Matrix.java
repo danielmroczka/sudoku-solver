@@ -60,15 +60,16 @@ public class Matrix implements IMatrix {
     private void removeCandidates(int row, int col, int value) {
         getCandidates(row, col).clear();
 
-        if (value > 0 && value < 10) {
+        if (isSetValue(value)) {
             for (int r = 0; r < SIZE; r++) {
                 removeCandidate(r, col, value);
             }
             for (int c = 0; c < SIZE; c++) {
                 removeCandidate(row, c, value);
             }
-            int rowStart = (row / 3) * IMatrix.BLOCK_SIZE;
-            int colStart = (col / 3) * IMatrix.BLOCK_SIZE;
+            int rowStart = (row / IMatrix.BLOCK_SIZE) * IMatrix.BLOCK_SIZE;
+            int colStart = (col / IMatrix.BLOCK_SIZE) * IMatrix.BLOCK_SIZE;
+
             for (int rowGroup = rowStart; rowGroup < rowStart + IMatrix.BLOCK_SIZE; rowGroup++) {
                 for (int colGroup = colStart; colGroup < colStart + IMatrix.BLOCK_SIZE; colGroup++) {
                     removeCandidate(rowGroup, colGroup, value);
