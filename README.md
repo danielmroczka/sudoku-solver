@@ -10,7 +10,6 @@ Implemented algorithms:
 - [x]  Open Singles
 - [x]  Hidden Singles
 - [x]  Hidden Pairs/Triples
-- [x]  Naked Singles
 - [x]  Naked Pairs/Triples
 - [x]  Line/Block Reduction
 - [x]  XWing

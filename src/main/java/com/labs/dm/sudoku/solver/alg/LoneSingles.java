@@ -8,7 +8,8 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
- * Lone Singles Algorithm Implementation
+ * Lone Singles (Naked Singles) Algorithm Implementation.
+ *
  *
  * @author daniel
  *         http://www.learn-sudoku.com/lone-singles.html
