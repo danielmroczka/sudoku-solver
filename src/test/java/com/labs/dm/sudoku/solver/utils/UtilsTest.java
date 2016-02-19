@@ -20,6 +20,11 @@ public class UtilsTest {
         assertEquals(6, factorial(3));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testFactorial2() {
+        factorial(-1);
+    }
+
     @Test
     public void testCombination() throws Exception {
         assertEquals(6, combination(4, 2));

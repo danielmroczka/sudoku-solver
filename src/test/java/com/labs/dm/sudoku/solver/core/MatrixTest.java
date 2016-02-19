@@ -52,6 +52,14 @@ public class MatrixTest {
     }
 
     @Test
+    public void testIsSetValue() {
+        matrix.setValueAt(0, 0, 9);
+        assertTrue(matrix.isCellSet(0, 0));
+        assertFalse(matrix.isCellSet(0, 1));
+    }
+
+
+    @Test
     public void shouldIterateForAllItems() {
         Iterator it = matrix.iterator();
         int counter = 0;
@@ -201,6 +209,17 @@ public class MatrixTest {
     public void shouldValidateSolvedMatrix() throws IOException {
         matrix = new MatrixLoader().load("patterns/solved.txt");
         assertTrue(matrix.validate());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void validateInputRowIndex() throws Exception {
+        matrix.setValueAt(10, 0, 1);
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void validateInputColIndex() throws Exception {
+        matrix.setValueAt(0, 10, 1);
     }
 
     @Test(expected = IllegalArgumentException.class)
