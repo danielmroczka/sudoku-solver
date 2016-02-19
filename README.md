@@ -25,11 +25,11 @@ Maven:
     <artifactId>sudoku-solver</artifactId>
     <version>0.0.5-SNAPSHOT</version>
 </dependency>
-
+```
 Command line:
 ```
 java -jar sudoku-solver.jar <txt file with sudoku>
-```
+
 ```
 
 
