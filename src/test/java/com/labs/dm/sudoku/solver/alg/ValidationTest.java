@@ -12,7 +12,9 @@ import java.io.IOException;
  */
 public class ValidationTest {
 
-    private IAlgorithm cand = new GenerateCandidates();
+    private final LoneSingles loneSingles = new LoneSingles();
+    private final OpenSingles openSingles = new OpenSingles();
+    private final IAlgorithm cand = new GenerateCandidates();
     private IMatrix matrix;
     private final int COUNT = 50;
 
@@ -26,8 +28,8 @@ public class ValidationTest {
     @Test
     public void validateXWing() throws IOException {
         for (int i = 0; i < COUNT; i++) {
-            new LoneSingles().execute(matrix);
-            new OpenSingles().execute(matrix);
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
             new XWing().execute(matrix);
             matrix.validate();
         }
@@ -36,9 +38,29 @@ public class ValidationTest {
     @Test
     public void validateHiddenPairs() throws IOException {
         for (int i = 0; i < COUNT; i++) {
-            new LoneSingles().execute(matrix);
-            new OpenSingles().execute(matrix);
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
             new HiddenPairs().execute(matrix);
+            matrix.validate();
+        }
+    }
+
+    @Test
+    public void validateHiddenTriples() throws IOException {
+        for (int i = 0; i < COUNT; i++) {
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+            new HiddenTriples().execute(matrix);
+            matrix.validate();
+        }
+    }
+
+    @Test
+    public void validateNakedTriples() throws IOException {
+        for (int i = 0; i < COUNT; i++) {
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+            new NakedTriples().execute(matrix);
             matrix.validate();
         }
     }
@@ -46,8 +68,8 @@ public class ValidationTest {
     @Test
     public void validateHiddenSingles() throws IOException {
         for (int i = 0; i < COUNT; i++) {
-            new LoneSingles().execute(matrix);
-            new OpenSingles().execute(matrix);
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
             new HiddenSingles().execute(matrix);
             matrix.validate();
         }
@@ -56,8 +78,8 @@ public class ValidationTest {
     @Test
     public void validateNakedPairs() throws IOException {
         for (int i = 0; i < COUNT; i++) {
-            new LoneSingles().execute(matrix);
-            new OpenSingles().execute(matrix);
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
             new NakedPairs().execute(matrix);
             matrix.validate();
         }
@@ -66,8 +88,8 @@ public class ValidationTest {
     @Test
     public void validateReduction() throws IOException {
         for (int i = 0; i < COUNT; i++) {
-            new LoneSingles().execute(matrix);
-            new OpenSingles().execute(matrix);
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
             new Reduction().execute(matrix);
             matrix.validate();
         }

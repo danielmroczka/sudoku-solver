@@ -396,6 +396,36 @@ public class Matrix implements IMatrix {
         return count;
     }
 
+    @Override
+    public List<List<Integer>> getCandidatesInRow(int row) {
+        List<List<Integer>> result = new ArrayList<>();
+        for (int col = 0; col < IMatrix.SIZE; col++) {
+            result.add(new ArrayList<>(getCandidates(row, col)));
+        }
+        return result;
+    }
+
+    @Override
+    public List<List<Integer>> getCandidatesInCol(int col) {
+        List<List<Integer>> result = new ArrayList<>();
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            result.add(new ArrayList<>(getCandidates(row, col)));
+        }
+        return result;
+    }
+
+    @Override
+    public List<List<Integer>> getCandidatesInBlock(int rowBlockIndex, int colBlockIndex) {
+        List<List<Integer>> result = new ArrayList<>();
+        for (int row = rowBlockIndex * IMatrix.BLOCK_SIZE; row < rowBlockIndex * IMatrix.BLOCK_SIZE + IMatrix.BLOCK_SIZE; row++) {
+            for (int col = colBlockIndex * IMatrix.BLOCK_SIZE; col < colBlockIndex * IMatrix.BLOCK_SIZE + IMatrix.BLOCK_SIZE; col++) {
+                result.add(new ArrayList<>(getCandidates(row, col)));
+            }
+        }
+        return result;
+
+    }
+
     private boolean isSetValue(int val) {
         return val > 0 && val < 10;
     }

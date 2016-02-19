@@ -38,6 +38,27 @@ public class Utils {
         return result;
     }
 
+    public static List<List<Integer>> combination(List<Integer> list, int size) {
+        List<List<Integer>> result = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = i; j < list.size(); j++) {
+                if (i == j) continue;
+                for (int k = j; k < list.size(); k++) {
+                    if (j == k) continue;
+                    List<Integer> tab = new ArrayList<>();
+                    tab.add(list.get(i));
+                    tab.add(list.get(j));
+                    tab.add(list.get(k));
+                    result.add(tab);
+                }
+                i++;
+            }
+        }
+
+        return result;
+    }
+
+
     public static boolean theSameBlock(Integer... val) {
         int v = val[0] / 3;
         boolean res = true;

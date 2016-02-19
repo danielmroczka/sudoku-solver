@@ -213,4 +213,21 @@ public class MatrixTest {
         matrix.getValueAt(10, 10);
     }
 
+    @Test
+    public void testGetCandidatesInRow() throws Exception {
+        assertEquals(9, matrix.getCandidatesInRow(0).size());
+        //TODO add cases
+    }
+
+    @Test
+    public void testGetCandidatesInCol() throws Exception {
+        assertEquals(9, matrix.getCandidatesInCol(0).size());
+        //TODO add cases
+    }
+
+    @Test
+    public void testGetCandidatesInBlock() throws Exception {
+        assertEquals(9, matrix.getCandidatesInBlock(0, 0).size());
+        //TODO add cases
+    }
 }

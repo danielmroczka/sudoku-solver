@@ -29,9 +29,14 @@ public class UtilsTest {
     @Test
     public void testPairs() throws Exception {
         List<Integer> list1 = Arrays.asList(1, 2, 3, 4);
-
         List<List<Integer>> result = pairs(list1);
         assertEquals(6, result.size());
+    }
+
+    @Test
+    public void testCombination2() throws Exception {
+        List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
+        assertEquals(6, combination(list1, 3).size());
     }
 
     @Test

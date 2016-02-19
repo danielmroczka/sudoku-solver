@@ -15,8 +15,10 @@ public class Flow {
         IAlgorithm openSingles = new OpenSingles();
         IAlgorithm loneSingles = new LoneSingles();
         IAlgorithm nakedPairs = new NakedPairs();
+        IAlgorithm hiddenTriples = new HiddenTriples();
         IAlgorithm hiddenSingles = new HiddenSingles();
         IAlgorithm hiddenPairs = new HiddenPairs();
+        IAlgorithm nakedTriples = new NakedTriples();
         IAlgorithm xWing = new XWing();
         IAlgorithm reduction = new Reduction();
 
@@ -32,7 +34,9 @@ public class Flow {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
             nakedPairs.execute(matrix);
+            //  nakedTriples.execute(matrix);
             hiddenPairs.execute(matrix);
+            hiddenTriples.execute(matrix);
             hiddenSingles.execute(matrix);
             reduction.execute(matrix);
             xWing.execute(matrix);

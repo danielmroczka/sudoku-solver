@@ -4,6 +4,7 @@
 package com.labs.dm.sudoku.solver.core;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author daniel
@@ -166,4 +167,10 @@ public interface IMatrix extends Iterable<Integer> {
     int getSetElemInCol(int col);
 
     int getSetElemInRow(int col);
+
+    List<List<Integer>> getCandidatesInRow(int row);
+
+    List<List<Integer>> getCandidatesInCol(int col);
+
+    List<List<Integer>> getCandidatesInBlock(int rowBlockIndex, int colBlockIndex);
 }
