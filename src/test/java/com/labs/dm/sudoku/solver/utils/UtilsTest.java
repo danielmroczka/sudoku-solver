@@ -28,20 +28,20 @@ public class UtilsTest {
     @Test
     public void testCombination() throws Exception {
         assertEquals(6, combination(4, 2));
-    }
-
-
-    @Test
-    public void testPairs() throws Exception {
-        List<Integer> list1 = Arrays.asList(1, 2, 3, 4);
-        List<List<Integer>> result = pairs(list1);
-        assertEquals(6, result.size());
+        assertEquals(10, combination(5, 2));
+        assertEquals(10, combination(5, 3));
+        assertEquals(5, combination(5, 4));
+        assertEquals(5, combination(5, 1));
     }
 
     @Test
     public void testCombination2() throws Exception {
         List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
-        assertEquals(6, combination(list1, 3).size());
+//        assertEquals(1, combinationList(list1, 5).size());
+        assertEquals(5, combinationList(list1, 4).size());
+        assertEquals(10, combinationList(list1, 3).size());
+        assertEquals(10, combinationList(list1, 2).size());
+        assertEquals(5, combinationList(list1, 1).size());
     }
 
     @Test

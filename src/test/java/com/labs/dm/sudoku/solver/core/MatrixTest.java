@@ -25,7 +25,7 @@ public class MatrixTest {
     }
 
     @Test
-    public void testGetCellValue() {
+    public void testEmptyCellValue() {
         assertEquals(IMatrix.EMPTY_VALUE, matrix.getValueAt(0, 0));
     }
 
@@ -90,6 +90,7 @@ public class MatrixTest {
     public void shouldAcceptValue0to9() {
         for (int value = 0; value <= 9; value++) {
             matrix.setValueAt(0, 0, value);
+            assertEquals(value, matrix.getValueAt(0, 0));
         }
     }
 
@@ -99,6 +100,12 @@ public class MatrixTest {
         tab[10] = 5;
         ((Matrix) matrix).loadFromArray(tab);
         assertEquals(5, matrix.getValueAt(1, 1));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void loadFromArrayWrongSize() {
+        int[] tab = new int[0];
+        ((Matrix) matrix).loadFromArray(tab);
     }
 
     @Test
@@ -249,4 +256,10 @@ public class MatrixTest {
         assertEquals(9, matrix.getCandidatesInBlock(0, 0).size());
         //TODO add cases
     }
+
+    @Test
+    public void shouldPrintCandidated() {
+        assertNotNull(matrix.printCandidates());
+    }
+
 }

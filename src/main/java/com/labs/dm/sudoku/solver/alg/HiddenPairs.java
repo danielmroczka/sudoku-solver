@@ -4,9 +4,13 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Hidden Pairs algorithm implementation
@@ -125,17 +129,13 @@ public class HiddenPairs implements IAlgorithm {
         }
     }
 
-    private Map<List<Integer>, Integer> group(List<List<Integer>> list) {
-        Map<List<Integer>, Integer> map = new HashMap<>();
-        for (List<Integer> list1 : list) {
-            if (list1.size() > 1) {
-                List<List<Integer>> pairs = SIZE == 2 ? Utils.pairs(list1) : Utils.combination(list1, 3);
-                for (List<Integer> item : pairs) {
-                    Integer val = map.get(item);
-                    if (val == null) {
-                        val = 0;
-                    }
-                    map.put(item, ++val);
+    private Map<List<Integer>, Integer> group(List<List<Integer>> input) {
+        CounterHashMap<List<Integer>> map = new CounterHashMap();
+        for (List<Integer> item : input) {
+            if (item.size() > 1) {
+                List<List<Integer>> combination = Utils.combinationList(item, SIZE);
+                for (List<Integer> elem : combination) {
+                    map.inc(elem);
                 }
             }
         }

@@ -17,7 +17,7 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
  */
 public class GenerateCandidates implements IAlgorithm {
 
-    private final List<Integer> fullSet = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    private final static List<Integer> fullSet = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     @Override
     public void execute(IMatrix matrix) {
@@ -31,7 +31,7 @@ public class GenerateCandidates implements IAlgorithm {
 
                 int[] cols = matrix.getElemsInCol(col);
                 int[] rows = matrix.getElemsInRow(row);
-                int[] blocks = matrix.getElemsInBlock(row / 3, col / 3);
+                int[] blocks = matrix.getElemsInBlock(row / IMatrix.BLOCK_SIZE, col / IMatrix.BLOCK_SIZE);
 
                 for (int i : cols) {
                     set.remove(i);

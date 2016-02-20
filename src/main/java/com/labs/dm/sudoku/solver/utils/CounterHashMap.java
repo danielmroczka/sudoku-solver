@@ -5,9 +5,9 @@ import java.util.HashMap;
 /**
  * Created by daniel on 2016-02-15.
  */
-public class CounterHashMap extends HashMap<Integer, Integer> {
+public class CounterHashMap<K> extends HashMap<K, Integer> {
 
-    public void inc(int key) {
+    public void inc(K key) {
         Integer value = get(key);
         if (value == null) {
             value = 0;

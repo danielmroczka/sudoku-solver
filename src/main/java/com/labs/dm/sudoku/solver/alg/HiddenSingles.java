@@ -41,24 +41,12 @@ public class HiddenSingles implements IAlgorithm {
                             for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
                                 if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                                     matrix.setValueAt(row, col, entry.getKey());
-                                    matrix.getCandidates(row, col).clear();
                                 }
                             }
                         }
                     }
                 }
             }
-        }
-    }
-
-    private void onFind(IMatrix matrix, Map<Integer, Integer> counter, int row, int col) {
-        Collection<Integer> candidates = matrix.getCandidates(row, col);
-        for (int item : candidates) {
-            Integer value = counter.get(item);
-            if (value == null) {
-                value = 0;
-            }
-            counter.put(item, ++value);
         }
     }
 
@@ -74,7 +62,6 @@ public class HiddenSingles implements IAlgorithm {
                     for (int row = 0; row < IMatrix.SIZE; row++) {
                         if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                             matrix.setValueAt(row, col, entry.getKey());
-                            matrix.getCandidates(row, col).clear();
                         }
                     }
                 }
@@ -94,7 +81,6 @@ public class HiddenSingles implements IAlgorithm {
                     for (int col = 0; col < IMatrix.SIZE; col++) {
                         if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                             matrix.setValueAt(row, col, entry.getKey());
-                            matrix.getCandidates(row, col).clear();
                         }
                     }
                 }
@@ -102,4 +88,14 @@ public class HiddenSingles implements IAlgorithm {
         }
     }
 
+    private void onFind(IMatrix matrix, Map<Integer, Integer> counter, int row, int col) {
+        Collection<Integer> candidates = matrix.getCandidates(row, col);
+        for (int item : candidates) {
+            Integer value = counter.get(item);
+            if (value == null) {
+                value = 0;
+            }
+            counter.put(item, ++value);
+        }
+    }
 }

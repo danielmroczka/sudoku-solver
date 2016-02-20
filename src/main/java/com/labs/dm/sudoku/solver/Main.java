@@ -19,6 +19,6 @@ public class Main {
         IMatrix matrix = loader.load("src/test/resources/patterns/hard4.txt");
         Flow flow = new Flow();
         flow.execute(matrix);
-        System.out.println(matrix.toString());
+        System.out.println(matrix.printCandidates());
     }
 }

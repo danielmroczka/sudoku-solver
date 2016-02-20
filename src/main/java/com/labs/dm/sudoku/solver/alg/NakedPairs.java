@@ -78,7 +78,6 @@ public class NakedPairs implements IAlgorithm {
                     }
                 }
             }
-
         }
     }
 
@@ -98,7 +97,6 @@ public class NakedPairs implements IAlgorithm {
                     }
                 }
             }
-
         }
     }
 }

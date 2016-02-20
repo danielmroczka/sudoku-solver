@@ -1,18 +1,27 @@
 package com.labs.dm.sudoku.solver.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by daniel on 2016-02-13.
  */
 public class Utils {
+
+    /**
+     * Returns factorial value
+     * For example factorial(4) = 1 * 2 * 3 * 4
+     *
+     * @param val
+     * @return
+     */
     public static int factorial(int val) {
         if (val < 0) {
             throw new IllegalArgumentException();
         }
         int res = 1;
-        for (int i = 1; i <= val; i++) {
+        for (int i = 2; i <= val; i++) {
             res = res * i;
         }
 
@@ -23,41 +32,29 @@ public class Utils {
         return factorial(n) / (factorial(k) * factorial(n - k));
     }
 
-    public static List<List<Integer>> pairs(List<Integer> list) {
-        List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = i; j < list.size(); j++) {
-                if (i == j) continue;
-                List<Integer> tab = new ArrayList<>();
-                tab.add(list.get(i));
-                tab.add(list.get(j));
-                result.add(tab);
-            }
-        }
-
-        return result;
+    /**
+     * Return unique combination of k-length elements from n-length list of unique numbers
+     *
+     * @param numbers
+     * @param k
+     * @return
+     */
+    public static List<List<Integer>> combinationList(List<Integer> numbers, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        combinationList(numbers, k, 0, new Integer[k], res);
+        return res;
     }
 
-    public static List<List<Integer>> combination(List<Integer> list, int size) {
-        List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = i; j < list.size(); j++) {
-                if (i == j) continue;
-                for (int k = j; k < list.size(); k++) {
-                    if (j == k) continue;
-                    List<Integer> tab = new ArrayList<>();
-                    tab.add(list.get(i));
-                    tab.add(list.get(j));
-                    tab.add(list.get(k));
-                    result.add(tab);
-                }
-                i++;
-            }
+    private static void combinationList(List<Integer> arr, int len, int startPosition, Integer[] result, List<List<Integer>> list) {
+        if (len == 0) {
+            list.add(Arrays.asList(Arrays.copyOf(result, result.length)));
+            return;
         }
-
-        return result;
+        for (int i = startPosition; i <= arr.size() - len; i++) {
+            result[result.length - len] = arr.get(i);
+            combinationList(arr, len - 1, i + 1, result, list);
+        }
     }
-
 
     public static boolean theSameBlock(Integer... val) {
         int v = val[0] / 3;
@@ -68,4 +65,5 @@ public class Utils {
         }
         return res;
     }
+
 }

@@ -29,7 +29,7 @@ public class Reduction implements IAlgorithm {
     private void reduceInBlock(IMatrix matrix) {
         for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
             for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
-                CounterHashMap map = getOccurenceInBlockMap(matrix, rowGroup, colGroup);
+                CounterHashMap<Integer> map = getOccurenceInBlockMap(matrix, rowGroup, colGroup);
 
                 for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                     if (entry.getValue() == 2 || entry.getValue() == 3) {
@@ -88,7 +88,7 @@ public class Reduction implements IAlgorithm {
 
     private void reduceInCols(IMatrix matrix) {
         for (int col = 0; col < IMatrix.SIZE; col++) {
-            CounterHashMap map = getOccurenceInColMap(matrix, col);
+            CounterHashMap<Integer> map = getOccurenceInColMap(matrix, col);
 
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 if (entry.getValue() == 2 || entry.getValue() == 3) {
@@ -123,7 +123,7 @@ public class Reduction implements IAlgorithm {
 
     private void reduceInRows(IMatrix matrix) {
         for (int row = 0; row < IMatrix.SIZE; row++) {
-            CounterHashMap map = getOccurenceInRowMap(matrix, row);
+            CounterHashMap<Integer> map = getOccurenceInRowMap(matrix, row);
 
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 if (entry.getValue() == 2 || entry.getValue() == 3) {

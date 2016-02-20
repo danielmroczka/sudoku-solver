@@ -13,7 +13,7 @@ Implemented algorithms:
 - [x]  Naked Pairs/Triples
 - [x]  Line/Block Reduction
 - [x]  XWing
-
+                           
 ##Usage
 
 Maven:
@@ -26,9 +26,9 @@ Maven:
 </dependency>
 ```
 Command line:
+
 ```
 java -jar sudoku-solver.jar <txt file with sudoku>
-
 ```
 
 
