@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class NakedTriplesTest {
 
-    private NakedTriples nakedTriples = new NakedTriples();
+    private final NakedTriples nakedTriples = new NakedTriples();
 
     @Test
     public void testExecute() {

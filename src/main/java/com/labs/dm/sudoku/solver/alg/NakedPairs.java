@@ -22,7 +22,7 @@ public class NakedPairs implements IAlgorithm {
     }
 
     private boolean accept(int value) {
-        return value == 2 || value == 3;
+        return value == SIZE;
     }
 
     private void findNakedPairsInBlocks(IMatrix matrix) {

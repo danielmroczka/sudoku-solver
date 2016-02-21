@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class GeneratorTest {
 
-    private Generator gen = new Generator();
+    private final Generator gen = new Generator();
 
     @Test
     public void shouldGenerateMatrix() {

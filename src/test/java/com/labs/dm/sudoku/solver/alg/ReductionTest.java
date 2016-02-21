@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ReductionTest {
 
-    private IAlgorithm reduction = new Reduction();
+    private final IAlgorithm reduction = new Reduction();
 
     @Test
     public void simple2() throws Exception {

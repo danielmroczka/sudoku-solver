@@ -34,7 +34,7 @@ public class Flow {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
             nakedPairs.execute(matrix);
-            //    nakedTriples.execute(matrix);
+            nakedTriples.execute(matrix);
             hiddenPairs.execute(matrix);
             hiddenTriples.execute(matrix);
             hiddenSingles.execute(matrix);
