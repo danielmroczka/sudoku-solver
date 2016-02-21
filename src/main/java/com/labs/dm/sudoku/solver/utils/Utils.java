@@ -1,8 +1,13 @@
 package com.labs.dm.sudoku.solver.utils;
 
+import com.labs.dm.sudoku.solver.core.Pair;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
  * Created by daniel on 2016-02-13.
@@ -64,6 +69,69 @@ public class Utils {
             v = i / 3;
         }
         return res;
+    }
+
+    private static boolean theSameRowBlock(Pair cell1, Pair cell2) {
+        return cell1.getRow() / 3 == cell2.getRow() / 3;
+    }
+
+    private static boolean theSameColBlock(Pair cell1, Pair cell2) {
+        return cell1.getCol() / 3 == cell2.getCol() / 3;
+    }
+
+    private static boolean theSameRow(Pair cell1, Pair cell2) {
+        return cell1.getRow() == cell2.getRow();
+    }
+
+    private static boolean theSameCol(Pair cell1, Pair cell2) {
+        return cell1.getCol() == cell2.getCol();
+    }
+
+    public static List<Pair> intersection(Pair cell1, Pair cell2) {
+        List<Pair> result = new ArrayList<>();
+        if (theSameColBlock(cell1, cell2) && theSameRowBlock(cell1, cell2)) {
+            for (int row = cell1.getRow() / BLOCK_SIZE; row < cell1.getRow() / BLOCK_SIZE + BLOCK_SIZE; row++) {
+                for (int col = cell1.getCol() / BLOCK_SIZE; col < cell1.getCol() / BLOCK_SIZE + BLOCK_SIZE; col++) {
+                    if ((row == cell1.getRow() && col == cell1.getCol()) || (row == cell2.getRow() && col == cell2.getCol())) {
+                        continue;
+                    }
+                    result.add(new Pair(row, col));
+                }
+
+            }
+        } else if (theSameRow(cell1, cell2)) {
+            for (int col = 0; col < SIZE; col++) {
+                if (col != cell1.getCol() && col != cell2.getCol()) {
+                    result.add(new Pair(cell1.getRow(), col));
+                }
+            }
+        } else if (theSameCol(cell1, cell2)) {
+            for (int row = 0; row < SIZE; row++) {
+                if (row != cell1.getRow() && row != cell2.getRow()) {
+                    result.add(new Pair(row, cell1.getCol()));
+                }
+            }
+        } else if (theSameRowBlock(cell1, cell2)) {
+            for (int col = cell1.getCol() / BLOCK_SIZE; col < cell1.getCol() / BLOCK_SIZE + BLOCK_SIZE; col++) {
+                result.add(new Pair(cell2.getRow(), col));
+            }
+            for (int col = cell2.getCol() / BLOCK_SIZE; col < cell2.getCol() / BLOCK_SIZE + BLOCK_SIZE; col++) {
+                result.add(new Pair(cell1.getRow(), col));
+            }
+
+        } else if (theSameColBlock(cell1, cell2)) {
+            for (int row = cell1.getRow() / BLOCK_SIZE; row < cell1.getRow() / BLOCK_SIZE + BLOCK_SIZE; row++) {
+                result.add(new Pair(row, cell2.getCol()));
+            }
+            for (int row = cell2.getRow() / BLOCK_SIZE; row < cell2.getRow() / BLOCK_SIZE + BLOCK_SIZE; row++) {
+                result.add(new Pair(row, cell1.getCol()));
+            }
+
+        } else {
+            result.add(new Pair(cell1.getRow(), cell1.getCol()));
+        }
+
+        return result;
     }
 
 }

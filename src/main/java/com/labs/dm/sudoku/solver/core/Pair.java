@@ -19,4 +19,12 @@ public class Pair {
     public int getRow() {
         return row;
     }
+
+    @Override
+    public String toString() {
+        return "Pair{" +
+                "col=" + col +
+                ", row=" + row +
+                '}';
+    }
 }

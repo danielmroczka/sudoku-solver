@@ -60,7 +60,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new NakedTriples().execute(matrix);
+            new NakedTriplets().execute(matrix);
             matrix.validate();
         }
     }

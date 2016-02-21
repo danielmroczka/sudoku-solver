@@ -18,8 +18,9 @@ public class Flow {
         IAlgorithm hiddenTriples = new HiddenTriples();
         IAlgorithm hiddenSingles = new HiddenSingles();
         IAlgorithm hiddenPairs = new HiddenPairs();
-        IAlgorithm nakedTriples = new NakedTriples();
+        IAlgorithm nakedTriples = new NakedTriplets();
         IAlgorithm xWing = new XWing();
+        IAlgorithm yWing = new YWing();
         IAlgorithm reduction = new Reduction();
 
         int prevCount = matrix.getSolvedItems();
@@ -40,6 +41,7 @@ public class Flow {
             hiddenSingles.execute(matrix);
             reduction.execute(matrix);
             xWing.execute(matrix);
+            //yWing.execute(matrix);
             matrix.validate();
             if (prevCount == matrix.getSolvedItems()) {
                 chance--;

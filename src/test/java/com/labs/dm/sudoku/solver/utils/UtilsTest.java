@@ -1,5 +1,6 @@
 package com.labs.dm.sudoku.solver.utils;
 
+import com.labs.dm.sudoku.solver.core.Pair;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -50,5 +51,19 @@ public class UtilsTest {
         assertTrue(theSameBlock(0, 1, 2));
         assertFalse(theSameBlock(0, 3));
         assertFalse(theSameBlock(0, 2, 3, 8));
+    }
+
+    @Test
+    public void intersection() throws Exception {
+        //the same cell
+        assertEquals(7, Utils.intersection(new Pair(0, 2), new Pair(2, 0)).size());
+        //cells in the same row or col
+        assertEquals(7, Utils.intersection(new Pair(0, 0), new Pair(0, 5)).size());
+        assertEquals(7, Utils.intersection(new Pair(0, 0), new Pair(5, 0)).size());
+        //cells in the same row block or col block
+        assertEquals(6, Utils.intersection(new Pair(0, 0), new Pair(2, 5)).size());
+        assertEquals(6, Utils.intersection(new Pair(0, 0), new Pair(5, 2)).size());
+        //different row and col
+        assertEquals(1, Utils.intersection(new Pair(0, 8), new Pair(8, 0)).size());
     }
 }

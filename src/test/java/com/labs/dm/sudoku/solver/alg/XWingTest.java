@@ -27,7 +27,7 @@ public class XWingTest {
     }
 
     @Test
-    @Ignore
+    //   @Ignore
     public void testInRow() {
         //GIVEN
         IMatrix matrix = new Matrix();
@@ -49,7 +49,7 @@ public class XWingTest {
     }
 
     @Test
-    @Ignore
+    //  @Ignore
     public void testInCol() {
         //GIVEN
         IMatrix matrix = new Matrix();
