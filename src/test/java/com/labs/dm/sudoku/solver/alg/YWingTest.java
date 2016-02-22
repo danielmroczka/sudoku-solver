@@ -40,7 +40,7 @@ public class YWingTest {
         assertTrue(matrix.getCandidatesCount() == 60);
         alg.execute(matrix);
         matrix.validate();
-        assertTrue(matrix.getCandidatesCount() < 55);
+        assertTrue(matrix.getCandidatesCount() < 58);
     }
 
 }

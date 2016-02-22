@@ -347,6 +347,11 @@ public class Matrix implements IMatrix {
 
     @Override
     public void setCandidates(int row, int col, Collection<Integer> set) {
+        for (int v : set) {
+            if (v > 9 || v < 1) {
+                throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
+            }
+        }
         possibleValues[row][col] = set;
     }
 
@@ -376,6 +381,11 @@ public class Matrix implements IMatrix {
 
     @Override
     public void addCandidates(int row, int col, Integer[] array) {
+        for (int v : array) {
+            if (v > 9 || v < 1) {
+                throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
+            }
+        }
         getCandidates(row, col).addAll(new HashSet<>(Arrays.asList(array)));
     }
 

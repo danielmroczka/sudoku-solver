@@ -4,27 +4,24 @@ package com.labs.dm.sudoku.solver.core;
  * Created by daniel on 2016-02-15.
  */
 public class Pair {
-    private final int col;
     private final int row;
+    private final int col;
 
     public Pair(int row, int col) {
-        this.col = col;
         this.row = row;
-    }
-
-    public int getCol() {
-        return col;
+        this.col = col;
     }
 
     public int getRow() {
         return row;
     }
 
+    public int getCol() {
+        return col;
+    }
+
     @Override
     public String toString() {
-        return "Pair{" +
-                "col=" + col +
-                ", row=" + row +
-                '}';
+        return "Pair{row=" + row + ", col=" + col + "}";
     }
 }
