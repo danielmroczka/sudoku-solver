@@ -64,6 +64,15 @@ public class UtilsTest {
         assertEquals(6, Utils.intersection(new Pair(0, 0), new Pair(2, 5)).size());
         assertEquals(6, Utils.intersection(new Pair(0, 0), new Pair(5, 2)).size());
         //different row and col
-        assertEquals(1, Utils.intersection(new Pair(0, 8), new Pair(8, 0)).size());
+        assertEquals(2, Utils.intersection(new Pair(0, 8), new Pair(8, 0)).size());
+    }
+
+    @Test
+    public void testIt() {
+        assertEquals(3, Utils.it(3).length);
+        assertArrayEquals(new int[]{0,1,2}, Utils.it(0));
+        assertArrayEquals(new int[]{0,1,2}, Utils.it(1));
+        assertArrayEquals(new int[]{0,1,2}, Utils.it(2));
+        assertArrayEquals(new int[]{3,4,5}, Utils.it(3));
     }
 }

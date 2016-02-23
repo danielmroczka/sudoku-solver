@@ -18,6 +18,7 @@ public class OpenSingles implements IAlgorithm {
 
     @Override
     public void execute(IMatrix matrix) {
+        matrix.validate();
         fillOpenSinglesInRows(matrix);
         fillOpenSinglesInCols(matrix);
         fillOpenSinglesInBlocks(matrix);

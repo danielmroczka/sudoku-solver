@@ -15,21 +15,24 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
  */
 public class YWing implements IAlgorithm {
 
-    private void eliminateCandidate(IMatrix matrix, Pair pair1, Pair pair2) {
+    private void eliminateCandidate(IMatrix matrix, Pair pivot, Pair pair1, Pair pair2) {
         int candidate = candidateToEliminate(matrix, pair1.getRow(), pair1.getCol(), pair2.getRow(), pair2.getCol());
 
         if (candidate < 1) {
             return;
         }
         for (Pair neighbor : Utils.intersection(pair1, pair2)) {
-            System.out.println("Eliminate at " + neighbor.toString());
-            matrix.getCandidates(neighbor.getRow(), neighbor.getCol()).remove(candidate);
+            if (pivot.equals(neighbor)) continue;
+            if (matrix.getCandidates(neighbor.getRow(), neighbor.getCol()).contains(candidate)) {
+                System.out.println("Eliminate at " + neighbor.toString() + " candidate=" + candidate);
+                matrix.getCandidates(neighbor.getRow(), neighbor.getCol()).remove(candidate);
+            }
         }
     }
 
     private int candidateToEliminate(IMatrix matrix, int row, int col, int row2, int col2) {
-        List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col2));
-        common.retainAll(matrix.getCandidates(row2, col));
+        List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col));
+        common.retainAll(matrix.getCandidates(row, col));
         if (common.size() == 1) {
             return common.get(0);
         }
@@ -52,17 +55,17 @@ public class YWing implements IAlgorithm {
                                 if (r == row) continue;
 
                                 if (matrix.getCandidates(r, col).size() == 2 && !Collections.disjoint(matrix.getCandidates(r, col), matrix.getCandidates(row, c))) {
-                                    eliminateCandidate(matrix, new Pair(row, c), new Pair(r, col));
+                                    eliminateCandidate(matrix, new Pair(row,col), new Pair(row, c), new Pair(r, col));
                                 }
                             }
 
-                            for (int rb = row / 3 * BLOCK_SIZE; rb < (row / 3) * BLOCK_SIZE + BLOCK_SIZE; rb++) {
-                                for (int cb = col / 3 * BLOCK_SIZE; cb < (col / 3) * BLOCK_SIZE + BLOCK_SIZE; cb++) {
+                            for (int rb : Utils.it(row)) {
+                                for (int cb : Utils.it(col)) {
                                     if (rb == row && cb == col) {
                                         continue;
                                     }
                                     if (matrix.getCandidates(rb, cb).size() == 2 && !Collections.disjoint(matrix.getCandidates(row, c), matrix.getCandidates(rb, cb))) {
-                                        eliminateCandidate(matrix, new Pair(row, c), new Pair(rb, cb));
+                                        eliminateCandidate(matrix, new Pair(row,col), new Pair(row, c), new Pair(rb, cb));
                                     }
                                 }
                             }
@@ -78,17 +81,17 @@ public class YWing implements IAlgorithm {
                                 if (c == col) continue;
 
                                 if (matrix.getCandidates(row, c).size() == 2 && !Collections.disjoint(matrix.getCandidates(row, col), matrix.getCandidates(row, c))) {
-                                    eliminateCandidate(matrix, new Pair(row, c), new Pair(r, col));
+                                    eliminateCandidate(matrix, new Pair(row,col), new Pair(row, c), new Pair(r, col));
                                 }
                             }
 
-                            for (int rb = row / 3 * BLOCK_SIZE; rb < (row / 3 + 1) * BLOCK_SIZE; rb++) {
-                                for (int cb = col / 3 * BLOCK_SIZE; cb < (col / 3 + 1) * BLOCK_SIZE; cb++) {
+                            for (int rb : Utils.it(row)) {
+                                for (int cb : Utils.it(col)) {
                                     if (rb == row && cb == col) {
                                         continue;
                                     }
                                     if (matrix.getCandidates(rb, cb).size() == 2 && !Collections.disjoint(matrix.getCandidates(row, col), matrix.getCandidates(rb, cb))) {
-                                        eliminateCandidate(matrix, new Pair(r, col), new Pair(rb, cb));
+                                        eliminateCandidate(matrix, new Pair(row,col), new Pair(r, col), new Pair(rb, cb));
                                     }
                                 }
                             }
@@ -110,7 +113,7 @@ public class YWing implements IAlgorithm {
                                     if (c == col) continue;
 
                                     if (matrix.getCandidates(row, c).size() == 2 && !Collections.disjoint(matrix.getCandidates(row, col), matrix.getCandidates(row, c))) {
-                                        eliminateCandidate(matrix, new Pair(rb, cb), new Pair(rb, c));
+                                        eliminateCandidate(matrix, new Pair(row,col), new Pair(rb, cb), new Pair(rb, c));
                                     }
                                 }
 
@@ -118,7 +121,7 @@ public class YWing implements IAlgorithm {
                                     if (r == row) continue;
 
                                     if (matrix.getCandidates(r, col).size() == 2 && !Collections.disjoint(matrix.getCandidates(row, col), matrix.getCandidates(r, col))) {
-                                        eliminateCandidate(matrix, new Pair(rb, cb), new Pair(r, cb));
+                                        eliminateCandidate(matrix, new Pair(row,col), new Pair(rb, cb), new Pair(r, cb));
                                     }
                                 }
                             }

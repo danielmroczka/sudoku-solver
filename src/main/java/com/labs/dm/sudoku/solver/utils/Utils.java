@@ -90,8 +90,8 @@ public class Utils {
     public static List<Pair> intersection(Pair cell1, Pair cell2) {
         List<Pair> result = new ArrayList<>();
         if (theSameColBlock(cell1, cell2) && theSameRowBlock(cell1, cell2)) {
-            for (int row = cell1.getRow() / BLOCK_SIZE * BLOCK_SIZE; row < cell1.getRow() / BLOCK_SIZE * BLOCK_SIZE + BLOCK_SIZE; row++) {
-                for (int col = cell1.getCol() / BLOCK_SIZE * BLOCK_SIZE; col < cell1.getCol() / BLOCK_SIZE * BLOCK_SIZE + BLOCK_SIZE; col++) {
+            for (int row : Utils.it(cell1.getRow())) {
+                for (int col : Utils.it(cell1.getCol())) {
                     if ((row == cell1.getRow() && col == cell1.getCol()) || (row == cell2.getRow() && col == cell2.getCol())) {
                         continue;
                     }
@@ -99,7 +99,8 @@ public class Utils {
                 }
 
             }
-        } else if (theSameRow(cell1, cell2)) {
+        } else
+        if (theSameRow(cell1, cell2)) {
             for (int col = 0; col < SIZE; col++) {
                 if (col != cell1.getCol() && col != cell2.getCol()) {
                     result.add(new Pair(cell1.getRow(), col));
@@ -112,26 +113,36 @@ public class Utils {
                 }
             }
         } else if (theSameRowBlock(cell1, cell2)) {
-            for (int col = cell1.getCol() / BLOCK_SIZE * BLOCK_SIZE; col < cell1.getCol() / BLOCK_SIZE * BLOCK_SIZE + BLOCK_SIZE; col++) {
+            for (int col : Utils.it(cell1.getCol())) {
                 result.add(new Pair(cell2.getRow(), col));
             }
-            for (int col = cell2.getCol() / BLOCK_SIZE * BLOCK_SIZE; col < cell2.getCol() / BLOCK_SIZE * BLOCK_SIZE + BLOCK_SIZE; col++) {
+            for (int col : Utils.it(cell2.getCol())) {
                 result.add(new Pair(cell1.getRow(), col));
             }
 
         } else if (theSameColBlock(cell1, cell2)) {
-            for (int row = cell1.getRow() / BLOCK_SIZE * BLOCK_SIZE; row < cell1.getRow() / BLOCK_SIZE * BLOCK_SIZE + BLOCK_SIZE; row++) {
+            for (int row : Utils.it(cell1.getRow())) {
                 result.add(new Pair(row, cell2.getCol()));
             }
-            for (int row = cell2.getRow() / BLOCK_SIZE * BLOCK_SIZE; row < cell2.getRow() / BLOCK_SIZE * BLOCK_SIZE + BLOCK_SIZE; row++) {
+            for (int row : Utils.it(cell2.getRow())) {
                 result.add(new Pair(row, cell1.getCol()));
             }
 
         } else {
-            result.add(new Pair(cell1.getRow(), cell1.getCol()));
+            result.add(new Pair(cell1.getRow(), cell2.getCol()));
+            result.add(new Pair(cell2.getRow(), cell1.getCol()));
         }
 
         return result;
+    }
+
+    public static int[] it(int pos) {
+        int[] res = new int[BLOCK_SIZE];
+        int id = 0;
+        for (int item = pos / BLOCK_SIZE * BLOCK_SIZE; item < pos / BLOCK_SIZE * BLOCK_SIZE + BLOCK_SIZE; item++) {
+            res[id++] = item;
+        }
+        return res;
     }
 
 }

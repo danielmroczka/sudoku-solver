@@ -41,7 +41,11 @@ public class Flow {
             hiddenSingles.execute(matrix);
             reduction.execute(matrix);
             xWing.execute(matrix);
-            //yWing.execute(matrix);
+            System.out.println(matrix);
+            System.out.println(matrix.printCandidates());
+            yWing.execute(matrix);
+            System.out.println(matrix);
+            System.out.println(matrix.printCandidates());
             matrix.validate();
             if (prevCount == matrix.getSolvedItems()) {
                 chance--;
