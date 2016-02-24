@@ -18,6 +18,38 @@ public class XYWingTest {
     private IAlgorithm cand = new GenerateCandidates();
 
     @Test
+    public void theSameBlock() {
+
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{2, 7});
+        matrix.addCandidates(2, 1, new Integer[]{1, 2});
+        matrix.addCandidates(1, 2, new Integer[]{1, 7});
+        matrix.addCandidates(1, 1, new Integer[]{1, 8, 9});
+        matrix.addCandidates(2, 2, new Integer[]{1, 8, 9});
+        //WHEN
+        yWing.execute(matrix);
+        //THEN
+        assertEquals(2, matrix.getCandidates(1, 1).size());
+        assertEquals(2, matrix.getCandidates(2, 2).size());
+    }
+
+    @Test
+    public void twoBlocks() {
+
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{2, 7});
+        matrix.addCandidates(2, 1, new Integer[]{1, 2});
+        matrix.addCandidates(0, 3, new Integer[]{1, 7});
+        matrix.addCandidates(2, 3, new Integer[]{1, 8, 9});
+        //WHEN
+        yWing.execute(matrix);
+        //THEN
+        assertEquals(2, matrix.getCandidates(2, 3).size());
+    }
+
+    @Test
     public void differentBlocks() {
 
         //GIVEN
@@ -80,7 +112,6 @@ public class XYWingTest {
         assertEquals(candidates - 3, matrix.getCandidatesCount());
         assertEquals(2, matrix.getCandidates(0, 1).size());
     }
-
 
     @Test
     public void testFromFile1() throws IOException {

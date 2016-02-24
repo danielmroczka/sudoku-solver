@@ -1,5 +1,6 @@
 package com.labs.dm.sudoku.solver.utils;
 
+import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Pair;
 
 import java.util.*;
@@ -142,18 +143,22 @@ public class Utils {
         return res;
     }
 
-    public static boolean compare(Collection<Integer> collection1, Collection<Integer> collection2, Collection<Integer> collection3) {
-        if (collection1.size() != 2 && collection2.size() != 2 && collection3.size() != 3) {
+    public static boolean compare(IMatrix matrix, Pair pivotPair, Pair pincetPair1, Pair pincetPair2) {
+        Collection<Integer> pivot = matrix.getCandidates(pivotPair);
+        Collection<Integer> pincet1 = matrix.getCandidates(pincetPair1);
+        Collection<Integer> pincet2 = matrix.getCandidates(pincetPair2);
+
+        if (pivot.size() != 2 && pincet1.size() != 2 && pincet2.size() != 3) {
             return false;
         }
-        if (new HashSet<>(collection1).size() != 2 || new HashSet<>(collection2).size() != 2 || new HashSet<>(collection3).size() != 2) {
+        if (new HashSet<>(pivot).size() != 2 || new HashSet<>(pincet1).size() != 2 || new HashSet<>(pincet2).size() != 2) {
             return false;
         }
 
         List<Integer> list = new ArrayList<>();
-        list.addAll(collection1);
-        list.addAll(collection2);
-        list.addAll(collection3);
+        list.addAll(pivot);
+        list.addAll(pincet1);
+        list.addAll(pincet2);
         CounterHashMap<Integer> map = new CounterHashMap<>();
         for (int item : list) {
             map.inc(item);
@@ -166,7 +171,26 @@ public class Utils {
             }
         }
 
-        return found && map.size() == 3;
+        List<Integer> copy1 = new ArrayList<>(pivot);
+        List<Integer> copy2 = new ArrayList<>(pivot);
+        copy1.retainAll(pincet1);
+        copy2.retainAll(pincet2);
+
+        return found && copy1.size() == 1 && copy2.size() == 1 && copy1.get(0) != copy2.get(0) && map.size() == 3;
     }
 
+    public static boolean accept(Collection<Integer> candidates, Collection<Integer> candidates1) {
+        if (candidates.size() != 2 || candidates1.size() != 2) {
+            return false;
+        }
+        int cnt = 0;
+        for (int i : candidates) {
+            for (int j : candidates1) {
+                if (i == j) {
+                    cnt++;
+                }
+            }
+        }
+        return cnt == 1;
+    }
 }

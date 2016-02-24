@@ -13,7 +13,7 @@ public class PairTest {
     @Test
     public void test() {
         Pair pair1 = new Pair(0, 0);
-        Pair pair2 = new Pair(0,0);
+        Pair pair2 = new Pair(0, 0);
         Pair pair3 = new Pair(1, 0);
         Pair pair4 = new Pair(0, 1);
 
