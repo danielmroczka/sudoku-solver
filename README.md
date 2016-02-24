@@ -1,5 +1,5 @@
 #Sudoku solver
-Library designed to solving sudoku problem.
+Library designed to solving Sudoku problem written in Java.
 
 [![Build Status](https://travis-ci.org/danielmroczka/sudoku-solver.png?branch=master)](https://travis-ci.org/danielmroczka/sudoku-solver)
 [![Coverage Status](https://coveralls.io/repos/github/danielmroczka/sudoku-solver/badge.svg?branch=master)](https://coveralls.io/github/danielmroczka/sudoku-solver?branch=master)
@@ -12,7 +12,9 @@ Implemented algorithms:
 - [x]  Hidden Pairs/Triples
 - [x]  Naked Pairs/Triples
 - [x]  Line/Block Reduction
-- [x]  XWing
+- [x]  X-Wing
+- [x]  XY-Wing
+- [x]  XYZ-Wing
                            
 ##Usage
 

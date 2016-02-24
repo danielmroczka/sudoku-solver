@@ -37,7 +37,7 @@ public class Generator {
             }
 
             if (validate) {
-                System.out.println("Step=" + probe);
+                //System.out.println("Step=" + probe);
                 probe++;
             } else {
                 matrix.setValueAt(row, col, IMatrix.EMPTY_VALUE);

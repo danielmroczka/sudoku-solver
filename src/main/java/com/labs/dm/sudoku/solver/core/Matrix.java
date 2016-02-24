@@ -3,6 +3,8 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import com.labs.dm.sudoku.solver.utils.Utils;
+
 import java.util.*;
 
 /**
@@ -11,7 +13,6 @@ import java.util.*;
  * @author daniel
  */
 public class Matrix implements IMatrix {
-
     private final int[][] tab;
 
     private final Collection<Integer>[][] possibleValues;
@@ -67,11 +68,8 @@ public class Matrix implements IMatrix {
             for (int c = 0; c < SIZE; c++) {
                 removeCandidate(row, c, value);
             }
-            int rowStart = (row / IMatrix.BLOCK_SIZE) * IMatrix.BLOCK_SIZE;
-            int colStart = (col / IMatrix.BLOCK_SIZE) * IMatrix.BLOCK_SIZE;
-
-            for (int rowGroup = rowStart; rowGroup < rowStart + IMatrix.BLOCK_SIZE; rowGroup++) {
-                for (int colGroup = colStart; colGroup < colStart + IMatrix.BLOCK_SIZE; colGroup++) {
+            for (int rowGroup : Utils.it((row / BLOCK_SIZE) * BLOCK_SIZE)) {
+                for (int colGroup : Utils.it((col / BLOCK_SIZE) * BLOCK_SIZE)) {
                     removeCandidate(rowGroup, colGroup, value);
                 }
             }
@@ -256,6 +254,11 @@ public class Matrix implements IMatrix {
     }
 
     @Override
+    public Collection<Integer> getCandidates(Pair pair) {
+        return getCandidates(pair.getRow(), pair.getCol());
+    }
+
+    @Override
     public int[] toArray() {
         int[] result = new int[SIZE * SIZE];
         for (int row = 0; row < SIZE; row++) {
@@ -347,6 +350,11 @@ public class Matrix implements IMatrix {
 
     @Override
     public void setCandidates(int row, int col, Collection<Integer> set) {
+        for (int v : set) {
+            if (v > 9 || v < 1) {
+                throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
+            }
+        }
         possibleValues[row][col] = set;
     }
 
@@ -376,6 +384,11 @@ public class Matrix implements IMatrix {
 
     @Override
     public void addCandidates(int row, int col, Integer[] array) {
+        for (int v : array) {
+            if (v > 9 || v < 1) {
+                throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
+            }
+        }
         getCandidates(row, col).addAll(new HashSet<>(Arrays.asList(array)));
     }
 

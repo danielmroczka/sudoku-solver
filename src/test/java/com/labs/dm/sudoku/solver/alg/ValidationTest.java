@@ -36,6 +36,26 @@ public class ValidationTest {
     }
 
     @Test
+    public void validateXYWing() throws IOException {
+        for (int i = 0; i < COUNT; i++) {
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+            new XYWing().execute(matrix);
+            matrix.validate();
+        }
+    }
+
+    @Test
+    public void validateXYZWing() throws IOException {
+        for (int i = 0; i < COUNT; i++) {
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+            new XYZWing().execute(matrix);
+            matrix.validate();
+        }
+    }
+
+    @Test
     public void validateHiddenPairs() throws IOException {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
@@ -60,7 +80,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new NakedTriples().execute(matrix);
+            new NakedTriplets().execute(matrix);
             matrix.validate();
         }
     }

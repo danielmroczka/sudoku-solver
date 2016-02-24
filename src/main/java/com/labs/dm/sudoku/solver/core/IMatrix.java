@@ -136,6 +136,8 @@ public interface IMatrix extends Iterable<Integer> {
      */
     Collection<Integer> getCandidates(int row, int col);
 
+    Collection<Integer> getCandidates(Pair pair);
+
     void setCandidates(int row, int col, Collection<Integer> set);
 
     /**

@@ -1,8 +1,11 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 
 /**
  * Naked Pairs Algorithm Implementation
@@ -28,7 +31,7 @@ public class NakedPairs implements IAlgorithm {
     private void findNakedPairsInBlocks(IMatrix matrix) {
         for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
-                Map<Collection<Integer>, Integer> map = new HashMap<>();
+                CounterHashMap<Collection<Integer>> map = new CounterHashMap<>();
                 for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
                     for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
                         count(matrix, map, row, col);
@@ -50,20 +53,9 @@ public class NakedPairs implements IAlgorithm {
         }
     }
 
-    private void count(IMatrix matrix, Map<Collection<Integer>, Integer> map, int row, int col) {
-        Collection<Integer> key = matrix.getCandidates(row, col);
-        if (key.size() == SIZE) {
-            Integer val = map.get(key);
-            if (val == null) {
-                val = 0;
-            }
-            map.put(new HashSet<>(key), ++val);
-        }
-    }
-
     private void findNakedPairsInRows(IMatrix matrix) {
         for (int row = 0; row < IMatrix.SIZE; row++) {
-            Map<Collection<Integer>, Integer> map = new HashMap<>();
+            CounterHashMap<Collection<Integer>> map = new CounterHashMap<>();
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 count(matrix, map, row, col);
             }
@@ -83,7 +75,7 @@ public class NakedPairs implements IAlgorithm {
 
     private void findNakedPairsInCols(IMatrix matrix) {
         for (int col = 0; col < IMatrix.SIZE; col++) {
-            Map<Collection<Integer>, Integer> map = new HashMap<>();
+            CounterHashMap<Collection<Integer>> map = new CounterHashMap<>();
             for (int row = 0; row < IMatrix.SIZE; row++) {
                 count(matrix, map, row, col);
             }
@@ -97,6 +89,13 @@ public class NakedPairs implements IAlgorithm {
                     }
                 }
             }
+        }
+    }
+
+    private void count(IMatrix matrix, CounterHashMap<Collection<Integer>> map, int row, int col) {
+        Collection<Integer> key = matrix.getCandidates(row, col);
+        if (accept(key.size())) {
+            map.inc(key);
         }
     }
 }

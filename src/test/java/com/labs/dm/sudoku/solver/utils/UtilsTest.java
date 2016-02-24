@@ -1,5 +1,6 @@
 package com.labs.dm.sudoku.solver.utils;
 
+import com.labs.dm.sudoku.solver.core.Pair;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -51,4 +52,36 @@ public class UtilsTest {
         assertFalse(theSameBlock(0, 3));
         assertFalse(theSameBlock(0, 2, 3, 8));
     }
+
+    @Test
+    public void intersection() throws Exception {
+        //the same cell
+        assertEquals(7, Utils.intersection(new Pair(0, 2), new Pair(2, 0)).size());
+        //cells in the same row or col
+        assertEquals(7, Utils.intersection(new Pair(0, 0), new Pair(0, 5)).size());
+        assertEquals(7, Utils.intersection(new Pair(0, 0), new Pair(5, 0)).size());
+        //cells in the same row block or col block
+        assertEquals(6, Utils.intersection(new Pair(0, 0), new Pair(2, 5)).size());
+        assertEquals(6, Utils.intersection(new Pair(0, 0), new Pair(5, 2)).size());
+        //different row and col
+        assertEquals(2, Utils.intersection(new Pair(0, 8), new Pair(8, 0)).size());
+    }
+
+    @Test
+    public void testIt() {
+        assertEquals(3, Utils.it(3).length);
+        assertArrayEquals(new int[]{0, 1, 2}, Utils.it(0));
+        assertArrayEquals(new int[]{0, 1, 2}, Utils.it(1));
+        assertArrayEquals(new int[]{0, 1, 2}, Utils.it(2));
+        assertArrayEquals(new int[]{3, 4, 5}, Utils.it(3));
+    }
+
+    @Test
+    public void compare() {
+       // assertTrue(Utils.compare(Arrays.asList(1, 2), Arrays.asList(2, 7), Arrays.asList(1, 7)));
+      //  assertFalse(Utils.compare(Arrays.asList(1, 2), Arrays.asList(2, 7), Arrays.asList(8, 7)));
+      //  assertFalse(Utils.compare(Arrays.asList(1, 2), Arrays.asList(2, 7), Arrays.asList(2, 7)));
+      //  assertFalse(Utils.compare(Arrays.asList(1, 1), Arrays.asList(2, 2), Arrays.asList(7, 7)));
+    }
+
 }
