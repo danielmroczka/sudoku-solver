@@ -13,7 +13,7 @@ public class XYZWingTest {
 
     private XYZWing wing = new XYZWing();
 
-    //@Test
+    @Test
     public void simpleTest() {
 
         //GIVEN

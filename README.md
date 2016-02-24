@@ -14,6 +14,7 @@ Implemented algorithms:
 - [x]  Line/Block Reduction
 - [x]  X-Wing
 - [x]  XY-Wing
+- [x]  XYZ-Wing
                            
 ##Usage
 

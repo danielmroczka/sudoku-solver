@@ -1,6 +1,5 @@
 package com.labs.dm.sudoku.solver.io;
 
-import com.labs.dm.sudoku.solver.alg.Flow;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -36,7 +35,7 @@ public class GeneratorTest {
     @Ignore
     public void shouldGenerateMatrixFull() {
         IMatrix matrix = gen.generate(27);
-        Flow flow = new Flow();
-        flow.execute(matrix);
+        //Flow flow = new Flow();
+        //flow.execute(matrix);
     }
 }
