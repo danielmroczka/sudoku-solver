@@ -2,9 +2,7 @@ package com.labs.dm.sudoku.solver.utils;
 
 import com.labs.dm.sudoku.solver.core.Pair;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
@@ -99,8 +97,7 @@ public class Utils {
                 }
 
             }
-        } else
-        if (theSameRow(cell1, cell2)) {
+        } else if (theSameRow(cell1, cell2)) {
             for (int col = 0; col < SIZE; col++) {
                 if (col != cell1.getCol() && col != cell2.getCol()) {
                     result.add(new Pair(cell1.getRow(), col));
@@ -143,6 +140,33 @@ public class Utils {
             res[id++] = item;
         }
         return res;
+    }
+
+    public static boolean compare(Collection<Integer> collection1, Collection<Integer> collection2, Collection<Integer> collection3) {
+        if (collection1.size() != 2 && collection2.size() != 2 && collection3.size() != 3) {
+            return false;
+        }
+        if (new HashSet<>(collection1).size() != 2 || new HashSet<>(collection2).size() != 2 || new HashSet<>(collection3).size() != 2) {
+            return false;
+        }
+
+        List<Integer> list = new ArrayList<>();
+        list.addAll(collection1);
+        list.addAll(collection2);
+        list.addAll(collection3);
+        CounterHashMap<Integer> map = new CounterHashMap<>();
+        for (int item : list) {
+            map.inc(item);
+        }
+        boolean found = true;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() != 2) {
+                found = false;
+                break;
+            }
+        }
+
+        return found && map.size() == 3;
     }
 
 }
