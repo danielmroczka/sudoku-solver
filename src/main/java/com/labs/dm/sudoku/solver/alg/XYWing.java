@@ -15,7 +15,7 @@ import static com.labs.dm.sudoku.solver.utils.Utils.compare;
  *
  * Created by daniel on 2016-02-21.
  */
-public class YWing implements IAlgorithm {
+public class XYWing implements IAlgorithm {
 
     private void eliminateCandidate(IMatrix matrix, Pair pivot, Pair pair1, Pair pair2) {
         int candidate = candidateToEliminate(matrix, pair1.getRow(), pair1.getCol(), pair2.getRow(), pair2.getCol());
@@ -109,7 +109,7 @@ public class YWing implements IAlgorithm {
                     }
 
 
-                    /*for (int rb : Utils.it(row)) {
+                    for (int rb : Utils.it(row)) {
                         for (int cb : Utils.it(col)) {
                             if (rb == row && cb == col) {
                                 continue;
@@ -127,19 +127,18 @@ public class YWing implements IAlgorithm {
                                     }
                                 }
 
-
                                 for (int r = 0; r < IMatrix.SIZE; r++) {
                                     if (r == row) continue;
 
                                     if (matrix.getCandidates(r, col).size() == 2 && !Collections.disjoint(matrix.getCandidates(row, col), matrix.getCandidates(r, col))) {
-                                        if (compare(matrix.getCandidates(row, col), matrix.getCandidates(r, col), matrix.getCandidates(row, c))) {
+                                        if (compare(matrix.getCandidates(row, col), matrix.getCandidates(r, col), matrix.getCandidates(row, col))) {
                                             eliminateCandidate(matrix, pivot, new Pair(rb, cb), new Pair(r, cb));
                                         }
                                     }
                                 }
                             }
                         }
-                    }*/
+                    }
                 }
             }
         }

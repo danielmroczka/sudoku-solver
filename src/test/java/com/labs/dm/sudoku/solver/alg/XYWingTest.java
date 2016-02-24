@@ -12,9 +12,9 @@ import static org.junit.Assert.*;
 /**
  * Created by daniel on 2016-02-21.
  */
-public class YWingTest {
+public class XYWingTest {
 
-    private IAlgorithm yWing = new YWing();
+    private IAlgorithm yWing = new XYWing();
     private IAlgorithm cand = new GenerateCandidates();
 
     @Test
