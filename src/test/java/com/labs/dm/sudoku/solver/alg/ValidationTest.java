@@ -20,7 +20,7 @@ public class ValidationTest {
 
     @Before
     public void before() throws IOException {
-        matrix = new MatrixLoader().load("src/test/resources/patterns/tough1.txt");
+        matrix = new MatrixLoader().load("src/test/resources/patterns/hard.txt");
         cand.execute(matrix);
         matrix.validate();
     }
