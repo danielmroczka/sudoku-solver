@@ -3,7 +3,6 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
-import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.*;
@@ -45,20 +44,11 @@ public class Matrix implements IMatrix {
 
     @Override
     public void setValueAt(int row, int col, int value) {
-
-        //System.out.println("setValue(" + value + ") at: " + row + ", " + col);
         validateInputIndex(row, col);
         validateInputValue(value);
         tab[row][col] = value;
-        //validate();
         removeCandidates(row, col, value);
-        MatrixLoader ml = new MatrixLoader();
     }
-        /*try {
-           // ml.save(this, "target\\matrix_" + new Date().getTime());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }    }*/
 
     @Override
     public void removeCandidate(int row, int col, int value) {
@@ -243,7 +233,9 @@ public class Matrix implements IMatrix {
     @Override
     public void setRows(int row, int[] rows) {
         validateInputArray(rows);
-        tab[row] = rows;
+        for (int col = 0; col < SIZE; col++) {
+            setValueAt(row, col, rows[col]);
+        }
     }
 
     @Override
