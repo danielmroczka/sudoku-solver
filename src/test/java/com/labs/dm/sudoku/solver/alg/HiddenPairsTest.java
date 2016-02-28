@@ -57,7 +57,7 @@ public class HiddenPairsTest {
         //THEN
         assertEquals(2, matrix.getCandidates(2, 0).size());
         assertEquals(2, matrix.getCandidates(2, 2).size());
-        // assertEquals(candidates-3, matrix.getCandidatesCount());
+        //assertEquals(candidates-2, matrix.getCandidatesCount());
     }
 
     @Test

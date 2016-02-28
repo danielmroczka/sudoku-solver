@@ -148,6 +148,10 @@ public class Utils {
         Collection<Integer> pincet1 = matrix.getCandidates(pincetPair1);
         Collection<Integer> pincet2 = matrix.getCandidates(pincetPair2);
 
+        if (Arrays.equals(pincet1.toArray(), pincet2.toArray())) {
+            return false;
+        }
+
         if (pincet1.size() != 2 && pincet2.size() != 2) {
             return false;
         }
@@ -164,8 +168,8 @@ public class Utils {
             map.inc(item);
         }
         boolean found = true;
-/*        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if (entry.getValue() != 2) {
+        /*for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() >= 2) {
                 found = false;
                 break;
             }

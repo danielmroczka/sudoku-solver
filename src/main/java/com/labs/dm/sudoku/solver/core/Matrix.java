@@ -3,6 +3,7 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.*;
@@ -44,12 +45,20 @@ public class Matrix implements IMatrix {
 
     @Override
     public void setValueAt(int row, int col, int value) {
+
         //System.out.println("setValue(" + value + ") at: " + row + ", " + col);
         validateInputIndex(row, col);
         validateInputValue(value);
         tab[row][col] = value;
+        //validate();
         removeCandidates(row, col, value);
+        MatrixLoader ml = new MatrixLoader();
     }
+        /*try {
+           // ml.save(this, "target\\matrix_" + new Date().getTime());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }    }*/
 
     @Override
     public void removeCandidate(int row, int col, int value) {
@@ -311,13 +320,13 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean validate() {
-        Set<Integer> set = new HashSet<>();
-        validateRows(set);
-        validateCols(set);
+        validateRows();
+        validateCols();
         return true;
     }
 
-    private void validateCols(Set<Integer> set) {
+    private void validateCols() {
+        Set<Integer> set = new HashSet<>();
         for (int col = 0; col < SIZE; col++) {
             int[] cols = getElemsInCol(col);
             for (int c : cols) {
@@ -330,7 +339,8 @@ public class Matrix implements IMatrix {
         }
     }
 
-    private void validateRows(Set<Integer> set) {
+    private void validateRows() {
+        Set<Integer> set = new HashSet<>();
         for (int row = 0; row < SIZE; row++) {
             int[] rows = getElemsInRow(row);
             for (int r : rows) {
