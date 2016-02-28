@@ -163,17 +163,22 @@ public class Utils {
         list.addAll(pivot);
         list.addAll(pincet1);
         list.addAll(pincet2);
+
+        if (new HashSet<>(list).size() != size) {
+            // return false; //TODO
+        }
+
         CounterHashMap<Integer> map = new CounterHashMap<>();
         for (int item : list) {
             map.inc(item);
         }
         boolean found = true;
-        /*for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if (entry.getValue() >= 2) {
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() < 2) {
                 found = false;
                 break;
             }
-        }*/
+        }
 
         List<Integer> copy1 = new ArrayList<>(pivot);
         List<Integer> copy2 = new ArrayList<>(pivot);
