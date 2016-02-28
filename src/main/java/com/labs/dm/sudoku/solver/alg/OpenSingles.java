@@ -27,8 +27,9 @@ public class OpenSingles implements IAlgorithm {
     private void fillOpenSinglesInRows(IMatrix matrix) {
         for (int row = 0; row < IMatrix.SIZE; row++) {
             int[] rows = matrix.getElemsInRow(row);
-            if (fillOpenSingles(rows)) {
-                matrix.setRows(row, rows);
+            int pos = fillOpenSingles(rows);
+            if (pos >= 0) {
+                matrix.setValueAt(row, pos, rows[pos]);
             }
         }
     }
@@ -36,8 +37,9 @@ public class OpenSingles implements IAlgorithm {
     private void fillOpenSinglesInCols(IMatrix matrix) {
         for (int col = 0; col < IMatrix.SIZE; col++) {
             int[] cols = matrix.getElemsInCol(col);
-            if (fillOpenSingles(cols)) {
-                matrix.setCols(col, cols);
+            int pos = fillOpenSingles(cols);
+            if (pos >= 0) {
+                matrix.setValueAt(pos, col, cols[pos]);
             }
         }
     }
@@ -46,8 +48,9 @@ public class OpenSingles implements IAlgorithm {
         for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
                 int[] block = matrix.getElemsInBlock(rowGroup, colGroup);
-                if (fillOpenSingles(block)) {
-                    matrix.setBlock(rowGroup, colGroup, block);
+                int pos = fillOpenSingles(block);
+                if (pos >= 0) {
+                    matrix.setValueAt(pos - (pos / 3) + rowGroup * IMatrix.BLOCK_SIZE, pos / 3 + colGroup * IMatrix.BLOCK_SIZE, block[pos]);
                 }
             }
         }
@@ -82,7 +85,7 @@ public class OpenSingles implements IAlgorithm {
         return false;
     }
 
-    protected boolean fillOpenSingles(int[] tab) {
+    protected int fillOpenSingles(int[] tab) {
         if (tab.length != IMatrix.SIZE) {
             throw new IllegalArgumentException("Invalid array size.");
         }
@@ -102,8 +105,9 @@ public class OpenSingles implements IAlgorithm {
 
         if (set.size() == 1) {
             tab[position] = set.get(0);
+            return position;
         }
-        return set.size() == 1;
+        return -1;
     }
 
 
