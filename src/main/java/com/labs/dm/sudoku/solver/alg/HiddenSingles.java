@@ -4,9 +4,9 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,7 +28,7 @@ public class HiddenSingles implements IAlgorithm {
         for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
 
-                Map<Integer, Integer> counter = new HashMap<>();
+                CounterHashMap<Integer> counter = new CounterHashMap<>();
                 for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
                     for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
                         onFind(matrix, counter, row, col);
@@ -52,7 +52,7 @@ public class HiddenSingles implements IAlgorithm {
 
     private void findInCols(IMatrix matrix) {
         for (int col = 0; col < IMatrix.SIZE; col++) {
-            Map<Integer, Integer> counter = new HashMap<>();
+            CounterHashMap<Integer> counter = new CounterHashMap<>();
             for (int row = 0; row < IMatrix.SIZE; row++) {
                 onFind(matrix, counter, row, col);
             }
@@ -71,7 +71,7 @@ public class HiddenSingles implements IAlgorithm {
 
     private void findInRows(IMatrix matrix) {
         for (int row = 0; row < IMatrix.SIZE; row++) {
-            Map<Integer, Integer> counter = new HashMap<>();
+            CounterHashMap<Integer> counter = new CounterHashMap<>();
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 onFind(matrix, counter, row, col);
             }
@@ -88,14 +88,10 @@ public class HiddenSingles implements IAlgorithm {
         }
     }
 
-    private void onFind(IMatrix matrix, Map<Integer, Integer> counter, int row, int col) {
+    private void onFind(IMatrix matrix, CounterHashMap<Integer> counter, int row, int col) {
         Collection<Integer> candidates = matrix.getCandidates(row, col);
         for (int item : candidates) {
-            Integer value = counter.get(item);
-            if (value == null) {
-                value = 0;
-            }
-            counter.put(item, ++value);
+            counter.inc(item);
         }
     }
 }

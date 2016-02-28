@@ -49,6 +49,7 @@ public class XYWing implements IAlgorithm {
                     // eliminate pincets
                     for (int i = 0; i < pincets.size(); i++) {
                         for (int j = i; j < pincets.size(); j++) {
+                            if (i == j) continue;
                             if (compare(matrix, pivot, pincets.get(i), pincets.get(j), pivotLength)) {
                                 eliminateCandidate(matrix, pivot, pincets.get(i), pincets.get(j));
                             }
