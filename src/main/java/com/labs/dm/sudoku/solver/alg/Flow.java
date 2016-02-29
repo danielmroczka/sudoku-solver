@@ -4,6 +4,10 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.io.MatrixLoader;
+
+import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author daniel
@@ -34,16 +38,19 @@ public class Flow {
         while (!matrix.isSolved()) {
             System.out.println("flow execution " + matrix.getCandidatesCount());
             loneSingles.execute(matrix);
+            log(matrix);
             openSingles.execute(matrix);
             nakedPairs.execute(matrix);
             nakedTriples.execute(matrix);
             hiddenPairs.execute(matrix);
             hiddenTriples.execute(matrix);
+            log(matrix);
             hiddenSingles.execute(matrix);
             reduction.execute(matrix);
             xWing.execute(matrix);
             xyWing.execute(matrix);
             xyzWing.execute(matrix);
+            System.out.println(matrix.printCandidates());
             matrix.validate();
             if (prevCount == matrix.getSolvedItems()) {
                 chance--;
@@ -60,7 +67,13 @@ public class Flow {
         matrix.validate();
         System.out.println("Set cells = " + matrix.getSolvedItems());
         System.out.println(matrix);
-        // System.out.println(matrix.printCandidates());
     }
 
+    private void log(IMatrix matrix) {
+        try {
+            new MatrixLoader().save(matrix, "target\\matrix_" + new Date().getTime());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

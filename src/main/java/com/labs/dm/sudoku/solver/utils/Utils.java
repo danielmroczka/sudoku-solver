@@ -164,8 +164,8 @@ public class Utils {
         list.addAll(pincet1);
         list.addAll(pincet2);
 
-        if (new HashSet<>(list).size() != size) {
-            // return false; //TODO
+        if (new HashSet<>(list).size() != 3) {
+            return false;
         }
 
         CounterHashMap<Integer> map = new CounterHashMap<>();

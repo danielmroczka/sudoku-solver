@@ -44,6 +44,8 @@ public class Matrix implements IMatrix {
 
     @Override
     public void setValueAt(int row, int col, int value) {
+
+        //System.out.println("setValue(" + value + ") at: " + row + ", " + col);
         validateInputIndex(row, col);
         validateInputValue(value);
         tab[row][col] = value;

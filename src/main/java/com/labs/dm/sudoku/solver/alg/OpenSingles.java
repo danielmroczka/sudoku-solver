@@ -62,29 +62,6 @@ public class OpenSingles implements IAlgorithm {
      * @param tab
      * @return
      */
-    protected boolean fillOpenSinglesNew(int[] tab) {
-        if (tab.length != IMatrix.SIZE) {
-            throw new IllegalArgumentException("Invalid array size.");
-        }
-
-        int position = -1, cnt = 0, sum = 0;
-        for (int elem = 0; elem < tab.length; elem++) {
-            if (tab[elem] == IMatrix.EMPTY_VALUE) {
-                if (++cnt > 1) {
-                    return false;
-                }
-                position = elem;
-            }
-            sum += tab[elem];
-        }
-
-        if (cnt == 1) {
-            tab[position] = 45 - sum;
-            return true;
-        }
-        return false;
-    }
-
     protected int fillOpenSingles(int[] tab) {
         if (tab.length != IMatrix.SIZE) {
             throw new IllegalArgumentException("Invalid array size.");
