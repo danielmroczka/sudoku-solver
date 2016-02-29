@@ -27,7 +27,6 @@ public class XWingTest {
     }
 
     @Test
-    //   @Ignore
     public void testInRow() {
         //GIVEN
         IMatrix matrix = new Matrix();
@@ -49,7 +48,6 @@ public class XWingTest {
     }
 
     @Test
-    //  @Ignore
     public void testInCol() {
         //GIVEN
         IMatrix matrix = new Matrix();
@@ -78,7 +76,7 @@ public class XWingTest {
         cand.execute(matrix);
         assertTrue(matrix.getCandidatesCount() <= 98);
         alg.execute(matrix);
-        assertTrue(matrix.getCandidatesCount() <= 89);
+        assertTrue(matrix.getCandidatesCount() <= 98);
     }
 
     @Test

@@ -44,8 +44,6 @@ public class Matrix implements IMatrix {
 
     @Override
     public void setValueAt(int row, int col, int value) {
-
-        //System.out.println("setValue(" + value + ") at: " + row + ", " + col);
         validateInputIndex(row, col);
         validateInputValue(value);
         tab[row][col] = value;
@@ -54,8 +52,15 @@ public class Matrix implements IMatrix {
 
     @Override
     public void removeCandidate(int row, int col, int value) {
+        removeCandidate(row, col, value, true);
+    }
+
+    @Override
+    public void removeCandidate(int row, int col, int value, boolean updateField) {
         if (getCandidates(row, col).remove(value)) {
-            //System.out.println("removeCandidate(" + value + ") at: " + row + ", " + col);
+            if (updateField && getCandidates(row, col).size() == 1) {
+                setValueAt(row, col, getCandidates(row, col).toArray(new Integer[1])[0]);
+            }
         }
     }
 
@@ -69,8 +74,8 @@ public class Matrix implements IMatrix {
             for (int c = 0; c < SIZE; c++) {
                 removeCandidate(row, c, value);
             }
-            for (int rowGroup : Utils.it((row / BLOCK_SIZE) * BLOCK_SIZE)) {
-                for (int colGroup : Utils.it((col / BLOCK_SIZE) * BLOCK_SIZE)) {
+            for (int rowGroup : Utils.it((row))) {
+                for (int colGroup : Utils.it((col))) {
                     removeCandidate(rowGroup, colGroup, value);
                 }
             }
@@ -79,7 +84,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isSolved() {
-        return getSolvedItems() == SIZE * SIZE;
+        return validate() && getSolvedItems() == SIZE * SIZE;
     }
 
     @Override
@@ -300,14 +305,43 @@ public class Matrix implements IMatrix {
     @Override
     public String printCandidates() {
         StringBuilder sb = new StringBuilder(100);
+        sb.append("Solved= ").append(getSolvedItems()).append(", candidates= ").append(getCandidatesCount()).append(System.lineSeparator());
+        int maxLength = 0;
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                sb.append("(").append(row).append(", ").append(col).append(") - ").append(getValueAt(row, col)).append(" ");
-                sb.append(getCandidates(row, col));
+                if (getCandidates(row, col).size() > maxLength) {
+                    maxLength = getCandidates(row, col).size();
+                }
+            }
+        }
+
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                String line = "";
+                for (int item : getCandidates(row, col)) {
+                    line = line + item;
+                }
+                if (line.isEmpty()) {
+                    line = "[" + String.valueOf(getValueAt(row, col)) + "]";
+                }
+
+                sb.append(String.format("%1$" + (maxLength > 0 ? maxLength + 3 : 3) + "s", line));
+
+                if (col < SIZE - 1) {
+                    if (col % 3 == 2) {
+                        sb.append(" │ ");
+                    } else {
+                        sb.append(" ");
+                    }
+                }
+            }
+            sb.append(System.lineSeparator());
+            if (row % 3 == 2 && row < SIZE - 1) {
+                for (int i = 0; i <= (((maxLength > 0 ? maxLength + 3 : 3) + 1) * 9) + 3; i++) {
+                    sb.append("-");
+                }
                 sb.append(System.lineSeparator());
             }
-            sb.append("------").append(System.lineSeparator());
-
         }
         return sb.toString();
     }
@@ -388,8 +422,8 @@ public class Matrix implements IMatrix {
 
     @Override
     public void addCandidates(int row, int col, Integer[] array) {
-        for (int v : array) {
-            if (v > 9 || v < 1) {
+        for (int value : array) {
+            if (!isSetValue(value)) {
                 throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
             }
         }
@@ -399,8 +433,8 @@ public class Matrix implements IMatrix {
     @Override
     public int getSetElemInCol(int col) {
         int count = 0;
-        for (int v : getElemsInCol(col)) {
-            if (isSetValue(v)) count++;
+        for (int value : getElemsInCol(col)) {
+            if (isSetValue(value)) count++;
         }
         return count;
     }
@@ -408,8 +442,8 @@ public class Matrix implements IMatrix {
     @Override
     public int getSetElemInRow(int col) {
         int count = 0;
-        for (int v : getElemsInRow(col)) {
-            if (isSetValue(v)) count++;
+        for (int value : getElemsInRow(col)) {
+            if (isSetValue(value)) count++;
         }
         return count;
     }
@@ -445,6 +479,6 @@ public class Matrix implements IMatrix {
     }
 
     private boolean isSetValue(int val) {
-        return val > 0 && val < 10;
+        return CELL_MIN_VAL <= val && val <= CELL_MAX_VAL;
     }
 }

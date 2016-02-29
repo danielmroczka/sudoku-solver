@@ -27,20 +27,20 @@ public class XYWing implements IAlgorithm {
                     List<Pair> pincets = new ArrayList<>();
 
                     for (int c = 0; c < IMatrix.SIZE; c++) {
-                        if (c != col && accept(matrix.getCandidates(pivot), matrix.getCandidates(row, c), pivotLength)) {
+                        if (c != col && acceptPincet(matrix.getCandidates(pivot), matrix.getCandidates(row, c), pivotLength)) {
                             pincets.add(new Pair(row, c));
                         }
                     }
 
                     for (int r = 0; r < IMatrix.SIZE; r++) {
-                        if (r != row && accept(matrix.getCandidates(pivot), matrix.getCandidates(r, col), pivotLength)) {
+                        if (r != row && acceptPincet(matrix.getCandidates(pivot), matrix.getCandidates(r, col), pivotLength)) {
                             pincets.add(new Pair(r, col));
                         }
                     }
 
                     for (int rb : Utils.it(row)) {
                         for (int cb : Utils.it(col)) {
-                            if (rb != row && cb != col && accept(matrix.getCandidates(pivot), matrix.getCandidates(rb, cb), pivotLength)) {
+                            if (rb != row && cb != col && acceptPincet(matrix.getCandidates(pivot), matrix.getCandidates(rb, cb), pivotLength)) {
                                 pincets.add(new Pair(rb, cb));
                             }
                         }
@@ -49,7 +49,7 @@ public class XYWing implements IAlgorithm {
                     // eliminate pincets
                     for (int i = 0; i < pincets.size(); i++) {
                         for (int j = i + 1; j < pincets.size(); j++) {
-                            if (compare(matrix, pivot, pincets.get(i), pincets.get(j), pivotLength)) {
+                            if (acceptPivotAndPincets(matrix, pivot, pincets.get(i), pincets.get(j), pivotLength)) {
                                 eliminateCandidate(matrix, pivot, pincets.get(i), pincets.get(j));
                             }
                         }
@@ -65,7 +65,7 @@ public class XYWing implements IAlgorithm {
         if (candidate < 1) {
             return;
         }
-        for (Pair neighbor : intersection(pair1, pair2)) {
+        for (Pair neighbor : pairsOnIntersections(pair1, pair2)) {
             if (!pivot.equals(neighbor) && matrix.getCandidates(neighbor).contains(candidate)) {
                 matrix.getCandidates(neighbor).remove(candidate);
             }

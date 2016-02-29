@@ -4,10 +4,6 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
-import com.labs.dm.sudoku.solver.io.MatrixLoader;
-
-import java.io.IOException;
-import java.util.Date;
 
 /**
  * @author daniel
@@ -29,8 +25,9 @@ public class Flow {
         IAlgorithm reduction = new Reduction();
 
         int prevCount = matrix.getSolvedItems();
+        int prevCandidates = matrix.getCandidatesCount();
 
-        int chance = 5;
+        int chance = 3;
         showPossibles.execute(matrix);
         System.out.println("Candidates = " + matrix.getCandidatesCount());
         matrix.validate();
@@ -38,13 +35,11 @@ public class Flow {
         while (!matrix.isSolved()) {
             System.out.println("flow execution " + matrix.getCandidatesCount());
             loneSingles.execute(matrix);
-            //log(matrix);
             openSingles.execute(matrix);
             nakedPairs.execute(matrix);
             nakedTriples.execute(matrix);
             hiddenPairs.execute(matrix);
             hiddenTriples.execute(matrix);
-            //log(matrix);
             hiddenSingles.execute(matrix);
             reduction.execute(matrix);
             xWing.execute(matrix);
@@ -52,15 +47,16 @@ public class Flow {
             xyzWing.execute(matrix);
             System.out.println(matrix.printCandidates());
             matrix.validate();
-            if (prevCount == matrix.getSolvedItems()) {
+            if (prevCount == matrix.getSolvedItems() && prevCandidates == matrix.getCandidatesCount()) {
                 chance--;
                 if (chance == 0) {
                     break;
                 }
             } else {
-                chance = 5;
+                chance = 3;
             }
             prevCount = matrix.getSolvedItems();
+            prevCandidates = matrix.getCandidatesCount();
         }
 
         System.out.println("Candidates = " + matrix.getCandidatesCount());
@@ -69,11 +65,4 @@ public class Flow {
         System.out.println(matrix);
     }
 
-    private void log(IMatrix matrix) {
-        try {
-            new MatrixLoader().save(matrix, "target\\matrix_" + new Date().getTime());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

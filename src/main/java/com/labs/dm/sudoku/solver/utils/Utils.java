@@ -2,7 +2,12 @@ package com.labs.dm.sudoku.solver.utils;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Pair;
+import com.labs.dm.sudoku.solver.io.MatrixLoader;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.*;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
@@ -86,11 +91,11 @@ public class Utils {
         return cell1.getCol() == cell2.getCol();
     }
 
-    public static List<Pair> intersection(Pair cell1, Pair cell2) {
+    public static List<Pair> pairsOnIntersections(Pair cell1, Pair cell2) {
         List<Pair> result = new ArrayList<>();
         if (theSameColBlock(cell1, cell2) && theSameRowBlock(cell1, cell2)) {
-            for (int row : Utils.it(cell1.getRow())) {
-                for (int col : Utils.it(cell1.getCol())) {
+            for (int row : it(cell1.getRow())) {
+                for (int col : it(cell1.getCol())) {
                     if ((row == cell1.getRow() && col == cell1.getCol()) || (row == cell2.getRow() && col == cell2.getCol())) {
                         continue;
                     }
@@ -111,18 +116,18 @@ public class Utils {
                 }
             }
         } else if (theSameRowBlock(cell1, cell2)) {
-            for (int col : Utils.it(cell1.getCol())) {
+            for (int col : it(cell1.getCol())) {
                 result.add(new Pair(cell2.getRow(), col));
             }
-            for (int col : Utils.it(cell2.getCol())) {
+            for (int col : it(cell2.getCol())) {
                 result.add(new Pair(cell1.getRow(), col));
             }
 
         } else if (theSameColBlock(cell1, cell2)) {
-            for (int row : Utils.it(cell1.getRow())) {
+            for (int row : it(cell1.getRow())) {
                 result.add(new Pair(row, cell2.getCol()));
             }
-            for (int row : Utils.it(cell2.getRow())) {
+            for (int row : it(cell2.getRow())) {
                 result.add(new Pair(row, cell1.getCol()));
             }
 
@@ -143,7 +148,7 @@ public class Utils {
         return res;
     }
 
-    public static boolean compare(IMatrix matrix, Pair pivotPair, Pair pincetPair1, Pair pincetPair2, int size) {
+    public static boolean acceptPivotAndPincets(IMatrix matrix, Pair pivotPair, Pair pincetPair1, Pair pincetPair2, int size) {
         Collection<Integer> pivot = matrix.getCandidates(pivotPair);
         Collection<Integer> pincet1 = matrix.getCandidates(pincetPair1);
         Collection<Integer> pincet2 = matrix.getCandidates(pincetPair2);
@@ -188,7 +193,7 @@ public class Utils {
         return found && copy1.size() == (size - 1) && copy2.size() == (size - 1) && copy1.get(0) != copy2.get(0) && map.size() == 3;
     }
 
-    public static boolean accept(Collection<Integer> pivot, Collection<Integer> pincet, int size) {
+    public static boolean acceptPincet(Collection<Integer> pivot, Collection<Integer> pincet, int size) {
         if (pincet.size() != 2) {
             return false;
         }
@@ -201,5 +206,28 @@ public class Utils {
             }
         }
         return cnt == size - 1;
+    }
+
+    public static void log(IMatrix matrix) {
+        try {
+
+            new MatrixLoader().save(matrix, "target\\matrix_" + new Date().getTime() + ".txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void logCandidates(String tag, IMatrix matrix) {
+        File file = new File("target\\matrix_cand_" + tag + "_" + new Date().getTime() + ".txt");
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+        try {
+            try (FileOutputStream fos = new FileOutputStream(file)) {
+                fos.write(matrix.printCandidates().getBytes(Charset.defaultCharset()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

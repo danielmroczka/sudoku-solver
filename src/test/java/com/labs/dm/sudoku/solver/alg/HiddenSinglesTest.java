@@ -43,22 +43,20 @@ public class HiddenSinglesTest {
     public void testExecuteBlock() {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setValueAt(3, 3, 6);
-        matrix.setValueAt(3, 4, 4);
-        matrix.setValueAt(3, 5, 2);
-        matrix.setValueAt(4, 3, 8);
-        matrix.setValueAt(4, 4, 9);
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int col = 0; col < IMatrix.SIZE; col++) {
+                matrix.addCandidates(row, col, new Integer[]{1, 2, 3});
+            }
+        }
 
-        matrix.addCandidates(4, 5, new Integer[]{7, 5, 3});
-        matrix.addCandidates(5, 3, new Integer[]{1, 3});
-        matrix.addCandidates(5, 4, new Integer[]{1, 5});
-        matrix.addCandidates(5, 5, new Integer[]{1, 5, 3});
+        matrix.addCandidates(4, 4, new Integer[]{4});
 
+        int resolved = matrix.getSolvedItems();
         IAlgorithm hiddenSingles = new HiddenSingles();
         //WHEN
         hiddenSingles.execute(matrix);
         //THEN
-        //assertEquals(7, matrix.getValueAt(4,5));
+        assertEquals(resolved + 1, matrix.getSolvedItems());
         assertTrue(matrix.validate());
     }
 

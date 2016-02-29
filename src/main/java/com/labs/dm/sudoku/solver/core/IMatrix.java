@@ -11,6 +11,9 @@ import java.util.List;
  */
 public interface IMatrix extends Iterable<Integer> {
 
+    int CELL_MIN_VAL = 1;
+    int CELL_MAX_VAL = 9;
+
     int EMPTY_VALUE = 0;
 
     /**
@@ -42,6 +45,8 @@ public interface IMatrix extends Iterable<Integer> {
     void setValueAt(int row, int col, int value);
 
     void removeCandidate(int row, int col, int value);
+
+    void removeCandidate(int row, int col, int value, boolean updateField);
 
     /**
      * Returns true if matrix is solved. Matrix is solved when all elements are
@@ -136,6 +141,12 @@ public interface IMatrix extends Iterable<Integer> {
      */
     Collection<Integer> getCandidates(int row, int col);
 
+    /**
+     * Get collection of candidates for selected cell
+     *
+     * @param pair
+     * @return
+     */
     Collection<Integer> getCandidates(Pair pair);
 
     void setCandidates(int row, int col, Collection<Integer> set);
@@ -152,12 +163,34 @@ public interface IMatrix extends Iterable<Integer> {
      */
     int[] toArray();
 
+    /**
+     * Prints matrix values or candidates
+     *
+     * @return
+     */
     String printCandidates();
 
+    /**
+     * Validates values uniqueness
+     *
+     * @return
+     */
     boolean validate();
 
+    /**
+     * Returns number of already resolved cells
+     *
+     * @return
+     */
     int getSolvedItems();
 
+    /**
+     * Returns information if cell is set (value >0 or value <10)
+     *
+     * @param row
+     * @param col
+     * @return
+     */
     boolean isCellSet(int row, int col);
 
     int occurenciesInRow(int row, int value);

@@ -3,6 +3,8 @@ package com.labs.dm.sudoku.solver.alg;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
+import java.util.Iterator;
+
 /**
  * Created by daniel on 2016-02-15.
  */
@@ -12,7 +14,8 @@ public class XWing implements IAlgorithm {
     public void execute(IMatrix matrix) {
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                for (int candidate : matrix.getCandidates(row, col)) {
+                for (Iterator<Integer> i = matrix.getCandidates(row, col).iterator(); i.hasNext(); ) {
+                    int candidate = i.next();
                     if (matrix.occurenciesInCol(col, candidate) == 2) {
                         //detect in rows:
                         for (int tempCol = col + 1; tempCol < IMatrix.SIZE; tempCol++) {
@@ -31,8 +34,8 @@ public class XWing implements IAlgorithm {
                                     if (matrix.getCandidates(tempRow, col).contains(candidate) && matrix.getCandidates(tempRow, tempCol).contains(candidate)) {
                                         for (int c = 0; c < IMatrix.SIZE; c++) {
                                             if (c != col && c != tempCol) {
-                                                matrix.removeCandidate(row, c, candidate);
-                                                matrix.removeCandidate(tempRow, c, candidate);
+                                                matrix.removeCandidate(row, c, candidate, false);
+                                                matrix.removeCandidate(tempRow, c, candidate, false);
                                             }
                                         }
                                     }
@@ -59,8 +62,8 @@ public class XWing implements IAlgorithm {
                                     if (matrix.getCandidates(row, tempCol).contains(candidate) && matrix.getCandidates(tempRow, tempCol).contains(candidate)) {
                                         for (int r = 0; r < IMatrix.SIZE; r++) {
                                             if (r != row && r != tempRow) {
-                                                matrix.removeCandidate(r, col, candidate);
-                                                matrix.removeCandidate(r, tempCol, candidate);
+                                                matrix.removeCandidate(r, col, candidate, false);
+                                                matrix.removeCandidate(r, tempCol, candidate, false);
                                             }
                                         }
                                     }

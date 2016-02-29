@@ -8,6 +8,8 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.labs.dm.sudoku.solver.core.IMatrix.*;
+
 /**
  * Open Singles Algorithm.
  *
@@ -25,7 +27,7 @@ public class OpenSingles implements IAlgorithm {
     }
 
     private void fillOpenSinglesInRows(IMatrix matrix) {
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < SIZE; row++) {
             int[] rows = matrix.getElemsInRow(row);
             int pos = fillOpenSingles(rows);
             if (pos >= 0) {
@@ -35,7 +37,7 @@ public class OpenSingles implements IAlgorithm {
     }
 
     private void fillOpenSinglesInCols(IMatrix matrix) {
-        for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int col = 0; col < SIZE; col++) {
             int[] cols = matrix.getElemsInCol(col);
             int pos = fillOpenSingles(cols);
             if (pos >= 0) {
@@ -45,12 +47,12 @@ public class OpenSingles implements IAlgorithm {
     }
 
     private void fillOpenSinglesInBlocks(IMatrix matrix) {
-        for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
-            for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
+        for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
+            for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
                 int[] block = matrix.getElemsInBlock(rowGroup, colGroup);
                 int pos = fillOpenSingles(block);
                 if (pos >= 0) {
-                    matrix.setValueAt(pos - (pos / 3) + rowGroup * IMatrix.BLOCK_SIZE, pos / 3 + colGroup * IMatrix.BLOCK_SIZE, block[pos]);
+                    matrix.setValueAt((pos - (pos / BLOCK_SIZE)) + (rowGroup * BLOCK_SIZE), pos / 3 + colGroup * BLOCK_SIZE, block[pos]);
                 }
             }
         }
@@ -63,17 +65,17 @@ public class OpenSingles implements IAlgorithm {
      * @return
      */
     protected int fillOpenSingles(int[] tab) {
-        if (tab.length != IMatrix.SIZE) {
+        if (tab.length != SIZE) {
             throw new IllegalArgumentException("Invalid array size.");
         }
 
         List<Integer> set = new ArrayList<>();
         int position = -1;
-        for (int elem = 1; elem <= IMatrix.SIZE; elem++) {
+        for (int elem = 1; elem <= SIZE; elem++) {
             set.add(elem);
         }
         for (int elem = 0; elem < tab.length; elem++) {
-            if (tab[elem] == IMatrix.EMPTY_VALUE) {
+            if (tab[elem] == EMPTY_VALUE) {
                 position = elem;
             } else {
                 set.remove(set.indexOf(tab[elem]));

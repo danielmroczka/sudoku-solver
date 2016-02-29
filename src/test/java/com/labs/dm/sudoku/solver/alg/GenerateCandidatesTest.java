@@ -30,13 +30,13 @@ public class GenerateCandidatesTest {
     }
 
     @Test
-    public void shouldSet() {
+    public void shouldSetCandidatesOnEmptyMatrix() {
         alg.execute(matrix);
         assertEquals(9, matrix.getCandidates(4, 4).size());
     }
 
     @Test
-    public void shouldSet2() throws IOException {
+    public void shouldSetCandidatesFromFile() throws IOException {
         matrix = new MatrixLoader().load("patterns/easy1.txt");
         alg.execute(matrix);
         Collection<Integer> set = matrix.getCandidates(4, 4);
@@ -47,18 +47,18 @@ public class GenerateCandidatesTest {
     }
 
     @Test
-    public void shouldSet1() throws IOException {
+    public void shouldSetCandidatesFromFile2() throws IOException {
         matrix = new MatrixLoader().load("patterns/solved.txt");
         alg.execute(matrix);
         assertEquals(0, matrix.getCandidates(4, 4).size());
     }
 
     @Test
-    public void shouldSet3() throws IOException {
+    public void shouldNotSetCandidatesIfCellHasValue() throws IOException {
         int[] ones = new int[81];
         Arrays.fill(ones, 1);
         matrix = new Matrix(ones);
         alg.execute(matrix);
-        // assertEquals(8, matrix.getCandidates(4, 4).size());
+        assertEquals(0, matrix.getCandidates(4, 4).size());
     }
 }

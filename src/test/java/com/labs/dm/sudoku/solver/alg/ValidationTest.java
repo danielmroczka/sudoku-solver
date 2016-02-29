@@ -85,7 +85,7 @@ public class ValidationTest {
         }
     }
 
-    //@Test
+    @Test
     public void validateHiddenSingles() throws IOException {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);

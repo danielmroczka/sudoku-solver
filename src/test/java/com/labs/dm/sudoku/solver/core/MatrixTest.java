@@ -52,6 +52,23 @@ public class MatrixTest {
     }
 
     @Test
+    public void shouldPopulateRemovingCandidates() {
+        //GIVEN
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int col = 0; col < IMatrix.SIZE; col++) {
+                matrix.addCandidates(row, col, new Integer[]{1});
+            }
+        }
+
+        int candidates = matrix.getCandidatesCount();
+        //WHEN
+        matrix.setValueAt(5, 5, 1);
+        //THEN
+        assertEquals(candidates - 21, matrix.getCandidatesCount());
+        assertEquals(60, matrix.getCandidatesCount());
+    }
+
+    @Test
     public void testIsSetValue() {
         matrix.setValueAt(0, 0, 9);
         assertTrue(matrix.isCellSet(0, 0));
