@@ -38,13 +38,13 @@ public class Flow {
         while (!matrix.isSolved()) {
             System.out.println("flow execution " + matrix.getCandidatesCount());
             loneSingles.execute(matrix);
-            log(matrix);
+            //log(matrix);
             openSingles.execute(matrix);
             nakedPairs.execute(matrix);
             nakedTriples.execute(matrix);
             hiddenPairs.execute(matrix);
             hiddenTriples.execute(matrix);
-            log(matrix);
+            //log(matrix);
             hiddenSingles.execute(matrix);
             reduction.execute(matrix);
             xWing.execute(matrix);
