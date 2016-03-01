@@ -52,7 +52,7 @@ public class OpenSingles implements IAlgorithm {
                 int[] block = matrix.getElemsInBlock(rowGroup, colGroup);
                 int pos = fillOpenSingles(block);
                 if (pos >= 0) {
-                    matrix.setValueAt((pos - (pos / BLOCK_SIZE)) + (rowGroup * BLOCK_SIZE), pos / 3 + colGroup * BLOCK_SIZE, block[pos]);
+                    matrix.setValueAt((pos - (pos / BLOCK_SIZE)) + (rowGroup * BLOCK_SIZE), pos / BLOCK_SIZE + colGroup * BLOCK_SIZE, block[pos]);
                 }
             }
         }
@@ -69,21 +69,21 @@ public class OpenSingles implements IAlgorithm {
             throw new IllegalArgumentException("Invalid array size.");
         }
 
-        List<Integer> set = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         int position = -1;
         for (int elem = 1; elem <= SIZE; elem++) {
-            set.add(elem);
+            list.add(elem);
         }
         for (int elem = 0; elem < tab.length; elem++) {
             if (tab[elem] == EMPTY_VALUE) {
                 position = elem;
             } else {
-                set.remove(set.indexOf(tab[elem]));
+                list.remove(list.indexOf(tab[elem]));
             }
         }
 
-        if (set.size() == 1) {
-            tab[position] = set.get(0);
+        if (list.size() == 1) {
+            tab[position] = list.get(0);
             return position;
         }
         return -1;

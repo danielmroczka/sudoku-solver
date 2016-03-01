@@ -11,9 +11,8 @@ import java.util.List;
  */
 public interface IMatrix extends Iterable<Integer> {
 
-    int CELL_MIN_VAL = 1;
-    int CELL_MAX_VAL = 9;
-
+    int MIN_VALUE = 1;
+    int MAX_VALUE = 9;
     int EMPTY_VALUE = 0;
 
     /**
@@ -46,11 +45,9 @@ public interface IMatrix extends Iterable<Integer> {
 
     void removeCandidate(int row, int col, int value);
 
-    void removeCandidate(int row, int col, int value, boolean updateField);
-
     /**
-     * Returns true if matrix is solved. Matrix is solved when all elements are
-     * valid and are not empty
+     * Returns true if matrix is solved.
+     * Matrix is solved when all elements are valid and are not empty
      *
      * @return
      */
@@ -193,15 +190,11 @@ public interface IMatrix extends Iterable<Integer> {
      */
     boolean isCellSet(int row, int col);
 
-    int occurenciesInRow(int row, int value);
+    int candidatesCountInRow(int row, int value);
 
-    int occurenciesInCol(int col, int value);
+    int candidatesCountInCol(int col, int value);
 
     void addCandidates(int row, int col, Integer[] array);
-
-    int getSetElemInCol(int col);
-
-    int getSetElemInRow(int col);
 
     List<List<Integer>> getCandidatesInRow(int row);
 

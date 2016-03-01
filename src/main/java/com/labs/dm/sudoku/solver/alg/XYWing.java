@@ -7,6 +7,7 @@ import com.labs.dm.sudoku.solver.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 import static com.labs.dm.sudoku.solver.utils.Utils.*;
 
 /**
@@ -20,19 +21,19 @@ public class XYWing implements IAlgorithm {
 
     @Override
     public void execute(IMatrix matrix) {
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
                 if (matrix.getCandidates(row, col).size() == pivotLength) {
                     Pair pivot = new Pair(row, col);
                     List<Pair> pincets = new ArrayList<>();
 
-                    for (int c = 0; c < IMatrix.SIZE; c++) {
+                    for (int c = 0; c < SIZE; c++) {
                         if (c != col && acceptPincet(matrix.getCandidates(pivot), matrix.getCandidates(row, c), pivotLength)) {
                             pincets.add(new Pair(row, c));
                         }
                     }
 
-                    for (int r = 0; r < IMatrix.SIZE; r++) {
+                    for (int r = 0; r < SIZE; r++) {
                         if (r != row && acceptPincet(matrix.getCandidates(pivot), matrix.getCandidates(r, col), pivotLength)) {
                             pincets.add(new Pair(r, col));
                         }

@@ -66,7 +66,6 @@ public class Reduction implements IAlgorithm {
                         }
 
                         if (theSameRow) {
-                            //System.out.println("Removing " + entry.getKey() + " in row = " + item.getRow());
                             for (int col = 0; col < IMatrix.SIZE; col++) {
                                 boolean found = true;
                                 for (Pair p : list) {

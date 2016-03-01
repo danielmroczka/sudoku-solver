@@ -52,13 +52,8 @@ public class Matrix implements IMatrix {
 
     @Override
     public void removeCandidate(int row, int col, int value) {
-        removeCandidate(row, col, value, true);
-    }
-
-    @Override
-    public void removeCandidate(int row, int col, int value, boolean updateField) {
         if (getCandidates(row, col).remove(value)) {
-            if (updateField && getCandidates(row, col).size() == 1) {
+            if (getCandidates(row, col).size() == 1) {
                 setValueAt(row, col, getCandidates(row, col).toArray(new Integer[1])[0]);
             }
         }
@@ -127,7 +122,7 @@ public class Matrix implements IMatrix {
 
     protected final void loadFromArray(int... items) {
         if (items.length != SIZE * SIZE) {
-            throw new IllegalArgumentException("Ïncorrect input array length!");
+            throw new IllegalArgumentException("Incorrect input array length!");
         }
         int index = 0;
         for (int row = 0; row < SIZE; row++) {
@@ -329,7 +324,7 @@ public class Matrix implements IMatrix {
 
                 if (col < SIZE - 1) {
                     if (col % 3 == 2) {
-                        sb.append(" │ ");
+                        sb.append(" | ");
                     } else {
                         sb.append(" ");
                     }
@@ -397,9 +392,9 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public int occurenciesInRow(int row, int value) {
+    public int candidatesCountInRow(int row, int value) {
         int cnt = 0;
-        for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int col = 0; col < SIZE; col++) {
             if (getCandidates(row, col).contains(value)) {
                 cnt++;
             }
@@ -409,9 +404,9 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public int occurenciesInCol(int col, int value) {
+    public int candidatesCountInCol(int col, int value) {
         int cnt = 0;
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < SIZE; row++) {
             if (getCandidates(row, col).contains(value)) {
                 cnt++;
             }
@@ -431,27 +426,9 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public int getSetElemInCol(int col) {
-        int count = 0;
-        for (int value : getElemsInCol(col)) {
-            if (isSetValue(value)) count++;
-        }
-        return count;
-    }
-
-    @Override
-    public int getSetElemInRow(int col) {
-        int count = 0;
-        for (int value : getElemsInRow(col)) {
-            if (isSetValue(value)) count++;
-        }
-        return count;
-    }
-
-    @Override
     public List<List<Integer>> getCandidatesInRow(int row) {
         List<List<Integer>> result = new ArrayList<>();
-        for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int col = 0; col < SIZE; col++) {
             result.add(new ArrayList<>(getCandidates(row, col)));
         }
         return result;
@@ -460,7 +437,7 @@ public class Matrix implements IMatrix {
     @Override
     public List<List<Integer>> getCandidatesInCol(int col) {
         List<List<Integer>> result = new ArrayList<>();
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < SIZE; row++) {
             result.add(new ArrayList<>(getCandidates(row, col)));
         }
         return result;
@@ -469,8 +446,8 @@ public class Matrix implements IMatrix {
     @Override
     public List<List<Integer>> getCandidatesInBlock(int rowBlockIndex, int colBlockIndex) {
         List<List<Integer>> result = new ArrayList<>();
-        for (int row = rowBlockIndex * IMatrix.BLOCK_SIZE; row < rowBlockIndex * IMatrix.BLOCK_SIZE + IMatrix.BLOCK_SIZE; row++) {
-            for (int col = colBlockIndex * IMatrix.BLOCK_SIZE; col < colBlockIndex * IMatrix.BLOCK_SIZE + IMatrix.BLOCK_SIZE; col++) {
+        for (int row = rowBlockIndex * BLOCK_SIZE; row < rowBlockIndex * BLOCK_SIZE + BLOCK_SIZE; row++) {
+            for (int col = colBlockIndex * BLOCK_SIZE; col < colBlockIndex * BLOCK_SIZE + BLOCK_SIZE; col++) {
                 result.add(new ArrayList<>(getCandidates(row, col)));
             }
         }
@@ -479,6 +456,6 @@ public class Matrix implements IMatrix {
     }
 
     private boolean isSetValue(int val) {
-        return CELL_MIN_VAL <= val && val <= CELL_MAX_VAL;
+        return MIN_VALUE <= val && val <= MAX_VALUE;
     }
 }

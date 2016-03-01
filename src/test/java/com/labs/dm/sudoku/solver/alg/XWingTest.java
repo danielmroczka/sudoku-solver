@@ -32,19 +32,21 @@ public class XWingTest {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 3});
         matrix.addCandidates(0, 4, new Integer[]{1, 3});
-        matrix.addCandidates(0, 6, new Integer[]{1, 3});
         matrix.addCandidates(4, 0, new Integer[]{1, 3});
         matrix.addCandidates(4, 4, new Integer[]{1, 3});
-        matrix.addCandidates(4, 6, new Integer[]{1, 3});
+
+        matrix.addCandidates(0, 6, new Integer[]{1, 4, 5});
+        matrix.addCandidates(4, 6, new Integer[]{1, 5, 6});
         //WHEN
         alg.execute(matrix);
         //THEN
-        assertEquals(0, matrix.getCandidates(0, 6).size());
-        assertEquals(0, matrix.getCandidates(4, 6).size());
         assertEquals(2, matrix.getCandidates(0, 0).size());
         assertEquals(2, matrix.getCandidates(0, 4).size());
         assertEquals(2, matrix.getCandidates(4, 0).size());
         assertEquals(2, matrix.getCandidates(4, 4).size());
+
+        assertEquals(2, matrix.getCandidates(0, 6).size());
+        assertEquals(2, matrix.getCandidates(4, 6).size());
     }
 
     @Test
@@ -52,21 +54,23 @@ public class XWingTest {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 3});
-        matrix.addCandidates(4, 0, new Integer[]{1, 3});
-        matrix.addCandidates(6, 0, new Integer[]{1, 3});
         matrix.addCandidates(0, 4, new Integer[]{1, 3});
+        matrix.addCandidates(4, 0, new Integer[]{1, 3});
         matrix.addCandidates(4, 4, new Integer[]{1, 3});
-        matrix.addCandidates(6, 4, new Integer[]{1, 3});
+
+        matrix.addCandidates(6, 0, new Integer[]{1, 4, 5});
+        matrix.addCandidates(6, 4, new Integer[]{1, 5, 6});
         //WHEN
         alg.execute(matrix);
 
         //THEN
-        assertEquals(0, matrix.getCandidates(6, 0).size());
-        assertEquals(0, matrix.getCandidates(6, 4).size());
-        assertEquals(2, matrix.getCandidates(4, 0).size());
-        assertEquals(2, matrix.getCandidates(4, 4).size());
         assertEquals(2, matrix.getCandidates(0, 0).size());
         assertEquals(2, matrix.getCandidates(0, 4).size());
+        assertEquals(2, matrix.getCandidates(4, 0).size());
+        assertEquals(2, matrix.getCandidates(4, 4).size());
+
+        assertEquals(2, matrix.getCandidates(6, 0).size());
+        assertEquals(2, matrix.getCandidates(6, 4).size());
     }
 
     @Test
