@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  */
 public class XYWingTest {
 
-    private IAlgorithm yWing = new XYWing();
+    private IAlgorithm xyWing = new XYWing();
     private IAlgorithm cand = new GenerateCandidates();
 
     @Test
@@ -28,7 +28,7 @@ public class XYWingTest {
         matrix.addCandidates(1, 1, new Integer[]{1, 8, 9});
         matrix.addCandidates(2, 2, new Integer[]{1, 8, 9});
         //WHEN
-        yWing.execute(matrix);
+        xyWing.execute(matrix);
         //THEN
         assertEquals(2, matrix.getCandidates(1, 1).size());
         assertEquals(2, matrix.getCandidates(2, 2).size());
@@ -44,7 +44,7 @@ public class XYWingTest {
         matrix.addCandidates(0, 3, new Integer[]{1, 7});
         matrix.addCandidates(2, 3, new Integer[]{1, 8, 9});
         //WHEN
-        yWing.execute(matrix);
+        xyWing.execute(matrix);
         //THEN
         assertEquals(2, matrix.getCandidates(2, 3).size());
     }
@@ -59,9 +59,9 @@ public class XYWingTest {
         matrix.addCandidates(5, 0, new Integer[]{1, 7});
         matrix.addCandidates(5, 4, new Integer[]{1, 9});
         //WHEN
-        yWing.execute(matrix);
+        xyWing.execute(matrix);
         //THEN
-        assertEquals(1, matrix.getCandidates(5, 4).size());
+        assertEquals(9, matrix.getValueAt(5, 4));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class XYWingTest {
 
         //WHEN
         int candidates = matrix.getCandidatesCount();
-        yWing.execute(matrix);
+        xyWing.execute(matrix);
         //THEN
         assertEquals(candidates - 5, matrix.getCandidatesCount());
         assertFalse(matrix.getCandidates(0, 1).contains(1));
@@ -107,7 +107,7 @@ public class XYWingTest {
         int candidates = matrix.getCandidatesCount();
         //WHEN
 
-        yWing.execute(matrix);
+        xyWing.execute(matrix);
         //THEN
         assertEquals(candidates - 3, matrix.getCandidatesCount());
         assertEquals(2, matrix.getCandidates(0, 1).size());
@@ -118,7 +118,7 @@ public class XYWingTest {
         IMatrix matrix = new MatrixLoader().load("src/test/resources/patterns/xwing/incol.txt");
         cand.execute(matrix);
         assertTrue(matrix.getCandidatesCount() == 60);
-        yWing.execute(matrix);
+        xyWing.execute(matrix);
         matrix.validate();
         assertTrue(matrix.getCandidatesCount() <= 60);
     }

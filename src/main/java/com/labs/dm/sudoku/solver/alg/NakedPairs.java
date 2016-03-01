@@ -45,7 +45,7 @@ public class NakedPairs implements IAlgorithm {
                         for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
                             for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
                                 if (!matrix.getCandidates(row, col).equals(entry.getKey()) && !Collections.disjoint(matrix.getCandidates(row, col), entry.getKey())) {
-                                    matrix.getCandidates(row, col).removeAll(entry.getKey());
+                                    matrix.removeCandidate(row, col, entry.getKey());
                                 }
                             }
                         }
@@ -65,9 +65,8 @@ public class NakedPairs implements IAlgorithm {
             for (Map.Entry<Collection<Integer>, Integer> entry : map.entrySet()) {
                 if (accept(entry.getValue())) {
                     for (int col = 0; col < IMatrix.SIZE; col++) {
-                        Collection<Integer> candidates = matrix.getCandidates(row, col);
-                        if (!candidates.equals(entry.getKey()) && !Collections.disjoint(candidates, entry.getKey())) {
-                            candidates.removeAll(entry.getKey());
+                        if (!matrix.getCandidates(row, col).equals(entry.getKey()) && !Collections.disjoint(matrix.getCandidates(row, col), entry.getKey())) {
+                            matrix.removeCandidate(row, col, entry.getKey());
                         }
                     }
                 }
@@ -85,9 +84,8 @@ public class NakedPairs implements IAlgorithm {
             for (Map.Entry<Collection<Integer>, Integer> entry : map.entrySet()) {
                 if (accept(entry.getValue())) {
                     for (int row = 0; row < IMatrix.SIZE; row++) {
-                        Collection<Integer> candidates = matrix.getCandidates(row, col);
-                        if (!candidates.equals(entry.getKey()) && !Collections.disjoint(candidates, entry.getKey())) {
-                            candidates.removeAll(entry.getKey());
+                        if (!matrix.getCandidates(row, col).equals(entry.getKey()) && !Collections.disjoint(matrix.getCandidates(row, col), entry.getKey())) {
+                            matrix.removeCandidate(row, col, entry.getKey());
                         }
                     }
                 }

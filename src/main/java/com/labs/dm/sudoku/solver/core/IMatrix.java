@@ -45,6 +45,8 @@ public interface IMatrix extends Iterable<Integer> {
 
     void removeCandidate(int row, int col, int value);
 
+    void removeCandidate(int row, int col, Collection<Integer> values);
+
     /**
      * Returns true if matrix is solved.
      * Matrix is solved when all elements are valid and are not empty

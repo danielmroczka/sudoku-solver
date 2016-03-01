@@ -47,21 +47,29 @@ public class Matrix implements IMatrix {
         validateInputIndex(row, col);
         validateInputValue(value);
         tab[row][col] = value;
-        removeCandidates(row, col, value);
+        getCandidates(row, col).clear();
+        System.out.println("Set cell value " + value + " at: " + row + ", " + col);
+        removeCandidatesAtNeighbourhood(row, col, value);
     }
 
     @Override
     public void removeCandidate(int row, int col, int value) {
         if (getCandidates(row, col).remove(value)) {
+            System.out.println("Remove candid. " + value + " at: " + row + ", " + col);
             if (getCandidates(row, col).size() == 1) {
                 setValueAt(row, col, getCandidates(row, col).toArray(new Integer[1])[0]);
             }
         }
     }
 
-    private void removeCandidates(int row, int col, int value) {
-        getCandidates(row, col).clear();
+    @Override
+    public void removeCandidate(int row, int col, Collection<Integer> values) {
+        for (int candidate : values) {
+            removeCandidate(row, col, candidate);
+        }
+    }
 
+    private void removeCandidatesAtNeighbourhood(int row, int col, int value) {
         if (isSetValue(value)) {
             for (int r = 0; r < SIZE; r++) {
                 removeCandidate(r, col, value);
@@ -79,7 +87,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isSolved() {
-        return validate() && getSolvedItems() == SIZE * SIZE;
+        return validate() && getSolvedItems() == SIZE * SIZE && getCandidatesCount() == 0;
     }
 
     @Override
@@ -176,7 +184,7 @@ public class Matrix implements IMatrix {
     }
 
     private void validateInputValue(final int value) {
-        if (value < 0 || value > SIZE) {
+        if (value < 0 || value > MAX_VALUE) {
             throw new IllegalArgumentException("Invalid input value=" + value);
         }
     }
@@ -274,71 +282,12 @@ public class Matrix implements IMatrix {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(100);
-        sb.append("Solved= ").append(getSolvedItems()).append(", candidates= ").append(getCandidatesCount());
-        sb.append(System.lineSeparator());
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                sb.append(getValueAt(row, col));
-                if (col < SIZE - 1) {
-                    if (col % 3 == 2) {
-                        sb.append(" | ");
-                    } else {
-                        sb.append(" ");
-                    }
-                }
-            }
-            sb.append(System.lineSeparator());
-            if (row % 3 == 2 && row < SIZE - 1) {
-                sb.append("------+-------+------").append(System.lineSeparator());
-            }
-
-        }
-        return sb.toString();
+        return Utils.printMatrix(this);
     }
 
     @Override
     public String printCandidates() {
-        StringBuilder sb = new StringBuilder(100);
-        sb.append("Solved= ").append(getSolvedItems()).append(", candidates= ").append(getCandidatesCount()).append(System.lineSeparator());
-        int maxLength = 0;
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                if (getCandidates(row, col).size() > maxLength) {
-                    maxLength = getCandidates(row, col).size();
-                }
-            }
-        }
-
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                String line = "";
-                for (int item : getCandidates(row, col)) {
-                    line = line + item;
-                }
-                if (line.isEmpty()) {
-                    line = "[" + String.valueOf(getValueAt(row, col)) + "]";
-                }
-
-                sb.append(String.format("%1$" + (maxLength > 0 ? maxLength + 3 : 3) + "s", line));
-
-                if (col < SIZE - 1) {
-                    if (col % 3 == 2) {
-                        sb.append(" | ");
-                    } else {
-                        sb.append(" ");
-                    }
-                }
-            }
-            sb.append(System.lineSeparator());
-            if (row % 3 == 2 && row < SIZE - 1) {
-                for (int i = 0; i <= (((maxLength > 0 ? maxLength + 3 : 3) + 1) * 9) + 3; i++) {
-                    sb.append("-");
-                }
-                sb.append(System.lineSeparator());
-            }
-        }
-        return sb.toString();
+        return Utils.printCandidates(this);
     }
 
     @Override
@@ -383,8 +332,8 @@ public class Matrix implements IMatrix {
 
     @Override
     public void setCandidates(int row, int col, Collection<Integer> set) {
-        for (int v : set) {
-            if (v > 9 || v < 1) {
+        for (int val : set) {
+            if (!isSetValue(val)) {
                 throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
             }
         }

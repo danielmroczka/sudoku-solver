@@ -230,4 +230,80 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
+    public static String printMatrix(IMatrix matrix) {
+        StringBuilder sb = new StringBuilder(100);
+        if (matrix.isSolved()) {
+            sb.append("Matrix Solved!");
+        } else {
+            sb.append("Solved cells = ").append(matrix.getSolvedItems()).append(", candidates = ").append(matrix.getCandidatesCount()).append(System.lineSeparator());
+        }
+        sb.append(System.lineSeparator());
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                sb.append(matrix.getValueAt(row, col));
+                if (col < SIZE - 1) {
+                    if (col % 3 == 2) {
+                        sb.append(" | ");
+                    } else {
+                        sb.append(" ");
+                    }
+                }
+            }
+            sb.append(System.lineSeparator());
+            if (row % 3 == 2 && row < SIZE - 1) {
+                sb.append("------+-------+------").append(System.lineSeparator());
+            }
+
+        }
+        return sb.toString();
+    }
+
+    public static String printCandidates(IMatrix matrix) {
+        StringBuilder sb = new StringBuilder(100);
+        if (matrix.isSolved()) {
+            sb.append("Matrix Solved!");
+        } else {
+            sb.append("Solved cells = ").append(matrix.getSolvedItems()).append(", candidates = ").append(matrix.getCandidatesCount()).append(System.lineSeparator());
+        }
+        sb.append(System.lineSeparator());
+        int maxLength = 0;
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (matrix.getCandidates(row, col).size() > maxLength) {
+                    maxLength = matrix.getCandidates(row, col).size();
+                }
+            }
+        }
+
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                String line = "";
+                for (int item : matrix.getCandidates(row, col)) {
+                    line = line + item;
+                }
+                if (line.isEmpty()) {
+                    line = "[" + String.valueOf(matrix.getValueAt(row, col)) + "]";
+                }
+
+                sb.append(String.format("%1$" + (maxLength > 0 ? maxLength + 3 : 3) + "s", line));
+
+                if (col < SIZE - 1) {
+                    if (col % 3 == 2) {
+                        sb.append(" | ");
+                    } else {
+                        sb.append(" ");
+                    }
+                }
+            }
+            sb.append(System.lineSeparator());
+            if (row % 3 == 2 && row < SIZE - 1) {
+                for (int i = 0; i <= (((maxLength > 0 ? maxLength + 3 : 3) + 1) * 9) + 3; i++) {
+                    sb.append("-");
+                }
+                sb.append(System.lineSeparator());
+            }
+        }
+        return sb.toString();
+    }
 }

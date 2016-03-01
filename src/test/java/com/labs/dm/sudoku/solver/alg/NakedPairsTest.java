@@ -19,8 +19,6 @@ public class NakedPairsTest {
         matrix.setValueAt(0, 4, 6);
         matrix.setValueAt(0, 7, 8);
 
-        //MatrixUtils.initCandiates(matrix);
-
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 4, 5});
         matrix.addCandidates(0, 2, new Integer[]{1, 2, 4, 5, 7});
         matrix.addCandidates(0, 3, new Integer[]{2, 4, 5, 7});
@@ -32,12 +30,12 @@ public class NakedPairsTest {
         //WHEN
         nakedPairs.execute(matrix);
         //THEN
-        assertEquals(3, matrix.getCandidates(0, 0).size());
-        assertEquals(4, matrix.getCandidates(0, 2).size());
-        assertEquals(3, matrix.getCandidates(0, 3).size());
+        assertEquals(2, matrix.getCandidates(0, 0).size());
+        assertEquals(3, matrix.getCandidates(0, 2).size());
+        assertEquals(2, matrix.getCandidates(0, 3).size());
         assertEquals(2, matrix.getCandidates(0, 5).size());
         assertEquals(2, matrix.getCandidates(0, 6).size());
-        assertEquals(1, matrix.getCandidates(0, 8).size());
+        assertEquals(0, matrix.getCandidates(0, 8).size());
 
     }
 
@@ -60,12 +58,12 @@ public class NakedPairsTest {
         //WHEN
         nakedPairs.execute(matrix);
         //THEN
-        assertEquals(3, matrix.getCandidates(4, 3).size());
-        assertEquals(4, matrix.getCandidates(4, 4).size());
-        assertEquals(3, matrix.getCandidates(4, 5).size());
+        assertEquals(2, matrix.getCandidates(4, 3).size());
+        assertEquals(3, matrix.getCandidates(4, 4).size());
+        assertEquals(2, matrix.getCandidates(4, 5).size());
         assertEquals(2, matrix.getCandidates(5, 3).size());
         assertEquals(2, matrix.getCandidates(5, 4).size());
-        assertEquals(1, matrix.getCandidates(5, 5).size());
+        assertEquals(0, matrix.getCandidates(5, 5).size());
 
     }
 }

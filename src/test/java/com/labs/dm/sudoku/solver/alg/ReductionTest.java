@@ -35,7 +35,7 @@ public class ReductionTest {
         matrix.addCandidates(3, 4, new Integer[]{1, 5, 6});
         int before = matrix.getCandidatesCount();
         reduction.execute(matrix);
-        assertEquals(9, before - matrix.getCandidatesCount());
+        assertEquals(23, before - matrix.getCandidatesCount());
     }
 
     @Test
@@ -56,15 +56,15 @@ public class ReductionTest {
         int before = matrix.getCandidatesCount();
         reduction.execute(matrix);
 
-        assertEquals(1, matrix.getCandidates(1, 0).size());
-        assertEquals(1, matrix.getCandidates(2, 2).size());
+        assertEquals(0, matrix.getCandidates(1, 0).size());
+        assertEquals(0, matrix.getCandidates(2, 2).size());
 
-        assertEquals(2, matrix.getCandidates(1, 4).size());
-        assertEquals(2, matrix.getCandidates(2, 4).size());
-        assertEquals(2, matrix.getCandidates(3, 0).size());
-        assertEquals(2, matrix.getCandidates(3, 1).size());
+        assertEquals(0, matrix.getCandidates(1, 4).size());
+        assertEquals(0, matrix.getCandidates(2, 4).size());
+        assertEquals(0, matrix.getCandidates(3, 0).size());
+        assertEquals(0, matrix.getCandidates(3, 1).size());
 
-        assertEquals(2, before - matrix.getCandidatesCount());
+        assertEquals(17, before - matrix.getCandidatesCount());
     }
 
     @Test
@@ -85,15 +85,15 @@ public class ReductionTest {
         int before = matrix.getCandidatesCount();
         reduction.execute(matrix);
 
-        assertEquals(1, matrix.getCandidates(0, 1).size());
-        assertEquals(1, matrix.getCandidates(2, 2).size());
+        assertEquals(0, matrix.getCandidates(0, 1).size());
+        assertEquals(0, matrix.getCandidates(2, 2).size());
 
-        assertEquals(2, matrix.getCandidates(4, 1).size());
-        assertEquals(2, matrix.getCandidates(4, 2).size());
-        assertEquals(2, matrix.getCandidates(0, 3).size());
-        assertEquals(2, matrix.getCandidates(1, 3).size());
+        assertEquals(0, matrix.getCandidates(4, 1).size());
+        assertEquals(0, matrix.getCandidates(4, 2).size());
+        assertEquals(0, matrix.getCandidates(0, 3).size());
+        assertEquals(0, matrix.getCandidates(1, 3).size());
 
-        assertEquals(2, before - matrix.getCandidatesCount());
+        assertEquals(17, before - matrix.getCandidatesCount());
     }
 
     @Test

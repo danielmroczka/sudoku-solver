@@ -59,9 +59,7 @@ public class Flow {
             prevCandidates = matrix.getCandidatesCount();
         }
 
-        System.out.println("Candidates = " + matrix.getCandidatesCount());
         matrix.validate();
-        System.out.println("Set cells = " + matrix.getSolvedItems());
         System.out.println(matrix);
     }
 

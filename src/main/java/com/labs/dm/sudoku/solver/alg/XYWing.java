@@ -68,7 +68,7 @@ public class XYWing implements IAlgorithm {
         }
         for (Pair neighbor : pairsOnIntersections(pair1, pair2)) {
             if (!pivot.equals(neighbor) && matrix.getCandidates(neighbor).contains(candidate)) {
-                matrix.getCandidates(neighbor).remove(candidate);
+                matrix.removeCandidate(neighbor.getRow(), neighbor.getCol(), candidate);
             }
         }
     }

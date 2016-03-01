@@ -17,6 +17,7 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
  * Redcution Algorithm.
+ * http://www.thonky.com/sudoku/box-line-reduction/
  *
  * @author daniel
  */
@@ -44,6 +45,9 @@ public class Reduction implements IAlgorithm {
                                 }
                             }
                         }
+                        if (list.isEmpty()) {
+                            continue;
+                        }
 
                         boolean theSameRow = true;
                         boolean theSameCol = true;
@@ -56,14 +60,14 @@ public class Reduction implements IAlgorithm {
 
                         if (theSameCol) {
                             for (int row = 0; row < IMatrix.SIZE; row++) {
-                                boolean f = true;
+                                boolean found = true;
                                 for (Pair p : list) {
                                     if (p.getRow() == row) {
-                                        f = false;
+                                        found = false;
                                     }
                                 }
-                                if (f) {
-                                    matrix.getCandidates(row, item.getCol()).remove(entry.getKey());
+                                if (found) {
+                                    matrix.removeCandidate(row, item.getCol(), entry.getKey());
                                 }
                             }
                         }
@@ -77,7 +81,7 @@ public class Reduction implements IAlgorithm {
                                     }
                                 }
                                 if (found) {
-                                    matrix.getCandidates(item.getRow(), col).remove(entry.getKey());
+                                    matrix.removeCandidate(item.getRow(), col, entry.getKey());
                                 }
                             }
                         }
@@ -94,8 +98,23 @@ public class Reduction implements IAlgorithm {
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 if (entry.getValue() == 2 || entry.getValue() == 3) {
                     List<Integer> pos = getPositions(matrix, col, entry.getKey());
-                    if (Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
+                    if (pos.size() > 0 && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
                         removeInBlockCol(matrix, col, entry.getKey(), pos);
+                    }
+                }
+            }
+        }
+    }
+
+    private void reduceInRows(IMatrix matrix) {
+        for (int row = 0; row < SIZE; row++) {
+            CounterHashMap<Integer> map = getOccurenceInRowMap(matrix, row);
+
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                if (entry.getValue() == 2 || entry.getValue() == 3) {
+                    List<Integer> pos = getPositions2(matrix, row, entry.getKey());
+                    if (pos.size() > 0 && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
+                        removeInBlockRow(matrix, row, entry.getKey(), pos);
                     }
                 }
             }
@@ -120,21 +139,6 @@ public class Reduction implements IAlgorithm {
             }
         }
         return pos;
-    }
-
-    private void reduceInRows(IMatrix matrix) {
-        for (int row = 0; row < SIZE; row++) {
-            CounterHashMap<Integer> map = getOccurenceInRowMap(matrix, row);
-
-            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-                if (entry.getValue() == 2 || entry.getValue() == 3) {
-                    List<Integer> pos = getPositions2(matrix, row, entry.getKey());
-                    if (Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
-                        removeInBlockRow(matrix, row, entry.getKey(), pos);
-                    }
-                }
-            }
-        }
     }
 
     private CounterHashMap<Integer> getOccurenceInBlockMap(IMatrix matrix, int rowGroup, int colGroup) {
@@ -177,8 +181,7 @@ public class Reduction implements IAlgorithm {
         for (int rowTemp = 3 * (rowBlock / 3); rowTemp < 3 * (rowBlock / 3) + 3; rowTemp++) {
             for (int colTemp = 3 * (col / 3); colTemp < 3 * (col / 3) + 3; colTemp++) {
                 if (colTemp != col && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
-                    //System.out.println("Removing Col " + rowTemp + ", " + colTemp + ", " + key);
-                    matrix.getCandidates(rowTemp, colTemp).remove(key);
+                    matrix.removeCandidate(rowTemp, colTemp, key);
                 }
             }
         }
@@ -188,8 +191,7 @@ public class Reduction implements IAlgorithm {
         for (int colTemp : Utils.it(pos.get(0))) {
             for (int rowTemp : Utils.it(row)) {
                 if (rowTemp != row && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
-                    //System.out.println("Removing Row " + rowTemp + ", " + colTemp + ", " + key);
-                    matrix.getCandidates(rowTemp, colTemp).remove(key);
+                    matrix.removeCandidate(rowTemp, colTemp, key);
                 }
             }
         }
