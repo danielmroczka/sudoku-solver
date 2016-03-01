@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+
 /**
  * Redcution Algorithm.
  *
@@ -27,15 +30,15 @@ public class Reduction implements IAlgorithm {
     }
 
     private void reduceInBlock(IMatrix matrix) {
-        for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
-            for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
+        for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
+            for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
                 CounterHashMap<Integer> map = getOccurenceInBlockMap(matrix, rowGroup, colGroup);
 
                 for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                     if (entry.getValue() == 2 || entry.getValue() == 3) {
                         List<Pair> list = new ArrayList<>();
-                        for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
-                            for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
+                        for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
+                            for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
                                 if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                                     list.add(new Pair(row, col));
                                 }
@@ -85,7 +88,7 @@ public class Reduction implements IAlgorithm {
     }
 
     private void reduceInCols(IMatrix matrix) {
-        for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int col = 0; col < SIZE; col++) {
             CounterHashMap<Integer> map = getOccurenceInColMap(matrix, col);
 
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
@@ -101,7 +104,7 @@ public class Reduction implements IAlgorithm {
 
     private List<Integer> getPositions(IMatrix matrix, int col, int key) {
         List<Integer> pos = new ArrayList<>();
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < SIZE; row++) {
             if (matrix.getCandidates(row, col).contains(key)) {
                 pos.add(row);
             }
@@ -110,8 +113,8 @@ public class Reduction implements IAlgorithm {
     }
 
     private List<Integer> getPositions2(IMatrix matrix, int row, int key) {
-        List<java.lang.Integer> pos = new ArrayList<>();
-        for (int col = 0; col < IMatrix.SIZE; col++) {
+        List<Integer> pos = new ArrayList<>();
+        for (int col = 0; col < SIZE; col++) {
             if (matrix.getCandidates(row, col).contains(key)) {
                 pos.add(col);
             }
@@ -120,7 +123,7 @@ public class Reduction implements IAlgorithm {
     }
 
     private void reduceInRows(IMatrix matrix) {
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < SIZE; row++) {
             CounterHashMap<Integer> map = getOccurenceInRowMap(matrix, row);
 
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
@@ -134,23 +137,24 @@ public class Reduction implements IAlgorithm {
         }
     }
 
-    private CounterHashMap getOccurenceInBlockMap(IMatrix matrix, int rowGroup, int colGroup) {
-        CounterHashMap map = new CounterHashMap();
+    private CounterHashMap<Integer> getOccurenceInBlockMap(IMatrix matrix, int rowGroup, int colGroup) {
+        CounterHashMap<Integer> map = new CounterHashMap();
 
-        for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
-            for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
+        for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
+            for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
                 for (int key : matrix.getCandidates(row, col)) {
                     map.inc(key);
                 }
+
             }
         }
 
         return map;
     }
 
-    private CounterHashMap getOccurenceInColMap(IMatrix matrix, int col) {
-        CounterHashMap map = new CounterHashMap();
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+    private CounterHashMap<Integer> getOccurenceInColMap(IMatrix matrix, int col) {
+        CounterHashMap<Integer> map = new CounterHashMap();
+        for (int row = 0; row < SIZE; row++) {
             for (int key : matrix.getCandidates(row, col)) {
                 map.inc(key);
             }
@@ -158,9 +162,9 @@ public class Reduction implements IAlgorithm {
         return map;
     }
 
-    private CounterHashMap getOccurenceInRowMap(IMatrix matrix, int row) {
+    private CounterHashMap<Integer> getOccurenceInRowMap(IMatrix matrix, int row) {
         CounterHashMap map = new CounterHashMap();
-        for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int col = 0; col < SIZE; col++) {
             for (int key : matrix.getCandidates(row, col)) {
                 map.inc(key);
             }
@@ -173,6 +177,7 @@ public class Reduction implements IAlgorithm {
         for (int rowTemp = 3 * (rowBlock / 3); rowTemp < 3 * (rowBlock / 3) + 3; rowTemp++) {
             for (int colTemp = 3 * (col / 3); colTemp < 3 * (col / 3) + 3; colTemp++) {
                 if (colTemp != col && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
+                    //System.out.println("Removing Col " + rowTemp + ", " + colTemp + ", " + key);
                     matrix.getCandidates(rowTemp, colTemp).remove(key);
                 }
             }
@@ -180,10 +185,10 @@ public class Reduction implements IAlgorithm {
     }
 
     private void removeInBlockRow(IMatrix matrix, int row, int key, List<Integer> pos) {
-        int colBlock = pos.get(0);
-        for (int colTemp = 3 * (colBlock / 3); colTemp < 3 * (colBlock / 3) + 3; colTemp++) {
-            for (int rowTemp = 3 * (row / 3); rowTemp < 3 * (row / 3) + 3; rowTemp++) {
+        for (int colTemp : Utils.it(pos.get(0))) {
+            for (int rowTemp : Utils.it(row)) {
                 if (rowTemp != row && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
+                    //System.out.println("Removing Row " + rowTemp + ", " + colTemp + ", " + key);
                     matrix.getCandidates(rowTemp, colTemp).remove(key);
                 }
             }
