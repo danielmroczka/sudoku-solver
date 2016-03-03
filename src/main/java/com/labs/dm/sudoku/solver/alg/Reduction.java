@@ -38,8 +38,8 @@ public class Reduction implements IAlgorithm {
                 for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                     if (entry.getValue() == 2 || entry.getValue() == 3) {
                         List<Pair> list = new ArrayList<>();
-                        for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
-                            for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
+                        for (int col : Utils.it(colGroup * BLOCK_SIZE)) {
+                            for (int row : Utils.it(rowGroup * BLOCK_SIZE)) {
                                 if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                                     list.add(new Pair(row, col));
                                 }
@@ -97,7 +97,7 @@ public class Reduction implements IAlgorithm {
 
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 if (entry.getValue() == 2 || entry.getValue() == 3) {
-                    List<Integer> pos = getPositions(matrix, col, entry.getKey());
+                    List<Integer> pos = getPosInCol(matrix, col, entry.getKey());
                     if (pos.size() > 0 && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
                         removeInBlockCol(matrix, col, entry.getKey(), pos);
                     }
@@ -112,7 +112,7 @@ public class Reduction implements IAlgorithm {
 
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 if (entry.getValue() == 2 || entry.getValue() == 3) {
-                    List<Integer> pos = getPositions2(matrix, row, entry.getKey());
+                    List<Integer> pos = getPosInRow(matrix, row, entry.getKey());
                     if (pos.size() > 0 && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
                         removeInBlockRow(matrix, row, entry.getKey(), pos);
                     }
@@ -121,7 +121,7 @@ public class Reduction implements IAlgorithm {
         }
     }
 
-    private List<Integer> getPositions(IMatrix matrix, int col, int key) {
+    private List<Integer> getPosInCol(IMatrix matrix, int col, int key) {
         List<Integer> pos = new ArrayList<>();
         for (int row = 0; row < SIZE; row++) {
             if (matrix.getCandidates(row, col).contains(key)) {
@@ -131,7 +131,7 @@ public class Reduction implements IAlgorithm {
         return pos;
     }
 
-    private List<Integer> getPositions2(IMatrix matrix, int row, int key) {
+    private List<Integer> getPosInRow(IMatrix matrix, int row, int key) {
         List<Integer> pos = new ArrayList<>();
         for (int col = 0; col < SIZE; col++) {
             if (matrix.getCandidates(row, col).contains(key)) {
@@ -144,12 +144,11 @@ public class Reduction implements IAlgorithm {
     private CounterHashMap<Integer> getOccurenceInBlockMap(IMatrix matrix, int rowGroup, int colGroup) {
         CounterHashMap<Integer> map = new CounterHashMap();
 
-        for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
-            for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
+        for (int col : Utils.it(colGroup * BLOCK_SIZE)) {
+            for (int row : Utils.it(rowGroup * BLOCK_SIZE)) {
                 for (int key : matrix.getCandidates(row, col)) {
                     map.inc(key);
                 }
-
             }
         }
 
@@ -178,8 +177,8 @@ public class Reduction implements IAlgorithm {
 
     private void removeInBlockCol(IMatrix matrix, int col, int key, List<Integer> pos) {
         int rowBlock = pos.get(0);
-        for (int rowTemp = 3 * (rowBlock / 3); rowTemp < 3 * (rowBlock / 3) + 3; rowTemp++) {
-            for (int colTemp = 3 * (col / 3); colTemp < 3 * (col / 3) + 3; colTemp++) {
+        for (int rowTemp : Utils.it(3 * rowBlock / 3)) {
+            for (int colTemp : Utils.it(3 * (col / 3))) {
                 if (colTemp != col && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
                     matrix.removeCandidate(rowTemp, colTemp, key);
                 }

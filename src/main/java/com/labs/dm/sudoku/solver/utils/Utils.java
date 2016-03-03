@@ -283,17 +283,17 @@ public class Utils {
                     line = line + item;
                 }
                 if (line.isEmpty()) {
-                    line = "[" + String.valueOf(matrix.getValueAt(row, col)) + "]";
+                    line = "[" + matrix.getValueAt(row, col) + "]";
                 }
 
                 sb.append(String.format("%1$" + (maxLength > 0 ? maxLength + 3 : 3) + "s", line));
 
                 if (col < SIZE - 1) {
                     if (col % 3 == 2) {
-                        sb.append(" | ");
-                    } else {
-                        sb.append(" ");
+                        sb.append(" |");
                     }
+                    sb.append(" ");
+
                 }
             }
             sb.append(System.lineSeparator());
