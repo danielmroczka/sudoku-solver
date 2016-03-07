@@ -279,4 +279,12 @@ public class MatrixTest {
         assertNotNull(matrix.printCandidates());
     }
 
+    @Test
+    public void shouldSortNumberInAddCandidates() {
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{9, 5, 1});
+
+        assertArrayEquals(new Integer[]{1, 5, 9}, matrix.getCandidates(0, 0).toArray(new Integer[3]));
+
+    }
 }

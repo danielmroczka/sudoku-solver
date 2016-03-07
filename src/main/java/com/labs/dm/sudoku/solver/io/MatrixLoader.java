@@ -54,8 +54,7 @@ public class MatrixLoader {
     }
 
     protected String[] toTable(String input) {
-        input = input.trim();
-        input = input.replaceAll("[\\s*,\\s*]+", ",").replaceAll("[\\s]+", ",");
+        input = input.trim().replaceAll("[\\s*,\\s*]+", ",").replaceAll("[\\s]+", ",");
         return input.split("[\n\t,;]");
     }
 
@@ -66,7 +65,7 @@ public class MatrixLoader {
             inputStream = new FileInputStream(filePath);
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            char[] buf = new char[1024];
+            char[] buf = new char[128];
             int numRead;
             while ((numRead = reader.read(buf)) != -1) {
                 String readData = String.valueOf(buf, 0, numRead);

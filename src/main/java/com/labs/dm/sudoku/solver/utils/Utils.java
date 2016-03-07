@@ -306,4 +306,27 @@ public class Utils {
         }
         return sb.toString();
     }
+
+    public static Map<Integer, List<Pair>> candidatesMap(IMatrix matrix) {
+        Map<Integer, List<Pair>> map = new HashMap<>();
+
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (matrix.getCandidates(row, col).size() == 1) {
+                    throw new IllegalStateException("Cells cannot be in state having only one candidate!");
+                }
+                for (int candidate : matrix.getCandidates(row, col)) {
+
+                    List<Pair> list = map.get(candidate);
+                    if (list == null) {
+                        list = new ArrayList<>();
+                    }
+                    list.add(new Pair(row, col));
+                    map.put(candidate, list);
+                }
+            }
+        }
+
+        return map;
+    }
 }

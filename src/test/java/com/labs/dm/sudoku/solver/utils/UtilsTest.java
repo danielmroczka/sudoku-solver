@@ -1,10 +1,13 @@
 package com.labs.dm.sudoku.solver.utils;
 
+import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.core.Pair;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import static com.labs.dm.sudoku.solver.utils.Utils.*;
 import static org.junit.Assert.*;
@@ -74,6 +77,23 @@ public class UtilsTest {
         assertArrayEquals(new int[]{0, 1, 2}, Utils.it(1));
         assertArrayEquals(new int[]{0, 1, 2}, Utils.it(2));
         assertArrayEquals(new int[]{3, 4, 5}, Utils.it(3));
+    }
+
+    @Test
+    public void candidatesMap() {
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{1, 2, 3});
+        matrix.addCandidates(1, 1, new Integer[]{2, 3, 4});
+        matrix.addCandidates(2, 2, new Integer[]{3, 4, 5});
+
+        Map<Integer, List<Pair>> map = Utils.candidatesMap(matrix);
+
+        assertEquals(5, map.size());
+        assertEquals(1, map.get(1).size());
+        assertEquals(2, map.get(2).size());
+        assertEquals(3, map.get(3).size());
+        assertEquals(2, map.get(4).size());
+        assertEquals(1, map.get(5).size());
     }
 
     @Test

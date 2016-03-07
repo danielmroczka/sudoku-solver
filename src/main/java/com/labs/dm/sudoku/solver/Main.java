@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws IOException {
         MatrixLoader loader = new MatrixLoader();
-        IMatrix matrix = loader.load("src/test/resources/patterns/hard2.txt");
+        IMatrix matrix = loader.load("src/test/resources/patterns/11clues.txt");
         Flow flow = new Flow();
         flow.execute(matrix);
     }

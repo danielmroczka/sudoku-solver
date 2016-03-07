@@ -8,6 +8,7 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 
 import java.io.IOException;
+import java.util.logging.LogManager;
 
 /**
  * @author daniel
@@ -15,6 +16,8 @@ import java.io.IOException;
 public class MainCLI {
 
     public static void main(String[] args) throws IOException {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        LogManager.getLogManager().readConfiguration(classLoader.getResourceAsStream("log.properties"));
         if (args.length != 1) {
             throw new IllegalArgumentException("Input file name is missing!");
         }

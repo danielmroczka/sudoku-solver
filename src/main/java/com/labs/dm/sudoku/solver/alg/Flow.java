@@ -23,6 +23,7 @@ public class Flow {
         IAlgorithm xyWing = new XYWing();
         IAlgorithm xyzWing = new XYZWing();
         IAlgorithm reduction = new Reduction();
+        IAlgorithm swordfish = new Swordfish();
 
         int prevCount = matrix.getSolvedItems();
         int prevCandidates = matrix.getCandidatesCount();
@@ -45,6 +46,7 @@ public class Flow {
             xWing.execute(matrix);
             xyWing.execute(matrix);
             xyzWing.execute(matrix);
+            swordfish.execute(matrix);
             System.out.println(matrix.printCandidates());
             matrix.validate();
             if (prevCount == matrix.getSolvedItems() && prevCandidates == matrix.getCandidatesCount()) {

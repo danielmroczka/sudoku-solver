@@ -6,6 +6,7 @@ package com.labs.dm.sudoku.solver.core;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Class represents main matrix
@@ -13,6 +14,9 @@ import java.util.*;
  * @author daniel
  */
 public class Matrix implements IMatrix {
+
+    private Logger logger = Logger.getLogger("Matrix");
+
     private final int[][] tab;
 
     private final Collection<Integer>[][] possibleValues;
@@ -48,14 +52,14 @@ public class Matrix implements IMatrix {
         validateInputValue(value);
         tab[row][col] = value;
         getCandidates(row, col).clear();
-        System.out.println("Set cell value " + value + " at: " + row + ", " + col);
+        logger.info("Set cell value " + value + " at: " + row + ", " + col);
         removeCandidatesAtNeighbourhood(row, col, value);
     }
 
     @Override
     public void removeCandidate(int row, int col, int value) {
         if (getCandidates(row, col).remove(value)) {
-            System.out.println("Remove candid. " + value + " at: " + row + ", " + col);
+            logger.info("Remove candid. " + value + " at: " + row + ", " + col);
             if (getCandidates(row, col).size() == 1) {
                 setValueAt(row, col, getCandidates(row, col).toArray(new Integer[1])[0]);
             }
