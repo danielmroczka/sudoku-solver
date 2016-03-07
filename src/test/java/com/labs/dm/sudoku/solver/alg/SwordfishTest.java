@@ -2,11 +2,9 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by daniel on 2016-03-06.
@@ -16,7 +14,7 @@ public class SwordfishTest {
     private IAlgorithm swordfish = new Swordfish();
 
     @Test
-    @Ignore
+    //@Ignore
     public void minimumSwordfishInCols() {
         IMatrix matrix = new Matrix();
         //candidates in swordfish
@@ -30,9 +28,9 @@ public class SwordfishTest {
         //candidates should be removed
         matrix.addCandidates(6, 0, new Integer[]{2, 5, 8, 9});
         matrix.addCandidates(4, 0, new Integer[]{2, 5, 8, 9});
-        matrix.addCandidates(5, 7, new Integer[]{2, 8});
+        matrix.addCandidates(5, 7, new Integer[]{2, 5, 8, 9});
 
-        matrix.addCandidates(2, 8, new Integer[]{2, 8});
+        // matrix.addCandidates(4, 7, new Integer[]{2, 8});
 
         swordfish.execute(matrix);
 
@@ -40,11 +38,11 @@ public class SwordfishTest {
         assertFalse(matrix.getCandidates(4, 0).contains(2));
         assertFalse(matrix.getCandidates(5, 7).contains(2));
 
-        assertTrue(matrix.getCandidates(2, 8).contains(2));
+        //   assertTrue(matrix.getCandidates(4, 7).contains(2));
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void fullSwordfishInCols() {
         IMatrix matrix = new Matrix();
         //candidates in swordfish

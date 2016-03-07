@@ -5,8 +5,11 @@ import com.labs.dm.sudoku.solver.core.Pair;
 import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
  * Swordfish algorithm
@@ -17,6 +20,7 @@ import java.util.Map;
  * Created by daniel on 2016-03-03.
  */
 public class Swordfish implements IAlgorithm {
+
     @Override
     public void execute(IMatrix matrix) {
 
@@ -35,19 +39,32 @@ public class Swordfish implements IAlgorithm {
                 colsMap.inc(pair.getCol());
             }
 
+            List<Integer> cols = new ArrayList<>();
+            List<Integer> rows = new ArrayList<>();
+
+            for (Map.Entry<Integer, Integer> entryRows : rowsMap.entrySet()) {
+                if (entryRows.getValue() >= 2) {
+                    rows.add(entryRows.getKey());
+                }
+            }
+            for (Map.Entry<Integer, Integer> entryCols : colsMap.entrySet()) {
+                if (entryCols.getValue() >= 2) {
+                    cols.add(entryCols.getKey());
+                }
+            }
 
             if (colsMap.size() == 3 && rowsMap.size() >= 3) {
                 for (int col : colsMap.keySet()) {
-                    for (int row = 0; row < IMatrix.SIZE; row++) {
-                        if (rowsMap.get(row) != null && rowsMap.get(row) < 2 && colsMap.get(col) != null && colsMap.get(col) < 2) {
+                    for (int row = 0; row < SIZE; row++) {
+                        if (!(rows.contains(row))) {
                             matrix.removeCandidate(row, col, entry.getKey());
                         }
                     }
                 }
             } else if (colsMap.size() >= 3 && rowsMap.size() == 3) {
                 for (int row : rowsMap.keySet()) {
-                    for (int col = 0; col < IMatrix.SIZE; col++) {
-                        if (rowsMap.get(row) != null && rowsMap.get(row) < 2 && colsMap.get(col) != null && colsMap.get(col) < 2) {
+                    for (int col = 0; col < SIZE; col++) {
+                        if (!(cols.contains(col))) {
                             matrix.removeCandidate(row, col, entry.getKey());
                         }
                     }
