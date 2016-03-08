@@ -23,7 +23,7 @@ public class Flow {
         IAlgorithm xyWing = new XYWing();
         IAlgorithm xyzWing = new XYZWing();
         IAlgorithm reduction = new Reduction();
-        IAlgorithm swordfish = new Swordfish();
+        IAlgorithm swordfish = new SwordFish();
 
         int prevCount = matrix.getSolvedItems();
         int prevCandidates = matrix.getCandidatesCount();

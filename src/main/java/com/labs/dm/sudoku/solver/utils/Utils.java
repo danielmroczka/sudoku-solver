@@ -261,7 +261,13 @@ public class Utils {
 
     public static String printCandidates(IMatrix matrix) {
         StringBuilder sb = new StringBuilder(100);
-        if (matrix.isSolved()) {
+        boolean solved = false;
+        try {
+            matrix.isSolved();
+        } catch (IllegalStateException ex) {
+
+        }
+        if (solved) {
             sb.append("Matrix Solved!");
         } else {
             sb.append("Solved cells = ").append(matrix.getSolvedItems()).append(", candidates = ").append(matrix.getCandidatesCount()).append(System.lineSeparator());
