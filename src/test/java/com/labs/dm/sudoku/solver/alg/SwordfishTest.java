@@ -4,14 +4,15 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 /**
  * Created by daniel on 2016-03-06.
  */
-public class SwordfishTest {
+public class SwordFishTest {
 
-    private IAlgorithm swordfish = new Swordfish();
+    private IAlgorithm swordfish = new SwordFish();
 
     @Test
     //@Ignore
@@ -64,5 +65,29 @@ public class SwordfishTest {
 
         assertFalse(matrix.getCandidates(6, 0).contains(2));
         assertFalse(matrix.getCandidates(5, 7).contains(2));
+    }
+
+    @Test
+    public void advanced() {
+        IMatrix matrix = new Matrix();
+        //candidates in swordfish
+        matrix.addCandidates(1, 0, new Integer[]{2, 4});
+        matrix.addCandidates(1, 3, new Integer[]{1, 2, 4});
+        matrix.addCandidates(1, 5, new Integer[]{1, 4});
+        matrix.addCandidates(2, 1, new Integer[]{2, 4});
+        matrix.addCandidates(2, 3, new Integer[]{2, 4});
+        matrix.addCandidates(3, 5, new Integer[]{1, 4});
+        matrix.addCandidates(3, 8, new Integer[]{2, 4});
+        matrix.addCandidates(4, 3, new Integer[]{1, 4});
+        matrix.addCandidates(4, 6, new Integer[]{4, 6});
+        matrix.addCandidates(7, 1, new Integer[]{4, 6});
+        matrix.addCandidates(7, 6, new Integer[]{4, 6});
+        matrix.addCandidates(8, 0, new Integer[]{4, 6});
+        matrix.addCandidates(8, 8, new Integer[]{3, 4});
+        int candidates = matrix.getCandidatesCount();
+        //candidates should be removed
+        swordfish.execute(matrix);
+        assertFalse(matrix.getCandidates(1, 3).contains(4));
+        assertEquals(candidates - 1, matrix.getCandidatesCount());
     }
 }

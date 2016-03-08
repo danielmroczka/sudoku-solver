@@ -114,4 +114,16 @@ public class ValidationTest {
             matrix.validate();
         }
     }
+
+    @Test
+    public void validateSwordFish() throws IOException {
+        System.out.println(matrix.printCandidates());
+        for (int i = 0; i < COUNT; i++) {
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+            new SwordFish().execute(matrix);
+            System.out.println(matrix.printCandidates());
+            matrix.validate();
+        }
+    }
 }

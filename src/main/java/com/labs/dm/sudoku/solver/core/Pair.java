@@ -1,5 +1,7 @@
 package com.labs.dm.sudoku.solver.core;
 
+import java.util.Comparator;
+
 /**
  * Created by daniel on 2016-02-15.
  */
@@ -41,6 +43,18 @@ public class Pair {
 
     @Override
     public String toString() {
-        return "Pair{row=" + row + ", col=" + col + "}";
+        return "Pair{" + row + "," + col + "}";
+    }
+
+    public static class ComaparatorRows implements Comparator<Pair> {
+
+        @Override
+        public int compare(Pair o1, Pair o2) {
+            if (o1 == null || o2 == null) {
+                return 0;
+            }
+
+            return o1.getRow() != o2.getRow() ? o1.getRow() - o2.getRow() : o1.getCol() - o2.getCol();
+        }
     }
 }

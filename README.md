@@ -19,6 +19,8 @@ Implemented algorithms:
 - [x]  X-Wing
 - [x]  XY-Wing
 - [x]  XYZ-Wing
+- [x]  Sword-Fish
+- [x]  Jelly-Fish
                            
 ##Usage
 
@@ -28,7 +30,7 @@ Maven:
 <dependency>
     <groupId>com.labs.dm</groupId>
     <artifactId>sudoku-solver</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
 </dependency>
 ```
 Command line:
