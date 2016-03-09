@@ -287,4 +287,16 @@ public class MatrixTest {
         assertArrayEquals(new Integer[]{1, 5, 9}, matrix.getCandidates(0, 0).toArray(new Integer[3]));
 
     }
+
+    @Test
+    public void cloneTest() {
+        IMatrix original = new Matrix();
+        original.setValueAt(0, 0, 9);
+
+        IMatrix copy = new Matrix((Matrix) original);
+
+        assertArrayEquals(original.toArray(), copy.toArray());
+        assertEquals(9, copy.getValueAt(0, 0));
+        assertNotEquals(copy, original);
+    }
 }

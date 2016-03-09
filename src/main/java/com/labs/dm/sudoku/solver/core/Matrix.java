@@ -13,16 +13,25 @@ import java.util.logging.Logger;
  *
  * @author daniel
  */
-public class Matrix implements IMatrix {
+public class Matrix implements IMatrix, Cloneable {
 
     private Logger logger = Logger.getLogger("Matrix");
 
     private final int[][] tab;
 
-    private final Collection<Integer>[][] possibleValues;
+    protected final Collection<Integer>[][] possibleValues;
 
     public Matrix() {
-        tab = new int[SIZE][SIZE];
+        this(new int[SIZE][SIZE]);
+    }
+
+    public Matrix(Matrix copy) {
+        this.tab = copy.tab;
+        possibleValues = copy.possibleValues;
+    }
+
+    private Matrix(int[][] tab) {
+        this.tab = tab;
         possibleValues = new HashSet[SIZE][SIZE];
         initCandidates();
     }
@@ -410,5 +419,10 @@ public class Matrix implements IMatrix {
 
     private boolean isSetValue(int val) {
         return MIN_VALUE <= val && val <= MAX_VALUE;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return new Matrix(tab);
     }
 }
