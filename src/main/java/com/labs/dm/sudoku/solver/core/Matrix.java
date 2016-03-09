@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author daniel
  */
-public class Matrix implements IMatrix, Cloneable {
+public class Matrix implements IMatrix {
 
     private Logger logger = Logger.getLogger("Matrix");
 
@@ -26,7 +26,13 @@ public class Matrix implements IMatrix, Cloneable {
     }
 
     public Matrix(Matrix copy) {
-        this.tab = Arrays.copyOf(copy.tab, copy.tab.length);
+        this.tab = new int[SIZE][SIZE];
+        for (int r = 0; r < 9; r++) {
+            for (int c = 0; c < 9; c++) {
+                this.tab[r][c] = copy.tab[r][c];
+            }
+        }
+
         possibleValues = new HashSet[SIZE][SIZE];
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
@@ -64,10 +70,13 @@ public class Matrix implements IMatrix, Cloneable {
     public void setValueAt(int row, int col, int value) {
         validateInputIndex(row, col);
         validateInputValue(value);
-        tab[row][col] = value;
-        getCandidates(row, col).clear();
         logger.info("Set cell value " + value + " at: " + row + ", " + col);
-        removeCandidatesAtNeighbourhood(row, col, value);
+        tab[row][col] = value;
+        if (isSetValue(value)) {
+            getCandidates(row, col).clear();
+        }
+
+        removeSurroundingCandidates(row, col, value);
     }
 
     @Override
@@ -87,7 +96,7 @@ public class Matrix implements IMatrix, Cloneable {
         }
     }
 
-    private void removeCandidatesAtNeighbourhood(int row, int col, int value) {
+    private void removeSurroundingCandidates(int row, int col, int value) {
         if (isSetValue(value)) {
             for (int r = 0; r < SIZE; r++) {
                 removeCandidate(r, col, value);
@@ -426,8 +435,5 @@ public class Matrix implements IMatrix, Cloneable {
         return MIN_VALUE <= val && val <= MAX_VALUE;
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new Matrix(tab);
-    }
+
 }

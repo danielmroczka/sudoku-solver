@@ -335,4 +335,27 @@ public class Utils {
 
         return map;
     }
+
+    public static List<Pair> getSurroundings(int row, int col) {
+        List<Pair> res = new ArrayList<>(20);
+        for (int r = 0; r < SIZE; r++) {
+            if (r != row) {
+                res.add(new Pair(r, col));
+            }
+        }
+        for (int c = 0; c < SIZE; c++) {
+            if (c != col) {
+                res.add(new Pair(row, c));
+            }
+        }
+        for (int rowGroup : Utils.it((row))) {
+            for (int colGroup : Utils.it((col))) {
+                if (rowGroup != row && colGroup != col) {
+                    res.add(new Pair(rowGroup, colGroup));
+                }
+            }
+        }
+
+        return res;
+    }
 }

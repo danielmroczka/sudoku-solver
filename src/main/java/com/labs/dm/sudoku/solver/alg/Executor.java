@@ -16,6 +16,9 @@ public class Executor {
     }
 
     public void run() {
+        long time = System.nanoTime();
         algorithm.execute(matrix);
+        time = System.nanoTime() - time;
+
     }
 }

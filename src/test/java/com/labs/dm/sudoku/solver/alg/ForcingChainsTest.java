@@ -23,10 +23,11 @@ public class ForcingChainsTest {
         matrix.addCandidates(3, 2, new Integer[]{1, 4});
         matrix.addCandidates(3, 0, new Integer[]{5, 7});
 
-        matrix.addCandidates(5, 3, new Integer[]{4, 7});
+        matrix.addCandidates(3, 5, new Integer[]{4, 7});
 
         //candidates should be removed
         alg.execute(matrix);
-        assertFalse(matrix.getCandidates(3, 0).contains(5));
+        System.out.println(matrix.printCandidates());
+        assertFalse(matrix.getCandidates(3, 0).contains(7));
     }
 }
