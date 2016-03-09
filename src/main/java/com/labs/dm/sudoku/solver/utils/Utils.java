@@ -358,4 +358,12 @@ public class Utils {
 
         return res;
     }
+
+    public static void deepCopy(int[][] original, int[][] copy) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                copy[row][col] = original[row][col];
+            }
+        }
+    }
 }

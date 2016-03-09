@@ -130,7 +130,7 @@ public class HiddenPairs implements IAlgorithm {
     }
 
     private Map<List<Integer>, Integer> group(List<List<Integer>> input) {
-        CounterHashMap<List<Integer>> map = new CounterHashMap();
+        CounterHashMap<List<Integer>> map = new CounterHashMap<>();
         for (List<Integer> item : input) {
             if (item.size() > 1) {
                 List<List<Integer>> combination = Utils.combinationList(item, SIZE);

@@ -8,6 +8,8 @@ import com.labs.dm.sudoku.solver.utils.Utils;
 import java.util.*;
 import java.util.logging.Logger;
 
+import static com.labs.dm.sudoku.solver.utils.Utils.deepCopy;
+
 /**
  * Class represents main matrix
  *
@@ -26,13 +28,8 @@ public class Matrix implements IMatrix {
     }
 
     public Matrix(Matrix copy) {
-        this.tab = new int[SIZE][SIZE];
-        for (int r = 0; r < 9; r++) {
-            for (int c = 0; c < 9; c++) {
-                this.tab[r][c] = copy.tab[r][c];
-            }
-        }
-
+        tab = new int[SIZE][SIZE];
+        deepCopy(copy.tab, tab);
         possibleValues = new HashSet[SIZE][SIZE];
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
@@ -70,7 +67,7 @@ public class Matrix implements IMatrix {
     public void setValueAt(int row, int col, int value) {
         validateInputIndex(row, col);
         validateInputValue(value);
-        logger.info("Set cell value " + value + " at: " + row + ", " + col);
+        logger.fine("Set cell value " + value + " at: " + row + ", " + col);
         tab[row][col] = value;
         if (isSetValue(value)) {
             getCandidates(row, col).clear();
@@ -82,7 +79,7 @@ public class Matrix implements IMatrix {
     @Override
     public void removeCandidate(int row, int col, int value) {
         if (getCandidates(row, col).remove(value)) {
-            logger.info("Remove candid. " + value + " at: " + row + ", " + col);
+            logger.fine("Remove candid. " + value + " at: " + row + ", " + col);
             if (getCandidates(row, col).size() == 1) {
                 setValueAt(row, col, getCandidates(row, col).toArray(new Integer[1])[0]);
             }
@@ -434,6 +431,4 @@ public class Matrix implements IMatrix {
     private boolean isSetValue(int val) {
         return MIN_VALUE <= val && val <= MAX_VALUE;
     }
-
-
 }

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
@@ -31,7 +32,7 @@ public class GenerateCandidates implements IAlgorithm {
 
                 int[] cols = matrix.getElemsInCol(col);
                 int[] rows = matrix.getElemsInRow(row);
-                int[] blocks = matrix.getElemsInBlock(row / IMatrix.BLOCK_SIZE, col / IMatrix.BLOCK_SIZE);
+                int[] blocks = matrix.getElemsInBlock(row / BLOCK_SIZE, col / BLOCK_SIZE);
 
                 for (int i : cols) {
                     set.remove(i);

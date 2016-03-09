@@ -9,7 +9,7 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
  * Lone Singles (Naked Singles) Algorithm Implementation.
- *
+ * <p>
  * Finds cells with only one candidate and updates the cell value with candidate value.
  *
  * @author daniel

@@ -37,7 +37,6 @@ public class FlowTest {
         for (int i = 68; i > 0; i--) {
             IMatrix matrix = g.generate(i);
             flow.execute(matrix);
-            System.out.println(matrix);
             assertTrue(matrix.isSolved());
         }
     }

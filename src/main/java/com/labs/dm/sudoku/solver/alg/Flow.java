@@ -5,51 +5,41 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 
+import java.util.logging.Logger;
+
 /**
  * @author daniel
  */
 public class Flow {
 
-    public void execute(IMatrix matrix) {
-        IAlgorithm showPossibles = new GenerateCandidates();
-        IAlgorithm openSingles = new OpenSingles();
-        IAlgorithm loneSingles = new LoneSingles();
-        IAlgorithm nakedPairs = new NakedPairs();
-        IAlgorithm hiddenTriples = new HiddenTriples();
-        IAlgorithm hiddenSingles = new HiddenSingles();
-        IAlgorithm hiddenPairs = new HiddenPairs();
-        IAlgorithm nakedTriples = new NakedTriplets();
-        IAlgorithm xWing = new XWing();
-        IAlgorithm xyWing = new XYWing();
-        IAlgorithm xyzWing = new XYZWing();
-        IAlgorithm reduction = new Reduction();
-        IAlgorithm swordfish = new SwordFish();
-        IAlgorithm jellyFish = new JellyFish();
+    private Logger logger = Logger.getLogger("Flow");
 
+    public void execute(IMatrix matrix) {
         int prevCount = matrix.getSolvedItems();
         int prevCandidates = matrix.getCandidatesCount();
-
         int chance = 3;
-        showPossibles.execute(matrix);
-        System.out.println("Candidates = " + matrix.getCandidatesCount());
+        new Executor(matrix, GenerateCandidates.class).run();
+        logger.info("Candidates = " + matrix.getCandidatesCount());
         matrix.validate();
-        System.out.println("Set cells = " + matrix.getSolvedItems());
+        logger.info("Set cells = " + matrix.getSolvedItems());
+        int counter = 0;
         while (!matrix.isSolved()) {
-            System.out.println("flow execution " + matrix.getCandidatesCount());
-            loneSingles.execute(matrix);
-            openSingles.execute(matrix);
-            nakedPairs.execute(matrix);
-            nakedTriples.execute(matrix);
-            hiddenPairs.execute(matrix);
-            hiddenTriples.execute(matrix);
-            hiddenSingles.execute(matrix);
-            reduction.execute(matrix);
-            xWing.execute(matrix);
-            xyWing.execute(matrix);
-            xyzWing.execute(matrix);
-            swordfish.execute(matrix);
-            jellyFish.execute(matrix);
-            System.out.println(matrix.printCandidates());
+            logger.info("Flow execution " + ++counter + " candidates:" + matrix.getCandidatesCount());
+            new Executor(matrix, LoneSingles.class).run();
+            new Executor(matrix, OpenSingles.class).run();
+            new Executor(matrix, NakedPairs.class).run();
+            new Executor(matrix, NakedTriplets.class).run();
+            new Executor(matrix, HiddenPairs.class).run();
+            new Executor(matrix, HiddenTriples.class).run();
+            new Executor(matrix, HiddenSingles.class).run();
+            new Executor(matrix, Reduction.class).run();
+            new Executor(matrix, XWing.class).run();
+            new Executor(matrix, XYWing.class).run();
+            new Executor(matrix, XYZWing.class).run();
+            new Executor(matrix, SwordFish.class).run();
+            new Executor(matrix, JellyFish.class).run();
+
+            logger.info(matrix.printCandidates());
             matrix.validate();
             if (prevCount == matrix.getSolvedItems() && prevCandidates == matrix.getCandidatesCount()) {
                 chance--;
@@ -64,7 +54,7 @@ public class Flow {
         }
 
         matrix.validate();
-        System.out.println(matrix);
+        logger.info(matrix.toString());
     }
 
 }

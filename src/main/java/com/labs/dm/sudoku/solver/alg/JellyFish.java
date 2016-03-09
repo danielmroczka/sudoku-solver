@@ -11,6 +11,6 @@ package com.labs.dm.sudoku.solver.alg;
 public class JellyFish extends SwordFish {
     public JellyFish() {
         SIZE = 4;
-        MIN_POINTS = 10; //?
+        MIN_POINTS = 8; //?
     }
 }

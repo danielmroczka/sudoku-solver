@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class CounterHashMapTest {
     @Test
     public void shouldIncrementHashMap() {
-        CounterHashMap<Integer> map = new CounterHashMap();
+        CounterHashMap<Integer> map = new CounterHashMap<>();
         map.inc(1);
         map.inc(2);
         map.inc(2);
