@@ -17,13 +17,16 @@ public class ForcingChains implements IAlgorithm {
                 IMatrix[] clones = new IMatrix[matrix.getCandidates(row, col).size()];
                 int index = 0;
                 for (int i = 0; i < clones.length; i++) {
-                    clones[i] = new Matrix((Matrix) matrix);
+
                 }
 
+
                 for (int candidate : matrix.getCandidates(row, col)) {
+                    clones[index] = new Matrix((Matrix) matrix);
                     clones[index].setValueAt(row, col, candidate);
                     index++;
                 }
+
 
                 for (int r = 0; r < IMatrix.SIZE; r++) {
                     for (int c = 0; c < IMatrix.SIZE; c++) {

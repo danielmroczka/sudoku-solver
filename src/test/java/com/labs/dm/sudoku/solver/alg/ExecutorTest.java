@@ -14,8 +14,11 @@ public class ExecutorTest {
     @Test
     public void name() throws Exception {
         IMatrix matrix = new Matrix();
-        IAlgorithm algorithm = matrix1 -> {
-            matrix1.setValueAt(0, 0, 9);
+        IAlgorithm algorithm = new IAlgorithm() {
+            @Override
+            public void execute(IMatrix matrix) {
+                matrix.setValueAt(0, 0, 9);
+            }
         };
         new Executor(matrix, algorithm).run();
 

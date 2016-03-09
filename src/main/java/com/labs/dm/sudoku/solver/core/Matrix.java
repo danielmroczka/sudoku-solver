@@ -26,8 +26,13 @@ public class Matrix implements IMatrix, Cloneable {
     }
 
     public Matrix(Matrix copy) {
-        this.tab = copy.tab;
-        possibleValues = copy.possibleValues;
+        this.tab = Arrays.copyOf(copy.tab, copy.tab.length);
+        possibleValues = new HashSet[SIZE][SIZE];
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int col = 0; col < IMatrix.SIZE; col++) {
+                setCandidates(row, col, new HashSet<>(copy.getCandidates(row, col)));
+            }
+        }
     }
 
     private Matrix(int[][] tab) {

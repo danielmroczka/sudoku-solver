@@ -292,11 +292,14 @@ public class MatrixTest {
     public void cloneTest() {
         IMatrix original = new Matrix();
         original.setValueAt(0, 0, 9);
+        original.addCandidates(1, 1, new Integer[]{1, 2, 3});
 
         IMatrix copy = new Matrix((Matrix) original);
 
         assertArrayEquals(original.toArray(), copy.toArray());
         assertEquals(9, copy.getValueAt(0, 0));
+        assertArrayEquals(original.getCandidates(1, 1).toArray(), copy.getCandidates(1, 1).toArray());
+        assertFalse(original.getCandidates(1, 1) == copy.getCandidates(1, 1));
         assertNotEquals(copy, original);
     }
 }
