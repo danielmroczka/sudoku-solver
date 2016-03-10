@@ -1,5 +1,6 @@
-package com.labs.dm.sudoku.solver.alg;
+package com.labs.dm.sudoku.solver.executors;
 
+import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 
 import java.util.logging.Logger;

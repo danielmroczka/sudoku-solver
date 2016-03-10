@@ -1,6 +1,5 @@
-package com.labs.dm.sudoku.solver;
+package com.labs.dm.sudoku.solver.executors;
 
-import com.labs.dm.sudoku.solver.alg.Flow;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import org.junit.Test;

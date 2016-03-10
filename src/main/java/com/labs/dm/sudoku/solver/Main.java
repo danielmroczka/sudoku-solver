@@ -4,8 +4,8 @@
 
 package com.labs.dm.sudoku.solver;
 
-import com.labs.dm.sudoku.solver.alg.Flow;
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.executors.Flow;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 
 import java.io.IOException;

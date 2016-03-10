@@ -2,9 +2,6 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import com.labs.dm.sudoku.solver.core.Pair;
-import com.labs.dm.sudoku.solver.utils.CounterHashMap;
-import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +27,7 @@ public class ForcingChains implements IAlgorithm {
                     List<Integer> l = new ArrayList<>((clones[index].getCandidates(row, col)));
                     l.remove((Integer) candidate);
                     clones[index].setValueAt(row, col, candidate);
-                    //propagateChange(clones[index], row, col, l.get(0));
-                    removeOneCandidate(clones[index]);
-                    //System.out.println(clones[index].printCandidates());
+                    new RemoveOneCandidate().execute(clones[index]);
                     index++;
                 }
 
@@ -57,44 +52,6 @@ public class ForcingChains implements IAlgorithm {
                         }
                     }
                 }
-            }
-        }
-    }
-
-    private void propagateChange(IMatrix clone, int row, int col, int value) {
-        for (Pair pair : Utils.getSurroundings(row, col)) {
-            int cnt = 0;
-            for (Pair n : Utils.getSurroundings(pair.getRow(), pair.getCol())) {
-                if (clone.getCandidates(n).contains(value)) {
-                    cnt++;
-                }
-            }
-            if (cnt == 0) {
-
-                if (clone.getCandidates(pair).contains(value)) {
-                    clone.setValueAt(pair.getRow(), pair.getCol(), value);
-                }
-            }
-        }
-    }
-
-    private void removeOneCandidate(IMatrix matrix) {
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col < 9; col++) {
-                CounterHashMap<Integer> map = new CounterHashMap<>();
-                for (Pair pair : Utils.getSurroundings(row, col)) {
-                    for (int cand : matrix.getCandidates(pair)) {
-                        map.inc(cand);
-                    }
-                }
-                List<Integer> toRemove = new ArrayList<>();
-                for (int cand : matrix.getCandidates(row, col)) {
-                    if (map.get(cand) == null) {
-                        toRemove.add(cand);
-                    }
-                }
-
-                matrix.removeCandidate(row, col, toRemove);
             }
         }
     }
