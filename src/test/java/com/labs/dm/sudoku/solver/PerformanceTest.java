@@ -16,7 +16,7 @@ public class PerformanceTest {
 
     private final MatrixLoader loader = new MatrixLoader();
 
-    String[] files = {"tough1.txt"};
+    final String[] files = {"tough1.txt"};
 
     @Test
     public void pass() throws IOException {

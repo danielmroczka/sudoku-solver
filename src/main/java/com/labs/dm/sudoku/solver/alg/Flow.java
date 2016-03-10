@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  */
 public class Flow {
 
-    private Logger logger = Logger.getLogger("Flow");
+    private final Logger logger = Logger.getLogger("Flow");
 
     public void execute(IMatrix matrix) {
         int prevCount = matrix.getSolvedItems();

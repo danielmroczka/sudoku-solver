@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class XYZWingTest {
 
-    private XYZWing wing = new XYZWing();
+    private final XYZWing wing = new XYZWing();
 
     @Test
     public void simpleTest() {

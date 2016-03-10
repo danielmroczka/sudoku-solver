@@ -12,7 +12,7 @@ import static org.junit.Assert.assertFalse;
  */
 public class ForcingChainsTest {
 
-    private IAlgorithm alg = new ForcingChains();
+    private final IAlgorithm alg = new ForcingChains();
 
     @Test
     @Ignore

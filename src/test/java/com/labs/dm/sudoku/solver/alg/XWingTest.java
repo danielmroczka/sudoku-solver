@@ -16,8 +16,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class XWingTest {
 
-    private IAlgorithm alg = new XWing();
-    private IAlgorithm cand = new GenerateCandidates();
+    private final IAlgorithm alg = new XWing();
+    private final IAlgorithm cand = new GenerateCandidates();
 
     @Test
     public void shouldTestEmptyMarix() {

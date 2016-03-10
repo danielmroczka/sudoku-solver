@@ -12,7 +12,7 @@ import static org.junit.Assert.assertFalse;
  */
 public class SwordFishTest {
 
-    private IAlgorithm swordfish = new SwordFish();
+    private final IAlgorithm swordfish = new SwordFish();
 
     @Test
     public void minimumSwordfishInCols() {

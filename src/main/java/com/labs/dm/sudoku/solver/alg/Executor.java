@@ -9,7 +9,7 @@ import java.util.logging.Logger;
  */
 public class Executor {
 
-    private Logger logger = Logger.getLogger("Executor");
+    private final Logger logger = Logger.getLogger("Executor");
     private final IAlgorithm algorithm;
     private final IMatrix matrix;
 

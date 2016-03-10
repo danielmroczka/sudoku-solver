@@ -166,7 +166,7 @@ public class Reduction implements IAlgorithm {
     }
 
     private CounterHashMap<Integer> getOccurenceInRowMap(IMatrix matrix, int row) {
-        CounterHashMap map = new CounterHashMap<>();
+        CounterHashMap<Integer> map = new CounterHashMap<>();
         for (int col = 0; col < SIZE; col++) {
             for (int key : matrix.getCandidates(row, col)) {
                 map.inc(key);

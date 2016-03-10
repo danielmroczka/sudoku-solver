@@ -176,6 +176,8 @@ public interface IMatrix extends Iterable<Integer> {
      */
     boolean validate();
 
+    boolean validate(boolean silentMode);
+
     /**
      * Returns number of already resolved cells
      *

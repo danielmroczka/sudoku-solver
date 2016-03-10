@@ -29,12 +29,7 @@ public class Generator {
             int value = (int) (Math.random() * 9) + 1;
             matrix.setValueAt(row, col, value);
 
-            boolean validate = false;
-            try {
-                validate = matrix.validate();
-            } catch (IllegalStateException e) {
-
-            }
+            boolean validate = matrix.validate(true);
 
             if (validate) {
                 //System.out.println("Step=" + probe);

@@ -12,7 +12,7 @@ import static org.junit.Assert.assertFalse;
  */
 public class JellyFishTest {
 
-    private JellyFish jellyFish = new JellyFish();
+    private final JellyFish jellyFish = new JellyFish();
 
     @Test
     //@Ignore

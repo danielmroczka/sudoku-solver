@@ -17,7 +17,7 @@ import static com.labs.dm.sudoku.solver.utils.Utils.deepCopy;
  */
 public class Matrix implements IMatrix {
 
-    private Logger logger = Logger.getLogger("Matrix");
+    private final Logger logger = Logger.getLogger("Matrix");
 
     private final int[][] tab;
 
@@ -111,7 +111,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isSolved() {
-        return validate() && getSolvedItems() == SIZE * SIZE && getCandidatesCount() == 0;
+        return validate(true) && getSolvedItems() == SIZE * SIZE && getCandidatesCount() == 0;
     }
 
     @Override
@@ -319,6 +319,20 @@ public class Matrix implements IMatrix {
         validateRows();
         validateCols();
         return true;
+    }
+
+    @Override
+    public boolean validate(boolean silentMode) {
+        boolean state = false;
+        try {
+            state = validate();
+        } catch (IllegalStateException ex) {
+            if (!silentMode) {
+                throw ex;
+            }
+        }
+
+        return state;
     }
 
     private void validateCols() {

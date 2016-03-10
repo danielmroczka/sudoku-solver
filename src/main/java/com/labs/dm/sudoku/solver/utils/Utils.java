@@ -190,7 +190,7 @@ public class Utils {
         copy1.retainAll(pincet1);
         copy2.retainAll(pincet2);
 
-        return found && copy1.size() == (size - 1) && copy2.size() == (size - 1) && copy1.get(0) != copy2.get(0) && map.size() == 3;
+        return found && copy1.size() == (size - 1) && copy2.size() == (size - 1) && !Objects.equals(copy1.get(0), copy2.get(0)) && map.size() == 3;
     }
 
     public static boolean acceptPincet(Collection<Integer> pivot, Collection<Integer> pincet, int size) {
@@ -261,12 +261,7 @@ public class Utils {
 
     public static String printCandidates(IMatrix matrix) {
         StringBuilder sb = new StringBuilder(100);
-        boolean solved = false;
-        try {
-            matrix.isSolved();
-        } catch (IllegalStateException ex) {
-
-        }
+        boolean solved = matrix.isSolved();
         if (solved) {
             sb.append("Matrix Solved!");
         } else {
@@ -361,9 +356,7 @@ public class Utils {
 
     public static void deepCopy(int[][] original, int[][] copy) {
         for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                copy[row][col] = original[row][col];
-            }
+            System.arraycopy(original[row], 0, copy[row], 0, SIZE);
         }
     }
 }
