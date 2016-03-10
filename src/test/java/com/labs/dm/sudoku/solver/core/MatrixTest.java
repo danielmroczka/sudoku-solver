@@ -13,7 +13,7 @@ import java.util.Iterator;
 import static org.junit.Assert.*;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class MatrixTest {
 
@@ -294,7 +294,7 @@ public class MatrixTest {
         original.setValueAt(0, 0, 9);
         original.addCandidates(1, 1, new Integer[]{1, 2, 3});
 
-        IMatrix copy = new Matrix((Matrix) original);
+        IMatrix copy = new Matrix(original);
 
         assertArrayEquals(original.toArray(), copy.toArray());
         assertEquals(9, copy.getValueAt(0, 0));

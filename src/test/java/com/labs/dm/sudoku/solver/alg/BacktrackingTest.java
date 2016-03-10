@@ -1,9 +1,8 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.core.LogListener;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
-import org.junit.Ignore;
-import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
@@ -14,10 +13,11 @@ public class BacktrackingTest {
 
     private IAlgorithm back = new Backtracking();
 
-    @Test
-    @Ignore
+    //@Test
+    // @Ignore
     public void execute() throws Exception {
         IMatrix matrix = new MatrixLoader().load("patterns/solved.txt");
+        matrix.addMatrixListener(new LogListener());
         matrix.setValueAt(0, 0, 0);
         matrix.setValueAt(0, 1, 0);
         matrix.setValueAt(1, 0, 0);

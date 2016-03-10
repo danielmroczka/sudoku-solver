@@ -9,10 +9,14 @@ import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 import java.util.Collection;
 import java.util.Map;
 
+import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+
 /**
  * Hidden Singles algorithm implementation
  *
- * @author daniel
+ * @author Daniel Mroczka
+ *         <p>
  *         http://www.learn-sudoku.com/hidden-singles.html
  */
 public class HiddenSingles implements IAlgorithm {
@@ -25,20 +29,20 @@ public class HiddenSingles implements IAlgorithm {
     }
 
     private void findInBlock(IMatrix matrix) {
-        for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
-            for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
+        for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
+            for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
 
                 CounterHashMap<Integer> counter = new CounterHashMap<>();
-                for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                    for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
+                for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
+                    for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
                         onFind(matrix, counter, row, col);
                     }
                 }
 
                 for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
                     if (entry.getValue() == 1) {
-                        for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                            for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
+                        for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
+                            for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
                                 if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                                     matrix.setValueAt(row, col, entry.getKey());
                                 }
@@ -51,15 +55,15 @@ public class HiddenSingles implements IAlgorithm {
     }
 
     private void findInCols(IMatrix matrix) {
-        for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int col = 0; col < SIZE; col++) {
             CounterHashMap<Integer> counter = new CounterHashMap<>();
-            for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int row = 0; row < SIZE; row++) {
                 onFind(matrix, counter, row, col);
             }
 
             for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
                 if (entry.getValue() == 1) {
-                    for (int row = 0; row < IMatrix.SIZE; row++) {
+                    for (int row = 0; row < SIZE; row++) {
                         if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                             matrix.setValueAt(row, col, entry.getKey());
                         }
@@ -70,15 +74,15 @@ public class HiddenSingles implements IAlgorithm {
     }
 
     private void findInRows(IMatrix matrix) {
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < SIZE; row++) {
             CounterHashMap<Integer> counter = new CounterHashMap<>();
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+            for (int col = 0; col < SIZE; col++) {
                 onFind(matrix, counter, row, col);
             }
 
             for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
                 if (entry.getValue() == 1) {
-                    for (int col = 0; col < IMatrix.SIZE; col++) {
+                    for (int col = 0; col < SIZE; col++) {
                         if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                             matrix.setValueAt(row, col, entry.getKey());
                         }

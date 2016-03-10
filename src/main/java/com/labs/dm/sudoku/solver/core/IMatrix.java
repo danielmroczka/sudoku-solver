@@ -3,11 +3,13 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import com.labs.dm.sudoku.solver.executors.ContextItem;
+
 import java.util.Collection;
 import java.util.List;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public interface IMatrix extends Iterable<Integer> {
 
@@ -205,4 +207,10 @@ public interface IMatrix extends Iterable<Integer> {
     List<List<Integer>> getCandidatesInCol(int col);
 
     List<List<Integer>> getCandidatesInBlock(int rowBlockIndex, int colBlockIndex);
+
+    void addMatrixListener(IMatrixListener listener);
+
+    void removeMatrixListener();
+
+    List<ContextItem> getContext();
 }

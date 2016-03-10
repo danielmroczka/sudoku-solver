@@ -3,33 +3,34 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import com.labs.dm.sudoku.solver.executors.ContextItem;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 import static com.labs.dm.sudoku.solver.utils.Utils.deepCopy;
 
 /**
  * Class represents main matrix
  *
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class Matrix implements IMatrix {
 
-    private final Logger logger = Logger.getLogger("Matrix");
-
+    private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;
 
     protected final Collection<Integer>[][] possibleValues;
+
+    private IMatrixListener listener;
 
     public Matrix() {
         this(new int[SIZE][SIZE]);
     }
 
-    public Matrix(Matrix copy) {
+    public Matrix(IMatrix copy) {
         tab = new int[SIZE][SIZE];
-        deepCopy(copy.tab, tab);
+        deepCopy(((Matrix) copy).tab, tab);
         possibleValues = new HashSet[SIZE][SIZE];
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
@@ -67,10 +68,17 @@ public class Matrix implements IMatrix {
     public void setValueAt(int row, int col, int value) {
         validateInputIndex(row, col);
         validateInputValue(value);
-        logger.fine("Set cell value " + value + " at: " + row + ", " + col);
+        if (listener != null) {
+            listener.onChangeValue(row, col, value);
+        }
         tab[row][col] = value;
         if (isSetValue(value)) {
             getCandidates(row, col).clear();
+        }
+
+        removeSurroundingCandidates(row, col, value);
+        if (isSolved() && listener != null) {
+            listener.onResolved();
         }
 
         removeSurroundingCandidates(row, col, value);
@@ -79,7 +87,9 @@ public class Matrix implements IMatrix {
     @Override
     public void removeCandidate(int row, int col, int value) {
         if (getCandidates(row, col).remove(value)) {
-            logger.fine("Remove candid. " + value + " at: " + row + ", " + col);
+            if (listener != null) {
+                listener.onRemoveCandidate(row, col, value);
+            }
             if (getCandidates(row, col).size() == 1) {
                 setValueAt(row, col, getCandidates(row, col).toArray(new Integer[1])[0]);
             }
@@ -445,4 +455,20 @@ public class Matrix implements IMatrix {
     private boolean isSetValue(int val) {
         return MIN_VALUE <= val && val <= MAX_VALUE;
     }
+
+    @Override
+    public void addMatrixListener(IMatrixListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void removeMatrixListener() {
+        listener = null;
+    }
+
+    @Override
+    public List<ContextItem> getContext() {
+        return context;
+    }
+
 }

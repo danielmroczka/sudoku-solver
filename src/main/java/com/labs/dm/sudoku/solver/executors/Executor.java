@@ -3,6 +3,8 @@ package com.labs.dm.sudoku.solver.executors;
 import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -11,33 +13,42 @@ import java.util.logging.Logger;
 public class Executor {
 
     private final Logger logger = Logger.getLogger("Executor");
-    private final IAlgorithm algorithm;
-    private final IMatrix matrix;
+    private final Map<Class<? extends IAlgorithm>, IAlgorithm> map = new HashMap<>();
+    private static Executor instance;
 
-    public Executor(IMatrix matrix, IAlgorithm algorithm) {
-        this.algorithm = algorithm;
-        this.matrix = matrix;
+    private Executor() {
     }
 
-    public Executor(IMatrix matrix, Class<? extends IAlgorithm> clazz) {
-        IAlgorithm algorithm = null;
+    public synchronized static void run(IMatrix matrix, Class<? extends IAlgorithm> clazz) {
+        if (instance == null) {
+            instance = new Executor();
+        }
+        instance.execute(matrix, clazz);
+    }
+
+    private void execute(IMatrix matrix, Class<? extends IAlgorithm> clazz) {
+        IAlgorithm algInstance = map.get(clazz);
         try {
-            algorithm = clazz.newInstance();
+            if (algInstance == null) {
+                algInstance = clazz.newInstance();
+                map.put(clazz, algInstance);
+            }
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        this.algorithm = algorithm;
-        this.matrix = matrix;
-    }
-
-    public void run() {
         long time = System.nanoTime();
         int solved = matrix.getSolvedItems();
         int candidates = matrix.getCandidatesCount();
-        algorithm.execute(matrix);
+        algInstance.execute(matrix);
         solved = matrix.getSolvedItems() - solved;
         candidates = candidates - matrix.getCandidatesCount();
         time = System.nanoTime() - time;
-        logger.info("Executed " + algorithm.getClass().getSimpleName() + " in " + time / 1000000d + " [ms]. Solved=" + solved + ", reduced candidates=" + candidates);
+        logger.fine("Executed " + clazz.getSimpleName() + " in " + time / 1000000d + " [ms]. Solved=" + solved + ", reduced candidates=" + candidates);
+
+        if (solved > 0 || candidates > 0) {
+            matrix.getContext().add(new ContextItem(algInstance.getClass().getSimpleName(), solved, candidates, (int) time));
+            execute(matrix, clazz);
+        }
     }
+
 }

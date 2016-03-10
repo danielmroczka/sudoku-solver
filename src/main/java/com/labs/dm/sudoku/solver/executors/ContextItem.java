@@ -1,0 +1,53 @@
+package com.labs.dm.sudoku.solver.executors;
+
+/**
+ * Class contains information about one algorithm execution
+ * <p>
+ * Created by daniel on 10-Mar-16.
+ */
+public class ContextItem {
+    /**
+     * The name of sudoku algorithm
+     */
+    private String name;
+    /**
+     * How many candidates have been resolved in one step
+     */
+    private int solved;
+    /**
+     * How many candidates have been removed in one step
+     */
+    private int reducedCandidate;
+    /**
+     * Time spent on execution in ms
+     */
+    private int time;
+
+    public ContextItem(String name, int solved, int reducedCandidate, int time) {
+        this.name = name;
+        this.solved = solved;
+        this.reducedCandidate = reducedCandidate;
+        this.time = time;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getSolved() {
+        return solved;
+    }
+
+    public int getReducedCandidate() {
+        return reducedCandidate;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%n%s, %s, %s, %.3f[ms]", name, solved, reducedCandidate, time / 1000000f);
+    }
+}

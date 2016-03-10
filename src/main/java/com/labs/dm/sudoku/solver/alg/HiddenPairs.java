@@ -17,7 +17,7 @@ import java.util.Map;
  * <p/>
  * http://www.learn-sudoku.com/hidden-pairs.html
  *
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class HiddenPairs implements IAlgorithm {
 

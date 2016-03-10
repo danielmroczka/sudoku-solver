@@ -12,7 +12,7 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
  * <p>
  * Finds cells with only one candidate and updates the cell value with candidate value.
  *
- * @author daniel
+ * @author Daniel Mroczka
  *         http://www.learn-sudoku.com/lone-singles.html
  */
 public class LoneSingles implements IAlgorithm {

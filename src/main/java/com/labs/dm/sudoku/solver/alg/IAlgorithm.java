@@ -6,7 +6,7 @@ package com.labs.dm.sudoku.solver.alg;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public interface IAlgorithm {
 

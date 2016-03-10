@@ -14,7 +14,10 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
- * @author daniel
+ * Generates all possible candidates for each cell without value.
+ * It takes into account surroundings cells with already set value and removes them from the list.
+ *
+ * @author Daniel Mroczka
  */
 public class GenerateCandidates implements IAlgorithm {
 

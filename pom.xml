@@ -23,6 +23,13 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -112,6 +119,23 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.1.4</version>
+                <configuration>
+                    <targetClasses>
+                        <param>com.labs.dm.sudoku.solver*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>com.labs.dm.sudoku.solver*</param>
+                    </targetTests>
+                    <excludedClasses>
+                        <class>com.labs.dm.sudoku.solver.alg.ValidationTest</class>
+                        <class>com.labs.dm.sudoku.solver.alg.PerformanceTest</class>
+                    </excludedClasses>
+                </configuration>
             </plugin>
         </plugins>
     </build>

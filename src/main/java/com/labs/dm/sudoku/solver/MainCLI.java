@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.logging.LogManager;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class MainCLI {
 

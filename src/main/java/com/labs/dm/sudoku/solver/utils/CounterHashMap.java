@@ -14,4 +14,13 @@ public class CounterHashMap<K> extends HashMap<K, Integer> {
         }
         put(key, ++value);
     }
+
+    @Override
+    public Integer get(Object key) {
+        Integer res = super.get(key);
+        if (res == null) {
+            res = 0;
+        }
+        return res;
+    }
 }

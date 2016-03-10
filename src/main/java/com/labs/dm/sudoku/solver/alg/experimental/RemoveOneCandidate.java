@@ -1,5 +1,6 @@
-package com.labs.dm.sudoku.solver.alg;
+package com.labs.dm.sudoku.solver.alg.experimental;
 
+import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Pair;
 import com.labs.dm.sudoku.solver.utils.CounterHashMap;
@@ -28,7 +29,7 @@ public class RemoveOneCandidate implements IAlgorithm {
                 }
                 List<Integer> forcedToRemove = new ArrayList<>();
                 for (int cand : matrix.getCandidates(row, col)) {
-                    if (map.get(cand) == null || map.get(cand) == 0) {
+                    if (map.get(cand) == 0) {
                         forcedToRemove.add(cand);
                     }
                 }

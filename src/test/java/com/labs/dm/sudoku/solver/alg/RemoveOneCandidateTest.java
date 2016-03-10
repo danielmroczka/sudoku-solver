@@ -1,7 +1,9 @@
 package com.labs.dm.sudoku.solver.alg;
 
+import com.labs.dm.sudoku.solver.alg.experimental.RemoveOneCandidate;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
+import com.labs.dm.sudoku.solver.executors.Flow;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -25,9 +27,19 @@ public class RemoveOneCandidateTest {
 
         //candidates should be removed
         matrix.setValueAt(0, 2, 2);
-        alg.execute(matrix);
+        new HiddenSingles().execute(matrix);
         System.out.println(matrix.printCandidates());
         assertFalse(matrix.getCandidates(3, 2).contains(1));
+        assertEquals(0, matrix.getCandidatesCount());
+    }
+
+    //@Test
+    public void execute2() throws Exception {
+        IMatrix matrix = new Matrix();
+        for (int ind = 0; ind < 9; ind++) {
+            matrix.addCandidates(ind, ind, new Integer[]{ind + 1});
+        }
+        new Flow().execute(matrix);
         assertEquals(0, matrix.getCandidatesCount());
     }
 }

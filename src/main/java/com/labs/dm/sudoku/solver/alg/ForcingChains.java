@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by daniel on 2016-03-09.
+ * @author Daniel Mroczka
  */
 public class ForcingChains implements IAlgorithm {
 
@@ -23,11 +23,11 @@ public class ForcingChains implements IAlgorithm {
                 int index = 0;
 
                 for (int candidate : matrix.getCandidates(row, col)) {
-                    clones[index] = new Matrix((Matrix) matrix);
+                    clones[index] = new Matrix(matrix);
                     List<Integer> l = new ArrayList<>((clones[index].getCandidates(row, col)));
                     l.remove((Integer) candidate);
                     clones[index].setValueAt(row, col, candidate);
-                    new RemoveOneCandidate().execute(clones[index]);
+                    new HiddenSingles().execute(clones[index]);
                     index++;
                 }
 

@@ -13,7 +13,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class HiddenPairsTest {
 

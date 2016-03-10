@@ -2,7 +2,6 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -15,7 +14,6 @@ public class ForcingChainsTest {
     private final IAlgorithm alg = new ForcingChains();
 
     @Test
-    @Ignore
     public void simple() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 2, new Integer[]{1, 2});

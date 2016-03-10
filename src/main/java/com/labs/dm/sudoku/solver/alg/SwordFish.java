@@ -14,11 +14,11 @@ import static com.labs.dm.sudoku.solver.utils.Utils.combinationList;
 
 /**
  * SwordFish algorithm
- * <p/>
+ * <p>
  * http://hodoku.sourceforge.net/en/tech_fishb.php#bf3
  * http://www.sudoku9981.com/sudoku-solving/swordfish.php
  * http://www.dwojcik.republika.pl/sudoku/techniques/techn09.htm
- * <p/>
+ * <p>
  * Created by daniel on 2016-03-03.
  */
 public class SwordFish implements IAlgorithm {
@@ -60,8 +60,6 @@ public class SwordFish implements IAlgorithm {
         if (removeInCols) {
             removeInRows(matrix, value, rowMap, colMap);
         }
-        //System.out.println(rowMap);
-        //System.out.println(colMap);
     }
 
     private boolean canRemoveInRows(IMatrix matrix, int value, CounterHashMap<Integer> rowMap, CounterHashMap<Integer> colMap) {
@@ -152,22 +150,7 @@ public class SwordFish implements IAlgorithm {
                         colsTempMap.inc(p.getCol());
                     }
 
-                    boolean accept = true;
-                    for (int t : rowsTempMap.values()) {
-                        if (t < 2) {
-                            accept = false;
-                            break;
-                        }
-                    }
-                    for (int t : colsTempMap.values()) {
-                        if (t < 2) {
-                            accept = false;
-                            break;
-                        }
-                    }
-
-
-                    if (accept && pair.size() >= MIN_POINTS) {
+                    if (pair.size() >= MIN_POINTS && accept(rowsTempMap, colsTempMap)) {
                         pairs.add(pair);
                     }
                 }
@@ -175,10 +158,20 @@ public class SwordFish implements IAlgorithm {
             if (!pairs.isEmpty()) {
                 res.put(entry.getKey(), pairs);
             }
-
         }
 
         return res;
+    }
+
+    protected boolean accept(CounterHashMap<Integer> rowsMap, CounterHashMap<Integer> colsMap) {
+        boolean accept = true;
+        for (int val : rowsMap.values()) {
+            if (val < 2) accept = false;
+        }
+        for (int val : colsMap.values()) {
+            if (val < 2) accept = false;
+        }
+        return accept && rowsMap.size() == SIZE && colsMap.size() == SIZE;
     }
 
     /**

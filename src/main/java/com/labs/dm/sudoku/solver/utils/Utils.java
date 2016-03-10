@@ -310,8 +310,7 @@ public class Utils {
 
     public static Map<Integer, List<Pair>> candidatesMap(IMatrix matrix) {
         Map<Integer, List<Pair>> map = new HashMap<>();
-
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if (matrix.getCandidates(row, col).size() == 1) {
                     throw new IllegalStateException("Cells cannot be in state having only one candidate!");

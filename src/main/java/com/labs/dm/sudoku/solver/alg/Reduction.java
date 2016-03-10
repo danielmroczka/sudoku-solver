@@ -16,10 +16,10 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
- * Redcution Algorithm.
+ * Reduction Algorithm.
  * http://www.thonky.com/sudoku/box-line-reduction/
  *
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class Reduction implements IAlgorithm {
 
