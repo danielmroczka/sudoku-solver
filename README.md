@@ -30,7 +30,7 @@ Maven:
 <dependency>
     <groupId>com.labs.dm</groupId>
     <artifactId>sudoku-solver</artifactId>
-    <version>0.0.6-SNAPSHOT</version>
+    <version>0.0.7-SNAPSHOT</version>
 </dependency>
 ```
 Command line:
