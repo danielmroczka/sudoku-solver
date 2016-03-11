@@ -15,7 +15,7 @@ public class NakedTripletsTest {
     private final NakedTriplets nakedTriplets = new NakedTriplets();
 
     @Test
-    public void allThreeCanidatesInAllThreeCellsBlock() {
+    public void allThreeCandidatesInAllThreeCellsBlock() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 4, 5, 6});
@@ -33,7 +33,7 @@ public class NakedTripletsTest {
     }
 
     @Test
-    public void allThreeCanidatesInAllThreeCellsRow() {
+    public void allThreeCandidatesInAllThreeCellsRow() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.setValueAt(0, 2, 7);
@@ -73,8 +73,7 @@ public class NakedTripletsTest {
         //THEN
         assertEquals(2, matrix.getCandidates(0, 3).size());
         assertEquals(2, matrix.getCandidates(0, 5).size());
-        assertEquals(3, matrix.getCandidates(0, 8).size());
+        assertEquals(2, matrix.getCandidates(0, 8).size());
     }
-
 
 }

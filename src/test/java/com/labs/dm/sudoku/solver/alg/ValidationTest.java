@@ -20,7 +20,7 @@ public class ValidationTest {
 
     @Before
     public void before() throws IOException {
-        matrix = new MatrixLoader().load("src/test/resources/patterns/hard.txt");
+        matrix = new MatrixLoader().load("src/test/resources/patterns/hard/hard.txt");
         cand.execute(matrix);
         matrix.validate();
     }
@@ -117,12 +117,10 @@ public class ValidationTest {
 
     @Test
     public void validateSwordFish() throws IOException {
-        System.out.println(matrix.printCandidates());
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
             new SwordFish().execute(matrix);
-            System.out.println(matrix.printCandidates());
             matrix.validate();
         }
     }

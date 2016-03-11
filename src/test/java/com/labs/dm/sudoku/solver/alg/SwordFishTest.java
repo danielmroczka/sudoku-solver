@@ -12,10 +12,9 @@ import static org.junit.Assert.assertFalse;
  */
 public class SwordFishTest {
 
-    private IAlgorithm swordfish = new SwordFish();
+    private final IAlgorithm swordfish = new SwordFish();
 
     @Test
-    //@Ignore
     public void minimumSwordfishInCols() {
         IMatrix matrix = new Matrix();
         //candidates in swordfish
@@ -43,7 +42,6 @@ public class SwordFishTest {
     }
 
     @Test
-    //@Ignore
     public void fullSwordfishInCols() {
         IMatrix matrix = new Matrix();
         //candidates in swordfish
@@ -89,5 +87,34 @@ public class SwordFishTest {
         swordfish.execute(matrix);
         assertFalse(matrix.getCandidates(1, 3).contains(4));
         assertEquals(candidates - 1, matrix.getCandidatesCount());
+    }
+
+    @Test
+    public void advanced2() {
+        IMatrix matrix = new Matrix();
+        //candidates in swordfish
+        matrix.addCandidates(0, 5, new Integer[]{2, 6});
+        matrix.addCandidates(0, 8, new Integer[]{2, 3});
+        matrix.addCandidates(4, 0, new Integer[]{2, 4});
+        matrix.addCandidates(4, 8, new Integer[]{2, 7, 9});
+        matrix.addCandidates(8, 0, new Integer[]{2, 3, 7});
+        matrix.addCandidates(8, 5, new Integer[]{1, 2, 7, 9});
+
+        matrix.addCandidates(1, 4, new Integer[]{2, 6});
+        matrix.addCandidates(1, 6, new Integer[]{2, 7, 8});
+        matrix.addCandidates(1, 8, new Integer[]{2, 3, 7});
+        matrix.addCandidates(5, 0, new Integer[]{2, 4, 6});
+        matrix.addCandidates(5, 2, new Integer[]{1, 2});
+        matrix.addCandidates(5, 6, new Integer[]{2, 4, 6});
+        matrix.addCandidates(7, 0, new Integer[]{2, 7});
+
+        matrix.addCandidates(7, 2, new Integer[]{1, 2, 7, 9});
+        matrix.addCandidates(7, 4, new Integer[]{1, 2, 7});
+
+        //candidates should be removed
+        swordfish.execute(matrix);
+        assertFalse(matrix.getCandidates(5, 0).contains(2));
+        assertFalse(matrix.getCandidates(7, 0).contains(2));
+        assertFalse(matrix.getCandidates(1, 8).contains(2));
     }
 }

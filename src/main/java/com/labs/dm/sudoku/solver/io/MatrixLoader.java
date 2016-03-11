@@ -7,9 +7,9 @@ import java.io.*;
 import java.nio.charset.Charset;
 
 /**
- * Class
+ * Load / Save operation on Matrix object.
  *
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class MatrixLoader {
 

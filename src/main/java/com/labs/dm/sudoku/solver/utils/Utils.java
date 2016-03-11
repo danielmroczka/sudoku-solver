@@ -190,7 +190,7 @@ public class Utils {
         copy1.retainAll(pincet1);
         copy2.retainAll(pincet2);
 
-        return found && copy1.size() == (size - 1) && copy2.size() == (size - 1) && copy1.get(0) != copy2.get(0) && map.size() == 3;
+        return found && copy1.size() == (size - 1) && copy2.size() == (size - 1) && !Objects.equals(copy1.get(0), copy2.get(0)) && map.size() == 3;
     }
 
     public static boolean acceptPincet(Collection<Integer> pivot, Collection<Integer> pincet, int size) {
@@ -261,12 +261,7 @@ public class Utils {
 
     public static String printCandidates(IMatrix matrix) {
         StringBuilder sb = new StringBuilder(100);
-        boolean solved = false;
-        try {
-            matrix.isSolved();
-        } catch (IllegalStateException ex) {
-
-        }
+        boolean solved = matrix.isSolved();
         if (solved) {
             sb.append("Matrix Solved!");
         } else {
@@ -315,8 +310,7 @@ public class Utils {
 
     public static Map<Integer, List<Pair>> candidatesMap(IMatrix matrix) {
         Map<Integer, List<Pair>> map = new HashMap<>();
-
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if (matrix.getCandidates(row, col).size() == 1) {
                     throw new IllegalStateException("Cells cannot be in state having only one candidate!");
@@ -334,5 +328,34 @@ public class Utils {
         }
 
         return map;
+    }
+
+    public static List<Pair> getSurroundings(int row, int col) {
+        List<Pair> res = new ArrayList<>(20);
+        for (int r = 0; r < SIZE; r++) {
+            if (r != row) {
+                res.add(new Pair(r, col));
+            }
+        }
+        for (int c = 0; c < SIZE; c++) {
+            if (c != col) {
+                res.add(new Pair(row, c));
+            }
+        }
+        for (int rowGroup : Utils.it((row))) {
+            for (int colGroup : Utils.it((col))) {
+                if (rowGroup != row && colGroup != col) {
+                    res.add(new Pair(rowGroup, colGroup));
+                }
+            }
+        }
+
+        return res;
+    }
+
+    public static void deepCopy(int[][] original, int[][] copy) {
+        for (int row = 0; row < SIZE; row++) {
+            System.arraycopy(original[row], 0, copy[row], 0, SIZE);
+        }
     }
 }

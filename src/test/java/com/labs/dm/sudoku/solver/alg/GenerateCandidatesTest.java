@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class GenerateCandidatesTest {
 
@@ -37,7 +37,7 @@ public class GenerateCandidatesTest {
 
     @Test
     public void shouldSetCandidatesFromFile() throws IOException {
-        matrix = new MatrixLoader().load("patterns/easy1.txt");
+        matrix = new MatrixLoader().load("patterns/easy/002.txt");
         alg.execute(matrix);
         Collection<Integer> set = matrix.getCandidates(4, 4);
         assertEquals(3, set.size());

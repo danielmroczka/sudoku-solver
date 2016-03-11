@@ -3,11 +3,13 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import com.labs.dm.sudoku.solver.executors.ContextItem;
+
 import java.util.Collection;
 import java.util.List;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public interface IMatrix extends Iterable<Integer> {
 
@@ -176,6 +178,8 @@ public interface IMatrix extends Iterable<Integer> {
      */
     boolean validate();
 
+    boolean validate(boolean silentMode);
+
     /**
      * Returns number of already resolved cells
      *
@@ -198,9 +202,17 @@ public interface IMatrix extends Iterable<Integer> {
 
     void addCandidates(int row, int col, Integer[] array);
 
+    void addCandidates(int row, int col, int... candidates);
+
     List<List<Integer>> getCandidatesInRow(int row);
 
     List<List<Integer>> getCandidatesInCol(int col);
 
     List<List<Integer>> getCandidatesInBlock(int rowBlockIndex, int colBlockIndex);
+
+    void addMatrixListener(IMatrixListener listener);
+
+    void removeMatrixListener();
+
+    List<ContextItem> getContext();
 }

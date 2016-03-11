@@ -14,8 +14,8 @@ import static org.junit.Assert.*;
  */
 public class XYWingTest {
 
-    private IAlgorithm xyWing = new XYWing();
-    private IAlgorithm cand = new GenerateCandidates();
+    private final IAlgorithm xyWing = new XYWing();
+    private final IAlgorithm cand = new GenerateCandidates();
 
     @Test
     public void theSameBlock() {

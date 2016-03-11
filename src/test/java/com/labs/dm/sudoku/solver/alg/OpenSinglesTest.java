@@ -14,7 +14,7 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class OpenSinglesTest {
 

@@ -13,7 +13,7 @@ import java.util.Iterator;
 import static org.junit.Assert.*;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class MatrixTest {
 
@@ -286,5 +286,33 @@ public class MatrixTest {
 
         assertArrayEquals(new Integer[]{1, 5, 9}, matrix.getCandidates(0, 0).toArray(new Integer[3]));
 
+    }
+
+    @Test
+    public void cloneTest() {
+        IMatrix original = new Matrix();
+        original.setValueAt(0, 0, 9);
+        original.addCandidates(1, 1, new Integer[]{1, 2, 3});
+
+        IMatrix copy = new Matrix(original);
+
+        assertArrayEquals(original.toArray(), copy.toArray());
+        assertEquals(9, copy.getValueAt(0, 0));
+        assertArrayEquals(original.getCandidates(1, 1).toArray(), copy.getCandidates(1, 1).toArray());
+        assertFalse(original.getCandidates(1, 1) == copy.getCandidates(1, 1));
+        assertNotEquals(copy, original);
+    }
+
+    @Test
+    public void changeValuePropagation() throws Exception {
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 2, new Integer[]{1, 2});
+        matrix.addCandidates(3, 2, new Integer[]{1, 4});
+        matrix.addCandidates(3, 0, new Integer[]{5, 7});
+
+        matrix.addCandidates(3, 5, new Integer[]{4, 7});
+
+        matrix.setValueAt(0, 2, 1); //TODO set to 2 should also pass the test
+        assertEquals(5, matrix.getValueAt(3, 0));
     }
 }

@@ -13,7 +13,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class LoneSinglesTest {
 

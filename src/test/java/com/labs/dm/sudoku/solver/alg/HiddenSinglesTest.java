@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class HiddenSinglesTest {
 

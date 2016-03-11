@@ -3,6 +3,7 @@ package com.labs.dm.sudoku.solver.utils;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.core.Pair;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -97,6 +98,7 @@ public class UtilsTest {
     }
 
     @Test
+    @Ignore
     public void compare() {
         // assertTrue(Utils.acceptPivotAndPincets(Arrays.asList(1, 2), Arrays.asList(2, 7), Arrays.asList(1, 7)));
         //  assertFalse(Utils.acceptPivotAndPincets(Arrays.asList(1, 2), Arrays.asList(2, 7), Arrays.asList(8, 7)));

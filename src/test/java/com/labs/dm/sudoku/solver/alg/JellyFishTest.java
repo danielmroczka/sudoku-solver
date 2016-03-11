@@ -12,7 +12,7 @@ import static org.junit.Assert.assertFalse;
  */
 public class JellyFishTest {
 
-    private JellyFish jellyFish = new JellyFish();
+    private final JellyFish jellyFish = new JellyFish();
 
     @Test
     //@Ignore
@@ -39,20 +39,17 @@ public class JellyFishTest {
         matrix.addCandidates(8, 7, new Integer[]{2, 5, 8});
         matrix.addCandidates(8, 8, new Integer[]{2, 5, 8});
 
-        //
         matrix.addCandidates(1, 7, new Integer[]{2, 4, 6, 9});
         matrix.addCandidates(2, 7, new Integer[]{2, 4, 5, 6});
         matrix.addCandidates(2, 8, new Integer[]{2, 3, 5, 6});
         matrix.addCandidates(6, 7, new Integer[]{2, 8, 9});
         int candidates = matrix.getCandidatesCount();
-        System.out.println(matrix.printCandidates());
         jellyFish.execute(matrix);
-        System.out.println(matrix.printCandidates());
 
         assertFalse(matrix.getCandidates(1, 7).contains(2));
         assertFalse(matrix.getCandidates(2, 7).contains(2));
         assertFalse(matrix.getCandidates(2, 8).contains(2));
         assertFalse(matrix.getCandidates(6, 7).contains(2));
-        assertEquals(candidates - 4, matrix.getCandidatesCount());
+        assertEquals(4, candidates - matrix.getCandidatesCount());
     }
 }

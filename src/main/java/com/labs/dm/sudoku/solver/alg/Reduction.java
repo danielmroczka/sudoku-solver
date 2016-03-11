@@ -16,10 +16,10 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
- * Redcution Algorithm.
+ * Reduction Algorithm.
  * http://www.thonky.com/sudoku/box-line-reduction/
  *
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class Reduction implements IAlgorithm {
 
@@ -142,7 +142,7 @@ public class Reduction implements IAlgorithm {
     }
 
     private CounterHashMap<Integer> getOccurenceInBlockMap(IMatrix matrix, int rowGroup, int colGroup) {
-        CounterHashMap<Integer> map = new CounterHashMap();
+        CounterHashMap<Integer> map = new CounterHashMap<>();
 
         for (int col : Utils.it(colGroup * BLOCK_SIZE)) {
             for (int row : Utils.it(rowGroup * BLOCK_SIZE)) {
@@ -156,7 +156,7 @@ public class Reduction implements IAlgorithm {
     }
 
     private CounterHashMap<Integer> getOccurenceInColMap(IMatrix matrix, int col) {
-        CounterHashMap<Integer> map = new CounterHashMap();
+        CounterHashMap<Integer> map = new CounterHashMap<>();
         for (int row = 0; row < SIZE; row++) {
             for (int key : matrix.getCandidates(row, col)) {
                 map.inc(key);
@@ -166,7 +166,7 @@ public class Reduction implements IAlgorithm {
     }
 
     private CounterHashMap<Integer> getOccurenceInRowMap(IMatrix matrix, int row) {
-        CounterHashMap map = new CounterHashMap();
+        CounterHashMap<Integer> map = new CounterHashMap<>();
         for (int col = 0; col < SIZE; col++) {
             for (int key : matrix.getCandidates(row, col)) {
                 map.inc(key);

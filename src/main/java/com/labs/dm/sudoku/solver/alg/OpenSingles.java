@@ -13,7 +13,7 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.*;
 /**
  * Open Singles Algorithm.
  *
- * @author daniel
+ * @author Daniel Mroczka
  *         http://www.learn-sudoku.com/open-singles.html
  */
 public class OpenSingles implements IAlgorithm {

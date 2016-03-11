@@ -3,26 +3,44 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import com.labs.dm.sudoku.solver.executors.ContextItem;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.*;
-import java.util.logging.Logger;
+
+import static com.labs.dm.sudoku.solver.utils.Utils.deepCopy;
 
 /**
  * Class represents main matrix
  *
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class Matrix implements IMatrix {
 
-    private Logger logger = Logger.getLogger("Matrix");
-
+    private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;
 
-    private final Collection<Integer>[][] possibleValues;
+    protected final Collection<Integer>[][] possibleValues;
+
+    private IMatrixListener listener;
 
     public Matrix() {
+        this(new int[SIZE][SIZE]);
+    }
+
+    public Matrix(IMatrix copy) {
         tab = new int[SIZE][SIZE];
+        deepCopy(((Matrix) copy).tab, tab);
+        possibleValues = new HashSet[SIZE][SIZE];
+        for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int col = 0; col < IMatrix.SIZE; col++) {
+                setCandidates(row, col, new HashSet<>(copy.getCandidates(row, col)));
+            }
+        }
+    }
+
+    private Matrix(int[][] tab) {
+        this.tab = tab;
         possibleValues = new HashSet[SIZE][SIZE];
         initCandidates();
     }
@@ -50,16 +68,28 @@ public class Matrix implements IMatrix {
     public void setValueAt(int row, int col, int value) {
         validateInputIndex(row, col);
         validateInputValue(value);
+        if (listener != null) {
+            listener.onChangeValue(row, col, value);
+        }
         tab[row][col] = value;
-        getCandidates(row, col).clear();
-        logger.info("Set cell value " + value + " at: " + row + ", " + col);
-        removeCandidatesAtNeighbourhood(row, col, value);
+        if (isSetValue(value)) {
+            getCandidates(row, col).clear();
+        }
+
+        removeSurroundingCandidates(row, col, value);
+        if (isSolved() && listener != null) {
+            listener.onResolved();
+        }
+
+        removeSurroundingCandidates(row, col, value);
     }
 
     @Override
     public void removeCandidate(int row, int col, int value) {
         if (getCandidates(row, col).remove(value)) {
-            logger.info("Remove candid. " + value + " at: " + row + ", " + col);
+            if (listener != null) {
+                listener.onRemoveCandidate(row, col, value);
+            }
             if (getCandidates(row, col).size() == 1) {
                 setValueAt(row, col, getCandidates(row, col).toArray(new Integer[1])[0]);
             }
@@ -73,7 +103,7 @@ public class Matrix implements IMatrix {
         }
     }
 
-    private void removeCandidatesAtNeighbourhood(int row, int col, int value) {
+    private void removeSurroundingCandidates(int row, int col, int value) {
         if (isSetValue(value)) {
             for (int r = 0; r < SIZE; r++) {
                 removeCandidate(r, col, value);
@@ -91,7 +121,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isSolved() {
-        return validate() && getSolvedItems() == SIZE * SIZE && getCandidatesCount() == 0;
+        return validate(true) && getSolvedItems() == SIZE * SIZE && getCandidatesCount() == 0;
     }
 
     @Override
@@ -301,6 +331,20 @@ public class Matrix implements IMatrix {
         return true;
     }
 
+    @Override
+    public boolean validate(boolean silentMode) {
+        boolean state = false;
+        try {
+            state = validate();
+        } catch (IllegalStateException ex) {
+            if (!silentMode) {
+                throw ex;
+            }
+        }
+
+        return state;
+    }
+
     private void validateCols() {
         Set<Integer> set = new HashSet<>();
         for (int col = 0; col < SIZE; col++) {
@@ -379,6 +423,11 @@ public class Matrix implements IMatrix {
     }
 
     @Override
+    public void addCandidates(int row, int col, int... candidates) {
+        addCandidates(row, col, candidates);
+    }
+
+    @Override
     public List<List<Integer>> getCandidatesInRow(int row) {
         List<List<Integer>> result = new ArrayList<>();
         for (int col = 0; col < SIZE; col++) {
@@ -411,4 +460,20 @@ public class Matrix implements IMatrix {
     private boolean isSetValue(int val) {
         return MIN_VALUE <= val && val <= MAX_VALUE;
     }
+
+    @Override
+    public void addMatrixListener(IMatrixListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void removeMatrixListener() {
+        listener = null;
+    }
+
+    @Override
+    public List<ContextItem> getContext() {
+        return context;
+    }
+
 }

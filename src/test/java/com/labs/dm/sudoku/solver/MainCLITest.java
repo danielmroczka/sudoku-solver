@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.io.FileNotFoundException;
 
 /**
- * @author daniel
+ * @author Daniel Mroczka
  */
 public class MainCLITest {
 
