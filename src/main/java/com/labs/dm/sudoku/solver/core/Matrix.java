@@ -423,6 +423,11 @@ public class Matrix implements IMatrix {
     }
 
     @Override
+    public void addCandidates(int row, int col, int... candidates) {
+        addCandidates(row, col, candidates);
+    }
+
+    @Override
     public List<List<Integer>> getCandidatesInRow(int row) {
         List<List<Integer>> result = new ArrayList<>();
         for (int col = 0; col < SIZE; col++) {

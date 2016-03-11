@@ -26,10 +26,6 @@ public class NakedPairs implements IAlgorithm {
         findNakedPairsInBlocks(matrix);
     }
 
-    private boolean accept(int value) {
-        return value == SIZE;
-    }
-
     private void findNakedPairsInBlocks(IMatrix matrix) {
         for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
@@ -99,4 +95,9 @@ public class NakedPairs implements IAlgorithm {
             map.inc(key);
         }
     }
+
+    private boolean accept(int value) {
+        return value == SIZE;//>= 2 && value <= SIZE;
+    }
+
 }

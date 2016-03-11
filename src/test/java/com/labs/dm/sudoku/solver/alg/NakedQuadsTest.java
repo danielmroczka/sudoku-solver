@@ -57,4 +57,27 @@ public class NakedQuadsTest {
         assertEquals(2, matrix.getCandidates(0, 7).size());
         assertEquals(2, matrix.getCandidates(0, 8).size());
     }
+
+    //@Test
+    public void test() {
+        // GOAL find quad of 2,4,8,9
+
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.setValueAt(0, 0, 1);
+
+        matrix.addCandidates(0, 1, new Integer[]{4, 5, 6});
+        matrix.addCandidates(0, 2, new Integer[]{4, 9});
+        matrix.addCandidates(0, 3, new Integer[]{3, 5, 6});
+        matrix.addCandidates(0, 4, new Integer[]{3, 5, 6, 7});
+        matrix.addCandidates(0, 5, new Integer[]{3, 5, 7});
+        matrix.addCandidates(0, 6, new Integer[]{2, 4, 8, 9});
+        matrix.addCandidates(0, 7, new Integer[]{2, 4});
+        matrix.addCandidates(0, 8, new Integer[]{2, 8, 9});
+        //WHEN
+        nakedQuads.execute(matrix);
+        //THEN
+        assertEquals(2, matrix.getCandidates(0, 1).size());
+    }
+
 }

@@ -43,6 +43,7 @@ public class Flow {
             run(matrix, XYZWing.class);
             run(matrix, SwordFish.class);
             run(matrix, JellyFish.class);
+            run(matrix, ForcingChains.class);
 
             logger.info(matrix.printCandidates());
             matrix.validate();
