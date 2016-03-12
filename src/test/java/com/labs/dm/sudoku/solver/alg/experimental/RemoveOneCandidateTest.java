@@ -1,6 +1,7 @@
-package com.labs.dm.sudoku.solver.alg;
+package com.labs.dm.sudoku.solver.alg.experimental;
 
-import com.labs.dm.sudoku.solver.alg.experimental.RemoveOneCandidate;
+import com.labs.dm.sudoku.solver.alg.HiddenSingles;
+import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.executors.Flow;

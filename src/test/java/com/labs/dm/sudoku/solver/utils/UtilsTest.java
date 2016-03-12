@@ -40,13 +40,15 @@ public class UtilsTest {
     }
 
     @Test
-    public void testCombination2() throws Exception {
-        List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
-//        assertEquals(1, combinationList(list1, 5).size());
-        assertEquals(5, combinationList(list1, 4).size());
-        assertEquals(10, combinationList(list1, 3).size());
-        assertEquals(10, combinationList(list1, 2).size());
-        assertEquals(5, combinationList(list1, 1).size());
+    public void testCombinationList() throws Exception {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        assertEquals(1, combinationList(list, 0).size());
+        assertEquals(5, combinationList(list, 1).size());
+        assertEquals(10, combinationList(list, 2).size());
+        assertEquals(10, combinationList(list, 3).size());
+        assertEquals(5, combinationList(list, 4).size());
+        assertEquals(1, combinationList(list, 5).size());
+        assertEquals(0, combinationList(list, 10).size());
     }
 
     @Test

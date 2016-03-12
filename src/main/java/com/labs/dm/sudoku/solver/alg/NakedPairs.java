@@ -89,14 +89,14 @@ public class NakedPairs implements IAlgorithm {
         }
     }
 
-    private void count(IMatrix matrix, CounterHashMap<Collection<Integer>> map, int row, int col) {
+    protected void count(IMatrix matrix, CounterHashMap<Collection<Integer>> map, int row, int col) {
         Collection<Integer> key = matrix.getCandidates(row, col);
         if (accept(key.size())) {
             map.inc(key);
         }
     }
 
-    private boolean accept(int value) {
+    protected boolean accept(int value) {
         return value == SIZE;//>= 2 && value <= SIZE;
     }
 

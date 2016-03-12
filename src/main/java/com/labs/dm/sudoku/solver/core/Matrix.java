@@ -68,20 +68,18 @@ public class Matrix implements IMatrix {
     public void setValueAt(int row, int col, int value) {
         validateInputIndex(row, col);
         validateInputValue(value);
+        tab[row][col] = value;
         if (listener != null) {
             listener.onChangeValue(row, col, value);
         }
-        tab[row][col] = value;
         if (isSetValue(value)) {
             getCandidates(row, col).clear();
+            removeSurroundingCandidates(row, col, value);
         }
 
-        removeSurroundingCandidates(row, col, value);
-        if (isSolved() && listener != null) {
+        if (listener != null && isSolved()) {
             listener.onResolved();
         }
-
-        removeSurroundingCandidates(row, col, value);
     }
 
     @Override
@@ -105,15 +103,19 @@ public class Matrix implements IMatrix {
 
     private void removeSurroundingCandidates(int row, int col, int value) {
         if (isSetValue(value)) {
-            for (int r = 0; r < SIZE; r++) {
-                removeCandidate(r, col, value);
-            }
-            for (int c = 0; c < SIZE; c++) {
-                removeCandidate(row, c, value);
+            for (int index = 0; index < SIZE; index++) {
+                if (index != row) {
+                    removeCandidate(index, col, value);
+                }
+                if (index != col) {
+                    removeCandidate(row, index, value);
+                }
             }
             for (int rowGroup : Utils.it((row))) {
                 for (int colGroup : Utils.it((col))) {
-                    removeCandidate(rowGroup, colGroup, value);
+                    if (row != rowGroup && col != colGroup) {
+                        removeCandidate(rowGroup, colGroup, value);
+                    }
                 }
             }
         }
@@ -121,7 +123,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isSolved() {
-        return validate(true) && getSolvedItems() == SIZE * SIZE && getCandidatesCount() == 0;
+        return getSolvedItems() == SIZE * SIZE && getCandidatesCount() == 0 && validate(true);
     }
 
     @Override
