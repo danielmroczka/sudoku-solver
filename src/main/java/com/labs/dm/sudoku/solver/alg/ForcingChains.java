@@ -33,7 +33,7 @@ public class ForcingChains implements IAlgorithm {
                         if (matrix.getValueAt(r, c) == 0) {
                             boolean theSame = true;
                             for (int id = 0; id < clones.length - 1; id++) {
-                                if (clones[id].getValueAt(r, c) == 0 || clones[id].getValueAt(r, c) != clones[id + 1].getValueAt(r, c)) {
+                                if (clones[id].getValueAt(r, c) != clones[id + 1].getValueAt(r, c)) {
                                     theSame = false;
                                     break;
                                 }

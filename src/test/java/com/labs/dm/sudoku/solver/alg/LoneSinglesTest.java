@@ -23,7 +23,7 @@ public class LoneSinglesTest {
     public void testExecute() throws IOException {
         //GIVEN
         IMatrix matrix = new Matrix();
-        IMatrix resolvedMatrix = new com.labs.dm.sudoku.solver.io.MatrixLoader().load("src/test/resources/patterns/solved.txt");
+        IMatrix resolvedMatrix = new com.labs.dm.sudoku.solver.io.MatrixLoader().load("patterns/solved.txt");
 
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
