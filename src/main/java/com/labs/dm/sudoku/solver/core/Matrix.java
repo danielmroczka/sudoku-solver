@@ -20,8 +20,8 @@ public class Matrix implements IMatrix {
     private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;
 
-    protected final List<Integer>[][] possibleValues;
-//    protected final Map<Pair, List<Integer>> map;
+//    protected final List<Integer>[][] possibleValues;
+    protected final Map<Pair, List<Integer>> possibleValues;
 
     private IMatrixListener listener;
 
@@ -32,7 +32,7 @@ public class Matrix implements IMatrix {
     public Matrix(IMatrix copy) {
         tab = new int[SIZE][SIZE];
         deepCopy(((Matrix) copy).tab, tab);
-        possibleValues = new ArrayList[SIZE][SIZE];
+        possibleValues = new HashMap<>();
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 setCandidates(row, col, new ArrayList<>(copy.getCandidates(row, col)));
@@ -42,7 +42,7 @@ public class Matrix implements IMatrix {
 
     private Matrix(int[][] tab) {
         this.tab = tab;
-        possibleValues = new ArrayList[SIZE][SIZE];
+        possibleValues = new HashMap<>();
         initCandidates();
     }
 
@@ -298,12 +298,12 @@ public class Matrix implements IMatrix {
 
     @Override
     public List<Integer> getCandidates(int row, int col) {
-        return possibleValues[row][col];
+        return getCandidates(new Pair(row, col));
     }
 
     @Override
     public List<Integer> getCandidates(Pair pair) {
-        return getCandidates(pair.getRow(), pair.getCol());
+        return possibleValues.get(pair);//getCandidates(pair.getRow(), pair.getCol());
     }
 
     @Override
@@ -388,7 +388,7 @@ public class Matrix implements IMatrix {
                 throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
             }
         }
-        possibleValues[row][col] = set;
+        possibleValues.put(new Pair(row,col), set);
     }
 
     @Override
