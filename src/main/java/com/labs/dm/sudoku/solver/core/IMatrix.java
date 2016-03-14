@@ -5,7 +5,6 @@ package com.labs.dm.sudoku.solver.core;
 
 import com.labs.dm.sudoku.solver.executors.ContextItem;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -47,7 +46,7 @@ public interface IMatrix extends Iterable<Integer> {
 
     void removeCandidate(int row, int col, int value);
 
-    void removeCandidate(int row, int col, Collection<Integer> values);
+    void removeCandidate(int row, int col, List<Integer> values);
 
     /**
      * Returns true if matrix is solved.
@@ -140,7 +139,7 @@ public interface IMatrix extends Iterable<Integer> {
      * @param col
      * @return
      */
-    Collection<Integer> getCandidates(int row, int col);
+    List<Integer> getCandidates(int row, int col);
 
     /**
      * Get collection of candidates for selected cell
@@ -148,9 +147,9 @@ public interface IMatrix extends Iterable<Integer> {
      * @param pair
      * @return
      */
-    Collection<Integer> getCandidates(Pair pair);
+    List<Integer> getCandidates(Pair pair);
 
-    void setCandidates(int row, int col, Collection<Integer> set);
+    void setCandidates(int row, int col, List<Integer> set);
 
     /**
      * Returns SIZE*SIZE elements array starting from first row, iterate through

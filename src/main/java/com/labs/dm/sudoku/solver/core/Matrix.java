@@ -20,7 +20,8 @@ public class Matrix implements IMatrix {
     private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;
 
-    protected final Collection<Integer>[][] possibleValues;
+    protected final List<Integer>[][] possibleValues;
+//    protected final Map<Pair, List<Integer>> map;
 
     private IMatrixListener listener;
 
@@ -31,24 +32,24 @@ public class Matrix implements IMatrix {
     public Matrix(IMatrix copy) {
         tab = new int[SIZE][SIZE];
         deepCopy(((Matrix) copy).tab, tab);
-        possibleValues = new HashSet[SIZE][SIZE];
+        possibleValues = new ArrayList[SIZE][SIZE];
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                setCandidates(row, col, new HashSet<>(copy.getCandidates(row, col)));
+                setCandidates(row, col, new ArrayList<>(copy.getCandidates(row, col)));
             }
         }
     }
 
     private Matrix(int[][] tab) {
         this.tab = tab;
-        possibleValues = new HashSet[SIZE][SIZE];
+        possibleValues = new ArrayList[SIZE][SIZE];
         initCandidates();
     }
 
     private void initCandidates() {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                setCandidates(row, col, new HashSet<Integer>());
+                setCandidates(row, col, new ArrayList<Integer>());
             }
         }
     }
@@ -84,18 +85,18 @@ public class Matrix implements IMatrix {
 
     @Override
     public void removeCandidate(int row, int col, int value) {
-        if (getCandidates(row, col).remove(value)) {
+        if (getCandidates(row, col).remove((Integer)value)) {
             if (listener != null) {
                 listener.onRemoveCandidate(row, col, value);
             }
             if (getCandidates(row, col).size() == 1) {
-                setValueAt(row, col, getCandidates(row, col).toArray(new Integer[1])[0]);
+                setValueAt(row, col, getCandidates(row, col).get(0));
             }
         }
     }
 
     @Override
-    public void removeCandidate(int row, int col, Collection<Integer> values) {
+    public void removeCandidate(int row, int col, List<Integer> values) {
         for (int candidate : values) {
             removeCandidate(row, col, candidate);
         }
@@ -296,12 +297,12 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public Collection<Integer> getCandidates(int row, int col) {
+    public List<Integer> getCandidates(int row, int col) {
         return possibleValues[row][col];
     }
 
     @Override
-    public Collection<Integer> getCandidates(Pair pair) {
+    public List<Integer> getCandidates(Pair pair) {
         return getCandidates(pair.getRow(), pair.getCol());
     }
 
@@ -381,7 +382,7 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public void setCandidates(int row, int col, Collection<Integer> set) {
+    public void setCandidates(int row, int col, List<Integer> set) {
         for (int val : set) {
             if (!isSetValue(val)) {
                 throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
@@ -421,7 +422,13 @@ public class Matrix implements IMatrix {
                 throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
             }
         }
-        getCandidates(row, col).addAll(new HashSet<>(Arrays.asList(array)));
+        List<Integer> toAdd = Arrays.asList(array);
+        for (int item:toAdd) {
+            if (!getCandidates(row, col).contains(item)) {
+                getCandidates(row, col).add(item);
+            }
+        }
+        Collections.sort(getCandidates(row,col));
     }
 
     @Override
