@@ -2,6 +2,7 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.utils.CounterHashMap;
+import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -12,7 +13,7 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 /**
  * Naked Pairs Algorithm Implementation
  * http://www.learn-sudoku.com/naked-pairs.html
- * <p/>
+ * <p>
  * Created by daniel on 2016-02-11.
  */
 public class NakedPairs implements IAlgorithm {
@@ -21,8 +22,8 @@ public class NakedPairs implements IAlgorithm {
 
     @Override
     public void execute(IMatrix matrix) {
-        findNakedPairsInCols(matrix);
         findNakedPairsInRows(matrix);
+        findNakedPairsInCols(matrix);
         findNakedPairsInBlocks(matrix);
     }
 
@@ -30,16 +31,16 @@ public class NakedPairs implements IAlgorithm {
         for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
                 CounterHashMap<Collection<Integer>> map = new CounterHashMap<>();
-                for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
-                    for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
+                for (int row : Utils.it(rowGroup * BLOCK_SIZE)) {
+                    for (int col : Utils.it(colGroup * BLOCK_SIZE)) {
                         count(matrix, map, row, col);
                     }
                 }
 
                 for (Map.Entry<Collection<Integer>, Integer> entry : map.entrySet()) {
                     if (accept(entry.getValue())) {
-                        for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
-                            for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
+                        for (int row : Utils.it(rowGroup * BLOCK_SIZE)) {
+                            for (int col : Utils.it(colGroup * BLOCK_SIZE)) {
                                 if (!matrix.getCandidates(row, col).equals(entry.getKey()) && !Collections.disjoint(matrix.getCandidates(row, col), entry.getKey())) {
                                     matrix.removeCandidate(row, col, entry.getKey());
                                 }
