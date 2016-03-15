@@ -34,6 +34,7 @@ public class Flow {
             run(matrix, OpenSingles.class);
             run(matrix, NakedPairs.class);
             run(matrix, NakedTriplets.class);
+            run(matrix, NakedQuads.class);
             run(matrix, HiddenPairs.class);
             run(matrix, HiddenTriples.class);
             run(matrix, HiddenSingles.class);

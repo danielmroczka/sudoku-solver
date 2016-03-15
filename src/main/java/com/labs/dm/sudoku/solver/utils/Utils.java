@@ -418,6 +418,7 @@ public class Utils {
                 for (int idx : indexCombination) {
                     map.add(listWithTwoLengthItems.get(idx));
                 }
+                return map;
             }
         }
 
@@ -434,7 +435,7 @@ public class Utils {
                 List<List<Integer>> combination = Utils.combinationList(entry, 2);
 
                 for (List<Integer> item : list) {
-                    if (!entry.equals(item) && item.size() >= 2 && item.size() <= size - 1) {
+                    if (!entry.equals(item) && item.size() >= 2 && item.size() <= size) {
                         for (List<Integer> elem : combination) {
                             if (item.equals(elem)) {
                                 cnt++;
