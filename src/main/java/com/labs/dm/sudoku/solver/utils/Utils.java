@@ -358,4 +358,99 @@ public class Utils {
             System.arraycopy(original[row], 0, copy[row], 0, SIZE);
         }
     }
+
+    public static List<List<Integer>> subset(List<List<Integer>> list, int size) {
+        List<List<Integer>> map = new ArrayList<>();
+        CounterHashMap<List<Integer>> counterMap = new CounterHashMap<>();
+        for (List<Integer> item : list) {
+            if (item.size() >= 2 && item.size() <= size) {
+                counterMap.inc(item);
+            }
+        }
+
+        /**
+         * Finds following pattern:
+         * 123, 123, 123 -> 123
+         */
+        for (Map.Entry<List<Integer>, Integer> entry : counterMap.entrySet()) {
+            if (entry.getValue() == size) {
+                for (int i = 0; i < size + 1; i++) {
+                    map.add(entry.getKey());
+                }
+                return map;
+            }
+        }
+
+        /**
+         * Finds following pattern:
+         * 24, 47, 27 -> 247
+         */
+        List<List<Integer>> listWithTwoLengthItems = new ArrayList<>();
+        List<Integer> cc = new ArrayList<>();
+        int i = 0;
+        for (List<Integer> entry : list) {
+            if (entry.size() == size - 1) {
+                listWithTwoLengthItems.add(entry);
+                cc.add(i++);
+            }
+        }
+
+        List<List<Integer>> indexListCombination = Utils.combinationList(cc, 3);
+        for (List<Integer> indexCombination : indexListCombination) {
+            List<Integer> tmpList = new ArrayList<>();
+
+            for (int idx : indexCombination) {
+                tmpList.addAll(listWithTwoLengthItems.get(idx));
+            }
+            CounterHashMap<Integer> counter = new CounterHashMap();
+            for (int item : tmpList) {
+                counter.inc(item);
+            }
+
+            boolean status = true;
+            for (int val : counter.values()) {
+                if (val != 2) status = false;
+            }
+
+            if (status) {
+                Set<Integer> set = new HashSet<>(tmpList);
+                map.add(new ArrayList<Integer>(set));
+                for (int idx : indexCombination) {
+                    map.add(listWithTwoLengthItems.get(idx));
+                }
+            }
+        }
+
+
+        /**
+         * Finds following pattern:
+         * 138, 18, 38 -> 138
+         *
+         */
+        for (List<Integer> entry : list) {
+            if (entry.size() == size) {
+                int cnt = 0;
+                List<List<Integer>> combination = Utils.combinationList(entry, 2);
+
+                for (List<Integer> item : list) {
+                    if (!entry.equals(item) && item.size() == size - 1) {
+                        for (List<Integer> elem : combination) {
+                            if (item.equals(elem)) {
+                                cnt++;
+                                map.add(item);
+                            }
+                        }
+                    }
+                }
+
+                if (cnt == 2) {
+                    map.add(entry);
+                    map.add(0, entry);
+                    return map;
+                }
+            }
+        }
+
+        return map;
+    }
 }
