@@ -76,7 +76,7 @@ public class XWingTest {
     @Test
     @Ignore
     public void testFromFile() throws IOException {
-        IMatrix matrix = new MatrixLoader().load("src/test/resources/patterns/hiddenPair.txt");
+        IMatrix matrix = new MatrixLoader().load("patterns/hiddenPair.txt");
         cand.execute(matrix);
         assertTrue(matrix.getCandidatesCount() <= 98);
         alg.execute(matrix);
@@ -85,7 +85,7 @@ public class XWingTest {
 
     @Test
     public void testFromFile1() throws IOException {
-        IMatrix matrix = new MatrixLoader().load("src/test/resources/patterns/xwing/incol.txt");
+        IMatrix matrix = new MatrixLoader().load("patterns/xwing/incol.txt");
         cand.execute(matrix);
         assertTrue(matrix.getCandidatesCount() == 60);
         alg.execute(matrix);

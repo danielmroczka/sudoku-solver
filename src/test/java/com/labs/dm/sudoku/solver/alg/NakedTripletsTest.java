@@ -2,7 +2,6 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -54,7 +53,6 @@ public class NakedTripletsTest {
     }
 
     @Test
-    @Ignore //TODO
     public void notAllThreeCanidatesInAllThreeCells() {
         //GIVEN
         IMatrix matrix = new Matrix();
@@ -73,7 +71,7 @@ public class NakedTripletsTest {
         //THEN
         assertEquals(2, matrix.getCandidates(0, 3).size());
         assertEquals(2, matrix.getCandidates(0, 5).size());
-        assertEquals(2, matrix.getCandidates(0, 8).size());
+        assertEquals(3, matrix.getCandidates(0, 8).size());
     }
 
 }

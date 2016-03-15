@@ -20,7 +20,8 @@ public class Matrix implements IMatrix {
     private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;
 
-    protected final Collection<Integer>[][] possibleValues;
+//    protected final List<Integer>[][] possibleValues;
+    protected final Map<Pair, List<Integer>> possibleValues;
 
     private IMatrixListener listener;
 
@@ -31,24 +32,24 @@ public class Matrix implements IMatrix {
     public Matrix(IMatrix copy) {
         tab = new int[SIZE][SIZE];
         deepCopy(((Matrix) copy).tab, tab);
-        possibleValues = new HashSet[SIZE][SIZE];
+        possibleValues = new HashMap<>();
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                setCandidates(row, col, new HashSet<>(copy.getCandidates(row, col)));
+                setCandidates(row, col, new ArrayList<>(copy.getCandidates(row, col)));
             }
         }
     }
 
     private Matrix(int[][] tab) {
         this.tab = tab;
-        possibleValues = new HashSet[SIZE][SIZE];
+        possibleValues = new HashMap<>();
         initCandidates();
     }
 
     private void initCandidates() {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                setCandidates(row, col, new HashSet<Integer>());
+                setCandidates(row, col, new ArrayList<Integer>());
             }
         }
     }
@@ -68,36 +69,34 @@ public class Matrix implements IMatrix {
     public void setValueAt(int row, int col, int value) {
         validateInputIndex(row, col);
         validateInputValue(value);
+        tab[row][col] = value;
         if (listener != null) {
             listener.onChangeValue(row, col, value);
         }
-        tab[row][col] = value;
         if (isSetValue(value)) {
             getCandidates(row, col).clear();
+            removeSurroundingCandidates(row, col, value);
         }
 
-        removeSurroundingCandidates(row, col, value);
-        if (isSolved() && listener != null) {
+        if (listener != null && isSolved()) {
             listener.onResolved();
         }
-
-        removeSurroundingCandidates(row, col, value);
     }
 
     @Override
     public void removeCandidate(int row, int col, int value) {
-        if (getCandidates(row, col).remove(value)) {
+        if (getCandidates(row, col).remove((Integer)value)) {
             if (listener != null) {
                 listener.onRemoveCandidate(row, col, value);
             }
             if (getCandidates(row, col).size() == 1) {
-                setValueAt(row, col, getCandidates(row, col).toArray(new Integer[1])[0]);
+                setValueAt(row, col, getCandidates(row, col).get(0));
             }
         }
     }
 
     @Override
-    public void removeCandidate(int row, int col, Collection<Integer> values) {
+    public void removeCandidate(int row, int col, List<Integer> values) {
         for (int candidate : values) {
             removeCandidate(row, col, candidate);
         }
@@ -105,15 +104,19 @@ public class Matrix implements IMatrix {
 
     private void removeSurroundingCandidates(int row, int col, int value) {
         if (isSetValue(value)) {
-            for (int r = 0; r < SIZE; r++) {
-                removeCandidate(r, col, value);
-            }
-            for (int c = 0; c < SIZE; c++) {
-                removeCandidate(row, c, value);
+            for (int index = 0; index < SIZE; index++) {
+                if (index != row) {
+                    removeCandidate(index, col, value);
+                }
+                if (index != col) {
+                    removeCandidate(row, index, value);
+                }
             }
             for (int rowGroup : Utils.it((row))) {
                 for (int colGroup : Utils.it((col))) {
-                    removeCandidate(rowGroup, colGroup, value);
+                    if (row != rowGroup && col != colGroup) {
+                        removeCandidate(rowGroup, colGroup, value);
+                    }
                 }
             }
         }
@@ -121,7 +124,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public boolean isSolved() {
-        return validate(true) && getSolvedItems() == SIZE * SIZE && getCandidatesCount() == 0;
+        return getSolvedItems() == SIZE * SIZE && getCandidatesCount() == 0 && validate(true);
     }
 
     @Override
@@ -294,13 +297,13 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public Collection<Integer> getCandidates(int row, int col) {
-        return possibleValues[row][col];
+    public List<Integer> getCandidates(int row, int col) {
+        return getCandidates(new Pair(row, col));
     }
 
     @Override
-    public Collection<Integer> getCandidates(Pair pair) {
-        return getCandidates(pair.getRow(), pair.getCol());
+    public List<Integer> getCandidates(Pair pair) {
+        return possibleValues.get(pair);//getCandidates(pair.getRow(), pair.getCol());
     }
 
     @Override
@@ -379,13 +382,13 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public void setCandidates(int row, int col, Collection<Integer> set) {
+    public void setCandidates(int row, int col, List<Integer> set) {
         for (int val : set) {
             if (!isSetValue(val)) {
                 throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
             }
         }
-        possibleValues[row][col] = set;
+        possibleValues.put(new Pair(row,col), set);
     }
 
     @Override
@@ -419,7 +422,13 @@ public class Matrix implements IMatrix {
                 throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
             }
         }
-        getCandidates(row, col).addAll(new HashSet<>(Arrays.asList(array)));
+        List<Integer> toAdd = Arrays.asList(array);
+        for (int item:toAdd) {
+            if (!getCandidates(row, col).contains(item)) {
+                getCandidates(row, col).add(item);
+            }
+        }
+        Collections.sort(getCandidates(row,col));
     }
 
     @Override

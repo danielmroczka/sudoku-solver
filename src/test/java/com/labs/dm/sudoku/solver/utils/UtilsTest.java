@@ -6,6 +6,7 @@ import com.labs.dm.sudoku.solver.core.Pair;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -40,13 +41,15 @@ public class UtilsTest {
     }
 
     @Test
-    public void testCombination2() throws Exception {
-        List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
-//        assertEquals(1, combinationList(list1, 5).size());
-        assertEquals(5, combinationList(list1, 4).size());
-        assertEquals(10, combinationList(list1, 3).size());
-        assertEquals(10, combinationList(list1, 2).size());
-        assertEquals(5, combinationList(list1, 1).size());
+    public void testCombinationList() throws Exception {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+        assertEquals(1, combinationList(list, 0).size());
+        assertEquals(5, combinationList(list, 1).size());
+        assertEquals(10, combinationList(list, 2).size());
+        assertEquals(10, combinationList(list, 3).size());
+        assertEquals(5, combinationList(list, 4).size());
+        assertEquals(1, combinationList(list, 5).size());
+        assertEquals(0, combinationList(list, 10).size());
     }
 
     @Test
@@ -106,4 +109,55 @@ public class UtilsTest {
         //  assertFalse(Utils.acceptPivotAndPincets(Arrays.asList(1, 1), Arrays.asList(2, 2), Arrays.asList(7, 7)));
     }
 
+    @Test
+    public void testSubSet1() throws Exception {
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(9));
+        list.add(Arrays.asList(1, 2));
+        list.add(Arrays.asList(1, 2, 3));
+        list.add(Arrays.asList(1, 2, 3));
+        list.add(Arrays.asList(1, 2, 3));
+        list.add(Arrays.asList(7, 8, 9));
+
+        List<List<Integer>> ids = Utils.subset(list, 3);
+        assertArrayEquals(new Integer[]{1, 2, 3}, ids.get(0).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{1, 2, 3}, ids.get(1).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{1, 2, 3}, ids.get(2).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{1, 2, 3}, ids.get(3).toArray(new Integer[0]));
+
+    }
+
+    @Test
+    public void testSubSet2() throws Exception {
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(2, 4));
+        list.add(Arrays.asList(4, 7));
+        list.add(Arrays.asList(2, 7));
+
+        list.add(Arrays.asList(2, 8));
+        list.add(Arrays.asList(1, 7, 4));
+
+        List<List<Integer>> ids = Utils.subset(list, 3);
+        assertArrayEquals(new Integer[]{2, 4, 7}, ids.get(0).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{2, 4}, ids.get(1).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{4, 7}, ids.get(2).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{2, 7}, ids.get(3).toArray(new Integer[0]));
+
+    }
+
+    @Test
+    public void testSubSet3() throws Exception {
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(1, 3, 8));
+        list.add(Arrays.asList(1, 8));
+        list.add(Arrays.asList(3, 8));
+        list.add(Arrays.asList(7, 8, 9));
+        list.add(Arrays.asList(1, 2, 3));
+
+        List<List<Integer>> ids = Utils.subset(list, 3);
+        assertArrayEquals(new Integer[]{1, 3, 8}, ids.get(0).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{1, 8}, ids.get(1).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{3, 8}, ids.get(2).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{1, 3, 8}, ids.get(3).toArray(new Integer[0]));
+    }
 }

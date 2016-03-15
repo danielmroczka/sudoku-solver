@@ -177,8 +177,8 @@ public class Reduction implements IAlgorithm {
 
     private void removeInBlockCol(IMatrix matrix, int col, int key, List<Integer> pos) {
         int rowBlock = pos.get(0);
-        for (int rowTemp : Utils.it(3 * rowBlock / 3)) {
-            for (int colTemp : Utils.it(3 * (col / 3))) {
+        for (int rowTemp : Utils.it(BLOCK_SIZE * rowBlock / BLOCK_SIZE)) {
+            for (int colTemp : Utils.it(BLOCK_SIZE * (col / BLOCK_SIZE))) {
                 if (colTemp != col && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
                     matrix.removeCandidate(rowTemp, colTemp, key);
                 }

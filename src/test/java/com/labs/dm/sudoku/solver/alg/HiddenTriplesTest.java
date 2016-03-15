@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  * Created by daniel on 2016-02-19.
  */
 public class HiddenTriplesTest {
-    private final HiddenTriples hiidenTriples = new HiddenTriples();
+    private final HiddenTriples hiddenTriples = new HiddenTriples();
 
     @Test
     public void testExecute() {
@@ -27,7 +27,7 @@ public class HiddenTriplesTest {
         matrix.addCandidates(0, 7, new Integer[]{1, 2, 6});
         matrix.addCandidates(0, 8, new Integer[]{4, 7});
         //WHEN
-        hiidenTriples.execute(matrix);
+        hiddenTriples.execute(matrix);
         //THEN
         assertEquals(3, matrix.getCandidates(0, 0).size());
         assertEquals(3, matrix.getCandidates(0, 5).size());
