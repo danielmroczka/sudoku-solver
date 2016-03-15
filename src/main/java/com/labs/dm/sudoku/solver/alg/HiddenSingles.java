@@ -5,9 +5,10 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.utils.CounterHashMap;
+import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.Collection;
-import java.util.Map;
+import java.util.Map.Entry;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
@@ -33,16 +34,16 @@ public class HiddenSingles implements IAlgorithm {
             for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
 
                 CounterHashMap<Integer> counter = new CounterHashMap<>();
-                for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
-                    for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
+                for (int row : Utils.blockElems(rowGroup * BLOCK_SIZE)) {
+                    for (int col : Utils.blockElems(colGroup * BLOCK_SIZE)) {
                         onFind(matrix, counter, row, col);
                     }
                 }
 
-                for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+                for (Entry<Integer, Integer> entry : counter.entrySet()) {
                     if (entry.getValue() == 1) {
-                        for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
-                            for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
+                        for (int row : Utils.blockElems(rowGroup * BLOCK_SIZE)) {
+                            for (int col : Utils.blockElems(colGroup * BLOCK_SIZE)) {
                                 if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                                     matrix.setValueAt(row, col, entry.getKey());
                                 }
@@ -61,7 +62,7 @@ public class HiddenSingles implements IAlgorithm {
                 onFind(matrix, counter, row, col);
             }
 
-            for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+            for (Entry<Integer, Integer> entry : counter.entrySet()) {
                 if (entry.getValue() == 1) {
                     for (int row = 0; row < SIZE; row++) {
                         if (matrix.getCandidates(row, col).contains(entry.getKey())) {
@@ -80,7 +81,7 @@ public class HiddenSingles implements IAlgorithm {
                 onFind(matrix, counter, row, col);
             }
 
-            for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+            for (Entry<Integer, Integer> entry : counter.entrySet()) {
                 if (entry.getValue() == 1) {
                     for (int col = 0; col < SIZE; col++) {
                         if (matrix.getCandidates(row, col).contains(entry.getKey())) {

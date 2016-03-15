@@ -86,6 +86,16 @@ public class ValidationTest {
     }
 
     @Test
+    public void validateNakedQuads() throws IOException {
+        for (int i = 0; i < COUNT; i++) {
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+            new NakedQuads().execute(matrix);
+            matrix.validate();
+        }
+    }
+
+    @Test
     public void validateHiddenSingles() throws IOException {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
