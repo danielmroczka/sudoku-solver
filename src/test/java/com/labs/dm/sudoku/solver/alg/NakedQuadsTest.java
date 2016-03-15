@@ -15,28 +15,6 @@ public class NakedQuadsTest {
     private final NakedQuads nakedQuads = new NakedQuads();
 
     @Test
-    @Ignore
-    public void testExecute() {
-        //GIVEN
-        IMatrix matrix = new Matrix();
-
-        matrix.setValueAt(0, 1, 5);
-        matrix.setValueAt(2, 2, 2);
-        matrix.addCandidates(0, 0, new Integer[]{1, 9});
-        matrix.addCandidates(0, 2, new Integer[]{1, 3, 6, 8});
-        matrix.addCandidates(1, 1, new Integer[]{1, 7, 9});
-        matrix.addCandidates(0, 1, new Integer[]{1, 3, 7, 9});
-        matrix.addCandidates(2, 0, new Integer[]{1, 4, 8, 9});
-        matrix.addCandidates(2, 2, new Integer[]{1, 4, 6, 9});
-        //WHEN
-        nakedQuads.execute(matrix);
-        //THEN
-        assertEquals(2, matrix.getCandidates(0, 2).size());
-        assertEquals(2, matrix.getCandidates(2, 0).size());
-        assertEquals(2, matrix.getCandidates(2, 1).size());
-    }
-
-    @Test
     public void allFourCandidatesInAllFourCells() {
         //GIVEN
         IMatrix matrix = new Matrix();

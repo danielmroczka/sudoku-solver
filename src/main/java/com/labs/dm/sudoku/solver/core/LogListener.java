@@ -3,7 +3,7 @@ package com.labs.dm.sudoku.solver.core;
 import java.util.logging.Logger;
 
 /**
- * Created by lrxmrod on 10-Mar-16.
+ * Created by Daniel Mroczka on 10-Mar-16.
  */
 public class LogListener implements IMatrixListener {
     private final Logger logger = Logger.getLogger("MatrixListener");

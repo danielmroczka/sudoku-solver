@@ -112,8 +112,8 @@ public class Matrix implements IMatrix {
                     removeCandidate(row, index, value);
                 }
             }
-            for (int rowGroup : Utils.it((row))) {
-                for (int colGroup : Utils.it((col))) {
+            for (int rowGroup : Utils.blockElems((row))) {
+                for (int colGroup : Utils.blockElems((col))) {
                     if (row != rowGroup && col != colGroup) {
                         removeCandidate(rowGroup, colGroup, value);
                     }

@@ -74,7 +74,6 @@ public class XWingTest {
     }
 
     @Test
-    @Ignore
     public void testFromFile() throws IOException {
         IMatrix matrix = new MatrixLoader().load("patterns/hiddenPair.txt");
         cand.execute(matrix);

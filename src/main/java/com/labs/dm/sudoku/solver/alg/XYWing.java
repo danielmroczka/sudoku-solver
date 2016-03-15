@@ -39,8 +39,8 @@ public class XYWing implements IAlgorithm {
                         }
                     }
 
-                    for (int rb : Utils.it(row)) {
-                        for (int cb : Utils.it(col)) {
+                    for (int rb : Utils.blockElems(row)) {
+                        for (int cb : Utils.blockElems(col)) {
                             if (rb != row && cb != col && acceptPincet(matrix.getCandidates(pivot), matrix.getCandidates(rb, cb), pivotLength)) {
                                 pincets.add(new Pair(rb, cb));
                             }

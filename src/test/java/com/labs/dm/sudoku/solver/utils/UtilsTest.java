@@ -76,11 +76,11 @@ public class UtilsTest {
 
     @Test
     public void testIt() {
-        assertEquals(3, Utils.it(3).length);
-        assertArrayEquals(new int[]{0, 1, 2}, Utils.it(0));
-        assertArrayEquals(new int[]{0, 1, 2}, Utils.it(1));
-        assertArrayEquals(new int[]{0, 1, 2}, Utils.it(2));
-        assertArrayEquals(new int[]{3, 4, 5}, Utils.it(3));
+        assertEquals(3, Utils.blockElems(3).length);
+        assertArrayEquals(new int[]{0, 1, 2}, Utils.blockElems(0));
+        assertArrayEquals(new int[]{0, 1, 2}, Utils.blockElems(1));
+        assertArrayEquals(new int[]{0, 1, 2}, Utils.blockElems(2));
+        assertArrayEquals(new int[]{3, 4, 5}, Utils.blockElems(3));
     }
 
     @Test

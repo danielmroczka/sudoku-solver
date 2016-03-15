@@ -94,8 +94,8 @@ public class Utils {
     public static List<Pair> pairsOnIntersections(Pair cell1, Pair cell2) {
         List<Pair> result = new ArrayList<>();
         if (theSameColBlock(cell1, cell2) && theSameRowBlock(cell1, cell2)) {
-            for (int row : it(cell1.getRow())) {
-                for (int col : it(cell1.getCol())) {
+            for (int row : blockElems(cell1.getRow())) {
+                for (int col : blockElems(cell1.getCol())) {
                     if ((row == cell1.getRow() && col == cell1.getCol()) || (row == cell2.getRow() && col == cell2.getCol())) {
                         continue;
                     }
@@ -116,18 +116,18 @@ public class Utils {
                 }
             }
         } else if (theSameRowBlock(cell1, cell2)) {
-            for (int col : it(cell1.getCol())) {
+            for (int col : blockElems(cell1.getCol())) {
                 result.add(new Pair(cell2.getRow(), col));
             }
-            for (int col : it(cell2.getCol())) {
+            for (int col : blockElems(cell2.getCol())) {
                 result.add(new Pair(cell1.getRow(), col));
             }
 
         } else if (theSameColBlock(cell1, cell2)) {
-            for (int row : it(cell1.getRow())) {
+            for (int row : blockElems(cell1.getRow())) {
                 result.add(new Pair(row, cell2.getCol()));
             }
-            for (int row : it(cell2.getRow())) {
+            for (int row : blockElems(cell2.getRow())) {
                 result.add(new Pair(row, cell1.getCol()));
             }
 
@@ -139,7 +139,13 @@ public class Utils {
         return result;
     }
 
-    public static int[] it(int pos) {
+    /**
+     * Returns position of block selected by start position parameter
+     *
+     * @param pos
+     * @return
+     */
+    public static int[] blockElems(int pos) {
         int[] res = new int[BLOCK_SIZE];
         int id = 0;
         for (int item = pos / BLOCK_SIZE * BLOCK_SIZE; item < pos / BLOCK_SIZE * BLOCK_SIZE + BLOCK_SIZE; item++) {
@@ -342,8 +348,8 @@ public class Utils {
                 res.add(new Pair(row, c));
             }
         }
-        for (int rowGroup : Utils.it((row))) {
-            for (int colGroup : Utils.it((col))) {
+        for (int rowGroup : Utils.blockElems((row))) {
+            for (int colGroup : Utils.blockElems((col))) {
                 if (rowGroup != row && colGroup != col) {
                     res.add(new Pair(rowGroup, colGroup));
                 }

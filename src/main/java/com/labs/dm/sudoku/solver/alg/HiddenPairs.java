@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.utils.Utils.blockElems;
+
 /**
  * Hidden Pairs algorithm implementation
  * <p/>
@@ -31,8 +34,8 @@ public class HiddenPairs implements IAlgorithm {
     }
 
     private void findHiddenPairsInBlock(IMatrix matrix) {
-        for (int rowGroup = 0; rowGroup < IMatrix.BLOCK_SIZE; rowGroup++) {
-            for (int colGroup = 0; colGroup < IMatrix.BLOCK_SIZE; colGroup++) {
+        for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
+            for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
                 Map<List<Integer>, Integer> mapWithOccurencies = group(matrix.getCandidatesInBlock(rowGroup, colGroup));
 
                 for (Map.Entry<List<Integer>, Integer> entry : mapWithOccurencies.entrySet()) {
@@ -40,8 +43,8 @@ public class HiddenPairs implements IAlgorithm {
                         List<Integer> pairs = entry.getKey();
                         int found = 0, unique = 0;
 
-                        for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                            for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
+                        for (int row : blockElems(rowGroup * BLOCK_SIZE)) {
+                            for (int col : blockElems(colGroup * BLOCK_SIZE)) {
                                 Collection<Integer> candidates = matrix.getCandidates(row, col);
 
                                 if (!Collections.disjoint(candidates, pairs)) {
@@ -55,8 +58,8 @@ public class HiddenPairs implements IAlgorithm {
 
                         if (unique == SIZE && found == SIZE) {
 
-                            for (int row = rowGroup * IMatrix.BLOCK_SIZE; row < (rowGroup + 1) * IMatrix.BLOCK_SIZE; row++) {
-                                for (int col = colGroup * IMatrix.BLOCK_SIZE; col < (colGroup + 1) * IMatrix.BLOCK_SIZE; col++) {
+                            for (int row : blockElems(rowGroup * BLOCK_SIZE)) {
+                                for (int col : blockElems(colGroup * BLOCK_SIZE)) {
                                     Collection<Integer> candidates = matrix.getCandidates(row, col);
                                     if (candidates.containsAll(pairs)) {
                                         candidates.retainAll(pairs);
