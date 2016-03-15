@@ -389,7 +389,7 @@ public class Utils {
         List<Integer> cc = new ArrayList<>();
         int i = 0;
         for (List<Integer> entry : list) {
-            if (entry.size() == size - 1) {
+            if (entry.size() >= 2 && entry.size() <= size - 1) {
                 listWithTwoLengthItems.add(entry);
                 cc.add(i++);
             }
@@ -425,6 +425,7 @@ public class Utils {
         /**
          * Finds following pattern:
          * 138, 18, 38 -> 138
+         * 37, 57, 135, 1357 -> 1357
          *
          */
         for (List<Integer> entry : list) {
@@ -433,7 +434,7 @@ public class Utils {
                 List<List<Integer>> combination = Utils.combinationList(entry, 2);
 
                 for (List<Integer> item : list) {
-                    if (!entry.equals(item) && item.size() == size - 1) {
+                    if (!entry.equals(item) && item.size() >= 2 && item.size() <= size - 1) {
                         for (List<Integer> elem : combination) {
                             if (item.equals(elem)) {
                                 cnt++;
