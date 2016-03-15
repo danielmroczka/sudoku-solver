@@ -453,6 +453,8 @@ public class Utils {
                     map.add(entry);
                     map.add(0, entry);
                     return map;
+                } else {
+                    map.clear();
                 }
             }
         }

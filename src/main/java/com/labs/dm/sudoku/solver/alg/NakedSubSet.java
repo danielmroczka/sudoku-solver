@@ -92,7 +92,7 @@ public abstract class NakedSubSet implements IAlgorithm {
         }
         boolean contains = false;
         for (List<Integer> item : res) {
-            if (item.equals(new ArrayList<>(matrix.getCandidates(row, col)))) {
+            if (item.equals(matrix.getCandidates(row, col))) {
                 contains = true;
                 break;
             }

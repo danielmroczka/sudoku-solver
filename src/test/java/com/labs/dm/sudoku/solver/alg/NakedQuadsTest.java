@@ -55,7 +55,6 @@ public class NakedQuadsTest {
     }
 
     @Test
-    //@Ignore
     public void spotInBlock() {
         // GOAL find quad of 2,4,8,9
 
@@ -80,7 +79,6 @@ public class NakedQuadsTest {
     }
 
     @Test
-    @Ignore
     public void test() {
         // GOAL find quad of 2,4,8,9
 
