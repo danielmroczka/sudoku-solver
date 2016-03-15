@@ -19,8 +19,6 @@ public class Matrix implements IMatrix {
 
     private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;
-
-//    protected final List<Integer>[][] possibleValues;
     protected final Map<Pair, List<Integer>> possibleValues;
 
     private IMatrixListener listener;
@@ -46,17 +44,17 @@ public class Matrix implements IMatrix {
         initCandidates();
     }
 
+    public Matrix(int... items) {
+        this();
+        loadFromArray(items);
+    }
+
     private void initCandidates() {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 setCandidates(row, col, new ArrayList<Integer>());
             }
         }
-    }
-
-    public Matrix(int... items) {
-        this();
-        loadFromArray(items);
     }
 
     @Override
@@ -85,7 +83,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public void removeCandidate(int row, int col, int value) {
-        if (getCandidates(row, col).remove((Integer)value)) {
+        if (getCandidates(row, col).remove((Integer) value)) {
             if (listener != null) {
                 listener.onRemoveCandidate(row, col, value);
             }
@@ -113,7 +111,7 @@ public class Matrix implements IMatrix {
                 }
             }
             for (int rowGroup : Utils.blockElems((row))) {
-                for (int colGroup : Utils.blockElems((col))) {
+                for (int colGroup : Utils.blockElems(col)) {
                     if (row != rowGroup && col != colGroup) {
                         removeCandidate(rowGroup, colGroup, value);
                     }
@@ -303,7 +301,7 @@ public class Matrix implements IMatrix {
 
     @Override
     public List<Integer> getCandidates(Pair pair) {
-        return possibleValues.get(pair);//getCandidates(pair.getRow(), pair.getCol());
+        return possibleValues.get(pair);
     }
 
     @Override
@@ -388,7 +386,7 @@ public class Matrix implements IMatrix {
                 throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
             }
         }
-        possibleValues.put(new Pair(row,col), set);
+        possibleValues.put(new Pair(row, col), set);
     }
 
     @Override
@@ -423,12 +421,12 @@ public class Matrix implements IMatrix {
             }
         }
         List<Integer> toAdd = Arrays.asList(array);
-        for (int item:toAdd) {
+        for (int item : toAdd) {
             if (!getCandidates(row, col).contains(item)) {
                 getCandidates(row, col).add(item);
             }
         }
-        Collections.sort(getCandidates(row,col));
+        Collections.sort(getCandidates(row, col));
     }
 
     @Override

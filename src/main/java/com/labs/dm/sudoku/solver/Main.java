@@ -11,17 +11,18 @@ import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import java.io.IOException;
 
 /**
- * Created by daniel on 2016-02-10.
+ * Created by Daniel Mroczka on 2016-02-10.
  */
 public class Main {
+
+    private Main() {
+    }
+
     public static void main(String[] args) throws IOException {
         MatrixLoader loader = new MatrixLoader();
-        IMatrix matrix = loader.load("src/test/resources/patterns/11clues.txt");
+        IMatrix matrix = loader.load("src/test/resources/patterns/17clues.txt");
         Flow flow = new Flow();
         flow.execute(matrix);
         System.out.println(matrix.getContext());
-
-        //matrix.addCandidates(1,1,new int[] {1,1});
-
     }
 }

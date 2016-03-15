@@ -99,7 +99,7 @@ public class Reduction implements IAlgorithm {
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 if (entry.getValue() == 2 || entry.getValue() == 3) {
                     List<Integer> pos = getPosInCol(matrix, col, entry.getKey());
-                    if (pos.size() > 0 && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
+                    if (!pos.isEmpty() && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
                         removeInBlockCol(matrix, col, entry.getKey(), pos);
                     }
                 }
@@ -114,7 +114,7 @@ public class Reduction implements IAlgorithm {
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                 if (entry.getValue() == 2 || entry.getValue() == 3) {
                     List<Integer> pos = getPosInRow(matrix, row, entry.getKey());
-                    if (pos.size() > 0 && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
+                    if (!pos.isEmpty() && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
                         removeInBlockRow(matrix, row, entry.getKey(), pos);
                     }
                 }

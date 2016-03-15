@@ -18,6 +18,9 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
  */
 public class Utils {
 
+    private Utils() {
+    }
+
     /**
      * Returns factorial value
      * For example factorial(4) = 1 * 2 * 3 * 4
@@ -348,8 +351,8 @@ public class Utils {
                 res.add(new Pair(row, c));
             }
         }
-        for (int rowGroup : Utils.blockElems((row))) {
-            for (int colGroup : Utils.blockElems((col))) {
+        for (int rowGroup : Utils.blockElems(row)) {
+            for (int colGroup : Utils.blockElems(col)) {
                 if (rowGroup != row && colGroup != col) {
                     res.add(new Pair(rowGroup, colGroup));
                 }

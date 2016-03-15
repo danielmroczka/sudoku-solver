@@ -12,14 +12,14 @@ import java.util.logging.Logger;
  */
 public class Executor {
 
-    private final Logger logger = Logger.getLogger("Executor");
+    private static final Logger LOGGER = Logger.getLogger("Executor");
     private final Map<Class<? extends IAlgorithm>, IAlgorithm> map = new HashMap<>();
     private static Executor instance;
 
     private Executor() {
     }
 
-    public synchronized static void run(IMatrix matrix, Class<? extends IAlgorithm> clazz) {
+    public static synchronized void run(IMatrix matrix, Class<? extends IAlgorithm> clazz) {
         if (instance == null) {
             instance = new Executor();
         }
@@ -34,7 +34,7 @@ public class Executor {
                 map.put(clazz, algInstance);
             }
         } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
             return;
         }
         long time = System.nanoTime();
@@ -44,7 +44,7 @@ public class Executor {
         solved = matrix.getSolvedItems() - solved;
         candidates = candidates - matrix.getCandidatesCount();
         time = System.nanoTime() - time;
-        logger.fine("Executed " + clazz.getSimpleName() + " in " + time / 1000000d + " [ms]. Solved=" + solved + ", reduced candidates=" + candidates);
+        LOGGER.fine("Executed " + clazz.getSimpleName() + " in " + time / 1000000d + " [ms]. Solved=" + solved + ", reduced candidates=" + candidates);
 
         if (solved > 0 || candidates > 0) {
             matrix.getContext().add(new ContextItem(algInstance.getClass().getSimpleName(), solved, candidates, (int) time));

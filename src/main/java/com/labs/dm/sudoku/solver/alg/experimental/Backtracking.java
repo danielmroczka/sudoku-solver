@@ -16,7 +16,6 @@ public class Backtracking implements IAlgorithm {
     @Override
     public void execute(IMatrix matrix) {
         onExecute(matrix, new Matrix(matrix));
-        // System.out.println(matrix.printCandidates());
     }
 
     private void onExecute(IMatrix matrix, IMatrix original) {
@@ -48,7 +47,6 @@ public class Backtracking implements IAlgorithm {
             for (int col = 0; col < 9; col++) {
                 if (matrix.getCandidates(row, col).size() > 0) {
                     list.add(new Pair(row, col));
-                    //ap.put(new Pair(row, col), matrix.getCandidates(row,col).size());
                 }
             }
         }
