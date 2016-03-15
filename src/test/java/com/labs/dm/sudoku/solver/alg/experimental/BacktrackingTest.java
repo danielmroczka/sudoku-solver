@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class BacktrackingTest {
 
-    private IAlgorithm back = new Backtracking();
+    private final IAlgorithm back = new Backtracking();
 
     @Test
     @Ignore

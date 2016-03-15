@@ -9,19 +9,19 @@ public class ContextItem {
     /**
      * The name of sudoku algorithm
      */
-    private String name;
+    private final String name;
     /**
      * How many candidates have been resolved in one step
      */
-    private int solved;
+    private final int solved;
     /**
      * How many candidates have been removed in one step
      */
-    private int reducedCandidate;
+    private final int reducedCandidate;
     /**
      * Time spent on execution in ms
      */
-    private int time;
+    private final int time;
 
     public ContextItem(String name, int solved, int reducedCandidate, int time) {
         this.name = name;

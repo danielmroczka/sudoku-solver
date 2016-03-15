@@ -3,7 +3,6 @@ package com.labs.dm.sudoku.solver.alg;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class XWing implements IAlgorithm {
         for (int row = 0; row < IMatrix.SIZE; row++) {
             for (int col = 0; col < IMatrix.SIZE; col++) {
 
-                List<Integer> candidates = new ArrayList<>(matrix.getCandidates(row, col));
+                List<Integer> candidates = matrix.getCandidates(row, col);
 
                 for (int candidate : candidates) {
                     if (matrix.candidatesCountInCol(col, candidate) == 2) {

@@ -201,8 +201,6 @@ public interface IMatrix extends Iterable<Integer> {
 
     void addCandidates(int row, int col, Integer[] array);
 
-    void addCandidates(int row, int col, int... candidates);
-
     List<List<Integer>> getCandidatesInRow(int row);
 
     List<List<Integer>> getCandidatesInCol(int col);

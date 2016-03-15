@@ -8,7 +8,6 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;

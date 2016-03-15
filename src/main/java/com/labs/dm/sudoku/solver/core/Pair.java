@@ -29,9 +29,7 @@ public class Pair {
 
         Pair pair = (Pair) o;
 
-        if (row != pair.row) return false;
-        return col == pair.col;
-
+        return row == pair.row && col == pair.col;
     }
 
     @Override

@@ -26,7 +26,7 @@ public abstract class NakedSubSet implements IAlgorithm {
         for (int row = 0; row < IMatrix.SIZE; row++) {
             List<List<Integer>> list = new ArrayList<>();
             for (int col = 0; col < IMatrix.SIZE; col++) {
-                list.add(new ArrayList<Integer>(matrix.getCandidates(row, col)));
+                list.add(matrix.getCandidates(row, col));
             }
             List<List<Integer>> res = Utils.subset(list, SIZE);
 
@@ -44,7 +44,7 @@ public abstract class NakedSubSet implements IAlgorithm {
         for (int col = 0; col < IMatrix.SIZE; col++) {
             List<List<Integer>> list = new ArrayList<>();
             for (int row = 0; row < IMatrix.SIZE; row++) {
-                list.add(new ArrayList<Integer>(matrix.getCandidates(row, col)));
+                list.add(matrix.getCandidates(row, col));
             }
             List<List<Integer>> res = Utils.subset(list, SIZE);
 
@@ -66,7 +66,7 @@ public abstract class NakedSubSet implements IAlgorithm {
 
                 for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
                     for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
-                        list.add(new ArrayList<Integer>(matrix.getCandidates(row, col)));
+                        list.add(matrix.getCandidates(row, col));
                     }
                 }
 

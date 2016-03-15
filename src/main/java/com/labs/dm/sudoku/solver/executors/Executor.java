@@ -35,6 +35,7 @@ public class Executor {
             }
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
+            return;
         }
         long time = System.nanoTime();
         int solved = matrix.getSolvedItems();
