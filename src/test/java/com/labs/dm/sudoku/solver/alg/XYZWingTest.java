@@ -4,6 +4,7 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -63,7 +64,7 @@ public class XYZWingTest {
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 3});
         matrix.addCandidates(0, 4, new Integer[]{2, 3});
         fill(matrix, 3);
-        matrix.setCandidates(2, 1, new HashSet<Integer>(Arrays.asList(new Integer[]{1, 3})));
+        matrix.setCandidates(2, 1, new ArrayList<Integer>(Arrays.asList(new Integer[]{1, 3})));
         //WHEN
         int candidates = matrix.getCandidatesCount();
         wing.execute(matrix);
@@ -80,7 +81,7 @@ public class XYZWingTest {
         matrix.addCandidates(0, 2, new Integer[]{2, 3});
 
         fill(matrix, 3);
-        matrix.setCandidates(0, 4, new HashSet<Integer>(Arrays.asList(new Integer[]{1, 3})));
+        matrix.setCandidates(0, 4, new ArrayList<Integer>(Arrays.asList(new Integer[]{1, 3})));
         int candidates = matrix.getCandidatesCount();
         //WHEN
 
