@@ -13,11 +13,11 @@ import java.nio.charset.Charset;
  */
 public class MatrixLoader {
 
-    private final static String DEFAULT_DELIMITER = ",";
+    private static final String DEFAULT_DELIMITER = ",";
 
     public IMatrix load(String fileName) throws IOException {
-        String inputText = readFileAsString(fileName);
-        int[] tab = convertToIntTable(toTable(inputText));
+        String inputText = this.readFileAsString(fileName);
+        int[] tab = this.convertToIntTable(this.toTable(inputText));
         return new Matrix(tab);
     }
 
@@ -27,7 +27,7 @@ public class MatrixLoader {
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 sb.append(matrix.getValueAt(row, col));
                 if (col < IMatrix.SIZE - 1) {
-                    sb.append(DEFAULT_DELIMITER);
+                    sb.append(MatrixLoader.DEFAULT_DELIMITER);
                 }
             }
             if (row < IMatrix.SIZE - 1) {
@@ -60,7 +60,7 @@ public class MatrixLoader {
 
     protected String readFileAsString(String filePath) throws IOException {
         StringBuilder fileData = new StringBuilder(IMatrix.SIZE);
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
         if (inputStream == null) {
             inputStream = new FileInputStream(filePath);
         }

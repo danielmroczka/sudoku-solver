@@ -5,8 +5,8 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
@@ -20,7 +20,7 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
  */
 public class GenerateCandidates implements IAlgorithm {
 
-    private final static List<Integer> fullSet = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    private static final List<Integer> fullSet = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     @Override
     public void execute(IMatrix matrix) {
@@ -30,7 +30,7 @@ public class GenerateCandidates implements IAlgorithm {
                     matrix.setCandidates(row, col, new ArrayList<Integer>());
                     continue;
                 }
-                List<Integer> set = new ArrayList<>(fullSet);
+                List<Integer> set = new ArrayList<>(GenerateCandidates.fullSet);
 
                 int[] cols = matrix.getElemsInCol(col);
                 int[] rows = matrix.getElemsInRow(row);
