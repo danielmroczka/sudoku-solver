@@ -16,8 +16,6 @@ public class HiddenTriplesTest {
     public void testExecute() {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setValueAt(0, 4, 9);
-        matrix.setValueAt(0, 6, 3);
 
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 5, 6, 8});
         matrix.addCandidates(0, 1, new Integer[]{4, 5, 7, 8});

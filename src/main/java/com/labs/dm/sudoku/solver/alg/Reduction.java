@@ -14,6 +14,7 @@ import java.util.Map;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+import static com.labs.dm.sudoku.solver.utils.Utils.blockElems;
 
 /**
  * Reduction Algorithm.
@@ -38,8 +39,8 @@ public class Reduction implements IAlgorithm {
                 for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
                     if (entry.getValue() == 2 || entry.getValue() == 3) {
                         List<Pair> list = new ArrayList<>();
-                        for (int col : Utils.blockElems(colGroup * BLOCK_SIZE)) {
-                            for (int row : Utils.blockElems(rowGroup * BLOCK_SIZE)) {
+                        for (int col : blockElems(colGroup * BLOCK_SIZE)) {
+                            for (int row : blockElems(rowGroup * BLOCK_SIZE)) {
                                 if (matrix.getCandidates(row, col).contains(entry.getKey())) {
                                     list.add(new Pair(row, col));
                                 }
@@ -144,8 +145,8 @@ public class Reduction implements IAlgorithm {
     private CounterHashMap<Integer> getOccurenceInBlockMap(IMatrix matrix, int rowGroup, int colGroup) {
         CounterHashMap<Integer> map = new CounterHashMap<>();
 
-        for (int col : Utils.blockElems(colGroup * BLOCK_SIZE)) {
-            for (int row : Utils.blockElems(rowGroup * BLOCK_SIZE)) {
+        for (int col : blockElems(colGroup * BLOCK_SIZE)) {
+            for (int row : blockElems(rowGroup * BLOCK_SIZE)) {
                 for (int key : matrix.getCandidates(row, col)) {
                     map.inc(key);
                 }
@@ -177,8 +178,8 @@ public class Reduction implements IAlgorithm {
 
     private void removeInBlockCol(IMatrix matrix, int col, int key, List<Integer> pos) {
         int rowBlock = pos.get(0);
-        for (int rowTemp : Utils.blockElems(BLOCK_SIZE * rowBlock / BLOCK_SIZE)) {
-            for (int colTemp : Utils.blockElems(BLOCK_SIZE * (col / BLOCK_SIZE))) {
+        for (int rowTemp : blockElems(rowBlock)) {
+            for (int colTemp : blockElems(col)) {
                 if (colTemp != col && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
                     matrix.removeCandidate(rowTemp, colTemp, key);
                 }
@@ -187,8 +188,8 @@ public class Reduction implements IAlgorithm {
     }
 
     private void removeInBlockRow(IMatrix matrix, int row, int key, List<Integer> pos) {
-        for (int colTemp : Utils.blockElems(pos.get(0))) {
-            for (int rowTemp : Utils.blockElems(row)) {
+        for (int colTemp : blockElems(pos.get(0))) {
+            for (int rowTemp : blockElems(row)) {
                 if (rowTemp != row && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
                     matrix.removeCandidate(rowTemp, colTemp, key);
                 }

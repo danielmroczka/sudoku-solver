@@ -1,9 +1,10 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
-import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.List;
+
+import static com.labs.dm.sudoku.solver.utils.Utils.theSameBlock;
 
 /**
  * Created by daniel on 2016-02-15.
@@ -22,14 +23,14 @@ public class XWing implements IAlgorithm {
                         //detect in rows:
                         for (int tempCol = col + 1; tempCol < IMatrix.SIZE; tempCol++) {
 
-                            if (Utils.theSameBlock(col, tempCol) || matrix.candidatesCountInCol(tempCol, candidate) != 2) {
+                            if (theSameBlock(col, tempCol) || matrix.candidatesCountInCol(tempCol, candidate) != 2) {
                                 continue;
                             }
 
                             if (matrix.getCandidates(row, tempCol).contains(candidate)) {
                                 for (int tempRow = row + 1; tempRow < IMatrix.SIZE; tempRow++) {
 
-                                    if (Utils.theSameBlock(row, tempRow)) {
+                                    if (theSameBlock(row, tempRow)) {
                                         continue;
                                     }
 
@@ -50,14 +51,14 @@ public class XWing implements IAlgorithm {
                         //detect in cols:
                         for (int tempRow = row + 1; tempRow < IMatrix.SIZE; tempRow++) {
 
-                            if (Utils.theSameBlock(row, tempRow) || matrix.candidatesCountInRow(tempRow, candidate) != 2) {
+                            if (theSameBlock(row, tempRow) || matrix.candidatesCountInRow(tempRow, candidate) != 2) {
                                 continue;
                             }
 
                             if (matrix.getCandidates(tempRow, col).contains(candidate)) {
                                 for (int tempCol = col + 1; tempCol < IMatrix.SIZE; tempCol++) {
 
-                                    if (Utils.theSameBlock(col, tempCol)) {
+                                    if (theSameBlock(col, tempCol)) {
                                         continue;
                                     }
 

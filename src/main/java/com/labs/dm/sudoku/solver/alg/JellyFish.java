@@ -13,7 +13,7 @@ import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 public class JellyFish extends SwordFish {
     public JellyFish() {
         SIZE = 4;
-        MIN_POINTS = 8; //?
+        MIN_POINTS = 8;
     }
 
     protected boolean accept(CounterHashMap<Integer> rowsMap, CounterHashMap<Integer> colsMap) {
