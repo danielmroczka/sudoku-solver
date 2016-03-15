@@ -160,4 +160,24 @@ public class UtilsTest {
         assertArrayEquals(new Integer[]{3, 8}, ids.get(2).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{1, 3, 8}, ids.get(3).toArray(new Integer[0]));
     }
+
+    @Test
+    public void testSubSet4() throws Exception {
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(5, 7));
+        list.add(Arrays.asList(1, 3, 5));
+        list.add(Arrays.asList(1, 3, 5, 7));
+        list.add(Arrays.asList(4, 5, 6));
+        list.add(Arrays.asList(2, 4, 5));
+        list.add(Arrays.asList(6, 7, 9));
+        list.add(Arrays.asList(2, 3, 9));
+        list.add(Arrays.asList(3, 7));
+
+        List<List<Integer>> ids = Utils.subset(list, 4);
+        assertArrayEquals(new Integer[]{1, 3, 5, 7}, ids.get(0).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{5, 7}, ids.get(1).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{1, 3, 5}, ids.get(2).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{3, 7}, ids.get(3).toArray(new Integer[0]));
+        assertArrayEquals(new Integer[]{1, 3, 5, 7}, ids.get(4).toArray(new Integer[0]));
+    }
 }

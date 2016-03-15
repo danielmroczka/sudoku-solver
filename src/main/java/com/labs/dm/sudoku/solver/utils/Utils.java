@@ -432,7 +432,11 @@ public class Utils {
         for (List<Integer> entry : list) {
             if (entry.size() == size) {
                 int cnt = 0;
-                List<List<Integer>> combination = Utils.combinationList(entry, 2);
+
+                List<List<Integer>> combination = new ArrayList<>();
+                for (int j = 2; j < size; j++) {
+                    combination.addAll(Utils.combinationList(entry, j));
+                }
 
                 for (List<Integer> item : list) {
                     if (!entry.equals(item) && item.size() >= 2 && item.size() <= size) {
@@ -445,7 +449,7 @@ public class Utils {
                     }
                 }
 
-                if (cnt == 2) {
+                if (cnt == size - 1) {
                     map.add(entry);
                     map.add(0, entry);
                     return map;
