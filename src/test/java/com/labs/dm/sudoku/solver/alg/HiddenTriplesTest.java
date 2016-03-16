@@ -32,4 +32,24 @@ public class HiddenTriplesTest {
         assertEquals(3, matrix.getCandidates(0, 7).size());
 
     }
+
+    @Test
+    public void testExecute2() {
+        //GIVEN
+        IMatrix matrix = new Matrix();
+
+        matrix.addCandidates(0, 0, new Integer[]{1, 7, 8});
+        matrix.addCandidates(0, 2, new Integer[]{7, 8});
+        matrix.addCandidates(1, 0, new Integer[]{7, 6});
+        matrix.addCandidates(1, 1, new Integer[]{4, 5});
+        matrix.addCandidates(2, 0, new Integer[]{1, 6});
+        matrix.addCandidates(2, 1, new Integer[]{1, 2, 4, 5});
+        matrix.addCandidates(2, 2, new Integer[]{2, 5, 6});
+        //WHEN
+        hiddenTriples.execute(matrix);
+        //THEN
+        assertEquals(3, matrix.getCandidates(2, 1).size());
+        assertEquals(2, matrix.getCandidates(2, 2).size());
+
+    }
 }

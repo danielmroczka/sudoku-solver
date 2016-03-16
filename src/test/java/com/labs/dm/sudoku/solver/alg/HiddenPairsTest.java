@@ -20,12 +20,28 @@ public class HiddenPairsTest {
     private final HiddenPairs hiddenPairs = new HiddenPairs();
 
     @Test
+    public void testExecute1() {
+        // Hidden pair 6,9
+        //GIVEN
+        IMatrix matrix = new Matrix();
+
+        matrix.addCandidates(0, 0, new Integer[]{4, 5, 8});
+        matrix.addCandidates(0, 2, new Integer[]{4, 5, 7});
+        matrix.addCandidates(0, 3, new Integer[]{4, 5});
+        matrix.addCandidates(0, 5, new Integer[]{6, 7, 8, 9});
+        matrix.addCandidates(0, 6, new Integer[]{7, 8});
+        matrix.addCandidates(0, 8, new Integer[]{6, 8, 9});
+        //WHEN
+        hiddenPairs.execute(matrix);
+        //THEN
+        assertEquals(2, matrix.getCandidates(0, 5).size());
+        assertEquals(2, matrix.getCandidates(0, 8).size());
+    }
+
+    @Test
     public void testExecute() {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setValueAt(0, 3, 3);
-        matrix.setValueAt(0, 5, 1);
-        matrix.setValueAt(0, 4, 2);
 
         matrix.addCandidates(0, 1, new Integer[]{6, 7, 8, 9});
         matrix.addCandidates(0, 6, new Integer[]{7, 8});
@@ -41,9 +57,6 @@ public class HiddenPairsTest {
     public void testBlock() {
         //GIVEN
         IMatrix matrix = new Matrix();
-        matrix.setValueAt(0, 0, 3);
-        matrix.setValueAt(0, 2, 1);
-        matrix.setValueAt(1, 1, 2);
 
         matrix.addCandidates(0, 1, new Integer[]{4, 5, 8});
         matrix.addCandidates(1, 0, new Integer[]{4, 5, 7});

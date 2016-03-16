@@ -368,7 +368,24 @@ public class Utils {
         }
     }
 
-    public static List<List<Integer>> subset(List<List<Integer>> list, int size) {
+    /**
+     * Returns naked subset.
+     * If found returns list of size+1 elements
+     * 0: naked subset
+     * 1: first example of subset
+     * n: n- element of subset
+     * <p>
+     * Elements are subsets of naked subsets:
+     * 138: 138, 18, 38
+     * 1357: 37, 57, 135, 1357
+     * 247: 24, 47, 27
+     * 123: 123, 123, 123
+     *
+     * @param list
+     * @param size - size of naked subset. Two for pair, three for triple, four for quads
+     * @return list of naked subsets
+     */
+    public static List<List<Integer>> nakedSubset(List<List<Integer>> list, int size) {
         List<List<Integer>> map = new ArrayList<>();
         CounterHashMap<List<Integer>> counterMap = new CounterHashMap<>();
         for (List<Integer> item : list) {
@@ -470,4 +487,80 @@ public class Utils {
 
         return map;
     }
+
+    /**
+     * Returns hidden subset or empty List if no subsets are found.
+     *
+     * @param list
+     * @param size - size of hidden subset. Two for pair, three for triple, four for quads
+     * @return hidden subset
+     */
+    public static List<Integer> hiddenSubset(List<List<Integer>> list, int size) {
+        List<Integer> map = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+
+        /* Collect all potential subset for list */
+        for (List<Integer> item : list) {
+            for (int i = 2; i <= size; i++) {
+                res.addAll(Utils.combinationList(item, i));
+            }
+        }
+
+        /* Count occurence of each subset */
+        CounterHashMap<List<Integer>> counterHashMap = new CounterHashMap<>();
+        for (List<Integer> elem : res) {
+            counterHashMap.inc(elem);
+        }
+
+        /* Works for pairs but not for triple */
+        for (Map.Entry<List<Integer>, Integer> entry : counterHashMap.entrySet()) {
+            /* Finds the pair with exactly two/three/four (depends on parameter size) occurrences */
+            if (entry.getValue() == size) {
+                /* If found, check if any element from subset doesn't not exist somewhere else */
+                int cnt = 0;
+                for (List<Integer> l : list) {
+                    for (int k : entry.getKey()) {
+                        if (l.contains(k)) {
+                            cnt++;
+                        }
+                    }
+                }
+                if (cnt == size * size) {
+                    return entry.getKey();
+                }
+            }
+        }
+
+        /*for (List<Integer> entry : list) {
+            if (entry.size() == size) {
+                int cnt = 0;
+
+                List<List<Integer>> combination = new ArrayList<>();
+                for (int j = 2; j < size; j++) {
+                    combination.addAll(Utils.combinationList(entry, j));
+                }
+
+                for (List<Integer> item : list) {
+                    if (!entry.equals(item) && item.size() >= 2 && item.size() <= size) {
+                        for (List<Integer> elem : combination) {
+                            if (item.equals(elem)) {
+                                cnt++;
+                                //map.add(item);
+                            }
+                        }
+                    }
+                }
+
+                if (cnt == size - 1) {
+                    return entry;
+                } else {
+                    //map.clear();
+                }
+            }
+        }*/
+
+
+        return map;
+    }
+
 }

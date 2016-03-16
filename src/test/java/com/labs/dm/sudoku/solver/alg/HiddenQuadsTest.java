@@ -2,7 +2,6 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,7 +13,7 @@ public class HiddenQuadsTest {
     private final HiddenQuads hiddenQuads = new HiddenQuads();
 
     @Test
-    @Ignore
+    //  @Ignore
     public void testExecute() {
         //Should find hidden quad: 1, 6, 7, 8
         //GIVEN

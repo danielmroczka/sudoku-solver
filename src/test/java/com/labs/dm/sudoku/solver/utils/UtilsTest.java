@@ -110,7 +110,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testSubSet1() throws Exception {
+    public void nakedSubSet() throws Exception {
         List<List<Integer>> list = new ArrayList<>();
         list.add(Arrays.asList(9));
         list.add(Arrays.asList(1, 2));
@@ -119,7 +119,7 @@ public class UtilsTest {
         list.add(Arrays.asList(1, 2, 3));
         list.add(Arrays.asList(7, 8, 9));
 
-        List<List<Integer>> ids = Utils.subset(list, 3);
+        List<List<Integer>> ids = Utils.nakedSubset(list, 3);
         assertArrayEquals(new Integer[]{1, 2, 3}, ids.get(0).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{1, 2, 3}, ids.get(1).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{1, 2, 3}, ids.get(2).toArray(new Integer[0]));
@@ -128,7 +128,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testSubSet2() throws Exception {
+    public void nakedSubSet2() throws Exception {
         List<List<Integer>> list = new ArrayList<>();
         list.add(Arrays.asList(2, 4));
         list.add(Arrays.asList(4, 7));
@@ -137,7 +137,7 @@ public class UtilsTest {
         list.add(Arrays.asList(2, 8));
         list.add(Arrays.asList(1, 7, 4));
 
-        List<List<Integer>> ids = Utils.subset(list, 3);
+        List<List<Integer>> ids = Utils.nakedSubset(list, 3);
         assertArrayEquals(new Integer[]{2, 4, 7}, ids.get(0).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{2, 4}, ids.get(1).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{4, 7}, ids.get(2).toArray(new Integer[0]));
@@ -146,7 +146,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testSubSet3() throws Exception {
+    public void nakedSubSet3() throws Exception {
         List<List<Integer>> list = new ArrayList<>();
         list.add(Arrays.asList(1, 3, 8));
         list.add(Arrays.asList(1, 8));
@@ -154,7 +154,7 @@ public class UtilsTest {
         list.add(Arrays.asList(7, 8, 9));
         list.add(Arrays.asList(1, 2, 3));
 
-        List<List<Integer>> ids = Utils.subset(list, 3);
+        List<List<Integer>> ids = Utils.nakedSubset(list, 3);
         assertArrayEquals(new Integer[]{1, 3, 8}, ids.get(0).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{1, 8}, ids.get(1).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{3, 8}, ids.get(2).toArray(new Integer[0]));
@@ -162,7 +162,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testSubSet4() throws Exception {
+    public void nakedSubSet4() throws Exception {
         List<List<Integer>> list = new ArrayList<>();
         list.add(Arrays.asList(5, 7));
         list.add(Arrays.asList(1, 3, 5));
@@ -173,11 +173,41 @@ public class UtilsTest {
         list.add(Arrays.asList(2, 3, 9));
         list.add(Arrays.asList(3, 7));
 
-        List<List<Integer>> ids = Utils.subset(list, 4);
+        List<List<Integer>> ids = Utils.nakedSubset(list, 4);
         assertArrayEquals(new Integer[]{1, 3, 5, 7}, ids.get(0).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{5, 7}, ids.get(1).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{1, 3, 5}, ids.get(2).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{3, 7}, ids.get(3).toArray(new Integer[0]));
         assertArrayEquals(new Integer[]{1, 3, 5, 7}, ids.get(4).toArray(new Integer[0]));
+    }
+
+    @Test
+    public void hiddenSubSet1() throws Exception {
+        //expected hidden pair = 1,9
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(1, 6, 9));
+        list.add(Arrays.asList(1, 9));
+        list.add(Arrays.asList(2, 6));
+
+        List<Integer> ids = Utils.hiddenSubset(list, 2);
+        assertEquals(Arrays.asList(1, 9), ids);
+
+    }
+
+    @Test
+    public void hiddenSubSet2() throws Exception {
+        //expected hidden triple = 2,4,5
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(1, 7, 8));
+        list.add(Arrays.asList(7, 8));
+        list.add(Arrays.asList(7, 6));
+        list.add(Arrays.asList(4, 5));
+        list.add(Arrays.asList(1, 6));
+        list.add(Arrays.asList(1, 2, 4, 5));
+        list.add(Arrays.asList(2, 5, 6));
+
+        List<Integer> ids = Utils.hiddenSubset(list, 3);
+        assertEquals(Arrays.asList(2, 4, 5), ids);
+
     }
 }
