@@ -507,10 +507,7 @@ public class Utils {
         }
 
         /* Count occurence of each subset */
-        CounterHashMap<List<Integer>> counterHashMap = new CounterHashMap<>();
-        for (List<Integer> elem : res) {
-            counterHashMap.inc(elem);
-        }
+        CounterHashMap<List<Integer>> counterHashMap = count(res);
 
         /* Works for pairs but not for triple */
         for (Map.Entry<List<Integer>, Integer> entry : counterHashMap.entrySet()) {
@@ -531,14 +528,20 @@ public class Utils {
             }
         }
 
-        /*for (List<Integer> entry : list) {
+        for (List<Integer> entry : list) {
             if (entry.size() == size) {
                 int cnt = 0;
-
                 List<List<Integer>> combination = new ArrayList<>();
                 for (int j = 2; j < size; j++) {
                     combination.addAll(Utils.combinationList(entry, j));
                 }
+
+                for (List<Integer> item : list) {
+
+                }
+            }
+        }/*
+
 
                 for (List<Integer> item : list) {
                     if (!entry.equals(item) && item.size() >= 2 && item.size() <= size) {
@@ -559,8 +562,16 @@ public class Utils {
             }
         }*/
 
-
         return map;
     }
+
+    public static CounterHashMap<List<Integer>> count(List<List<Integer>> input) {
+        CounterHashMap<List<Integer>> map = new CounterHashMap<>();
+        for (List<Integer> key : input) {
+            map.inc(key);
+        }
+        return map;
+    }
+
 
 }
