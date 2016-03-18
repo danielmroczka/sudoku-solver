@@ -210,4 +210,13 @@ public class UtilsTest {
         assertEquals(Arrays.asList(2, 4, 5), ids);
 
     }
+
+    @Test
+    public void shouldMatch() throws Exception {
+        assertEquals(4, Utils.match(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2, 3, 4)));
+        assertEquals(3, Utils.match(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2, 3)));
+        assertEquals(2, Utils.match(Arrays.asList(1, 2), Arrays.asList(1, 2, 3, 4)));
+        assertEquals(2, Utils.match(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2)));
+
+    }
 }

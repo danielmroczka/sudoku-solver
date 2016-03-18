@@ -511,6 +511,7 @@ public class Utils {
 
         /* Count occurence of each subset */
         CounterHashMap<List<Integer>> counterHashMap = count(res);
+
         /* Works for pairs but not for triple */
         for (Entry<List<Integer>, Integer> entry : counterHashMap.entrySet()) {
             /* Finds the pair with exactly two/three/four (depends on parameter size) occurrences */
@@ -595,33 +596,61 @@ public class Utils {
 
         CounterHashMap<List<Integer>> map = new CounterHashMap<>();
         List<List<Integer>> combination = Utils.combinationList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9), size);
-        //2,4,5  2,5  4,5
-        int tmp = 0;
+        Map<List<Integer>, List<Integer>> mm = new HashMap<>();
         for (List<Integer> c : combination) {
+            int cnt = 0;
+            List<Integer> pos = new ArrayList<>();
+            int id = 0;
             for (List<Integer> item : list) {
                 List<List<Integer>> comb = Utils.getCombinationList(size, item);
+                boolean m = false;
                 for (List<Integer> cb : comb) {
-                    if (match(cb, c, 2)) {
-                        System.out.println(++tmp + " " + c + " : " + item + " " + cb);
+                    if (match(cb, c) >= 2) {
+                        // System.out.println(++tmp + " " + c + " : " + item + " " + cb);
+                        //cnt++;
+                        m = true;
                         map.inc(c);
+                    }
+                }
+                if (m) {
+                    pos.add(id);
+                    cnt++;
+
+                }
+                id++;
+            }
+            if (cnt == size) {
+                mm.put(c, pos);
+            }
+        }
+
+        Map<List<Integer>, List<Integer>> res = filter(list, mm);
+        if (res.size() > 0) {
+            subset = (List<Integer>) res.keySet().toArray()[0];
+        }
+        return subset;
+    }
+
+    private static Map<List<Integer>, List<Integer>> filter(List<List<Integer>> list, Map<List<Integer>, List<Integer>> mm) {
+        Map<List<Integer>, List<Integer>> copy = new HashMap<>(mm);
+
+        for (Map.Entry<List<Integer>, List<Integer>> entry : mm.entrySet()) {
+            for (int e : entry.getKey()) {
+                for (int i = 0; i < list.size(); i++) {
+                    List<Integer> ll = list.get(i);
+                    if ((ll.contains(e) && !entry.getValue().contains(i))) {
+                        copy.remove(entry.getKey());
                     }
                 }
             }
         }
-
-
-        return subset;
+        return copy;
     }
 
-    private static boolean match(List<Integer> original, List<Integer> match, int posMatched) {
-        int r = 0;
-        for (int i : original) {
-            for (int j : match) {
-                if (i == j) r++;
-            }
-        }
-
-        return r >= posMatched;
+    public static int match(List<Integer> original, List<Integer> match) {
+        List<Integer> list = new ArrayList<>(original);
+        list.retainAll(match);
+        return list.size();
     }
 
     private static List<List<Integer>> getCombinationList(int size, List<Integer> innerEntry) {
@@ -639,5 +668,6 @@ public class Utils {
         }
         return map;
     }
+
 
 }

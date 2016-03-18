@@ -18,6 +18,8 @@ Implemented algorithms:
 - [x]  XYZ-Wing
 - [x]  Sword-Fish
 - [x]  Jelly-Fish
+- [x]  Forcing Chains
+
                            
 ##Usage
 
