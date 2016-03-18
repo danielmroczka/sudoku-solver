@@ -198,13 +198,13 @@ public class UtilsTest {
     public void hiddenSubSet2() throws Exception {
         //expected hidden triple = 2,4,5
         List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(1, 2, 4, 5));
+        list.add(Arrays.asList(4, 5));
+        list.add(Arrays.asList(2, 5, 6));
         list.add(Arrays.asList(1, 7, 8));
         list.add(Arrays.asList(7, 8));
         list.add(Arrays.asList(7, 6));
-        list.add(Arrays.asList(4, 5));
         list.add(Arrays.asList(1, 6));
-        list.add(Arrays.asList(1, 2, 4, 5));
-        list.add(Arrays.asList(2, 5, 6));
 
         List<Integer> ids = Utils.hiddenSubset(list, 3);
         assertEquals(Arrays.asList(2, 4, 5), ids);

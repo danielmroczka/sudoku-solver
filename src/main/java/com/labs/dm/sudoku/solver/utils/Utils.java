@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.util.Map.Entry;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
@@ -495,8 +496,10 @@ public class Utils {
      * @param size - size of hidden subset. Two for pair, three for triple, four for quads
      * @return hidden subset
      */
-    public static List<Integer> hiddenSubset(List<List<Integer>> list, int size) {
-        List<Integer> map = new ArrayList<>();
+    public static List<Integer> hiddenSubset1(List<List<Integer>> list, int size) {
+        /* List with the found subset */
+        List<Integer> subset = new ArrayList<>();
+        /* Contains all unique combination with size <2, size> from input list */
         List<List<Integer>> res = new ArrayList<>();
 
         /* Collect all potential subset for list */
@@ -508,9 +511,8 @@ public class Utils {
 
         /* Count occurence of each subset */
         CounterHashMap<List<Integer>> counterHashMap = count(res);
-
         /* Works for pairs but not for triple */
-        for (Map.Entry<List<Integer>, Integer> entry : counterHashMap.entrySet()) {
+        for (Entry<List<Integer>, Integer> entry : counterHashMap.entrySet()) {
             /* Finds the pair with exactly two/three/four (depends on parameter size) occurrences */
             if (entry.getValue() == size) {
                 /* If found, check if any element from subset doesn't not exist somewhere else */
@@ -527,9 +529,32 @@ public class Utils {
                 }
             }
         }
+        //-------------------
+        List<Integer> idx = new ArrayList<>();
 
-        for (List<Integer> entry : list) {
-            if (entry.size() == size) {
+        for (int i = 0; i < list.size(); i++) {
+            List<Integer> entry = list.get(i);
+
+            List<List<Integer>> combination = getCombinationList(size, entry);
+
+            for (int j = i; j < list.size(); j++) {
+                if (i == j) continue;
+                List<Integer> innerEntry = list.get(j);
+
+                List<List<Integer>> innerCombination = getCombinationList(size, innerEntry);
+
+                for (List<Integer> l1 : combination) {
+                    for (List<Integer> l2 : innerCombination) {
+                        if (l1.equals(l2)) {
+                            System.out.println("ok" + entry + " " + innerEntry + " " + l2);
+                        }
+                    }
+                }
+
+
+            }
+
+            /*if (entry.size() == size) {
                 int cnt = 0;
                 List<List<Integer>> combination = new ArrayList<>();
                 for (int j = 2; j < size; j++) {
@@ -539,7 +564,7 @@ public class Utils {
                 for (List<Integer> item : list) {
 
                 }
-            }
+            }*/
         }/*
 
 
@@ -562,7 +587,49 @@ public class Utils {
             }
         }*/
 
-        return map;
+        return subset;
+    }
+
+    public static List<Integer> hiddenSubset(List<List<Integer>> list, int size) {
+        List<Integer> subset = new ArrayList<>();
+
+        CounterHashMap<List<Integer>> map = new CounterHashMap<>();
+        List<List<Integer>> combination = Utils.combinationList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9), size);
+        //2,4,5  2,5  4,5
+        int tmp = 0;
+        for (List<Integer> c : combination) {
+            for (List<Integer> item : list) {
+                List<List<Integer>> comb = Utils.getCombinationList(size, item);
+                for (List<Integer> cb : comb) {
+                    if (match(cb, c, 2)) {
+                        System.out.println(++tmp + " " + c + " : " + item + " " + cb);
+                        map.inc(c);
+                    }
+                }
+            }
+        }
+
+
+        return subset;
+    }
+
+    private static boolean match(List<Integer> original, List<Integer> match, int posMatched) {
+        int r = 0;
+        for (int i : original) {
+            for (int j : match) {
+                if (i == j) r++;
+            }
+        }
+
+        return r >= posMatched;
+    }
+
+    private static List<List<Integer>> getCombinationList(int size, List<Integer> innerEntry) {
+        List<List<Integer>> innerCombination = new ArrayList<>();
+        for (int i = 2; i <= size; i++) {
+            innerCombination.addAll(combinationList(innerEntry, i));
+        }
+        return innerCombination;
     }
 
     public static CounterHashMap<List<Integer>> count(List<List<Integer>> input) {
@@ -572,6 +639,5 @@ public class Utils {
         }
         return map;
     }
-
 
 }
