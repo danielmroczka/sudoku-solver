@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
-import java.util.Map.Entry;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
@@ -496,117 +495,22 @@ public class Utils {
      * @param size - size of hidden subset. Two for pair, three for triple, four for quads
      * @return hidden subset
      */
-    public static List<Integer> hiddenSubset1(List<List<Integer>> list, int size) {
-        /* List with the found subset */
-        List<Integer> subset = new ArrayList<>();
-        /* Contains all unique combination with size <2, size> from input list */
-        List<List<Integer>> res = new ArrayList<>();
-
-        /* Collect all potential subset for list */
-        for (List<Integer> item : list) {
-            for (int i = 2; i <= size; i++) {
-                res.addAll(Utils.combinationList(item, i));
-            }
-        }
-
-        /* Count occurence of each subset */
-        CounterHashMap<List<Integer>> counterHashMap = count(res);
-
-        /* Works for pairs but not for triple */
-        for (Entry<List<Integer>, Integer> entry : counterHashMap.entrySet()) {
-            /* Finds the pair with exactly two/three/four (depends on parameter size) occurrences */
-            if (entry.getValue() == size) {
-                /* If found, check if any element from subset doesn't not exist somewhere else */
-                int cnt = 0;
-                for (List<Integer> l : list) {
-                    for (int k : entry.getKey()) {
-                        if (l.contains(k)) {
-                            cnt++;
-                        }
-                    }
-                }
-                if (cnt == size * size) {
-                    return entry.getKey();
-                }
-            }
-        }
-        //-------------------
-        List<Integer> idx = new ArrayList<>();
-
-        for (int i = 0; i < list.size(); i++) {
-            List<Integer> entry = list.get(i);
-
-            List<List<Integer>> combination = getCombinationList(size, entry);
-
-            for (int j = i; j < list.size(); j++) {
-                if (i == j) continue;
-                List<Integer> innerEntry = list.get(j);
-
-                List<List<Integer>> innerCombination = getCombinationList(size, innerEntry);
-
-                for (List<Integer> l1 : combination) {
-                    for (List<Integer> l2 : innerCombination) {
-                        if (l1.equals(l2)) {
-                            System.out.println("ok" + entry + " " + innerEntry + " " + l2);
-                        }
-                    }
-                }
-
-
-            }
-
-            /*if (entry.size() == size) {
-                int cnt = 0;
-                List<List<Integer>> combination = new ArrayList<>();
-                for (int j = 2; j < size; j++) {
-                    combination.addAll(Utils.combinationList(entry, j));
-                }
-
-                for (List<Integer> item : list) {
-
-                }
-            }*/
-        }/*
-
-
-                for (List<Integer> item : list) {
-                    if (!entry.equals(item) && item.size() >= 2 && item.size() <= size) {
-                        for (List<Integer> elem : combination) {
-                            if (item.equals(elem)) {
-                                cnt++;
-                                //map.add(item);
-                            }
-                        }
-                    }
-                }
-
-                if (cnt == size - 1) {
-                    return entry;
-                } else {
-                    //map.clear();
-                }
-            }
-        }*/
-
-        return subset;
-    }
-
     public static List<Integer> hiddenSubset(List<List<Integer>> list, int size) {
+        final List<List<Integer>> combinations = Utils.combinationList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9), size);
         List<Integer> subset = new ArrayList<>();
+        CounterHashMap<List<Integer>> counterMap = new CounterHashMap<>();
+        Map<List<Integer>, List<Integer>> map = new HashMap<>();
 
-        CounterHashMap<List<Integer>> map = new CounterHashMap<>();
-        List<List<Integer>> combination = Utils.combinationList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9), size);
-        Map<List<Integer>, List<Integer>> mm = new HashMap<>();
-        for (List<Integer> c : combination) {
+        for (List<Integer> comnination : combinations) {
             int cnt = 0, id = 0;
             List<Integer> pos = new ArrayList<>();
             for (List<Integer> item : list) {
-                List<List<Integer>> comb = Utils.getCombinationList(size, item);
+                List<List<Integer>> innerCombination = Utils.getCombinationList(size, item);
                 boolean m = false;
-                for (List<Integer> cb : comb) {
-                    if (match(cb, c) >= 2) {
+                for (List<Integer> cb : innerCombination) {
+                    if (match(cb, comnination) >= 2) {
                         m = true;
-                        map.inc(c);
+                        counterMap.inc(comnination);
                     }
                 }
                 if (m) {
@@ -616,11 +520,11 @@ public class Utils {
                 id++;
             }
             if (cnt == size) {
-                mm.put(c, pos);
+                map.put(comnination, pos);
             }
         }
 
-        Map<List<Integer>, List<Integer>> res = filter(list, mm);
+        Map<List<Integer>, List<Integer>> res = filter(list, map);
         if (res.size() > 0) {
             subset = (List<Integer>) res.keySet().toArray()[0];
         }
@@ -631,10 +535,10 @@ public class Utils {
         Map<List<Integer>, List<Integer>> copy = new HashMap<>(mm);
 
         for (Map.Entry<List<Integer>, List<Integer>> entry : mm.entrySet()) {
-            for (int e : entry.getKey()) {
+            for (int item : entry.getKey()) {
                 for (int i = 0; i < list.size(); i++) {
-                    List<Integer> ll = list.get(i);
-                    if ((ll.contains(e) && !entry.getValue().contains(i))) {
+                    List<Integer> line = list.get(i);
+                    if ((line.contains(item) && !entry.getValue().contains(i))) {
                         copy.remove(entry.getKey());
                     }
                 }
