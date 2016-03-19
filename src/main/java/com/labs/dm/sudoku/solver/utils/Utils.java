@@ -531,6 +531,13 @@ public class Utils {
         return subset;
     }
 
+    /**
+     * Filter
+     *
+     * @param list
+     * @param mm
+     * @return
+     */
     private static Map<List<Integer>, List<Integer>> filter(List<List<Integer>> list, Map<List<Integer>, List<Integer>> mm) {
         Map<List<Integer>, List<Integer>> copy = new HashMap<>(mm);
 
@@ -560,14 +567,4 @@ public class Utils {
         }
         return innerCombination;
     }
-
-    public static CounterHashMap<List<Integer>> count(List<List<Integer>> input) {
-        CounterHashMap<List<Integer>> map = new CounterHashMap<>();
-        for (List<Integer> key : input) {
-            map.inc(key);
-        }
-        return map;
-    }
-
-
 }

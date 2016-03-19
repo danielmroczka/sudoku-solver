@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static com.labs.dm.sudoku.solver.executors.Executor.run;
+
 /**
  * Created by daniel on 2016-02-17.
  */
@@ -30,7 +32,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new XWing().execute(matrix);
+            run(matrix, XWing.class);
             matrix.validate();
         }
     }
@@ -40,7 +42,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new XYWing().execute(matrix);
+            run(matrix, XYWing.class);
             matrix.validate();
         }
     }
@@ -50,7 +52,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new XYZWing().execute(matrix);
+            run(matrix, XYZWing.class);
             matrix.validate();
         }
     }
@@ -60,7 +62,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new HiddenPairs().execute(matrix);
+            run(matrix, HiddenPairs.class);
             matrix.validate();
         }
     }
@@ -70,7 +72,17 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new HiddenTriples().execute(matrix);
+            run(matrix, HiddenTriples.class);
+            matrix.validate();
+        }
+    }
+
+    @Test
+    public void validateHiddenQuads() throws IOException {
+        for (int i = 0; i < COUNT; i++) {
+            loneSingles.execute(matrix);
+            openSingles.execute(matrix);
+            run(matrix, HiddenQuads.class);
             matrix.validate();
         }
     }
@@ -80,7 +92,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new NakedTriplets().execute(matrix);
+            run(matrix, NakedTriplets.class);
             matrix.validate();
         }
     }
@@ -90,7 +102,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new NakedQuads().execute(matrix);
+            run(matrix, NakedQuads.class);
             matrix.validate();
         }
     }
@@ -100,7 +112,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new HiddenSingles().execute(matrix);
+            run(matrix, HiddenSingles.class);
             matrix.validate();
         }
     }
@@ -110,7 +122,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new NakedPairs().execute(matrix);
+            run(matrix, NakedPairs.class);
             matrix.validate();
         }
     }
@@ -120,7 +132,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new Reduction().execute(matrix);
+            run(matrix, Reduction.class);
             matrix.validate();
         }
     }
@@ -130,7 +142,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new SwordFish().execute(matrix);
+            run(matrix, SwordFish.class);
             matrix.validate();
         }
     }
@@ -140,7 +152,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             loneSingles.execute(matrix);
             openSingles.execute(matrix);
-            new ForcingChains().execute(matrix);
+            run(matrix, ForcingChains.class);
             matrix.validate();
         }
     }
