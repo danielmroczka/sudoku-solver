@@ -13,8 +13,7 @@ public class HiddenQuadsTest {
     private final HiddenQuads hiddenQuads = new HiddenQuads();
 
     @Test
-    //  @Ignore
-    public void testExecute() {
+    public void shouldFoundQuadsInRow() {
         //Should find hidden quad: 1, 6, 7, 8
         //GIVEN
         IMatrix matrix = new Matrix();

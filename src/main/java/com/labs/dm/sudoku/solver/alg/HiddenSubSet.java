@@ -1,10 +1,13 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.core.Pair;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 
@@ -17,12 +20,23 @@ public abstract class HiddenSubSet implements IAlgorithm {
 
     @Override
     public void execute(IMatrix matrix) {
-        findHiddenPairsInRows(matrix);
-        findHiddenPairsInCols(matrix);
-        findHiddenPairsInBlocks(matrix);
+        Map<Pair, List<Integer>> toRemove = new HashMap<>();
+        findHiddenPairsInRows(matrix, toRemove);
+        findHiddenPairsInCols(matrix, toRemove);
+        findHiddenPairsInBlocks(matrix, toRemove);
+
+        //remove(matrix, toRemove);
     }
 
-    private void findHiddenPairsInRows(IMatrix matrix) {
+    private void remove(IMatrix matrix, Map<Pair, List<Integer>> toRemove) {
+        for (Map.Entry<Pair, List<Integer>> entry : toRemove.entrySet()) {
+
+            removeCandidate(matrix, entry.getKey().getRow(), entry.getKey().getCol(), entry.getValue());
+        }
+    }
+
+    private boolean findHiddenPairsInRows(IMatrix matrix, Map<Pair, List<Integer>> toRemove) {
+        boolean res = false;
         for (int row = 0; row < IMatrix.SIZE; row++) {
 
             /* Collect candidates in row */
@@ -37,13 +51,23 @@ public abstract class HiddenSubSet implements IAlgorithm {
             /* Remove candidate on cells where hidden subset has been found */
             if (!subset.isEmpty()) {
                 for (int col = 0; col < IMatrix.SIZE; col++) {
-                    removeCandidate(matrix, col, row, subset);
+                    List<Integer> val = toRemove.get(new Pair(row, col));
+                    if (val == null) {
+                        val = new ArrayList<>();
+                    }
+                    val.addAll(subset);
+                    toRemove.put(new Pair(row, col), val);
+
+                    removeCandidate(matrix, row, col, subset);
                 }
+                res = true;
             }
         }
+        return res;
     }
 
-    private void findHiddenPairsInBlocks(IMatrix matrix) {
+    private boolean findHiddenPairsInBlocks(IMatrix matrix, Map<Pair, List<Integer>> toRemove) {
+        boolean res = false;
         for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
 
@@ -62,15 +86,26 @@ public abstract class HiddenSubSet implements IAlgorithm {
                 if (!subset.isEmpty()) {
                     for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
                         for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
-                            removeCandidate(matrix, col, row, subset);
+                            removeCandidate(matrix, row, col, subset);
+                            List<Integer> val = toRemove.get(new Pair(row, col));
+                            if (val == null) {
+                                val = new ArrayList<>();
+                            }
+                            val.addAll(subset);
+                            toRemove.put(new Pair(row, col), val);
+
                         }
                     }
+                    res = true;
                 }
             }
         }
+        return res;
     }
 
-    private void findHiddenPairsInCols(IMatrix matrix) {
+    private boolean findHiddenPairsInCols(IMatrix matrix, Map<Pair, List<Integer>> toRemove) {
+        boolean res = false;
+
         for (int col = 0; col < IMatrix.SIZE; col++) {
 
             /* Collect candidates in column */
@@ -85,13 +120,23 @@ public abstract class HiddenSubSet implements IAlgorithm {
             /* Remove candidate on cells where hidden subset has been found */
             if (!subset.isEmpty()) {
                 for (int row = 0; row < IMatrix.SIZE; row++) {
-                    removeCandidate(matrix, col, row, subset);
+                    removeCandidate(matrix, row, col, subset);
+                    List<Integer> val = toRemove.get(new Pair(row, col));
+                    if (val == null) {
+                        val = new ArrayList<>();
+                    }
+                    val.addAll(subset);
+                    toRemove.put(new Pair(row, col), val);
+
                 }
+                res = true;
             }
         }
+
+        return res;
     }
 
-    private void removeCandidate(IMatrix matrix, int col, int row, List<Integer> subset) {
+    private void removeCandidate(IMatrix matrix, int row, int col, List<Integer> subset) {
         if (matrix.getCandidates(row, col).isEmpty()) {
             return;
         }
@@ -99,7 +144,7 @@ public abstract class HiddenSubSet implements IAlgorithm {
         List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col));
         common.retainAll(subset);
 
-        if (common.size() >= subset.size()) {
+        if (common.size() > 0) {
             List<Integer> diff = new ArrayList<>();
 
             for (int candidate : matrix.getCandidates(row, col)) {

@@ -20,7 +20,7 @@ public class HiddenPairsTest {
     private final HiddenPairs hiddenPairs = new HiddenPairs();
 
     @Test
-    public void testExecute1() {
+    public void shouldFoundPairInRow() {
         // Hidden pair 6,9
         //GIVEN
         IMatrix matrix = new Matrix();
@@ -39,7 +39,7 @@ public class HiddenPairsTest {
     }
 
     @Test
-    public void testExecute() {
+    public void shouldFoundPairInSimpleRow() {
         //GIVEN
         IMatrix matrix = new Matrix();
 
@@ -54,7 +54,7 @@ public class HiddenPairsTest {
     }
 
     @Test
-    public void testBlock() {
+    public void shouldFoundPairInBlock() {
         //GIVEN
         IMatrix matrix = new Matrix();
 
@@ -74,7 +74,7 @@ public class HiddenPairsTest {
     }
 
     @Test
-    public void test() throws IOException {
+    public void shouldFoundPairFromFile() throws IOException {
         MatrixLoader loader = new MatrixLoader();
         IMatrix matrix = loader.load("src/test/resources/patterns/hiddenPair2.txt");
         IAlgorithm alg = new HiddenPairs();

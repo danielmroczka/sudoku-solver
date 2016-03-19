@@ -598,16 +598,13 @@ public class Utils {
         List<List<Integer>> combination = Utils.combinationList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9), size);
         Map<List<Integer>, List<Integer>> mm = new HashMap<>();
         for (List<Integer> c : combination) {
-            int cnt = 0;
+            int cnt = 0, id = 0;
             List<Integer> pos = new ArrayList<>();
-            int id = 0;
             for (List<Integer> item : list) {
                 List<List<Integer>> comb = Utils.getCombinationList(size, item);
                 boolean m = false;
                 for (List<Integer> cb : comb) {
                     if (match(cb, c) >= 2) {
-                        // System.out.println(++tmp + " " + c + " : " + item + " " + cb);
-                        //cnt++;
                         m = true;
                         map.inc(c);
                     }
@@ -615,7 +612,6 @@ public class Utils {
                 if (m) {
                     pos.add(id);
                     cnt++;
-
                 }
                 id++;
             }
