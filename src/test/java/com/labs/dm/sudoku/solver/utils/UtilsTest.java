@@ -189,8 +189,10 @@ public class UtilsTest {
         list.add(Arrays.asList(1, 9));
         list.add(Arrays.asList(2, 6));
 
-        List<Integer> ids = Utils.hiddenSubset(list, 2);
-        assertEquals(Arrays.asList(1, 9), ids);
+        List<List<Integer>> ids = Utils.hiddenSubset(list, 2);
+        assertEquals(2, ids.size());
+        assertEquals(Arrays.asList(1, 9), ids.get(0));
+        assertEquals(Arrays.asList(0, 1), ids.get(1));
 
     }
 
@@ -206,9 +208,28 @@ public class UtilsTest {
         list.add(Arrays.asList(7, 6));
         list.add(Arrays.asList(1, 6));
 
-        List<Integer> ids = Utils.hiddenSubset(list, 3);
-        assertEquals(Arrays.asList(2, 4, 5), ids);
+        List<List<Integer>> ids = Utils.hiddenSubset(list, 3);
+        assertEquals(2, ids.size());
+        assertEquals(Arrays.asList(2, 4, 5), ids.get(0));
+        assertEquals(Arrays.asList(0, 1, 2), ids.get(1));
 
+    }
+
+    @Test
+    public void hiddenSubSet3() throws Exception {
+        //expected hidden triple =
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(1, 3, 7));
+        list.add(Arrays.asList(1, 3, 7));
+        list.add(Arrays.asList(4, 6, 8));
+        list.add(Arrays.asList(1, 3));
+        list.add(Arrays.asList(4, 8));
+        list.add(Arrays.asList(4, 6));
+
+        List<List<Integer>> ids = Utils.hiddenSubset(list, 3);
+        assertEquals(2, ids.size());
+        assertEquals(Arrays.asList(4, 6, 8), ids.get(0));
+        assertEquals(Arrays.asList(2, 4, 5), ids.get(1));
     }
 
     @Test

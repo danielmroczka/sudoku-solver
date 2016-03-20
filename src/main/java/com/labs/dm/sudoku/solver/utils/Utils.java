@@ -495,38 +495,53 @@ public class Utils {
      * @param size - size of hidden subset. Two for pair, three for triple, four for quads
      * @return hidden subset
      */
-    public static List<Integer> hiddenSubset(List<List<Integer>> list, int size) {
+    public static List<List<Integer>> hiddenSubset(List<List<Integer>> list, int size) {
         final List<List<Integer>> combinations = Utils.combinationList(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9), size);
-        List<Integer> subset = new ArrayList<>();
+        List<List<Integer>> subset = new ArrayList<>();
         CounterHashMap<List<Integer>> counterMap = new CounterHashMap<>();
         Map<List<Integer>, List<Integer>> map = new HashMap<>();
 
-        for (List<Integer> comnination : combinations) {
+        for (List<Integer> combination : combinations) {
+            CounterHashMap<Integer> cm = new CounterHashMap<>();
             int cnt = 0, id = 0;
             List<Integer> pos = new ArrayList<>();
+            Set<List<Integer>> set = new HashSet<>();
             for (List<Integer> item : list) {
+                for (int i : item) {
+                    cm.inc(i);
+                }
                 List<List<Integer>> innerCombination = Utils.getCombinationList(size, item);
                 boolean m = false;
                 for (List<Integer> cb : innerCombination) {
-                    if (match(cb, comnination) >= 2) {
+                    if (match(cb, combination) >= 2) {
                         m = true;
-                        counterMap.inc(comnination);
+                        counterMap.inc(combination);
                     }
                 }
                 if (m) {
+                    set.add(item);
                     pos.add(id);
                     cnt++;
                 }
                 id++;
             }
-            if (cnt == size) {
-                map.put(comnination, pos);
+
+            boolean all = true;
+            for (int c : combination) {
+                if (cm.get(c) == 0) {
+                    all = false;
+                }
+            }
+
+            if (all && cnt == size && set.size() == cnt) {
+                map.put(combination, pos);
             }
         }
 
         Map<List<Integer>, List<Integer>> res = filter(list, map);
         if (res.size() > 0) {
-            subset = (List<Integer>) res.keySet().toArray()[0];
+            subset.add((List<Integer>) res.keySet().toArray()[0]);
+            subset.add((List<Integer>) res.values().toArray()[0]);
         }
         return subset;
     }
@@ -543,10 +558,20 @@ public class Utils {
 
         for (Map.Entry<List<Integer>, List<Integer>> entry : mm.entrySet()) {
             for (int item : entry.getKey()) {
+                CounterHashMap<List<Integer>> map = new CounterHashMap<>();
                 for (int i = 0; i < list.size(); i++) {
                     List<Integer> line = list.get(i);
                     if ((line.contains(item) && !entry.getValue().contains(i))) {
                         copy.remove(entry.getKey());
+                    }
+                    map.inc(line);
+                }
+
+                for (Map.Entry<List<Integer>, Integer> e : map.entrySet()) {
+                    if (e.getValue() > 1) {
+                        if (e.getKey().equals(entry.getKey())) {
+                            copy.remove(entry.getKey());
+                        }
                     }
                 }
             }

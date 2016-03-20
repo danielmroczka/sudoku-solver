@@ -32,12 +32,12 @@ public abstract class HiddenSubSet implements IAlgorithm {
             }
 
             /* Find hidden subset */
-            List<Integer> subset = Utils.hiddenSubset(list, SIZE);
+            List<List<Integer>> subset = Utils.hiddenSubset(list, SIZE);
 
             /* Remove candidate on cells where hidden subset has been found */
-            if (!subset.isEmpty()) {
-                for (int col = 0; col < IMatrix.SIZE; col++) {
-                    removeCandidate(matrix, row, col, subset);
+            if (subset.size() == 2) {
+                for (int col : subset.get(1)) {
+                    removeCandidate(matrix, row, col, subset.get(0));
                 }
             }
         }
@@ -56,14 +56,14 @@ public abstract class HiddenSubSet implements IAlgorithm {
                 }
 
                 /* Find hidden subset */
-                List<Integer> subset = Utils.hiddenSubset(list, SIZE);
+                List<List<Integer>> subset = Utils.hiddenSubset(list, SIZE);
 
                 /* Remove candidate on cells where hidden subset has been found */
                 if (!subset.isEmpty()) {
-                    for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
-                        for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
-                            removeCandidate(matrix, row, col, subset);
-                        }
+                    for (int pos : subset.get(1)) {
+                        int row = rowGroup * BLOCK_SIZE + pos / 3;
+                        int col = colGroup * BLOCK_SIZE + pos % 3;
+                        removeCandidate(matrix, row, col, subset.get(0));
                     }
                 }
             }
@@ -80,12 +80,12 @@ public abstract class HiddenSubSet implements IAlgorithm {
             }
 
             /* Find hidden subset */
-            List<Integer> subset = Utils.hiddenSubset(list, SIZE);
+            List<List<Integer>> subset = Utils.hiddenSubset(list, SIZE);
 
             /* Remove candidate on cells where hidden subset has been found */
             if (!subset.isEmpty()) {
-                for (int row = 0; row < IMatrix.SIZE; row++) {
-                    removeCandidate(matrix, row, col, subset);
+                for (int row : subset.get(1)) {
+                    removeCandidate(matrix, row, col, subset.get(0));
                 }
             }
         }
@@ -98,16 +98,10 @@ public abstract class HiddenSubSet implements IAlgorithm {
 
         List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col));
         common.retainAll(subset);
-
-        if (common.size() > 0) {
-            List<Integer> diff = new ArrayList<>();
-
-            for (int candidate : matrix.getCandidates(row, col)) {
-                if (!subset.contains(candidate)) {
-                    diff.add(candidate);
-                }
-            }
-
+        System.out.println(matrix.printCandidates());
+        if (common.size() >= 2) {
+            List<Integer> diff = new ArrayList<>(matrix.getCandidates(row, col));
+            diff.removeAll(subset);
             matrix.removeCandidate(row, col, diff);
         }
     }

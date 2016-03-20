@@ -29,12 +29,13 @@ Maven:
 <dependency>
     <groupId>com.labs.dm</groupId>
     <artifactId>sudoku-solver</artifactId>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.0.8-SNAPSHOT</version>
 </dependency>
 ```
 Command line:
 
 ```
+
 java -jar sudoku-solver.jar <txt file with sudoku>
 ```
 
