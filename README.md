@@ -39,4 +39,6 @@ Command line:
 java -jar sudoku-solver.jar <txt file with sudoku>
 ```
 
+JavaDoc: [javadoc](http://danielmroczka.github.io/sudoku-solver/api/)
+
 
