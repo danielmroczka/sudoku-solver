@@ -98,7 +98,6 @@ public abstract class HiddenSubSet implements IAlgorithm {
 
         List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col));
         common.retainAll(subset);
-        System.out.println(matrix.printCandidates());
         if (common.size() >= 2) {
             List<Integer> diff = new ArrayList<>(matrix.getCandidates(row, col));
             diff.removeAll(subset);

@@ -64,6 +64,7 @@ public class NakedTripletsTest {
         assertEquals(4, matrix.getCandidates(0, 7).size());
         assertEquals(4, matrix.getCandidates(0, 8).size());
     }
+
     @Test
     public void notAllThreeCanidatesInAllThreeCells() {
         //GIVEN

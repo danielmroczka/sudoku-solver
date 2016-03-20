@@ -37,13 +37,13 @@ public class GenerateCandidates implements IAlgorithm {
                 int[] blocks = matrix.getElemsInBlock(row / BLOCK_SIZE, col / BLOCK_SIZE);
 
                 for (int i : cols) {
-                    set.remove((Integer)i);
+                    set.remove((Integer) i);
                 }
                 for (int i : rows) {
-                    set.remove((Integer)i);
+                    set.remove((Integer) i);
                 }
                 for (int i : blocks) {
-                    set.remove((Integer)i);
+                    set.remove((Integer) i);
                 }
 
                 matrix.setCandidates(row, col, set);

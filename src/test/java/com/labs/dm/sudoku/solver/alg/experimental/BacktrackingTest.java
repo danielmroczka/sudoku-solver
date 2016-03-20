@@ -20,11 +20,9 @@ public class BacktrackingTest {
     @Ignore
     public void easy() throws Exception {
         IMatrix matrix = new MatrixLoader().load("patterns/easy/001.txt");
-        System.out.println(matrix.printCandidates());
         new GenerateCandidates().execute(matrix);
         back.execute(matrix);
         assertTrue(matrix.isSolved());
-        System.out.println(matrix.printCandidates());
     }
 
     @Test

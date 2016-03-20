@@ -29,7 +29,6 @@ public class RemoveOneCandidateTest {
         //candidates should be removed
         matrix.setValueAt(0, 2, 2);
         new HiddenSingles().execute(matrix);
-        System.out.println(matrix.printCandidates());
         assertFalse(matrix.getCandidates(3, 2).contains(1));
         assertEquals(0, matrix.getCandidatesCount());
     }

@@ -35,9 +35,7 @@ public class ForcingChainsTest {
         matrix.addCandidates(8, 6, new Integer[]{4, 8});
 
         //candidates should be removed
-        System.out.println(matrix.printCandidates());
         alg.execute(matrix);
-        System.out.println(matrix.printCandidates());
         assertFalse(matrix.getCandidates(3, 0).contains(7));
     }
 
@@ -55,9 +53,7 @@ public class ForcingChainsTest {
         matrix.addCandidates(5, 7, new Integer[]{1, 3});
 
         //candidates should be removed
-        System.out.println(matrix.printCandidates());
         alg.execute(matrix);
-        System.out.println(matrix.printCandidates());
         assertEquals(7, matrix.getValueAt(0, 1));
     }
 }
