@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+import static com.labs.dm.sudoku.solver.utils.Utils.blockElems;
 
 /**
  * Created by Daniel Mroczka on 2016-03-21.
@@ -21,8 +22,8 @@ public abstract class HiddenSubSet implements IAlgorithm {
     @Override
     public void execute(IMatrix matrix) {
         findHiddenPairsInRows(matrix);
-        // findHiddenPairsInCols(matrix);
-        //  findHiddenPairsInBlocks(matrix);
+        findHiddenPairsInCols(matrix);
+        findHiddenPairsInBlocks(matrix);
     }
 
     private void findHiddenPairsInRows(IMatrix matrix) {
@@ -38,16 +39,11 @@ public abstract class HiddenSubSet implements IAlgorithm {
             group(subset, tab);
 
             for (Subset s : subset) {
-                System.out.println("Removing subset in row " + s);
                 for (int col : s.getSubsetPosition()) {
                     removeCandidate(matrix, row, col, s.getSubsetNumber());
-
                 }
-                break;
             }
         }
-
-        //  System.out.println(subset.size());
     }
 
     private void findHiddenPairsInCols(IMatrix matrix) {
@@ -62,16 +58,11 @@ public abstract class HiddenSubSet implements IAlgorithm {
             }
             group(subset, tab);
             for (Subset s : subset) {
-                System.out.println("Removing subset in col " + col);
-
                 for (int row : s.getSubsetPosition()) {
                     removeCandidate(matrix, row, col, s.getSubsetNumber());
                 }
             }
         }
-
-        //System.out.println(subset.size());
-
     }
 
     private void findHiddenPairsInBlocks(IMatrix matrix) {
@@ -80,8 +71,8 @@ public abstract class HiddenSubSet implements IAlgorithm {
         for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
                 Integer[][] tab = new Integer[SIZE][SIZE];
-                for (int row = rowGroup * BLOCK_SIZE; row < (rowGroup + 1) * BLOCK_SIZE; row++) {
-                    for (int col = colGroup * BLOCK_SIZE; col < (colGroup + 1) * BLOCK_SIZE; col++) {
+                for (int row : blockElems(rowGroup)) {
+                    for (int col : blockElems(colGroup)) {
                         for (int candidate : matrix.getCandidates(row, col)) {
                             int pos = (row % 3) * 3 + col % 3;
                             tab[candidate - 1][pos] = pos;
@@ -91,8 +82,6 @@ public abstract class HiddenSubSet implements IAlgorithm {
                 group(subset, tab);
 
                 for (Subset s : subset) {
-                    System.out.println("Removing subset in block " + s);
-
                     for (int pos : s.getSubsetPosition()) {
                         int row = rowGroup * BLOCK_SIZE + (pos / 3);
                         int col = colGroup * BLOCK_SIZE + pos % 3;
@@ -101,35 +90,45 @@ public abstract class HiddenSubSet implements IAlgorithm {
                 }
             }
         }
-
-        //  System.out.println(subset.size());
-
     }
 
-    private void group(List<Subset> subset, Integer[][] tab) {
-        List<List<Integer>> list = Utils.combinationList(Utils.FULL_LIST, size);
+    private void group(List<Subset> result, Integer[][] tab) {
+        /** Set of proposal subset, each of them with the same size **/
+        List<List<Integer>> subsets = Utils.combinationList(Utils.FULL_LIST, size);
 
+        /** Subset is a unique list of number staring from 1 with declared size (2..4) **/
+        for (List<Integer> subset : subsets) {
+            CounterHashMap<Integer> counterMap = new CounterHashMap<>();
+            boolean[] flags = new boolean[size];
+            int id = 0;
 
-        for (List<Integer> item : list) {
-            CounterHashMap<Integer> map = new CounterHashMap<>();
-            for (int i : item) {
-                Integer[] pos = tab[i - 1];
-                for (Integer p : pos) {
-                    if (p != null) {
-                        map.inc(p);
+            for (int item : subset) {
+                Integer[] positions = tab[item - 1];
 
+                for (Integer pos : positions) {
+                    if (pos != null) {
+                        counterMap.inc(pos);
+                        flags[id] = true;
                     }
                 }
+                id++;
             }
-            if (map.size() == size) {
+
+            if (counterMap.size() == size) {
                 boolean found = true;
-                for (int i : map.values()) {
+                for (int i : counterMap.values()) {
                     if (i < 2) {
                         found = false;
                     }
                 }
+                for (boolean elem : flags) {
+                    if (!elem) {
+                        found = false;
+                    }
+                }
+
                 if (found) {
-                    subset.add(new Subset(item, new ArrayList<>(map.keySet())));
+                    result.add(new Subset(subset, new ArrayList<>(counterMap.keySet())));
                 }
             }
         }
