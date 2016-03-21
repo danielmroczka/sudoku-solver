@@ -8,7 +8,7 @@ import com.labs.dm.sudoku.solver.utils.CounterHashMap;
  * http://hodoku.sourceforge.net/en/tech_fishb.php#bf3
  * http://www.sudokuwiki.org/Jelly_Fish_Strategy
  * <p>
- * Created by daniel on 2016-03-03.
+ * Created by Daniel Mroczka on 2016-03-03.
  */
 public class JellyFish extends SwordFish {
     public JellyFish() {

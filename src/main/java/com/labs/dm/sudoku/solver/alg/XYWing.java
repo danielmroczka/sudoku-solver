@@ -13,7 +13,7 @@ import static com.labs.dm.sudoku.solver.utils.Utils.*;
 /**
  * XY Wing implementation
  * <p/>
- * Created by daniel on 2016-02-21.
+ * Created by Daniel Mroczka on 2016-02-21.
  */
 public class XYWing implements IAlgorithm {
 

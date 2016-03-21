@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by daniel on 2016-02-19.
+ * Created by Daniel Mroczka on 2016-02-19.
  */
 public class GeneratorTest {
 

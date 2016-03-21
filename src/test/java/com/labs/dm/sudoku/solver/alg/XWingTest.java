@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by daniel on 2016-02-15.
+ * Created by Daniel Mroczka on 2016-02-15.
  */
 public class XWingTest {
 

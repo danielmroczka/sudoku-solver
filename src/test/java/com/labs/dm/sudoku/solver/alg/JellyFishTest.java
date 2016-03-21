@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 /**
- * Created by daniel on 08-Mar-16.
+ * Created by Daniel Mroczka on 08-Mar-16.
  */
 public class JellyFishTest {
 

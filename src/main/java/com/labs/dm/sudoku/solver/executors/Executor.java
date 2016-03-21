@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- * Created by daniel on 2016-03-09.
+ * Created by Daniel Mroczka on 2016-03-09.
  */
 public class Executor {
 

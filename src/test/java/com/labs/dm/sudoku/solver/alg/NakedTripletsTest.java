@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by daniel on 2016-02-19.
+ * Created by Daniel Mroczka on 2016-02-19.
  */
 public class NakedTripletsTest {
 

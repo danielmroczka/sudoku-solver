@@ -1,7 +1,7 @@
 package com.labs.dm.sudoku.solver.alg;
 
 /**
- * Created by daniel on 2016-02-19.
+ * Created by Daniel Mroczka on 2016-02-19.
  */
 public class HiddenTriples extends HiddenSubSet {
     public HiddenTriples() {

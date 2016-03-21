@@ -8,7 +8,7 @@ import java.io.IOException;
 import static org.mockito.Mockito.*;
 
 /**
- * Created by daniel on 10-Mar-16.
+ * Created by Daniel Mroczka on 10-Mar-16.
  */
 public class IMatrixListenerTest {
 

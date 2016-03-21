@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by daniel on 2016-03-10.
+ * Created by Daniel Mroczka on 2016-03-10.
  */
 public class BacktrackingTest {
 

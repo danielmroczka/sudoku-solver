@@ -19,7 +19,7 @@ import static com.labs.dm.sudoku.solver.utils.Utils.combinationList;
  * http://www.sudoku9981.com/sudoku-solving/swordfish.php
  * http://www.dwojcik.republika.pl/sudoku/techniques/techn09.htm
  * <p>
- * Created by daniel on 2016-03-03.
+ * Created by Daniel Mroczka on 2016-03-03.
  */
 public class SwordFish implements IAlgorithm {
 

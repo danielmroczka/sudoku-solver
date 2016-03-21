@@ -34,4 +34,28 @@ public class HiddenQuadsTest {
         assertEquals(4, matrix.getCandidates(0, 2).size());
         assertEquals(2, matrix.getCandidates(0, 5).size());
     }
+
+    @Test
+    public void shouldFoundQuadsInCol() {
+        //Should find hidden quad: 1, 2, 8, 9
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{5, 8, 9});
+        matrix.addCandidates(1, 0, new Integer[]{1, 4, 5, 8});
+        matrix.addCandidates(2, 0, new Integer[]{4, 5});
+        matrix.addCandidates(3, 0, new Integer[]{1, 2});
+        matrix.addCandidates(4, 0, new Integer[]{2, 5, 9});
+        matrix.addCandidates(5, 0, new Integer[]{5, 6, 7});
+        matrix.addCandidates(6, 0, new Integer[]{4, 5, 7});
+        matrix.addCandidates(7, 0, new Integer[]{3, 4, 5, 6});
+        matrix.addCandidates(8, 0, new Integer[]{3, 4, 5, 7});
+        //WHEN
+        hiddenQuads.execute(matrix);
+        //THEN
+        assertEquals(2, matrix.getCandidates(0, 0).size());
+        assertEquals(2, matrix.getCandidates(1, 0).size());
+        assertEquals(2, matrix.getCandidates(2, 0).size());
+        assertEquals(2, matrix.getCandidates(3, 0).size());
+        assertEquals(2, matrix.getCandidates(4, 0).size());
+    }
 }

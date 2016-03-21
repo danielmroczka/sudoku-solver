@@ -14,7 +14,7 @@ import static com.labs.dm.sudoku.solver.utils.Utils.getSurroundings;
 /**
  * TODO: need to find better class name
  * <p>
- * Created by daniel on 2016-03-10.
+ * Created by Daniel Mroczka on 2016-03-10.
  */
 public class RemoveOneCandidate implements IAlgorithm {
     @Override

@@ -10,7 +10,7 @@ import java.io.IOException;
 import static com.labs.dm.sudoku.solver.executors.Executor.run;
 
 /**
- * Created by daniel on 2016-02-17.
+ * Created by Daniel Mroczka on 2016-02-17.
  */
 public class ValidationTest {
 

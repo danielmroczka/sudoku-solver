@@ -10,7 +10,7 @@ import java.io.IOException;
 import static org.junit.Assert.*;
 
 /**
- * Created by daniel on 2016-02-21.
+ * Created by Daniel Mroczka on 2016-02-21.
  */
 public class XYWingTest {
 

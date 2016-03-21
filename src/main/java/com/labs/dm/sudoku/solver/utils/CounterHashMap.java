@@ -3,7 +3,7 @@ package com.labs.dm.sudoku.solver.utils;
 import java.util.HashMap;
 
 /**
- * Created by daniel on 2016-02-15.
+ * Created by Daniel Mroczka on 2016-02-15.
  */
 public class CounterHashMap<K> extends HashMap<K, Integer> {
 

@@ -11,7 +11,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by daniel on 23-Feb-16.
+ * Created by Daniel Mroczka on 23-Feb-16.
  */
 public class PairTest {
 

@@ -3,7 +3,7 @@ package com.labs.dm.sudoku.solver.core;
 import java.util.Comparator;
 
 /**
- * Created by daniel on 2016-02-15.
+ * Created by Daniel Mroczka on 2016-02-15.
  */
 public class Pair {
     private final int row;

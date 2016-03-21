@@ -3,7 +3,7 @@ package com.labs.dm.sudoku.solver.executors;
 /**
  * Class contains information about one algorithm execution
  * <p>
- * Created by daniel on 10-Mar-16.
+ * Created by Daniel Mroczka on 10-Mar-16.
  */
 public class ContextItem {
     /**

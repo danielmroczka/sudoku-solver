@@ -9,7 +9,7 @@ import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by daniel on 24-Feb-16.
+ * Created by Daniel Mroczka on 24-Feb-16.
  */
 public class XYZWingTest {
 

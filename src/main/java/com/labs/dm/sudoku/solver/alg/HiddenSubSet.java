@@ -1,12 +1,12 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
-import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.utils.SubSetUtils.hiddenSubset;
 
 /**
  * Created by Daniel Mroczka on 2016-03-15.
@@ -32,7 +32,7 @@ public abstract class HiddenSubSet implements IAlgorithm {
             }
 
             /* Find hidden subset */
-            List<List<Integer>> subset = Utils.hiddenSubset(list, SIZE);
+            List<List<Integer>> subset = hiddenSubset(list, SIZE);
 
             /* Remove candidate on cells where hidden subset has been found */
             if (subset.size() == 2) {
@@ -56,7 +56,7 @@ public abstract class HiddenSubSet implements IAlgorithm {
                 }
 
                 /* Find hidden subset */
-                List<List<Integer>> subset = Utils.hiddenSubset(list, SIZE);
+                List<List<Integer>> subset = hiddenSubset(list, SIZE);
 
                 /* Remove candidate on cells where hidden subset has been found */
                 if (!subset.isEmpty()) {
@@ -80,7 +80,7 @@ public abstract class HiddenSubSet implements IAlgorithm {
             }
 
             /* Find hidden subset */
-            List<List<Integer>> subset = Utils.hiddenSubset(list, SIZE);
+            List<List<Integer>> subset = hiddenSubset(list, SIZE);
 
             /* Remove candidate on cells where hidden subset has been found */
             if (!subset.isEmpty()) {
@@ -104,5 +104,6 @@ public abstract class HiddenSubSet implements IAlgorithm {
             matrix.removeCandidate(row, col, diff);
         }
     }
+
 
 }

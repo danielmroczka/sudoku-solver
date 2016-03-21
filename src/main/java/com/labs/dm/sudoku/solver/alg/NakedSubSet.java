@@ -1,12 +1,12 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
-import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.utils.SubSetUtils.nakedSubset;
 
 /**
  * Created by Daniel Mroczka on 2016-03-15.
@@ -28,7 +28,7 @@ public abstract class NakedSubSet implements IAlgorithm {
             for (int col = 0; col < IMatrix.SIZE; col++) {
                 list.add(matrix.getCandidates(row, col));
             }
-            List<List<Integer>> res = Utils.nakedSubset(list, SIZE);
+            List<List<Integer>> res = nakedSubset(list, SIZE);
 
             if (res.size() != SIZE + 1) {
                 continue;
@@ -46,7 +46,7 @@ public abstract class NakedSubSet implements IAlgorithm {
             for (int row = 0; row < IMatrix.SIZE; row++) {
                 list.add(matrix.getCandidates(row, col));
             }
-            List<List<Integer>> res = Utils.nakedSubset(list, SIZE);
+            List<List<Integer>> res = nakedSubset(list, SIZE);
 
             if (res.size() != SIZE + 1) {
                 continue;
@@ -70,7 +70,7 @@ public abstract class NakedSubSet implements IAlgorithm {
                     }
                 }
 
-                List<List<Integer>> res = Utils.nakedSubset(list, SIZE);
+                List<List<Integer>> res = nakedSubset(list, SIZE);
 
                 if (res.size() != SIZE + 1) {
                     continue;

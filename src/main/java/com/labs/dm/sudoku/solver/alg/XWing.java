@@ -7,7 +7,7 @@ import java.util.List;
 import static com.labs.dm.sudoku.solver.utils.Utils.theSameBlock;
 
 /**
- * Created by daniel on 2016-02-15.
+ * Created by Daniel Mroczka on 2016-02-15.
  */
 public class XWing implements IAlgorithm {
 
