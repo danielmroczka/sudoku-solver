@@ -10,10 +10,10 @@ package com.labs.dm.sudoku.solver.alg;
  *
  * @author Daniel Mroczka
  */
-public class HiddenPairs extends HiddenSubSet {
+public class HiddenPairs extends com.labs.dm.sudoku.solver.alg.experimental.HiddenSubSet {
 
     public HiddenPairs() {
-        SIZE = 2;
+        size = 2;
     }
 
 }
