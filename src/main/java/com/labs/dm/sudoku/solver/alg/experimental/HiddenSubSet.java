@@ -6,6 +6,7 @@ import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
@@ -39,6 +40,10 @@ public abstract class HiddenSubSet implements IAlgorithm {
             group(subset, tab);
 
             for (Subset s : subset) {
+                if (subset.size() > 1) {
+                    System.out.println("__r_" + Arrays.toString(subset.toArray()));
+                }
+
                 for (int col : s.getSubsetPosition()) {
                     removeCandidate(matrix, row, col, s.getSubsetNumber());
                 }
@@ -58,6 +63,10 @@ public abstract class HiddenSubSet implements IAlgorithm {
             }
             group(subset, tab);
             for (Subset s : subset) {
+                if (subset.size() > 1) {
+                    System.out.println("__c_" + Arrays.toString(subset.toArray()));
+                }
+
                 for (int row : s.getSubsetPosition()) {
                     removeCandidate(matrix, row, col, s.getSubsetNumber());
                 }
@@ -82,6 +91,10 @@ public abstract class HiddenSubSet implements IAlgorithm {
                 group(subset, tab);
 
                 for (Subset s : subset) {
+                    if (subset.size() > 1) {
+                        System.out.println("__b_" + Arrays.toString(subset.toArray()));
+                    }
+
                     for (int pos : s.getSubsetPosition()) {
                         int row = rowGroup * BLOCK_SIZE + (pos / 3);
                         int col = colGroup * BLOCK_SIZE + pos % 3;
@@ -139,12 +152,16 @@ public abstract class HiddenSubSet implements IAlgorithm {
             return;
         }
 
+        //TODO: Rewrite this part to make easier
         List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col));
         common.retainAll(subset);
         if (common.size() >= 2) {
             List<Integer> diff = new ArrayList<>(matrix.getCandidates(row, col));
             diff.removeAll(subset);
-            matrix.removeCandidate(row, col, diff);
+            if (diff.size() > 0) {
+                matrix.removeCandidate(row, col, diff);
+                System.out.println("Remove " + diff);
+            }
         }
     }
 
@@ -164,6 +181,14 @@ public abstract class HiddenSubSet implements IAlgorithm {
 
         public List<Integer> getSubsetPosition() {
             return subsetPosition;
+        }
+
+        @Override
+        public String toString() {
+            return "Subset{" +
+                    "subsetNumber=" + subsetNumber +
+                    ", subsetPosition=" + subsetPosition +
+                    '}';
         }
     }
 
