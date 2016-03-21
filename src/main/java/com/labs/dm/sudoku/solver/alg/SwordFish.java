@@ -163,15 +163,24 @@ public class SwordFish implements IAlgorithm {
         return res;
     }
 
-    protected boolean accept(CounterHashMap<Integer> rowsMap, CounterHashMap<Integer> colsMap) {
-        boolean accept = true;
+    protected boolean accept(Map<Integer, Integer> rowsMap, Map<Integer, Integer> colsMap) {
+        boolean accept = rowsMap.size() == SIZE && colsMap.size() == SIZE;
+
         for (int val : rowsMap.values()) {
-            if (val < 2) accept = false;
+            if (val < 2) {
+                accept = false;
+                break;
+            }
         }
+
         for (int val : colsMap.values()) {
-            if (val < 2) accept = false;
+            if (val < 2) {
+                accept = false;
+                break;
+            }
         }
-        return accept && rowsMap.size() == SIZE && colsMap.size() == SIZE;
+
+        return accept;
     }
 
     /**
