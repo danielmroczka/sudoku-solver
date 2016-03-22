@@ -20,10 +20,15 @@ public class Executor {
     }
 
     public static synchronized void run(IMatrix matrix, Class<? extends IAlgorithm> clazz) {
+
         if (instance == null) {
             instance = new Executor();
         }
         instance.execute(matrix, clazz);
+        if (!matrix.validate(true)) {
+            System.err.println("NotValid " + clazz);
+            System.out.println(matrix.printCandidates());
+        }
     }
 
     private void execute(IMatrix matrix, Class<? extends IAlgorithm> clazz) {

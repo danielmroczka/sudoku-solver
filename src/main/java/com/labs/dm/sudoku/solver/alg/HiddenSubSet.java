@@ -5,6 +5,7 @@ import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
@@ -37,10 +38,12 @@ public abstract class HiddenSubSet implements IAlgorithm {
             }
             group(subset, tab, size);
 
+            if (subset.size() > 1) {
+                System.out.println("__r_" + row + "_" + Arrays.toString(tab));
+                //System.out.println("__r_" + Arrays.toString(subset.toArray()));
+            }
+
             for (Subset s : subset) {
-                if (subset.size() > 1) {
-                    //  System.out.println("__r_" + Arrays.toString(subset.toArray()));
-                }
 
                 for (int col : s.getSubsetPosition()) {
                     removeCandidate(matrix, row, col, s.getSubsetNumber());
@@ -60,17 +63,18 @@ public abstract class HiddenSubSet implements IAlgorithm {
                     tab[candidate - 1][row] = row;
                 }
             }
-            group(subset, tab, size);
-            for (Subset s : subset) {
-                if (subset.size() > 1) {
-                    //  System.out.println("__c_" + Arrays.toString(subset.toArray()));
-                }
 
+
+            group(subset, tab, size);
+            if (subset.size() > 1) {
+                //System.out.println("__c_" + Arrays.toString(subset.toArray()));
+                System.out.println("__c_" + col + "_" + Arrays.toString(tab));
+            }
+            for (Subset s : subset) {
                 for (int row : s.getSubsetPosition()) {
                     removeCandidate(matrix, row, col, s.getSubsetNumber());
                 }
                 // break;
-
             }
         }
     }
@@ -91,10 +95,15 @@ public abstract class HiddenSubSet implements IAlgorithm {
                 }
                 group(subset, tab, size);
 
+                if (subset.size() > 1) {
+                    //System.out.println("__b_" + Arrays.toString(subset.toArray()));
+
+                    System.out.println("__b_" + rowGroup + " " + colGroup + "_" + Arrays.toString(tab));
+
+                }
+
                 for (Subset s : subset) {
-                    if (subset.size() > 1) {
-                        // System.out.println("__b_" + Arrays.toString(subset.toArray()));
-                    }
+
 
                     for (int pos : s.getSubsetPosition()) {
                         int row = rowGroup * BLOCK_SIZE + (pos / 3);
@@ -117,7 +126,7 @@ public abstract class HiddenSubSet implements IAlgorithm {
             CounterHashMap<Integer> counterMap = new CounterHashMap<>();
             boolean[] flags = new boolean[subsetSize];
             int id = 0;
-
+            /** Iterates through subset */
             for (int item : subset) {
                 Integer[] positions = tab[item - 1];
 
@@ -127,17 +136,15 @@ public abstract class HiddenSubSet implements IAlgorithm {
                         c++;
                     }
                 }
-                if (c < 2 || c > subsetSize) {
-                    break;
-                }
-
-                for (Integer pos : positions) {
-                    if (pos != null) {
-                        counterMap.inc(pos);
-                        flags[id] = true;
+                if (c >= 2) {
+                    for (Integer pos : positions) {
+                        if (pos != null) {
+                            counterMap.inc(pos);
+                            flags[id] = true;
+                        }
                     }
+                    id++;
                 }
-                id++;
             }
 
             if (counterMap.size() == subsetSize) {

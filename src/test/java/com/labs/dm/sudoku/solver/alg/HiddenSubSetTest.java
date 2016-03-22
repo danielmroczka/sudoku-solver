@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.*;
 
 /**
  * Created by Daniel Mroczka on 2016-03-19.
@@ -115,4 +116,29 @@ public class HiddenSubSetTest {
         assertEquals(Arrays.asList(2, 4, 5), result.get(0).getSubsetNumber());
         assertEquals(Arrays.asList(0, 4, 8), result.get(0).getSubsetPosition());
     }
+
+    @Test
+    public void findSubset3() throws Exception {
+        //GIVEN
+        List<HiddenSubSet.Subset> result = new ArrayList<>();
+        Integer[][] tab = new Integer[9][9];
+        tab[0][0] = 0;
+        tab[1][0] = 0;
+        tab[2][0] = 0;
+
+
+        tab[0][1] = 1;
+        tab[1][1] = 1;
+        tab[2][1] = 1;
+
+        tab[0][2] = 2;
+        tab[1][2] = 2;
+        tab[2][2] = 2;
+
+        tab[1][3] = 3;
+        hiddenSubset.group(result, tab, 3);
+        //THEN
+        assertThat(result, is(empty()));
+    }
+
 }
