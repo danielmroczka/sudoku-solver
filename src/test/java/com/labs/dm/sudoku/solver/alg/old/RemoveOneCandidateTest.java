@@ -1,4 +1,4 @@
-package com.labs.dm.sudoku.solver.alg.experimental;
+package com.labs.dm.sudoku.solver.alg.old;
 
 import com.labs.dm.sudoku.solver.alg.HiddenSingles;
 import com.labs.dm.sudoku.solver.alg.IAlgorithm;
