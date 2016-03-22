@@ -23,7 +23,7 @@ public class HiddenTriplesTest {
         //WHEN
         hiddenTriples.execute(matrix);
         //THEN
-        assertEquals(2, matrix.getCandidates(0, 0).size());
+        assertEquals(3, matrix.getCandidates(0, 0).size());
         assertEquals(2, matrix.getCandidates(1, 1).size());
         assertEquals(2, matrix.getCandidates(2, 2).size());
     }
