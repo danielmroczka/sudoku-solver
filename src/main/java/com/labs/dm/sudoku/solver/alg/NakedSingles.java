@@ -8,14 +8,14 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
 
 /**
- * Lone Singles (Naked Singles) Algorithm Implementation.
+ * Naked Singles (Lone Singles) Algorithm Implementation.
  * <p>
  * Finds cells with only one candidate and updates the cell value with candidate value.
  *
  * @author Daniel Mroczka
  *         http://www.learn-sudoku.com/lone-singles.html
  */
-public class LoneSingles implements IAlgorithm {
+public class NakedSingles implements IAlgorithm {
 
     @Override
     public void execute(IMatrix matrix) {

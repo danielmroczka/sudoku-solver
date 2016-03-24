@@ -26,9 +26,8 @@ public abstract class HiddenSubSet implements IAlgorithm {
     }
 
     private void findHiddenPairsInRows(IMatrix matrix) {
-        List<Subset> subset = new ArrayList<>();
-
         for (int row = 0; row < SIZE; row++) {
+            List<Subset> subset = new ArrayList<>();
             Integer[][] tab = fillTabRows(matrix, row);
             group(subset, tab, size);
 
@@ -41,9 +40,8 @@ public abstract class HiddenSubSet implements IAlgorithm {
     }
 
     private void findHiddenPairsInCols(IMatrix matrix) {
-        List<Subset> subset = new ArrayList<>();
-
         for (int col = 0; col < SIZE; col++) {
+            List<Subset> subset = new ArrayList<>();
             Integer[][] tab = fillTabCols(matrix, col);
             group(subset, tab, size);
 
@@ -56,10 +54,9 @@ public abstract class HiddenSubSet implements IAlgorithm {
     }
 
     private void findHiddenPairsInBlocks(IMatrix matrix) {
-        List<Subset> subset = new ArrayList<>();
-
         for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
+                List<Subset> subset = new ArrayList<>();
                 Integer[][] tab = fillTabBlock(matrix, rowGroup, colGroup);
                 group(subset, tab, size);
 
@@ -167,7 +164,7 @@ public abstract class HiddenSubSet implements IAlgorithm {
             List<Integer> diff = new ArrayList<>(matrix.getCandidates(row, col));
             diff.removeAll(subset);
             if (diff.size() > 0) {
-                Utils.logCandidates("tag", matrix);
+                Utils.logCandidates("beforeRemove", matrix);
                 matrix.removeCandidate(row, col, diff);
             }
         }

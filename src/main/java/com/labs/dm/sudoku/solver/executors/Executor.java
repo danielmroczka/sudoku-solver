@@ -51,10 +51,12 @@ public class Executor {
         time = System.nanoTime() - time;
         LOGGER.fine("Executed " + clazz.getSimpleName() + " in " + time / 1000000d + " [ms]. Solved=" + solved + ", reduced candidates=" + candidates);
 
+/*
         if (solved > 0 || candidates > 0) {
             matrix.getContext().add(new ContextItem(algInstance.getClass().getSimpleName(), solved, candidates, (int) time));
             execute(matrix, clazz);
         }
+*/
     }
 
 }

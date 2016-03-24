@@ -15,7 +15,7 @@ import static com.labs.dm.sudoku.solver.executors.Executor.run;
  */
 public class Flow {
 
-    private Class<? extends IAlgorithm>[] all = new Class[]{LoneSingles.class};
+    private Class<? extends IAlgorithm>[] all = new Class[]{NakedSingles.class};
 
     private final Logger logger = Logger.getLogger("Flow");
 
@@ -30,14 +30,14 @@ public class Flow {
         int counter = 0;
         while (!matrix.isSolved()) {
             logger.info("Flow execution " + ++counter + " candidates:" + matrix.getCandidatesCount());
-            run(matrix, LoneSingles.class);
+            run(matrix, NakedSingles.class);
             run(matrix, OpenSingles.class);
             run(matrix, NakedPairs.class);
             run(matrix, NakedTriplets.class);
             run(matrix, NakedQuads.class);
             run(matrix, HiddenPairs.class);
-            //  run(matrix, HiddenTriples.class);
-            //run(matrix, HiddenQuads.class);
+            run(matrix, HiddenTriples.class);
+            run(matrix, HiddenQuads.class);
             run(matrix, HiddenSingles.class);
             run(matrix, Reduction.class);
             run(matrix, XWing.class);

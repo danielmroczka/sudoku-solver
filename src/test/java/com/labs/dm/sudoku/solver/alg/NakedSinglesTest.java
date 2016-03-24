@@ -15,9 +15,9 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Daniel Mroczka
  */
-public class LoneSinglesTest {
+public class NakedSinglesTest {
 
-    private final LoneSingles loneSingles = new LoneSingles();
+    private final NakedSingles nakedSingles = new NakedSingles();
 
     @Test
     public void testExecute() throws IOException {
@@ -31,7 +31,7 @@ public class LoneSinglesTest {
             }
         }
         //WHEN
-        loneSingles.execute(matrix);
+        nakedSingles.execute(matrix);
         //THEN
         assertTrue(matrix.isSolved());
         assertArrayEquals(resolvedMatrix.toArray(), matrix.toArray());
