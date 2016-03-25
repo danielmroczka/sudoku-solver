@@ -85,6 +85,7 @@ public class HiddenSingles implements IAlgorithm {
                 if (entry.getValue() == 1) {
                     for (int col = 0; col < SIZE; col++) {
                         if (matrix.getCandidates(row, col).contains(entry.getKey())) {
+                            Utils.logCandidates("hiddeb", matrix);
                             matrix.setValueAt(row, col, entry.getKey());
                         }
                     }

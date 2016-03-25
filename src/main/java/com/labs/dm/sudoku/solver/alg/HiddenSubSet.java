@@ -154,7 +154,7 @@ public abstract class HiddenSubSet implements IAlgorithm {
      * @param subset
      */
     protected void removeCandidate(IMatrix matrix, int row, int col, List<Integer> subset) {
-        if (matrix.getCandidates(row, col).isEmpty()) {
+        if (matrix.isCellSet(row, col) || matrix.getCandidates(row, col).isEmpty()) {
             return;
         }
         //TODO: Rewrite this part to make easier
@@ -164,8 +164,8 @@ public abstract class HiddenSubSet implements IAlgorithm {
             List<Integer> diff = new ArrayList<>(matrix.getCandidates(row, col));
             diff.removeAll(subset);
             if (diff.size() > 0) {
-                Utils.logCandidates("beforeRemove", matrix);
                 matrix.removeCandidate(row, col, diff);
+                Utils.logCandidates("beforeRemove", matrix);
             }
         }
     }

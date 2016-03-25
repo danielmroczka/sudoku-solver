@@ -366,7 +366,7 @@ public class Matrix implements IMatrix {
             int[] rows = getElemsInRow(row);
             for (int r : rows) {
                 validateInputValue(r);
-                if (!set.add(r) && r != EMPTY_VALUE) {
+                if (!set.add(r) && isSetValue(r)) {
                     throw new IllegalStateException("Value " + r + " is not unique in row: " + row);
                 }
             }

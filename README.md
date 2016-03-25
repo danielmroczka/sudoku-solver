@@ -29,7 +29,7 @@ Maven:
 <dependency>
     <groupId>com.labs.dm</groupId>
     <artifactId>sudoku-solver</artifactId>
-    <version>0.0.8-SNAPSHOT</version>
+    <version>0.0.9-SNAPSHOT</version>
 </dependency>
 ```
 Command line:

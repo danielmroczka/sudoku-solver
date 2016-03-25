@@ -21,7 +21,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         MatrixLoader loader = new MatrixLoader();
-        IMatrix matrix = loader.load("src/test/resources/patterns/17clues.txt");
+        IMatrix matrix = loader.load("src/test/resources/patterns/hard/hard6.txt");
         matrix.addMatrixListener(new LogListener());
         Flow flow = new Flow();
         flow.execute(matrix);
