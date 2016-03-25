@@ -1,11 +1,12 @@
 package com.labs.dm.sudoku.solver.core;
 
+import java.io.Serializable;
 import java.util.logging.Logger;
 
 /**
  * Created by Daniel Mroczka on 10-Mar-16.
  */
-public class LogListener implements IMatrixListener {
+public class LogListener implements IMatrixListener, Serializable {
     private final Logger logger = Logger.getLogger("MatrixListener");
 
     @Override

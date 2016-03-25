@@ -6,6 +6,7 @@ package com.labs.dm.sudoku.solver.core;
 import com.labs.dm.sudoku.solver.executors.ContextItem;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
+import java.io.Serializable;
 import java.util.*;
 
 import static com.labs.dm.sudoku.solver.utils.Utils.deepCopy;
@@ -15,7 +16,7 @@ import static com.labs.dm.sudoku.solver.utils.Utils.deepCopy;
  *
  * @author Daniel Mroczka
  */
-public class Matrix implements IMatrix {
+public class Matrix implements IMatrix, Serializable {
 
     private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;

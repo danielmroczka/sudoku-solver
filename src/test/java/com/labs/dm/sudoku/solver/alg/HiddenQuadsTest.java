@@ -2,6 +2,7 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -57,5 +58,31 @@ public class HiddenQuadsTest {
         assertEquals(2, matrix.getCandidates(2, 0).size());
         assertEquals(2, matrix.getCandidates(3, 0).size());
         assertEquals(2, matrix.getCandidates(4, 0).size());
+    }
+
+    @Test
+    @Ignore
+    public void shouldFoundQuadsInBlock() {
+        //Should find hidden quad: 1,4,6,9
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{1, 3, 4, 6, 7, 8, 9});
+        matrix.addCandidates(0, 1, new Integer[]{3, 7, 8});
+        matrix.addCandidates(0, 2, new Integer[]{3, 4, 6, 7, 8, 9});
+        matrix.addCandidates(1, 0, new Integer[]{2, 3, 7, 8});
+        matrix.addCandidates(1, 1, new Integer[]{2, 3, 5, 7, 8});
+        matrix.addCandidates(1, 2, new Integer[]{2, 3, 5, 7, 8});
+        matrix.addCandidates(2, 0, new Integer[]{1, 3, 4, 7, 8, 9});
+        matrix.addCandidates(2, 1, new Integer[]{3, 5, 7, 8});
+        matrix.addCandidates(2, 2, new Integer[]{3, 4, 5, 7, 8, 9});
+        //WHEN
+        int count = matrix.getCandidatesCount();
+        hiddenQuads.execute(matrix);
+        //THEN
+        assertEquals(count - 13, matrix.getCandidatesCount());
+        assertEquals(4, matrix.getCandidates(0, 0).size());
+        assertEquals(3, matrix.getCandidates(0, 2).size());
+        assertEquals(3, matrix.getCandidates(2, 0).size());
+        assertEquals(2, matrix.getCandidates(2, 2).size());
     }
 }

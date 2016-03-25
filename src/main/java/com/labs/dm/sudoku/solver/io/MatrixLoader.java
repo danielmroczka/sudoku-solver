@@ -76,4 +76,34 @@ public class MatrixLoader {
         return fileData.toString();
     }
 
+    /**
+     * Temporary method to store current matrix state
+     * Should be replaced by method stored data in plain text format
+     *
+     * @param matrix
+     * @param filename
+     * @throws IOException
+     */
+    public void serialize(IMatrix matrix, String filename) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(filename)))) {
+            oos.writeObject(matrix);
+            oos.close();
+        }
+    }
+
+    /**
+     * @param filename
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public IMatrix deserialize(String filename) throws IOException, ClassNotFoundException {
+        IMatrix matrix;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(filename)))) {
+            matrix = (IMatrix) ois.readObject();
+            ois.close();
+        }
+        return matrix;
+    }
+
 }

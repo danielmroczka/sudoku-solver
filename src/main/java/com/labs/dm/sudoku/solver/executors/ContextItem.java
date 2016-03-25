@@ -1,11 +1,13 @@
 package com.labs.dm.sudoku.solver.executors;
 
+import java.io.Serializable;
+
 /**
  * Class contains information about one algorithm execution
  * <p>
  * Created by Daniel Mroczka on 10-Mar-16.
  */
-public class ContextItem {
+public class ContextItem implements Serializable {
     /**
      * The name of sudoku algorithm
      */
