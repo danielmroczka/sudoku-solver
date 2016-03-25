@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.util.logging.Logger;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
 import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
@@ -17,6 +18,8 @@ import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
  * Created by Daniel Mroczka on 2016-02-13.
  */
 public class Utils {
+
+    private static final Logger LOGGER = Logger.getAnonymousLogger();
 
     private Utils() {
     }
@@ -221,24 +224,24 @@ public class Utils {
 
     public static void log(IMatrix matrix) {
         try {
-
             new MatrixLoader().save(matrix, "target\\matrix_" + new Date().getTime() + ".txt");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
     }
 
     public static void logCandidates(String tag, IMatrix matrix) {
-        File file = new File("target\\matrix_cand_" + tag + "_" + new Date().getTime() + ".txt");
-        if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
-        }
+        File file;
         try {
+            file = new File("target\\matrix_cand_" + tag + "_" + new Date().getTime() + ".txt");
+            if (!file.getParentFile().exists()) {
+                file.getParentFile().mkdirs();
+            }
             try (FileOutputStream fos = new FileOutputStream(file)) {
                 fos.write(matrix.printCandidates().getBytes(Charset.defaultCharset()));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.severe(e.getMessage());
         }
     }
 
