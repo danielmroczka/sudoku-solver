@@ -2,8 +2,11 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
+import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,6 +40,25 @@ public class HiddenQuadsTest {
     }
 
     @Test
+    public void shouldFoundQuadsInRow2() {
+        //Should find hidden quad: 1, 2, 6, 7
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{3, 5, 8});
+        matrix.addCandidates(0, 1, new Integer[]{2, 5, 6, 7, 8});
+        matrix.addCandidates(0, 2, new Integer[]{2, 3, 6, 8});
+        matrix.addCandidates(0, 3, new Integer[]{1, 2, 3, 8});
+        matrix.addCandidates(0, 4, new Integer[]{1, 2, 3, 6});
+        matrix.addCandidates(0, 5, new Integer[]{2, 3, 5, 6});
+        matrix.addCandidates(0, 6, new Integer[]{2, 6, 7});
+        //WHEN
+        int count = matrix.getCandidatesCount();
+        hiddenQuads.execute(matrix);
+        //THEN
+        assertEquals(count, matrix.getCandidatesCount());
+    }
+
+    @Test
     public void shouldFoundQuadsInCol() {
         //Should find hidden quad: 1, 2, 8, 9
         //GIVEN
@@ -61,7 +83,6 @@ public class HiddenQuadsTest {
     }
 
     @Test
-    @Ignore
     public void shouldFoundQuadsInBlock() {
         //Should find hidden quad: 1,4,6,9
         //GIVEN
@@ -84,5 +105,39 @@ public class HiddenQuadsTest {
         assertEquals(3, matrix.getCandidates(0, 2).size());
         assertEquals(3, matrix.getCandidates(2, 0).size());
         assertEquals(2, matrix.getCandidates(2, 2).size());
+    }
+
+    @Test
+    public void shouldFoundQuadsInBlock2() {
+        //Should find hidden quad: 1,4,6,9
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{2, 3, 6, 8});
+        matrix.addCandidates(0, 1, new Integer[]{1, 2, 3, 8});
+        matrix.addCandidates(0, 2, new Integer[]{1, 2, 6});
+        matrix.addCandidates(1, 0, new Integer[]{2, 3, 4, 6, 8, 9});
+        matrix.addCandidates(1, 1, new Integer[]{1, 2});
+        matrix.addCandidates(1, 2, new Integer[]{1, 2, 3, 4, 6});
+        matrix.addCandidates(2, 1, new Integer[]{1, 2, 9});
+        //WHEN
+        int count = matrix.getCandidatesCount();
+        hiddenQuads.execute(matrix);
+        //THEN
+        assertEquals(count - 0, matrix.getCandidatesCount());
+    }
+
+    @Test
+    @Ignore
+    public void shouldFoundPairFromFile() throws IOException {
+        MatrixLoader loader = new MatrixLoader();
+        IMatrix matrix = loader.load("src/test/resources/patterns/hard/hard6.txt");
+        IAlgorithm cand = new GenerateCandidates();
+        cand.execute(matrix);
+
+        cand.execute(matrix);
+        int count = matrix.getCandidatesCount();
+        hiddenQuads.execute(matrix);
+
+        assertEquals(count - 13, matrix.getCandidatesCount());
     }
 }

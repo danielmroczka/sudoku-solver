@@ -57,7 +57,7 @@ public abstract class HiddenSubSet implements IAlgorithm {
         for (int rowGroup : blockElems(0)) {
             for (int colGroup : blockElems(0)) {
                 List<Subset> subsets = new ArrayList<>();
-                Integer[][] tab = fillTabBlock(matrix, rowGroup, colGroup);
+                Integer[][] tab = fillTabBlock(matrix, rowGroup * BLOCK_SIZE, colGroup * BLOCK_SIZE);
                 group(subsets, tab, size);
 
                 for (Subset subset : subsets) {
@@ -154,9 +154,10 @@ public abstract class HiddenSubSet implements IAlgorithm {
      * @param subset
      */
     protected void removeCandidate(IMatrix matrix, int row, int col, List<Integer> subset) {
-        if (matrix.isCellSet(row, col) || matrix.getCandidates(row, col).isEmpty()) {
+        if (matrix.getCandidates(row, col).isEmpty()) {
             return;
         }
+
         //TODO: Rewrite this part to make easier
         List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col));
         common.retainAll(subset);

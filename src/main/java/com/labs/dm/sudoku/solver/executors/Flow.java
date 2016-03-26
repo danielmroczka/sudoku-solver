@@ -32,22 +32,22 @@ public class Flow {
             logger.info("Flow execution " + ++counter + " candidates:" + matrix.getCandidatesCount());
             run(matrix, NakedSingles.class);
             run(matrix, OpenSingles.class);
-            //run(matrix, NakedPairs.class);
-            //run(matrix, NakedTriplets.class);
-            //run(matrix, NakedQuads.class);
-            //run(matrix, HiddenPairs.class);
-            //run(matrix, HiddenTriples.class);
+            run(matrix, NakedPairs.class);
+            run(matrix, NakedTriplets.class);
+            run(matrix, NakedQuads.class);
+            run(matrix, HiddenPairs.class);
+            run(matrix, HiddenTriples.class);
 
             run(matrix, HiddenQuads.class);
             run(matrix, HiddenSingles.class);
 
-            //run(matrix, Reduction.class);
-            //run(matrix, XWing.class);
-            //run(matrix, XYWing.class);
-            //run(matrix, XYZWing.class);
-            //run(matrix, SwordFish.class);
-            //run(matrix, JellyFish.class);
-            //run(matrix, ForcingChains.class);
+            run(matrix, Reduction.class);
+            run(matrix, XWing.class);
+            run(matrix, XYWing.class);
+            run(matrix, XYZWing.class);
+            run(matrix, SwordFish.class);
+            run(matrix, JellyFish.class);
+            run(matrix, ForcingChains.class);
 
             logger.info(matrix.printCandidates());
             matrix.validate();
