@@ -12,7 +12,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by daniel on 2016-03-21.
+ * Created by Daniel Mroczka on 2016-03-21.
  */
 public class SubSetUtilsTest {
 
