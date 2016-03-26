@@ -123,7 +123,7 @@ public class HiddenQuadsTest {
         int count = matrix.getCandidatesCount();
         hiddenQuads.execute(matrix);
         //THEN
-        assertEquals(count - 0, matrix.getCandidatesCount());
+        assertEquals(count, matrix.getCandidatesCount());
     }
 
     @Test

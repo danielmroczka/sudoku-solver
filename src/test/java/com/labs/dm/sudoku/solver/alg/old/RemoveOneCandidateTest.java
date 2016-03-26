@@ -34,7 +34,7 @@ public class RemoveOneCandidateTest {
     }
 
     //@Test
-    public void execute2() throws Exception {
+    public void execute2() {
         IMatrix matrix = new Matrix();
         for (int ind = 0; ind < 9; ind++) {
             matrix.addCandidates(ind, ind, new Integer[]{ind + 1});

@@ -164,7 +164,7 @@ public class SubSetUtils {
 
             if (status) {
                 Set<Integer> set = new HashSet<>(tmpList);
-                map.add(new ArrayList<Integer>(set));
+                map.add(new ArrayList<>(set));
                 for (int idx : indexCombination) {
                     map.add(listWithTwoLengthItems.get(idx));
                 }

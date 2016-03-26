@@ -9,9 +9,6 @@ public class CounterHashMap<K> extends HashMap<K, Integer> {
 
     public void inc(K key) {
         Integer value = get(key);
-        if (value == null) {
-            value = 0;
-        }
         put(key, ++value);
     }
 
