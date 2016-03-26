@@ -23,8 +23,7 @@ public abstract class NakedSubSet implements IAlgorithm {
 
     private void findNakedPairsInRows(IMatrix matrix) {
         for (int row = 0; row < IMatrix.SIZE; row++) {
-            List<List<Integer>> list = matrix.getCandidatesInRow(row);
-            List<List<Integer>> res = nakedSubset(list, SIZE);
+            List<List<Integer>> res = nakedSubset(matrix.getCandidatesInRow(row), SIZE);
 
             if (res.size() != SIZE + 1) {
                 continue;
@@ -38,8 +37,7 @@ public abstract class NakedSubSet implements IAlgorithm {
 
     private void findNakedPairsInCols(IMatrix matrix) {
         for (int col = 0; col < IMatrix.SIZE; col++) {
-            List<List<Integer>> list = matrix.getCandidatesInCol(col);
-            List<List<Integer>> res = nakedSubset(list, SIZE);
+            List<List<Integer>> res = nakedSubset(matrix.getCandidatesInCol(col), SIZE);
 
             if (res.size() != SIZE + 1) {
                 continue;
@@ -54,8 +52,7 @@ public abstract class NakedSubSet implements IAlgorithm {
     private void findNakedPairsInBlocks(IMatrix matrix) {
         for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
-                List<List<Integer>> list = matrix.getCandidatesInBlock(rowGroup, colGroup);
-                List<List<Integer>> res = nakedSubset(list, SIZE);
+                List<List<Integer>> res = nakedSubset(matrix.getCandidatesInBlock(rowGroup, colGroup), SIZE);
 
                 if (res.size() != SIZE + 1) {
                     continue;
