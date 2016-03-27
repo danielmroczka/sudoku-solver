@@ -6,10 +6,10 @@ package com.labs.dm.sudoku.solver.alg;
  * <p/>
  * Created by Daniel Mroczka on 2016-02-19.
  */
-public class NakedTriplets extends NakedSubSet {
+public class NakedTriplets extends NakedSubset {
 
     public NakedTriplets() {
-        SIZE = 3;
+        subsetSize = 3;
     }
 
 }

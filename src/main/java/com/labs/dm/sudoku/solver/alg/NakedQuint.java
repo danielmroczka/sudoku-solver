@@ -3,8 +3,8 @@ package com.labs.dm.sudoku.solver.alg;
 /**
  * Created by Daniel Mroczka on 2016-03-26.
  */
-public class NakedQuint extends NakedSubSet {
+public class NakedQuint extends NakedSubset {
     public NakedQuint() {
-        SIZE = 5;
+        subsetSize = 5;
     }
 }

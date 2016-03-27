@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
 /**
  * Created by Daniel Mroczka on 2016-03-19.
  */
-public class HiddenSubSetTest {
+public class HiddenSubsetTest {
 
-    private HiddenSubSet hiddenSubset = new HiddenSubSet() {
+    private HiddenSubset hiddenSubset = new HiddenSubset() {
         @Override
         public void execute(IMatrix matrix) {
             super.execute(matrix);
@@ -51,7 +51,7 @@ public class HiddenSubSetTest {
     @Test
     public void testGroup() throws Exception {
         //GIVEN
-        List<HiddenSubSet.Subset> result = new ArrayList<>();
+        List<HiddenSubset.Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         //WHEN
         hiddenSubset.group(result, tab, 2);
@@ -62,7 +62,7 @@ public class HiddenSubSetTest {
     @Test
     public void findSubset1() throws Exception {
         //GIVEN
-        List<HiddenSubSet.Subset> result = new ArrayList<>();
+        List<HiddenSubset.Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[1][0] = 0;
@@ -78,7 +78,7 @@ public class HiddenSubSetTest {
     @Test
     public void findSubset2() throws Exception {
         //GIVEN
-        List<HiddenSubSet.Subset> result = new ArrayList<>();
+        List<HiddenSubset.Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[2][0] = 0;
@@ -97,7 +97,7 @@ public class HiddenSubSetTest {
     @Test
     public void findSubsetSmallBlock() throws Exception {
         //GIVEN
-        List<HiddenSubSet.Subset> result = new ArrayList<>();
+        List<HiddenSubset.Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[1][0] = 0;
@@ -120,7 +120,7 @@ public class HiddenSubSetTest {
     @Test
     public void findSubset3() throws Exception {
         //GIVEN
-        List<HiddenSubSet.Subset> result = new ArrayList<>();
+        List<HiddenSubset.Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[1][0] = 0;
@@ -144,7 +144,7 @@ public class HiddenSubSetTest {
     @Test
     public void findSubsetPair() throws Exception {
         //GIVEN
-        List<HiddenSubSet.Subset> result = new ArrayList<>();
+        List<HiddenSubset.Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[1][0] = 0;

@@ -5,14 +5,14 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import java.util.List;
 
 import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
-import static com.labs.dm.sudoku.solver.utils.SubSetUtils.nakedSubset;
+import static com.labs.dm.sudoku.solver.utils.SubsetUtils.nakedSubset;
 
 /**
  * Created by Daniel Mroczka on 2016-03-15.
  */
-public abstract class NakedSubSet implements IAlgorithm {
+public abstract class NakedSubset implements IAlgorithm {
 
-    protected int SIZE;
+    protected int subsetSize;
 
     @Override
     public void execute(IMatrix matrix) {
@@ -23,9 +23,9 @@ public abstract class NakedSubSet implements IAlgorithm {
 
     private void findNakedPairsInRows(IMatrix matrix) {
         for (int row = 0; row < IMatrix.SIZE; row++) {
-            List<List<Integer>> res = nakedSubset(matrix.getCandidatesInRow(row), SIZE);
+            List<List<Integer>> res = nakedSubset(matrix.getCandidatesInRow(row), subsetSize);
 
-            if (res.size() != SIZE + 1) {
+            if (res.size() != subsetSize + 1) {
                 continue;
             }
 
@@ -37,9 +37,9 @@ public abstract class NakedSubSet implements IAlgorithm {
 
     private void findNakedPairsInCols(IMatrix matrix) {
         for (int col = 0; col < IMatrix.SIZE; col++) {
-            List<List<Integer>> res = nakedSubset(matrix.getCandidatesInCol(col), SIZE);
+            List<List<Integer>> res = nakedSubset(matrix.getCandidatesInCol(col), subsetSize);
 
-            if (res.size() != SIZE + 1) {
+            if (res.size() != subsetSize + 1) {
                 continue;
             }
 
@@ -52,9 +52,9 @@ public abstract class NakedSubSet implements IAlgorithm {
     private void findNakedPairsInBlocks(IMatrix matrix) {
         for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
-                List<List<Integer>> res = nakedSubset(matrix.getCandidatesInBlock(rowGroup, colGroup), SIZE);
+                List<List<Integer>> res = nakedSubset(matrix.getCandidatesInBlock(rowGroup, colGroup), subsetSize);
 
-                if (res.size() != SIZE + 1) {
+                if (res.size() != subsetSize + 1) {
                     continue;
                 }
 

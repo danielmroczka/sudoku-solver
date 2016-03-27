@@ -10,9 +10,9 @@ package com.labs.dm.sudoku.solver.alg;
  *         <p>
  *         http://www.learn-sudoku.com/hidden-singles.html
  */
-public class HiddenSingles extends HiddenSubSet {
+public class HiddenSingles extends HiddenSubset {
     public HiddenSingles() {
-        size = 1;
+        subsetSize = 1;
         minSize = 1;
     }
 }

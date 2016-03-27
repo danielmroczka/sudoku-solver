@@ -1,20 +1,21 @@
 package com.labs.dm.sudoku.solver.utils;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.labs.dm.sudoku.solver.utils.SubSetUtils.hiddenSubset;
-import static com.labs.dm.sudoku.solver.utils.SubSetUtils.nakedSubset;
+import static com.labs.dm.sudoku.solver.utils.SubsetUtils.hiddenSubset;
+import static com.labs.dm.sudoku.solver.utils.SubsetUtils.nakedSubset;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Daniel Mroczka on 2016-03-21.
  */
-public class SubSetUtilsTest {
+public class SubsetUtilsTest {
 
     @Test
     public void nakedSubSet() throws Exception {
@@ -146,5 +147,25 @@ public class SubSetUtilsTest {
         assertEquals(2, ids.size());
         assertEquals(Arrays.asList(4, 6, 8), ids.get(0));
         assertEquals(Arrays.asList(2, 4, 5), ids.get(1));
+    }
+
+    @Test
+    @Ignore
+    public void hiddenSubSetQuint() throws Exception {
+        //GIVEN
+        //expected hidden quint = 1,2,3,4,5
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(1, 2, 3, 4, 5));
+        list.add(Arrays.asList(1, 2, 3));
+        list.add(Arrays.asList(2, 3, 4));
+        list.add(Arrays.asList(3, 4, 5));
+        list.add(Arrays.asList(4, 5));
+        list.add(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        //WHEN
+        List<List<Integer>> ids = hiddenSubset(list, 5);
+        //THEN
+        assertEquals(2, ids.size());
+        assertEquals(Arrays.asList(1, 2, 3, 4, 5), ids.get(0));
+        assertEquals(Arrays.asList(0, 1, 2, 3, 4), ids.get(1));
     }
 }

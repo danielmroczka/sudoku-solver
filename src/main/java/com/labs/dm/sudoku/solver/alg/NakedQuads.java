@@ -6,9 +6,9 @@ package com.labs.dm.sudoku.solver.alg;
  * <p/>
  * Created by Daniel Mroczka on 2016-02-19.
  */
-public class NakedQuads extends NakedSubSet {
+public class NakedQuads extends NakedSubset {
 
     public NakedQuads() {
-        SIZE = 4;
+        subsetSize = 4;
     }
 }
