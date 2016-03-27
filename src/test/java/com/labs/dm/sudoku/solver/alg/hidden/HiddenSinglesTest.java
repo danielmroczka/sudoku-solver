@@ -44,8 +44,8 @@ public class HiddenSinglesTest {
     public void testExecuteBlock() {
         //GIVEN
         IMatrix matrix = new Matrix();
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int row = 0; row < Matrix.SIZE; row++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 matrix.addCandidates(row, col, new Integer[]{1, 2, 3});
             }
         }

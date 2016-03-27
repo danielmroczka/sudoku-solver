@@ -26,13 +26,13 @@ public class MatrixTest {
 
     @Test
     public void testEmptyCellValue() {
-        assertEquals(IMatrix.EMPTY_VALUE, matrix.getValueAt(0, 0));
+        assertEquals(Matrix.EMPTY_VALUE, matrix.getValueAt(0, 0));
     }
 
     @Test
     public void testSetCellValue() {
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int row = 0; row < Matrix.SIZE; row++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 matrix.setValueAt(row, col, 9);
                 assertEquals(9, matrix.getValueAt(row, col));
                 assertTrue(matrix.getCandidates(row, col).isEmpty());
@@ -42,8 +42,8 @@ public class MatrixTest {
 
     @Test
     public void testSetCellValueRemoveCandidates() {
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int row = 0; row < Matrix.SIZE; row++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 matrix.addCandidates(row, col, new Integer[]{1, 2, 3});
                 matrix.setValueAt(row, col, 1);
                 assertTrue(matrix.getCandidates(row, col).isEmpty());
@@ -54,8 +54,8 @@ public class MatrixTest {
     @Test
     public void shouldPopulateRemovingCandidates() {
         //GIVEN
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int row = 0; row < Matrix.SIZE; row++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 matrix.addCandidates(row, col, new Integer[]{1});
             }
         }
@@ -85,7 +85,7 @@ public class MatrixTest {
             counter++;
         }
 
-        assertEquals(IMatrix.SIZE * IMatrix.SIZE, counter);
+        assertEquals(Matrix.SIZE * Matrix.SIZE, counter);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -187,7 +187,7 @@ public class MatrixTest {
     @Test
     public void shouldSetCols() {
         int[] sampleSet = new int[]{9, 1, 2, 3, 4, 5, 6, 7, 8};
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < Matrix.SIZE; row++) {
             matrix.setCols(row, sampleSet);
             assertArrayEquals(sampleSet, matrix.getElemsInCol(row));
         }
@@ -196,7 +196,7 @@ public class MatrixTest {
     @Test
     public void shouldSetRows() {
         int[] sampleSet = new int[]{9, 1, 2, 3, 4, 5, 6, 7, 8};
-        for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int col = 0; col < Matrix.SIZE; col++) {
             matrix.setRows(col, sampleSet);
             assertArrayEquals(sampleSet, matrix.getElemsInRow(col));
         }

@@ -14,7 +14,8 @@ public class GeneratorTest {
 
     private final Generator gen = new Generator();
 
-    //@Test
+    @Test
+    @Ignore
     public void shouldGenerateMatrix() {
         IMatrix matrix = gen.generate(67);
         assertEquals(67, matrix.getSolvedItems());
@@ -31,11 +32,4 @@ public class GeneratorTest {
         gen.generate(-1);
     }
 
-    @Test
-    @Ignore
-    public void shouldGenerateMatrixFull() {
-        IMatrix matrix = gen.generate(27);
-        //Flow flow = new Flow();
-        //flow.execute(matrix);
-    }
 }

@@ -2,6 +2,7 @@ package com.labs.dm.sudoku.solver.alg.fish;
 
 import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.core.Pair;
 import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 import com.labs.dm.sudoku.solver.utils.Utils;
@@ -65,7 +66,7 @@ public class SwordFish implements IAlgorithm {
 
     private boolean canRemoveInRows(IMatrix matrix, int value, CounterHashMap<Integer> rowMap, CounterHashMap<Integer> colMap) {
         for (int col : colMap.keySet()) {
-            for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int row = 0; row < Matrix.SIZE; row++) {
                 if (!rowMap.containsKey(row)) {
                     if (matrix.getCandidates(row, col).contains(value)) {
                         return false;
@@ -78,7 +79,7 @@ public class SwordFish implements IAlgorithm {
 
     private boolean canRemoveInCols(IMatrix matrix, int value, CounterHashMap<Integer> rowMap, CounterHashMap<Integer> colMap) {
         for (int row : rowMap.keySet()) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 if (!colMap.containsKey(col)) {
                     if (matrix.getCandidates(row, col).contains(value)) {
                         return false;
@@ -91,7 +92,7 @@ public class SwordFish implements IAlgorithm {
 
     private void removeInCols(IMatrix matrix, int value, CounterHashMap<Integer> rowMap, CounterHashMap<Integer> colMap) {
         for (int row : rowMap.keySet()) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 if (!colMap.containsKey(col)) {
                     matrix.removeCandidate(row, col, value);
                 }
@@ -101,7 +102,7 @@ public class SwordFish implements IAlgorithm {
 
     private void removeInRows(IMatrix matrix, int value, CounterHashMap<Integer> rowMap, CounterHashMap<Integer> colMap) {
         for (int col : colMap.keySet()) {
-            for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int row = 0; row < Matrix.SIZE; row++) {
                 if (!rowMap.containsKey(row)) {
                     matrix.removeCandidate(row, col, value);
                 }

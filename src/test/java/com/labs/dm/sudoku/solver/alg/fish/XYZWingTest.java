@@ -89,8 +89,8 @@ public class XYZWingTest {
     }
 
     private void fill(IMatrix matrix, int value) {
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int row = 0; row < Matrix.SIZE; row++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 matrix.addCandidates(row, col, new Integer[]{value});
             }
         }

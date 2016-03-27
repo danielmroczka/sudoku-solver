@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
-import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+import static com.labs.dm.sudoku.solver.core.Matrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
 import static com.labs.dm.sudoku.solver.utils.Utils.blockElems;
 
 /**
@@ -37,7 +37,7 @@ public class Reduction implements IAlgorithm {
                 CounterHashMap<Integer> map = getOccurenceInBlockMap(matrix, rowGroup, colGroup);
 
                 for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-                    if (entry.getValue() == 2 || entry.getValue() == 3) {
+                    if (accept(entry)) {
                         List<Pair> list = new ArrayList<>();
                         for (int col : blockElems(colGroup * BLOCK_SIZE)) {
                             for (int row : blockElems(rowGroup * BLOCK_SIZE)) {
@@ -60,7 +60,7 @@ public class Reduction implements IAlgorithm {
                         }
 
                         if (theSameCol) {
-                            for (int row = 0; row < IMatrix.SIZE; row++) {
+                            for (int row = 0; row < SIZE; row++) {
                                 boolean found = true;
                                 for (Pair p : list) {
                                     if (p.getRow() == row) {
@@ -74,7 +74,7 @@ public class Reduction implements IAlgorithm {
                         }
 
                         if (theSameRow) {
-                            for (int col = 0; col < IMatrix.SIZE; col++) {
+                            for (int col = 0; col < SIZE; col++) {
                                 boolean found = true;
                                 for (Pair p : list) {
                                     if (p.getCol() == col) {
@@ -92,12 +92,16 @@ public class Reduction implements IAlgorithm {
         }
     }
 
+    private boolean accept(Map.Entry<Integer, Integer> entry) {
+        return entry.getValue() == 2 || entry.getValue() == 3;
+    }
+
     private void reduceInCols(IMatrix matrix) {
         for (int col = 0; col < SIZE; col++) {
             CounterHashMap<Integer> map = getOccurenceInColMap(matrix, col);
 
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-                if (entry.getValue() == 2 || entry.getValue() == 3) {
+                if (accept(entry)) {
                     List<Integer> pos = getPosInCol(matrix, col, entry.getKey());
                     if (!pos.isEmpty() && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
                         removeInBlockCol(matrix, col, entry.getKey(), pos);
@@ -112,7 +116,7 @@ public class Reduction implements IAlgorithm {
             CounterHashMap<Integer> map = getOccurenceInRowMap(matrix, row);
 
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-                if (entry.getValue() == 2 || entry.getValue() == 3) {
+                if (accept(entry)) {
                     List<Integer> pos = getPosInRow(matrix, row, entry.getKey());
                     if (!pos.isEmpty() && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
                         removeInBlockRow(matrix, row, entry.getKey(), pos);

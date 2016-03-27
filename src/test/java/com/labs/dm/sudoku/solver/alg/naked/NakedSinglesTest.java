@@ -25,8 +25,8 @@ public class NakedSinglesTest {
         IMatrix matrix = new Matrix();
         IMatrix resolvedMatrix = new com.labs.dm.sudoku.solver.io.MatrixLoader().load("patterns/solved.txt");
 
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int row = 0; row < Matrix.SIZE; row++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 matrix.getCandidates(row, col).add(resolvedMatrix.getValueAt(row, col));
             }
         }

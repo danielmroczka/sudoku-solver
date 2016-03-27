@@ -2,12 +2,13 @@ package com.labs.dm.sudoku.solver.alg.naked;
 
 import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.utils.CounterHashMap;
 import com.labs.dm.sudoku.solver.utils.Utils;
 
 import java.util.*;
 
-import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.core.Matrix.BLOCK_SIZE;
 
 /**
  * Created by Daniel Mroczka on 2016-03-15.
@@ -25,28 +26,28 @@ public abstract class NakedSubset implements IAlgorithm {
     }
 
     private void findNakedPairsInRows(IMatrix matrix) {
-        for (int row = 0; row < IMatrix.SIZE; row++) {
+        for (int row = 0; row < Matrix.SIZE; row++) {
             List<List<Integer>> res = nakedSubset(matrix.getCandidatesInRow(row), subsetSize);
 
             if (res.size() != subsetSize + 1) {
                 continue;
             }
 
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 removeCandidate(matrix, res, row, col);
             }
         }
     }
 
     private void findNakedPairsInCols(IMatrix matrix) {
-        for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int col = 0; col < Matrix.SIZE; col++) {
             List<List<Integer>> res = nakedSubset(matrix.getCandidatesInCol(col), subsetSize);
 
             if (res.size() != subsetSize + 1) {
                 continue;
             }
 
-            for (int row = 0; row < IMatrix.SIZE; row++) {
+            for (int row = 0; row < Matrix.SIZE; row++) {
                 removeCandidate(matrix, res, row, col);
             }
         }

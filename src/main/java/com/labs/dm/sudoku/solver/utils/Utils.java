@@ -11,8 +11,8 @@ import java.nio.charset.Charset;
 import java.util.*;
 import java.util.logging.Logger;
 
-import static com.labs.dm.sudoku.solver.core.IMatrix.BLOCK_SIZE;
-import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+import static com.labs.dm.sudoku.solver.core.Matrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
 
 /**
  * Created by Daniel Mroczka on 2016-02-13.

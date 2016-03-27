@@ -58,7 +58,7 @@ public class MatrixLoaderTest {
         //THEN
         File file = new File("target/test/output.txt");
         assertTrue(file.exists());
-        int expectedSize = IMatrix.SIZE * (2 * IMatrix.SIZE - 1) + +System.lineSeparator().length() * (IMatrix.SIZE - 1);
+        int expectedSize = Matrix.SIZE * (2 * Matrix.SIZE - 1) + +System.lineSeparator().length() * (Matrix.SIZE - 1);
         assertEquals(expectedSize, file.length());
     }
 

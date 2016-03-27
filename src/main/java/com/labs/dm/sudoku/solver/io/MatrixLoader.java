@@ -23,14 +23,14 @@ public class MatrixLoader {
 
     public void save(IMatrix matrix, String fileName) throws IOException {
         StringBuilder sb = new StringBuilder(100);
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int row = 0; row < Matrix.SIZE; row++) {
+            for (int col = 0; col < Matrix.SIZE; col++) {
                 sb.append(matrix.getValueAt(row, col));
-                if (col < IMatrix.SIZE - 1) {
+                if (col < Matrix.SIZE - 1) {
                     sb.append(MatrixLoader.DEFAULT_DELIMITER);
                 }
             }
-            if (row < IMatrix.SIZE - 1) {
+            if (row < Matrix.SIZE - 1) {
                 sb.append(System.lineSeparator());
             }
         }
@@ -59,7 +59,7 @@ public class MatrixLoader {
     }
 
     protected String readFileAsString(String filePath) throws IOException {
-        StringBuilder fileData = new StringBuilder(IMatrix.SIZE);
+        StringBuilder fileData = new StringBuilder(Matrix.SIZE);
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(filePath);
         if (inputStream == null) {
             inputStream = new FileInputStream(filePath);

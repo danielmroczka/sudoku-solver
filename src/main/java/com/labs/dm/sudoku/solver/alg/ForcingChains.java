@@ -4,7 +4,7 @@ import com.labs.dm.sudoku.solver.alg.hidden.HiddenSingles;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 
-import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
 
 /**
  * @author Daniel Mroczka

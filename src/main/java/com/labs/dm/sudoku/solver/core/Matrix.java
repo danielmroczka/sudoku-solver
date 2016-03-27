@@ -19,6 +19,17 @@ import static com.labs.dm.sudoku.solver.utils.Utils.deepCopy;
  */
 public class Matrix implements IMatrix, Serializable {
 
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 9;
+    public static final int EMPTY_VALUE = 0;
+    /**
+     * Number of rows and columns
+     */
+    public static final int SIZE = 9;
+    /**
+     * Size of the block
+     */
+    public static final int BLOCK_SIZE = SIZE / 3;
     private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;
     protected final Map<Pair, List<Integer>> possibleValues;
@@ -33,8 +44,8 @@ public class Matrix implements IMatrix, Serializable {
         tab = new int[SIZE][SIZE];
         deepCopy(((Matrix) copy).tab, tab);
         possibleValues = new HashMap<>();
-        for (int row = 0; row < IMatrix.SIZE; row++) {
-            for (int col = 0; col < IMatrix.SIZE; col++) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
                 setCandidates(row, col, new ArrayList<>(copy.getCandidates(row, col)));
             }
         }

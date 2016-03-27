@@ -22,7 +22,7 @@ public class Generator {
             int row = idx / 9;
             int col = idx % 9;
 
-            if (matrix.getValueAt(row, col) != IMatrix.EMPTY_VALUE) {
+            if (matrix.getValueAt(row, col) != Matrix.EMPTY_VALUE) {
                 continue;
             }
 
@@ -35,7 +35,7 @@ public class Generator {
                 //System.out.println("Step=" + probe);
                 probe++;
             } else {
-                matrix.setValueAt(row, col, IMatrix.EMPTY_VALUE);
+                matrix.setValueAt(row, col, Matrix.EMPTY_VALUE);
             }
 
         }

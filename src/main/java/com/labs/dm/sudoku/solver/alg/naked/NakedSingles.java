@@ -6,7 +6,7 @@ package com.labs.dm.sudoku.solver.alg.naked;
 import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 
-import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
 
 /**
  * Naked Singles (Lone Singles) Algorithm Implementation.

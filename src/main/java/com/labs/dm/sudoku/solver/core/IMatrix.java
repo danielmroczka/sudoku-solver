@@ -13,20 +13,6 @@ import java.util.List;
  */
 public interface IMatrix extends Iterable<Integer> {
 
-    int MIN_VALUE = 1;
-    int MAX_VALUE = 9;
-    int EMPTY_VALUE = 0;
-
-    /**
-     * Number of rows and columns
-     */
-    int SIZE = 9;
-
-    /**
-     * Size of the block
-     */
-    int BLOCK_SIZE = SIZE / 3;
-
     /**
      * Returns cell value from provided position
      *

@@ -8,7 +8,7 @@ import com.labs.dm.sudoku.solver.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.labs.dm.sudoku.solver.core.IMatrix.SIZE;
+import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
 import static com.labs.dm.sudoku.solver.utils.Utils.*;
 
 /**
