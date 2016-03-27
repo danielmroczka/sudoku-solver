@@ -5,7 +5,6 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class HiddenSubsetTest {
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 4, 5, 6, 7, 8});
         List<Integer> subset = Arrays.asList(1, 2, 3);
         //WHEN
-        hiddenSubset.removeCandidate(matrix, 0, 0, subset);
+        hiddenSubset.removeCandidates(matrix, 0, 0, subset);
         //THEN
         assertEquals(2, matrix.getCandidates(0, 0).size());
     }
@@ -44,7 +43,7 @@ public class HiddenSubsetTest {
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 3, 4, 5, 6});
         List<Integer> subset = Arrays.asList(7, 8, 9);
         //WHEN
-        hiddenSubset.removeCandidate(matrix, 0, 0, subset);
+        hiddenSubset.removeCandidates(matrix, 0, 0, subset);
         //THEN
         assertEquals(6, matrix.getCandidates(0, 0).size());
     }
@@ -52,10 +51,9 @@ public class HiddenSubsetTest {
     @Test
     public void testGroup() throws Exception {
         //GIVEN
-        List<Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         //WHEN
-        hiddenSubset.group(result, tab, 2);
+        List<Subset> result = hiddenSubset.findSubsets(tab, 2);
         //THEN
         assertTrue(result.isEmpty());
     }
@@ -63,14 +61,13 @@ public class HiddenSubsetTest {
     @Test
     public void findSubset1() throws Exception {
         //GIVEN
-        List<Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[1][0] = 0;
         tab[0][1] = 1;
         tab[1][1] = 1;
         //WHEN
-        hiddenSubset.group(result, tab, 2);
+        List<Subset> result = hiddenSubset.findSubsets(tab, 2);
         //THEN
         assertEquals(Arrays.asList(1, 2), result.get(0).getSubsetNumber());
         assertEquals(Arrays.asList(0, 1), result.get(0).getSubsetPosition());
@@ -79,7 +76,6 @@ public class HiddenSubsetTest {
     @Test
     public void findSubset2() throws Exception {
         //GIVEN
-        List<Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[2][0] = 0;
@@ -89,7 +85,7 @@ public class HiddenSubsetTest {
         tab[0][4] = 4;
         tab[5][4] = 4;
         //WHEN
-        hiddenSubset.group(result, tab, 3);
+        List<Subset> result = hiddenSubset.findSubsets(tab, 3);
         //THEN
         assertEquals(Arrays.asList(1, 3, 6), result.get(0).getSubsetNumber());
         assertEquals(Arrays.asList(0, 3, 4), result.get(0).getSubsetPosition());
@@ -98,7 +94,6 @@ public class HiddenSubsetTest {
     @Test
     public void findSubsetSmallBlock() throws Exception {
         //GIVEN
-        List<Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[1][0] = 0;
@@ -111,7 +106,7 @@ public class HiddenSubsetTest {
         tab[4][8] = 8;
         tab[5][8] = 8;
         //WHEN
-        hiddenSubset.group(result, tab, 3);
+        List<Subset> result = hiddenSubset.findSubsets(tab, 3);
         //THEN
         assertEquals(1, result.size());
         assertEquals(Arrays.asList(2, 4, 5), result.get(0).getSubsetNumber());
@@ -121,7 +116,6 @@ public class HiddenSubsetTest {
     @Test
     public void findSubset3() throws Exception {
         //GIVEN
-        List<Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[1][0] = 0;
@@ -137,7 +131,7 @@ public class HiddenSubsetTest {
         tab[2][2] = 2;
 
         tab[1][3] = 3;
-        hiddenSubset.group(result, tab, 3);
+        List<Subset> result = hiddenSubset.findSubsets(tab, 3);
         //THEN
         assertThat(result, is(empty()));
     }
@@ -145,7 +139,6 @@ public class HiddenSubsetTest {
     @Test
     public void findSubsetPair() throws Exception {
         //GIVEN
-        List<Subset> result = new ArrayList<>();
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
         tab[1][0] = 0;
@@ -157,7 +150,7 @@ public class HiddenSubsetTest {
         tab[3][1] = 1;
 
 
-        hiddenSubset.group(result, tab, 2);
+        List<Subset> result = hiddenSubset.findSubsets(tab, 2);
         //THEN
         assertEquals(1, result.size());
         assertEquals(Arrays.asList(2, 3), result.get(0).getSubsetNumber());
