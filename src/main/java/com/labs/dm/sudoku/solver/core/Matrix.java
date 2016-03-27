@@ -3,6 +3,7 @@
  */
 package com.labs.dm.sudoku.solver.core;
 
+import com.labs.dm.sudoku.solver.core.listener.IMatrixListener;
 import com.labs.dm.sudoku.solver.executors.ContextItem;
 import com.labs.dm.sudoku.solver.utils.Utils;
 

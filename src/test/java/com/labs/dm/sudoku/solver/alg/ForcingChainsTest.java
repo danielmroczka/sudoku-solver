@@ -1,8 +1,8 @@
 package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
-import com.labs.dm.sudoku.solver.core.LogListener;
 import com.labs.dm.sudoku.solver.core.Matrix;
+import com.labs.dm.sudoku.solver.core.listener.LogListener;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

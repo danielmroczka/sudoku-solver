@@ -1,5 +1,17 @@
 package com.labs.dm.sudoku.solver.alg;
 
+import com.labs.dm.sudoku.solver.alg.fish.SwordFish;
+import com.labs.dm.sudoku.solver.alg.fish.XWing;
+import com.labs.dm.sudoku.solver.alg.fish.XYWing;
+import com.labs.dm.sudoku.solver.alg.fish.XYZWing;
+import com.labs.dm.sudoku.solver.alg.hidden.HiddenPairs;
+import com.labs.dm.sudoku.solver.alg.hidden.HiddenQuads;
+import com.labs.dm.sudoku.solver.alg.hidden.HiddenSingles;
+import com.labs.dm.sudoku.solver.alg.hidden.HiddenTriples;
+import com.labs.dm.sudoku.solver.alg.naked.NakedPairs;
+import com.labs.dm.sudoku.solver.alg.naked.NakedQuads;
+import com.labs.dm.sudoku.solver.alg.naked.NakedSingles;
+import com.labs.dm.sudoku.solver.alg.naked.NakedTriplets;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import org.junit.Before;

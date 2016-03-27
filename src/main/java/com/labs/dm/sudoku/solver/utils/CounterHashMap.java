@@ -3,6 +3,8 @@ package com.labs.dm.sudoku.solver.utils;
 import java.util.HashMap;
 
 /**
+ * Implementation of HashMap making easier counting occurrences of keys and returns zero in case of missing key.
+ *
  * Created by Daniel Mroczka on 2016-02-15.
  */
 public class CounterHashMap<K> extends HashMap<K, Integer> {
@@ -15,9 +17,6 @@ public class CounterHashMap<K> extends HashMap<K, Integer> {
     @Override
     public Integer get(Object key) {
         Integer res = super.get(key);
-        if (res == null) {
-            res = 0;
-        }
-        return res;
+        return res == null ? 0 : res;
     }
 }

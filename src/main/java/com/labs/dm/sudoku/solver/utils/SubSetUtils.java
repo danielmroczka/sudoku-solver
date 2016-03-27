@@ -6,9 +6,11 @@ import static com.labs.dm.sudoku.solver.utils.Utils.FULL_LIST;
 import static com.labs.dm.sudoku.solver.utils.Utils.match;
 
 /**
+ *
+ *
  * Created by Daniel Mroczka on 2016-03-21.
  */
-public class SubSetUtils {
+public class SubsetUtils {
 
     /**
      * Returns hidden subset or empty List if no subsets are found.
@@ -94,7 +96,7 @@ public class SubSetUtils {
 
     /**
      * Returns naked subset.
-     * If found returns list of size+1 elements
+     * If found returns list of subsetSize+1 elements
      * 0: naked subset
      * 1: first example of subset
      * n: n- element of subset

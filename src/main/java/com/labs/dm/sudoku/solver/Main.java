@@ -5,7 +5,7 @@
 package com.labs.dm.sudoku.solver;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
-import com.labs.dm.sudoku.solver.core.LogListener;
+import com.labs.dm.sudoku.solver.core.listener.LogListener;
 import com.labs.dm.sudoku.solver.executors.Flow;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 

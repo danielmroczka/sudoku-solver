@@ -1,5 +1,6 @@
 package com.labs.dm.sudoku.solver.alg;
 
+import com.labs.dm.sudoku.solver.alg.hidden.HiddenSingles;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 
