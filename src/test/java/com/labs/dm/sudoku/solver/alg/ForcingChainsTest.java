@@ -2,7 +2,6 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import com.labs.dm.sudoku.solver.core.listener.LogListener;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,7 +17,6 @@ public class ForcingChainsTest {
     @Test
     public void simple() {
         IMatrix matrix = new Matrix();
-        matrix.addMatrixListener(new LogListener());
         matrix.addCandidates(0, 2, new Integer[]{1, 2});
         matrix.addCandidates(3, 2, new Integer[]{1, 4});
         matrix.addCandidates(3, 0, new Integer[]{5, 7});
@@ -42,7 +40,6 @@ public class ForcingChainsTest {
     @Test
     public void simple2() {
         IMatrix matrix = new Matrix();
-        matrix.addMatrixListener(new LogListener());
         matrix.addCandidates(0, 1, new Integer[]{2, 7});
         matrix.addCandidates(0, 7, new Integer[]{2, 3});
         matrix.addCandidates(1, 0, new Integer[]{1, 2});

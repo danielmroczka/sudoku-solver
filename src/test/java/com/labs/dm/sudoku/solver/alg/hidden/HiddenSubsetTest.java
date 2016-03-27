@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 public class HiddenSubsetTest {
 
-    private HiddenSubset hiddenSubset = new HiddenSubset() {
+    private final HiddenSubset hiddenSubset = new HiddenSubset() {
         @Override
         public void execute(IMatrix matrix) {
             super.execute(matrix);
@@ -176,4 +176,5 @@ public class HiddenSubsetTest {
         assertEquals(new Integer(1), tab[1][1]);
         assertEquals(new Integer(2), tab[2][2]);
     }
+
 }
