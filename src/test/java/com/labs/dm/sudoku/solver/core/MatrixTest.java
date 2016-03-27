@@ -5,11 +5,14 @@ package com.labs.dm.sudoku.solver.core;
 
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 
+import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
 import static org.junit.Assert.*;
 
 /**
@@ -31,8 +34,8 @@ public class MatrixTest {
 
     @Test
     public void testSetCellValue() {
-        for (int row = 0; row < Matrix.SIZE; row++) {
-            for (int col = 0; col < Matrix.SIZE; col++) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
                 matrix.setValueAt(row, col, 9);
                 assertEquals(9, matrix.getValueAt(row, col));
                 assertTrue(matrix.getCandidates(row, col).isEmpty());
@@ -42,8 +45,8 @@ public class MatrixTest {
 
     @Test
     public void testSetCellValueRemoveCandidates() {
-        for (int row = 0; row < Matrix.SIZE; row++) {
-            for (int col = 0; col < Matrix.SIZE; col++) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
                 matrix.addCandidates(row, col, new Integer[]{1, 2, 3});
                 matrix.setValueAt(row, col, 1);
                 assertTrue(matrix.getCandidates(row, col).isEmpty());
@@ -52,10 +55,36 @@ public class MatrixTest {
     }
 
     @Test
+    public void testRemoveCandidates() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                matrix.addCandidates(row, col, new Integer[]{1, 2, 3});
+                matrix.removeCandidates(row, col, Arrays.asList(2, 3));
+                assertTrue(matrix.getCandidates(row, col).isEmpty());
+                assertEquals(1, matrix.getValueAt(row, col));
+            }
+        }
+    }
+
+
+    @Test
+    @Ignore
+    public void testRemoveCandidates2() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                matrix.addCandidates(row, col, new Integer[]{1, 2, 3});
+                matrix.removeCandidates(row, col, Arrays.asList(1, 2, 3));
+                assertTrue(matrix.getCandidates(row, col).isEmpty());
+                assertEquals(0, matrix.getValueAt(row, col));
+            }
+        }
+    }
+
+    @Test
     public void shouldPopulateRemovingCandidates() {
         //GIVEN
-        for (int row = 0; row < Matrix.SIZE; row++) {
-            for (int col = 0; col < Matrix.SIZE; col++) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
                 matrix.addCandidates(row, col, new Integer[]{1});
             }
         }
@@ -85,7 +114,7 @@ public class MatrixTest {
             counter++;
         }
 
-        assertEquals(Matrix.SIZE * Matrix.SIZE, counter);
+        assertEquals(SIZE * SIZE, counter);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -187,7 +216,7 @@ public class MatrixTest {
     @Test
     public void shouldSetCols() {
         int[] sampleSet = new int[]{9, 1, 2, 3, 4, 5, 6, 7, 8};
-        for (int row = 0; row < Matrix.SIZE; row++) {
+        for (int row = 0; row < SIZE; row++) {
             matrix.setCols(row, sampleSet);
             assertArrayEquals(sampleSet, matrix.getElemsInCol(row));
         }
@@ -196,7 +225,7 @@ public class MatrixTest {
     @Test
     public void shouldSetRows() {
         int[] sampleSet = new int[]{9, 1, 2, 3, 4, 5, 6, 7, 8};
-        for (int col = 0; col < Matrix.SIZE; col++) {
+        for (int col = 0; col < SIZE; col++) {
             matrix.setRows(col, sampleSet);
             assertArrayEquals(sampleSet, matrix.getElemsInRow(col));
         }

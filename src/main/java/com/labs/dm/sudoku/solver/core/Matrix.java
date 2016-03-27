@@ -30,6 +30,7 @@ public class Matrix implements IMatrix, Serializable {
      * Size of the block
      */
     public static final int BLOCK_SIZE = SIZE / 3;
+
     private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;
     protected final Map<Pair, List<Integer>> possibleValues;
@@ -100,14 +101,19 @@ public class Matrix implements IMatrix, Serializable {
             if (listener != null) {
                 listener.onRemoveCandidate(row, col, value);
             }
-            if (getCandidates(row, col).size() == 1) {
-                setValueAt(row, col, getCandidates(row, col).get(0));
+            switch (getCandidates(row, col).size()) {
+                case 1:
+                    setValueAt(row, col, getCandidates(row, col).get(0));
+                    break;
+                case 0:
+                    setValueAt(row, col, EMPTY_VALUE);
+                    break;
             }
         }
     }
 
     @Override
-    public void removeCandidate(int row, int col, List<Integer> values) {
+    public void removeCandidates(int row, int col, Collection<Integer> values) {
         for (int candidate : values) {
             removeCandidate(row, col, candidate);
         }
@@ -394,10 +400,8 @@ public class Matrix implements IMatrix, Serializable {
 
     @Override
     public void setCandidates(int row, int col, List<Integer> set) {
-        for (int val : set) {
-            if (!isSetValue(val)) {
-                throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
-            }
+        for (int value : set) {
+            validateInputValue(value);
         }
         possibleValues.put(new Pair(row, col), set);
     }
@@ -429,9 +433,7 @@ public class Matrix implements IMatrix, Serializable {
     @Override
     public void addCandidates(int row, int col, Integer[] array) {
         for (int value : array) {
-            if (!isSetValue(value)) {
-                throw new IllegalArgumentException("Candidate cannot be less than 1 or greater than 9!");
-            }
+            validateInputValue(value);
         }
         List<Integer> toAdd = Arrays.asList(array);
         for (int item : toAdd) {

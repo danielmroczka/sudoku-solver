@@ -17,6 +17,7 @@ public class SwordFishTest {
 
     @Test
     public void minimumSwordfishInCols() {
+        //GIVEN
         IMatrix matrix = new Matrix();
         //candidates in swordfish
         matrix.addCandidates(1, 0, new Integer[]{2, 9});
@@ -31,15 +32,12 @@ public class SwordFishTest {
         matrix.addCandidates(4, 0, new Integer[]{2, 5, 8, 9});
         matrix.addCandidates(5, 7, new Integer[]{2, 5, 8, 9});
 
-        // matrix.addCandidates(4, 7, new Integer[]{2, 8});
-
+        //WHEN
         swordfish.execute(matrix);
-
+        //THEN
         assertFalse(matrix.getCandidates(6, 0).contains(2));
         assertFalse(matrix.getCandidates(4, 0).contains(2));
         assertFalse(matrix.getCandidates(5, 7).contains(2));
-
-        //   assertTrue(matrix.getCandidates(4, 7).contains(2));
     }
 
     @Test

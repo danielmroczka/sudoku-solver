@@ -29,13 +29,13 @@ public abstract class HiddenSubset implements IAlgorithm {
 
     protected void findHiddenPairsInRows(IMatrix matrix) {
         for (int row = 0; row < SIZE; row++) {
-            List<Subset> subset = new ArrayList<>();
+            List<Subset> subsets = new ArrayList<>();
             Integer[][] tab = fillTabRows(matrix, row);
-            group(subset, tab, subsetSize);
+            group(subsets, tab, subsetSize);
 
-            for (Subset s : subset) {
-                for (int col : s.getSubsetPosition()) {
-                    removeCandidate(matrix, row, col, s.getSubsetNumber());
+            for (Subset subset : subsets) {
+                for (int col : subset.getSubsetPosition()) {
+                    removeCandidate(matrix, row, col, subset.getSubsetNumber());
                 }
             }
         }
@@ -43,13 +43,13 @@ public abstract class HiddenSubset implements IAlgorithm {
 
     protected void findHiddenPairsInCols(IMatrix matrix) {
         for (int col = 0; col < SIZE; col++) {
-            List<Subset> subset = new ArrayList<>();
+            List<Subset> subsets = new ArrayList<>();
             Integer[][] tab = fillTabCols(matrix, col);
-            group(subset, tab, subsetSize);
+            group(subsets, tab, subsetSize);
 
-            for (Subset s : subset) {
-                for (int row : s.getSubsetPosition()) {
-                    removeCandidate(matrix, row, col, s.getSubsetNumber());
+            for (Subset subset : subsets) {
+                for (int row : subset.getSubsetPosition()) {
+                    removeCandidate(matrix, row, col, subset.getSubsetNumber());
                 }
             }
         }
@@ -156,18 +156,16 @@ public abstract class HiddenSubset implements IAlgorithm {
      * @param subset
      */
     protected void removeCandidate(IMatrix matrix, int row, int col, List<Integer> subset) {
-        if (matrix.getCandidates(row, col).isEmpty()) {
-            return;
-        }
-
-        //TODO: Rewrite this part to make easier
-        List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col));
-        common.retainAll(subset);
-        if (common.size() >= minSize) {
-            List<Integer> diff = new ArrayList<>(matrix.getCandidates(row, col));
-            diff.removeAll(subset);
-            if (diff.size() > 0) {
-                matrix.removeCandidate(row, col, diff);
+        if (!matrix.getCandidates(row, col).isEmpty()) {
+            List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col));
+            common.retainAll(subset);
+            /** Proceed when candidates and subset have at least minSize common digits **/
+            if (common.size() >= minSize) {
+                List<Integer> diff = new ArrayList<>(matrix.getCandidates(row, col));
+                diff.removeAll(subset);
+                if (diff.size() > 0) {
+                    matrix.removeCandidates(row, col, diff);
+                }
             }
         }
     }

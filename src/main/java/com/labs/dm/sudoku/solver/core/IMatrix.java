@@ -6,6 +6,7 @@ package com.labs.dm.sudoku.solver.core;
 import com.labs.dm.sudoku.solver.core.listener.IMatrixListener;
 import com.labs.dm.sudoku.solver.executors.ContextItem;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public interface IMatrix extends Iterable<Integer> {
     int getValueAt(int row, int col);
 
     /**
-     * Sets cell value at provided position
+     * Sets cell value at provided position by row and col
      *
      * @param row
      * @param col
@@ -31,9 +32,24 @@ public interface IMatrix extends Iterable<Integer> {
      */
     void setValueAt(int row, int col, int value);
 
+    /**
+     * Remove candidate from cell at provided position by row and col.
+     * If after removing remains only one candidate its value will be automatically set as a cell value and candidates list will be clear.
+     *
+     * @param row
+     * @param col
+     * @param value
+     */
     void removeCandidate(int row, int col, int value);
 
-    void removeCandidate(int row, int col, List<Integer> values);
+    /**
+     * Removing collection of values
+     *
+     * @param row
+     * @param col
+     * @param values
+     */
+    void removeCandidates(int row, int col, Collection<Integer> values);
 
     /**
      * Returns true if matrix is solved.

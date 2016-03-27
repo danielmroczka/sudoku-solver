@@ -84,7 +84,7 @@ public abstract class NakedSubset implements IAlgorithm {
             }
         }
         if (!contains) {
-            matrix.removeCandidate(row, col, res.get(0));
+            matrix.removeCandidates(row, col, res.get(0));
         }
     }
 
