@@ -9,6 +9,8 @@ import com.labs.dm.sudoku.solver.core.Matrix;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.labs.dm.sudoku.solver.core.Matrix.BLOCK_SIZE;
+
 /**
  * Open Singles Algorithm.
  *
@@ -50,7 +52,9 @@ public class OpenSingles implements IAlgorithm {
                 int[] block = matrix.getElemsInBlock(rowGroup, colGroup);
                 int pos = fillOpenSingles(block);
                 if (pos >= 0) {
-                    matrix.setValueAt((pos - (pos / Matrix.BLOCK_SIZE)) + (rowGroup * Matrix.BLOCK_SIZE), pos / Matrix.BLOCK_SIZE + colGroup * Matrix.BLOCK_SIZE, block[pos]);
+                    int row = rowGroup * BLOCK_SIZE + pos / 3;
+                    int col = colGroup * BLOCK_SIZE + pos % 3;
+                    matrix.setValueAt(row, col, block[pos]);
                 }
             }
         }
