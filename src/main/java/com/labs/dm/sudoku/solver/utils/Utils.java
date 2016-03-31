@@ -74,6 +74,10 @@ public class Utils {
         }
     }
 
+    public static boolean theSameBlock(List<Integer> list) {
+        return theSameBlock(list.toArray(new Integer[0]));
+    }
+
     public static boolean theSameBlock(Integer... val) {
         int v = val[0] / 3;
         boolean res = true;

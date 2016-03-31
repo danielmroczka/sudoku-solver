@@ -31,69 +31,17 @@ public class Reduction implements IAlgorithm {
         reduceInBlock(matrix);
     }
 
-    private void reduceInBlock(IMatrix matrix) {
-        for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
-            for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
-                CounterHashMap<Integer> map = getOccurenceInBlockMap(matrix, rowGroup, colGroup);
+    private void reduceInRows(IMatrix matrix) {
+        for (int row = 0; row < SIZE; row++) {
+            CounterHashMap<Integer> map = getOccurenceInRowMap(matrix, row);
 
-                for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-                    if (accept(entry)) {
-                        List<Pair> list = new ArrayList<>();
-                        for (int col : blockElems(colGroup * BLOCK_SIZE)) {
-                            for (int row : blockElems(rowGroup * BLOCK_SIZE)) {
-                                if (matrix.getCandidates(row, col).contains(entry.getKey())) {
-                                    list.add(new Pair(row, col));
-                                }
-                            }
-                        }
-                        if (list.isEmpty()) {
-                            continue;
-                        }
-
-                        boolean theSameRow = true;
-                        boolean theSameCol = true;
-                        Pair item = list.get(0);
-
-                        for (Pair p : list) {
-                            theSameCol = theSameCol && item.getCol() == p.getCol();
-                            theSameRow = theSameRow && item.getRow() == p.getRow();
-                        }
-
-                        if (theSameCol) {
-                            for (int row = 0; row < SIZE; row++) {
-                                boolean found = true;
-                                for (Pair p : list) {
-                                    if (p.getRow() == row) {
-                                        found = false;
-                                    }
-                                }
-                                if (found) {
-                                    matrix.removeCandidate(row, item.getCol(), entry.getKey());
-                                }
-                            }
-                        }
-
-                        if (theSameRow) {
-                            for (int col = 0; col < SIZE; col++) {
-                                boolean found = true;
-                                for (Pair p : list) {
-                                    if (p.getCol() == col) {
-                                        found = false;
-                                    }
-                                }
-                                if (found) {
-                                    matrix.removeCandidate(item.getRow(), col, entry.getKey());
-                                }
-                            }
-                        }
-                    }
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                List<Integer> pos = getPosInRow(matrix, row, entry.getKey());
+                if (!pos.isEmpty() && Utils.theSameBlock(pos)) {
+                    removeInBlockRow(matrix, row, entry.getKey(), pos);
                 }
             }
         }
-    }
-
-    private boolean accept(Map.Entry<Integer, Integer> entry) {
-        return entry.getValue() == 2 || entry.getValue() == 3;
     }
 
     private void reduceInCols(IMatrix matrix) {
@@ -101,25 +49,67 @@ public class Reduction implements IAlgorithm {
             CounterHashMap<Integer> map = getOccurenceInColMap(matrix, col);
 
             for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-                if (accept(entry)) {
-                    List<Integer> pos = getPosInCol(matrix, col, entry.getKey());
-                    if (!pos.isEmpty() && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
-                        removeInBlockCol(matrix, col, entry.getKey(), pos);
-                    }
+                List<Integer> pos = getPosInCol(matrix, col, entry.getKey());
+                if (!pos.isEmpty() && Utils.theSameBlock(pos)) {
+                    removeInBlockCol(matrix, col, entry.getKey(), pos);
                 }
             }
         }
     }
 
-    private void reduceInRows(IMatrix matrix) {
-        for (int row = 0; row < SIZE; row++) {
-            CounterHashMap<Integer> map = getOccurenceInRowMap(matrix, row);
+    private void reduceInBlock(IMatrix matrix) {
+        for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
+            for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
+                CounterHashMap<Integer> map = getOccurenceInBlockMap(matrix, rowGroup, colGroup);
 
-            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-                if (accept(entry)) {
-                    List<Integer> pos = getPosInRow(matrix, row, entry.getKey());
-                    if (!pos.isEmpty() && Utils.theSameBlock(pos.toArray(new Integer[pos.size()]))) {
-                        removeInBlockRow(matrix, row, entry.getKey(), pos);
+                for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+                    List<Pair> list = new ArrayList<>();
+                    for (int col : blockElems(colGroup * BLOCK_SIZE)) {
+                        for (int row : blockElems(rowGroup * BLOCK_SIZE)) {
+                            if (matrix.getCandidates(row, col).contains(entry.getKey())) {
+                                list.add(new Pair(row, col));
+                            }
+                        }
+                    }
+                    if (list.isEmpty()) {
+                        continue;
+                    }
+
+                    boolean theSameRow = true;
+                    boolean theSameCol = true;
+                    Pair item = list.get(0);
+
+                    for (Pair p : list) {
+                        theSameCol = theSameCol && item.getCol() == p.getCol();
+                        theSameRow = theSameRow && item.getRow() == p.getRow();
+                    }
+
+                    if (theSameCol) {
+                        for (int row = 0; row < SIZE; row++) {
+                            boolean found = true;
+                            for (Pair p : list) {
+                                if (p.getRow() == row) {
+                                    found = false;
+                                }
+                            }
+                            if (found) {
+                                matrix.removeCandidate(row, item.getCol(), entry.getKey());
+                            }
+                        }
+                    }
+
+                    if (theSameRow) {
+                        for (int col = 0; col < SIZE; col++) {
+                            boolean found = true;
+                            for (Pair p : list) {
+                                if (p.getCol() == col) {
+                                    found = false;
+                                }
+                            }
+                            if (found) {
+                                matrix.removeCandidate(item.getRow(), col, entry.getKey());
+                            }
+                        }
                     }
                 }
             }
@@ -181,8 +171,7 @@ public class Reduction implements IAlgorithm {
     }
 
     private void removeInBlockCol(IMatrix matrix, int col, int key, List<Integer> pos) {
-        int rowBlock = pos.get(0);
-        for (int rowTemp : blockElems(rowBlock)) {
+        for (int rowTemp : blockElems(pos.get(0))) {
             for (int colTemp : blockElems(col)) {
                 if (colTemp != col && matrix.getCandidates(rowTemp, colTemp).contains(key)) {
                     matrix.removeCandidate(rowTemp, colTemp, key);

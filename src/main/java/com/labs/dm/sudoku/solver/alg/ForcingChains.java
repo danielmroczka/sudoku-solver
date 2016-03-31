@@ -1,6 +1,5 @@
 package com.labs.dm.sudoku.solver.alg;
 
-import com.labs.dm.sudoku.solver.alg.hidden.HiddenSingles;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 
@@ -19,22 +18,22 @@ public class ForcingChains implements IAlgorithm {
                     continue;
                 }
 
+                /** creates clone instances from matrix and set cell at row and col different value from candidate list **/
                 IMatrix[] clones = new IMatrix[matrix.getCandidates(row, col).size()];
                 int index = 0;
 
                 for (int candidate : matrix.getCandidates(row, col)) {
+                    /** each clone will have different value cell at the same position **/
                     clones[index] = new Matrix(matrix);
-                    clones[index].setValueAt(row, col, candidate);
-                    new HiddenSingles().execute(clones[index]);
-                    index++;
+                    clones[index++].setValueAt(row, col, candidate);
                 }
 
                 for (int r = 0; r < SIZE; r++) {
                     for (int c = 0; c < SIZE; c++) {
-                        if (matrix.getValueAt(r, c) == 0) {
+                        if (!matrix.isCellSet(r, c)) {
                             boolean theSame = true;
-                            for (int id = 0; id < clones.length - 1; id++) {
-                                if (clones[id].getValueAt(r, c) != clones[id + 1].getValueAt(r, c)) {
+                            for (int cloneId = 0; cloneId < clones.length - 1; cloneId++) {
+                                if (clones[cloneId].getValueAt(r, c) != clones[cloneId + 1].getValueAt(r, c)) {
                                     theSame = false;
                                     break;
                                 }

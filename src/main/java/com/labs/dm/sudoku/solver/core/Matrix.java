@@ -371,7 +371,7 @@ public class Matrix implements IMatrix, Serializable {
             int[] cols = getElemsInCol(col);
             for (int c : cols) {
                 validateInputValue(c);
-                if (!set.add(c) && c != EMPTY_VALUE) {
+                if (!set.add(c) && isSetValue(c)) {
                     throw new IllegalStateException("Value " + c + " is not unique in col: " + col);
                 }
             }
