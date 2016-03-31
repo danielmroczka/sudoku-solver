@@ -75,39 +75,39 @@ public class Reduction implements IAlgorithm {
                         continue;
                     }
 
-                    boolean theSameRow = true;
-                    boolean theSameCol = true;
-                    Pair item = list.get(0);
+                    for (Pair item : list) {
+                        boolean theSameRow = true, theSameCol = true;
 
-                    for (Pair p : list) {
-                        theSameCol = theSameCol && item.getCol() == p.getCol();
-                        theSameRow = theSameRow && item.getRow() == p.getRow();
-                    }
+                        for (Pair p : list) {
+                            theSameCol = theSameCol && item.getCol() == p.getCol();
+                            theSameRow = theSameRow && item.getRow() == p.getRow();
+                        }
 
-                    if (theSameCol) {
-                        for (int row = 0; row < SIZE; row++) {
-                            boolean found = true;
-                            for (Pair p : list) {
-                                if (p.getRow() == row) {
-                                    found = false;
+                        if (theSameCol) {
+                            for (int row = 0; row < SIZE; row++) {
+                                boolean found = true;
+                                for (Pair p : list) {
+                                    if (p.getRow() == row) {
+                                        found = false;
+                                    }
                                 }
-                            }
-                            if (found) {
-                                matrix.removeCandidate(row, item.getCol(), entry.getKey());
+                                if (found) {
+                                    matrix.removeCandidate(row, item.getCol(), entry.getKey());
+                                }
                             }
                         }
-                    }
 
-                    if (theSameRow) {
-                        for (int col = 0; col < SIZE; col++) {
-                            boolean found = true;
-                            for (Pair p : list) {
-                                if (p.getCol() == col) {
-                                    found = false;
+                        if (theSameRow) {
+                            for (int col = 0; col < SIZE; col++) {
+                                boolean found = true;
+                                for (Pair p : list) {
+                                    if (p.getCol() == col) {
+                                        found = false;
+                                    }
                                 }
-                            }
-                            if (found) {
-                                matrix.removeCandidate(item.getRow(), col, entry.getKey());
+                                if (found) {
+                                    matrix.removeCandidate(item.getRow(), col, entry.getKey());
+                                }
                             }
                         }
                     }
