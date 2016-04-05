@@ -100,9 +100,6 @@ public class LockedCandidates implements IAlgorithm {
                             }
                         }
                     }
-                    if (list.isEmpty()) {
-                        continue;
-                    }
 
                     for (Pair item : list) {
                         boolean theSameRow = true, theSameCol = true;
@@ -112,34 +109,41 @@ public class LockedCandidates implements IAlgorithm {
                             theSameRow = theSameRow && item.getRow() == p.getRow();
                         }
 
-                        if (theSameCol) {
-                            for (int row = 0; row < SIZE; row++) {
-                                boolean found = true;
-                                for (Pair p : list) {
-                                    if (p.getRow() == row) {
-                                        found = false;
-                                    }
-                                }
-                                if (found) {
-                                    matrix.removeCandidate(row, item.getCol(), entry.getKey());
-                                }
-                            }
-                        }
-
-                        if (theSameRow) {
-                            for (int col = 0; col < SIZE; col++) {
-                                boolean found = true;
-                                for (Pair p : list) {
-                                    if (p.getCol() == col) {
-                                        found = false;
-                                    }
-                                }
-                                if (found) {
-                                    matrix.removeCandidate(item.getRow(), col, entry.getKey());
-                                }
-                            }
-                        }
+                        claimingInCols(matrix, entry, list, item, theSameCol);
+                        claimingInRows(matrix, entry, list, item, theSameRow);
                     }
+                }
+            }
+        }
+    }
+
+    private void claimingInRows(IMatrix matrix, Map.Entry<Integer, Integer> entry, List<Pair> list, Pair item, boolean theSameRow) {
+        if (theSameRow) {
+            for (int col = 0; col < SIZE; col++) {
+                boolean found = true;
+                for (Pair p : list) {
+                    if (p.getCol() == col) {
+                        found = false;
+                    }
+                }
+                if (found) {
+                    matrix.removeCandidate(item.getRow(), col, entry.getKey());
+                }
+            }
+        }
+    }
+
+    private void claimingInCols(IMatrix matrix, Map.Entry<Integer, Integer> entry, List<Pair> list, Pair item, boolean theSameCol) {
+        if (theSameCol) {
+            for (int row = 0; row < SIZE; row++) {
+                boolean found = true;
+                for (Pair p : list) {
+                    if (p.getRow() == row) {
+                        found = false;
+                    }
+                }
+                if (found) {
+                    matrix.removeCandidate(row, item.getCol(), entry.getKey());
                 }
             }
         }
