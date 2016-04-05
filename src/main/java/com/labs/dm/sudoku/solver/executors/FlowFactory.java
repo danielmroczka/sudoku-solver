@@ -34,7 +34,7 @@ public class FlowFactory {
             HiddenPairs.class,
             HiddenTriples.class,
             HiddenQuads.class,
-            Reduction.class,
+            LockedCandidates.class,
             XWing.class,
             XYWing.class,
             XYZWing.class,

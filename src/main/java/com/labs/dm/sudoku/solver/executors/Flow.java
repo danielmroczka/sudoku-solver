@@ -46,11 +46,9 @@ public class Flow {
             run(matrix, NakedQuads.class);
             run(matrix, HiddenPairs.class);
             run(matrix, HiddenTriples.class);
-
             run(matrix, HiddenQuads.class);
             run(matrix, HiddenSingles.class);
-
-            run(matrix, Reduction.class);
+            run(matrix, LockedCandidates.class);
             run(matrix, XWing.class);
             run(matrix, XYWing.class);
             run(matrix, XYZWing.class);

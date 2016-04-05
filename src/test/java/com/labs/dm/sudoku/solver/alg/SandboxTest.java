@@ -18,7 +18,7 @@ public class SandboxTest {
         matrix.addCandidates(0, 1, new Integer[]{5, 6, 7});
         matrix.addCandidates(2, 0, new Integer[]{3, 5});
         //WHEN
-        Executor.run(matrix, Reduction.class);
+        Executor.run(matrix, LockedCandidates.class);
         //THEN
         // assertEquals(1, matrix.getCandidates(2,0).size());
     }

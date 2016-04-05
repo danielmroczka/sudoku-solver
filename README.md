@@ -12,7 +12,7 @@ Implemented algorithms:
 - [x]  Hidden Singles
 - [x]  Hidden Pairs/Triples
 - [x]  Naked Subset (Pairs/Triples/Quads)
-- [x]  Line/Block Reduction
+- [x]  Locked Candidates (Pointing Pairs/Claiming)
 - [x]  X-Wing
 - [x]  XY-Wing
 - [x]  XYZ-Wing

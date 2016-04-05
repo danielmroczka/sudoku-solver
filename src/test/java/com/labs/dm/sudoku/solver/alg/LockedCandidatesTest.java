@@ -13,7 +13,7 @@ import static org.junit.Assert.assertFalse;
  */
 public class LockedCandidatesTest {
 
-    private final IAlgorithm reduction = new Reduction();
+    private final IAlgorithm reduction = new LockedCandidates();
 
     @Test
     public void lockedInRowReduceInBlock() throws Exception {

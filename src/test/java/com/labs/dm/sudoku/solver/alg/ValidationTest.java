@@ -144,7 +144,7 @@ public class ValidationTest {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
-            run(matrix, Reduction.class);
+            run(matrix, LockedCandidates.class);
             matrix.validate();
         }
     }
