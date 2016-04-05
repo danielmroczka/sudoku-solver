@@ -117,4 +117,41 @@ public class UtilsTest {
 
     }
 
+    @Test
+    public void shouldGetOccurencesInRow() throws Exception {
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{1, 2, 3});
+        matrix.addCandidates(0, 8, new Integer[]{2, 3, 4});
+        matrix.addCandidates(1, 0, new Integer[]{3, 4, 5});
+        //WHEN
+        Map<Integer, List<Pair>> result = Utils.getOccurencesInRow(matrix, 0, 1);
+        //THEN
+        assertEquals(5, result.keySet().size());
+        assertEquals(1, result.get(1).size());
+        assertEquals(2, result.get(2).size());
+        assertEquals(3, result.get(3).size());
+        assertEquals(2, result.get(4).size());
+        assertEquals(1, result.get(5).size());
+        assertNull(result.get(9));
+    }
+
+    @Test
+    public void shouldGetOccurencesInCol() throws Exception {
+        //GIVEN
+        IMatrix matrix = new Matrix();
+        matrix.addCandidates(0, 0, new Integer[]{1, 2, 3});
+        matrix.addCandidates(8, 0, new Integer[]{2, 3, 4});
+        matrix.addCandidates(0, 1, new Integer[]{3, 4, 5});
+        //WHEN
+        Map<Integer, List<Pair>> result = Utils.getOccurencesInCol(matrix, 0, 1);
+        //THEN
+        assertEquals(5, result.keySet().size());
+        assertEquals(1, result.get(1).size());
+        assertEquals(2, result.get(2).size());
+        assertEquals(3, result.get(3).size());
+        assertEquals(2, result.get(4).size());
+        assertEquals(1, result.get(5).size());
+        assertNull(result.get(9));
+    }
 }

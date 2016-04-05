@@ -1,6 +1,7 @@
 package com.labs.dm.sudoku.solver.utils;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.core.Pair;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
 
@@ -391,5 +392,50 @@ public class Utils {
             innerCombination.addAll(combinationList(innerEntry, i));
         }
         return innerCombination;
+    }
+
+    public static Map<Integer, List<Pair>> getOccurencesInRow(IMatrix matrix, int... rows) {
+        Map<Integer, List<Pair>> map = new HashMap<>();
+
+        for (int col = 0; col < Matrix.SIZE; col++) {
+            for (int row : rows) {
+                count(matrix, col, map, row);
+            }
+        }
+
+        return map;
+    }
+
+    public static Map<Integer, List<Pair>> getOccurencesInCol(IMatrix matrix, int... cols) {
+        Map<Integer, List<Pair>> map = new HashMap<>();
+
+        for (int row = 0; row < Matrix.SIZE; row++) {
+            for (int col : cols) {
+                count(matrix, col, map, row);
+            }
+        }
+
+        return map;
+    }
+
+    public static Map<Integer, List<Pair>> getOccurencesInBlock(IMatrix matrix, int rowGroup, int colGroup) {
+        Map<Integer, List<Pair>> map = new HashMap<>();
+        for (int row : Utils.blockElems(rowGroup * BLOCK_SIZE)) {
+            for (int col : Utils.blockElems(colGroup * BLOCK_SIZE)) {
+                count(matrix, col, map, row);
+            }
+        }
+        return map;
+    }
+
+    private static void count(IMatrix matrix, int col, Map<Integer, List<Pair>> map, int row) {
+        for (int candidate : matrix.getCandidates(row, col)) {
+            List<Pair> list = map.get(candidate);
+            if (list == null) {
+                list = new ArrayList<>();
+            }
+            list.add(new Pair(row, col));
+            map.put(candidate, list);
+        }
     }
 }
