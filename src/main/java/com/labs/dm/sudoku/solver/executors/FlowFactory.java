@@ -72,8 +72,6 @@ public class FlowFactory {
         }
 
         return result;
-
-
     }
 
     public void execute(IMatrix matrix) {
@@ -82,7 +80,6 @@ public class FlowFactory {
         int chance = 3;
         run(matrix, GenerateCandidates.class);
         matrix.validate();
-        int counter = 0;
         while (!matrix.isSolved()) {
             List<Class<? extends IAlgorithm>> clz = list();
             for (Class<? extends IAlgorithm> c : clz) {

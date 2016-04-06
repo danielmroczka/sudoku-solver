@@ -333,7 +333,8 @@ public class Utils {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if (matrix.getCandidates(row, col).size() == 1) {
-                    throw new IllegalStateException("Cells cannot be in state having only one candidate!");
+                    matrix.setValueWithCandidate(row, col);
+                    //throw new IllegalStateException("Cells cannot be in state having only one candidate!");
                 }
                 for (int candidate : matrix.getCandidates(row, col)) {
 

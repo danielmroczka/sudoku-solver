@@ -103,7 +103,7 @@ public class Matrix implements IMatrix, Serializable {
             }
             switch (getCandidates(row, col).size()) {
                 case 1:
-                    setValueAt(row, col, getCandidates(row, col).get(0));
+                    setValueWithCandidate(row, col);
                     break;
                 case 0:
                     setValueAt(row, col, EMPTY_VALUE);
@@ -491,6 +491,13 @@ public class Matrix implements IMatrix, Serializable {
     @Override
     public List<ContextItem> getContext() {
         return context;
+    }
+
+    @Override
+    public void setValueWithCandidate(int row, int col) {
+        if (getCandidates(row, col).size() == 1) {
+            setValueAt(row, col, getCandidates(row, col).get(0));
+        }
     }
 
 }

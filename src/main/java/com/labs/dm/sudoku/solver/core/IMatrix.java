@@ -215,4 +215,6 @@ public interface IMatrix extends Iterable<Integer> {
     void removeMatrixListener();
 
     List<ContextItem> getContext();
+
+    void setValueWithCandidate(int row, int col);
 }

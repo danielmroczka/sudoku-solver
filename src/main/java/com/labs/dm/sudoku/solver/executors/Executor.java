@@ -19,15 +19,17 @@ public class Executor {
     private Executor() {
     }
 
-    public static synchronized void run(IMatrix matrix, Class<? extends IAlgorithm> clazz) {
+    public static synchronized void run(IMatrix matrix, Class<? extends IAlgorithm>... classes) {
 
         if (instance == null) {
             instance = new Executor();
         }
-        instance.execute(matrix, clazz);
-        if (!matrix.validate(true)) {
-            System.err.println("NotValid " + clazz);
-            System.out.println(matrix.printCandidates());
+        for (Class<? extends IAlgorithm> clazz : classes) {
+            instance.execute(matrix, clazz);
+            if (!matrix.validate(true)) {
+                System.err.println("NotValid " + clazz);
+                System.out.println(matrix.printCandidates());
+            }
         }
     }
 
