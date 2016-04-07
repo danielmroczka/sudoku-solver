@@ -51,6 +51,7 @@ public class FlowFactory {
     public static void main(String[] args) throws IOException {
         FlowFactory factory = new FlowFactory();
         MatrixLoader loader = new MatrixLoader();
+
         IMatrix matrix = loader.load("src/test/resources/patterns/hard/hard6.txt");
         matrix.addMatrixListener(new LogListener());
         factory.execute(matrix);
@@ -88,6 +89,7 @@ public class FlowFactory {
             List<Class<? extends IAlgorithm>> clz = list();
             for (Class<? extends IAlgorithm> c : clz) {
                 run(matrix, c);
+                if (matrix.isSolved()) break;
             }
 
             matrix.validate();

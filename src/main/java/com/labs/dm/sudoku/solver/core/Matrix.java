@@ -431,7 +431,7 @@ public class Matrix implements IMatrix, Serializable {
     }
 
     @Override
-    public void addCandidates(int row, int col, Integer[] array) {
+    public IMatrix addCandidates(int row, int col, Integer[] array) {
         for (int value : array) {
             validateInputValue(value);
         }
@@ -442,6 +442,7 @@ public class Matrix implements IMatrix, Serializable {
             }
         }
         Collections.sort(getCandidates(row, col));
+        return this;
     }
 
     @Override
@@ -493,8 +494,7 @@ public class Matrix implements IMatrix, Serializable {
         return context;
     }
 
-    @Override
-    public void setValueWithCandidate(int row, int col) {
+    private void setValueWithCandidate(int row, int col) {
         if (getCandidates(row, col).size() == 1) {
             setValueAt(row, col, getCandidates(row, col).get(0));
         }

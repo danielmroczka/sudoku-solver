@@ -202,7 +202,7 @@ public interface IMatrix extends Iterable<Integer> {
 
     int candidatesCountInCol(int col, int value);
 
-    void addCandidates(int row, int col, Integer[] array);
+    IMatrix addCandidates(int row, int col, Integer[] array);
 
     List<List<Integer>> getCandidatesInRow(int row);
 
@@ -216,5 +216,4 @@ public interface IMatrix extends Iterable<Integer> {
 
     List<ContextItem> getContext();
 
-    void setValueWithCandidate(int row, int col);
 }
