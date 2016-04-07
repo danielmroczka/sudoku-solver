@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class NakedQuintTest {
 
-    private NakedQuint nakedQuint = new NakedQuint();
+    private final NakedQuint nakedQuint = new NakedQuint();
 
     @Test
     @Ignore

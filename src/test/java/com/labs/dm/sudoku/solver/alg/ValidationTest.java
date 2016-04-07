@@ -1,5 +1,6 @@
 package com.labs.dm.sudoku.solver.alg;
 
+import com.labs.dm.sudoku.solver.alg.chains.ForcingChains;
 import com.labs.dm.sudoku.solver.alg.fish.SwordFish;
 import com.labs.dm.sudoku.solver.alg.fish.XWing;
 import com.labs.dm.sudoku.solver.alg.fish.XYWing;

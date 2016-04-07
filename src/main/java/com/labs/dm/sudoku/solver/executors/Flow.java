@@ -3,7 +3,11 @@
  */
 package com.labs.dm.sudoku.solver.executors;
 
-import com.labs.dm.sudoku.solver.alg.*;
+import com.labs.dm.sudoku.solver.alg.GenerateCandidates;
+import com.labs.dm.sudoku.solver.alg.IAlgorithm;
+import com.labs.dm.sudoku.solver.alg.LockedCandidates;
+import com.labs.dm.sudoku.solver.alg.OpenSingles;
+import com.labs.dm.sudoku.solver.alg.chains.ForcingChains;
 import com.labs.dm.sudoku.solver.alg.fish.*;
 import com.labs.dm.sudoku.solver.alg.hidden.HiddenPairs;
 import com.labs.dm.sudoku.solver.alg.hidden.HiddenQuads;
