@@ -5,6 +5,8 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
 
 /**
  * Created by Daniel Mroczka on 4/7/2016.
+ *
+ * http://www.sadmansoftware.com/sudoku/xychain.php
  */
 public class XYChains implements IAlgorithm {
     @Override
