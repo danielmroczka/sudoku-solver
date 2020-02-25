@@ -328,7 +328,7 @@ public class MatrixTest {
         assertArrayEquals(original.toArray(), copy.toArray());
         assertEquals(9, copy.getValueAt(0, 0));
         assertArrayEquals(original.getCandidates(1, 1).toArray(), copy.getCandidates(1, 1).toArray());
-        assertFalse(original.getCandidates(1, 1) == copy.getCandidates(1, 1));
+        assertNotSame(original.getCandidates(1, 1), copy.getCandidates(1, 1));
         assertNotEquals(copy, original);
     }
 

@@ -155,7 +155,10 @@ public abstract class NakedSubset implements IAlgorithm {
 
             boolean status = true;
             for (int val : counter.values()) {
-                if (val != 2) status = false;
+                if (val != 2) {
+                    status = false;
+                    break;
+                }
             }
 
             if (status) {

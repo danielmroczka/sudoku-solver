@@ -14,9 +14,9 @@ public class CounterHashMapTest {
         map.inc(1);
         map.inc(2);
         map.inc(2);
-        assertEquals(new Integer(1), map.get(1));
-        assertEquals(new Integer(2), map.get(2));
-        assertEquals(new Integer(0), map.get(3));
+        assertEquals(Integer.valueOf(1), map.get(1));
+        assertEquals(Integer.valueOf(2), map.get(2));
+        assertEquals(Integer.valueOf(0), map.get(3));
     }
 
 }

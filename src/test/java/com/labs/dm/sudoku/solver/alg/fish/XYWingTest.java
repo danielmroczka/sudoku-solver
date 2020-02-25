@@ -119,7 +119,7 @@ public class XYWingTest {
     public void testFromFile1() throws IOException {
         IMatrix matrix = new MatrixLoader().load("patterns/xwing/incol.txt");
         cand.execute(matrix);
-        assertTrue(matrix.getCandidatesCount() == 60);
+        assertEquals(60, matrix.getCandidatesCount());
         xyWing.execute(matrix);
         matrix.validate();
         assertTrue(matrix.getCandidatesCount() <= 60);

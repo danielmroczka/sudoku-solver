@@ -7,8 +7,8 @@ import java.util.List;
  */
 public class Subset {
 
-    private List<Integer> subsetNumber;
-    private List<Integer> subsetPosition;
+    private final List<Integer> subsetNumber;
+    private final List<Integer> subsetPosition;
 
     public Subset(List<Integer> subsetNumber, List<Integer> subsetPosition) {
         this.subsetNumber = subsetNumber;

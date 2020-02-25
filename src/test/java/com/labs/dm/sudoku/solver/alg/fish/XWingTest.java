@@ -87,8 +87,8 @@ public class XWingTest {
     public void testFromFile1() throws IOException {
         IMatrix matrix = new MatrixLoader().load("patterns/xwing/incol.txt");
         cand.execute(matrix);
-        assertTrue(matrix.getCandidatesCount() == 60);
+        assertEquals(60, matrix.getCandidatesCount());
         alg.execute(matrix);
-        assertTrue(matrix.getCandidatesCount() == 56);
+        assertEquals(56, matrix.getCandidatesCount());
     }
 }

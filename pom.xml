@@ -9,12 +9,17 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.projectKey>danielmroczka_sudoku-solver</sonar.projectKey>
+        <sonar.organization>danielmroczka</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.login>0c70d93f81a82123cb34bd2ca997241324d7adcf</sonar.login>
     </properties>
 
     <scm>
         <developerConnection>git@github.com:danielmroczka/sudoku-solver.git</developerConnection>
         <connection>git@github.com:danielmroczka/sudoku-solver.git</connection>
     </scm>
+
 
     <dependencies>
         <dependency>
@@ -63,7 +68,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.7.6.201602180812</version>
+                <version>0.8.5</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -85,7 +90,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>2.7.1</version>
+                <version>3.7.0.1746</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
