@@ -1,5 +1,6 @@
 package com.labs.dm.sudoku.solver.core;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -7,8 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Created by Daniel Mroczka on 23-Feb-16.
@@ -22,9 +22,9 @@ public class PairTest {
         Pair pair3 = new Pair(1, 0);
         Pair pair4 = new Pair(0, 1);
 
-        assertTrue(pair1.equals(pair2));
-        assertFalse(pair2.equals(pair3));
-        assertFalse(pair2.equals(pair4));
+        Assert.assertEquals(pair1, pair2);
+        assertNotEquals(pair2, pair3);
+        assertNotEquals(pair2, pair4);
     }
 
     @Test

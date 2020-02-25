@@ -124,6 +124,7 @@ public class LockedCandidates implements IAlgorithm {
                 for (Pair p : list) {
                     if (p.getCol() == col) {
                         found = false;
+                        break;
                     }
                 }
                 if (found) {
@@ -140,6 +141,7 @@ public class LockedCandidates implements IAlgorithm {
                 for (Pair p : list) {
                     if (p.getRow() == row) {
                         found = false;
+                        break;
                     }
                 }
                 if (found) {
