@@ -105,8 +105,8 @@ public class LockedCandidates implements IAlgorithm {
                         boolean theSameRow = true, theSameCol = true;
 
                         for (Pair p : list) {
-                            theSameCol = theSameCol && item.getCol() == p.getCol();
-                            theSameRow = theSameRow && item.getRow() == p.getRow();
+                            theSameCol = theSameCol && item.col() == p.col();
+                            theSameRow = theSameRow && item.row() == p.row();
                         }
 
                         claimingInCols(matrix, entry, list, item, theSameCol);
@@ -122,13 +122,13 @@ public class LockedCandidates implements IAlgorithm {
             for (int col = 0; col < SIZE; col++) {
                 boolean found = true;
                 for (Pair p : list) {
-                    if (p.getCol() == col) {
+                    if (p.col() == col) {
                         found = false;
                         break;
                     }
                 }
                 if (found) {
-                    matrix.removeCandidate(item.getRow(), col, entry.getKey());
+                    matrix.removeCandidate(item.row(), col, entry.getKey());
                 }
             }
         }
@@ -139,13 +139,13 @@ public class LockedCandidates implements IAlgorithm {
             for (int row = 0; row < SIZE; row++) {
                 boolean found = true;
                 for (Pair p : list) {
-                    if (p.getRow() == row) {
+                    if (p.row() == row) {
                         found = false;
                         break;
                     }
                 }
                 if (found) {
-                    matrix.removeCandidate(row, item.getCol(), entry.getKey());
+                    matrix.removeCandidate(row, item.col(), entry.getKey());
                 }
             }
         }

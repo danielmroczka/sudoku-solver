@@ -5,39 +5,7 @@ import java.util.Comparator;
 /**
  * Created by Daniel Mroczka on 2016-02-15.
  */
-public class Pair {
-    private final int row;
-    private final int col;
-
-    public Pair(int row, int col) {
-        this.row = row;
-        this.col = col;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Pair pair = (Pair) o;
-
-        return row == pair.row && col == pair.col;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = row;
-        result = 31 * result + col;
-        return result;
-    }
+public record Pair(int row, int col) {
 
     @Override
     public String toString() {
@@ -52,7 +20,7 @@ public class Pair {
                 return 0;
             }
 
-            return o1.getRow() != o2.getRow() ? o1.getRow() - o2.getRow() : o1.getCol() - o2.getCol();
+            return o1.row() != o2.row() ? o1.row() - o2.row() : o1.col() - o2.col();
         }
     }
 }

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * Implementation of HashMap making easier counting occurrences of keys and returns zero in case of missing key.
- *
+ * <p>
  * Created by Daniel Mroczka on 2016-02-15.
  */
 public class CounterHashMap<K> extends HashMap<K, Integer> {

@@ -58,7 +58,7 @@ public class FlowFactory {
         System.out.println(matrix.getContext());
         int time = 0;
         for (ContextItem c : matrix.getContext()) {
-            time += c.getTime();
+            time += c.time();
         }
         System.out.println(time / 1000000);
     }

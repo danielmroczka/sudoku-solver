@@ -5,23 +5,7 @@ import java.util.List;
 /**
  * Created by daniel on 2016-03-27.
  */
-public class Subset {
-
-    private final List<Integer> subsetNumber;
-    private final List<Integer> subsetPosition;
-
-    public Subset(List<Integer> subsetNumber, List<Integer> subsetPosition) {
-        this.subsetNumber = subsetNumber;
-        this.subsetPosition = subsetPosition;
-    }
-
-    public List<Integer> getSubsetNumber() {
-        return subsetNumber;
-    }
-
-    public List<Integer> getSubsetPosition() {
-        return subsetPosition;
-    }
+public record Subset(List<Integer> subsetNumber, List<Integer> subsetPosition) {
 
     @Override
     public String toString() {

@@ -30,7 +30,7 @@ public class Backtracking implements IAlgorithm {
                     return;
                 }
                 IMatrix copy = new Matrix(matrix);
-                matrix.setValueAt(pair.getRow(), pair.getCol(), candidate);
+                matrix.setValueAt(pair.row(), pair.col(), candidate);
                 if (matrix.validate(true)) {
                     onExecute(matrix, copy);
                 } else {

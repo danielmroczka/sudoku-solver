@@ -90,27 +90,27 @@ public class Utils {
     }
 
     private static boolean theSameRowBlock(Pair cell1, Pair cell2) {
-        return cell1.getRow() / 3 == cell2.getRow() / 3;
+        return cell1.row() / 3 == cell2.row() / 3;
     }
 
     private static boolean theSameColBlock(Pair cell1, Pair cell2) {
-        return cell1.getCol() / 3 == cell2.getCol() / 3;
+        return cell1.col() / 3 == cell2.col() / 3;
     }
 
     private static boolean theSameRow(Pair cell1, Pair cell2) {
-        return cell1.getRow() == cell2.getRow();
+        return cell1.row() == cell2.row();
     }
 
     private static boolean theSameCol(Pair cell1, Pair cell2) {
-        return cell1.getCol() == cell2.getCol();
+        return cell1.col() == cell2.col();
     }
 
     public static List<Pair> pairsOnIntersections(Pair cell1, Pair cell2) {
         List<Pair> result = new ArrayList<>();
         if (theSameColBlock(cell1, cell2) && theSameRowBlock(cell1, cell2)) {
-            for (int row : blockElems(cell1.getRow())) {
-                for (int col : blockElems(cell1.getCol())) {
-                    if ((row == cell1.getRow() && col == cell1.getCol()) || (row == cell2.getRow() && col == cell2.getCol())) {
+            for (int row : blockElems(cell1.row())) {
+                for (int col : blockElems(cell1.col())) {
+                    if ((row == cell1.row() && col == cell1.col()) || (row == cell2.row() && col == cell2.col())) {
                         continue;
                     }
                     result.add(new Pair(row, col));
@@ -119,35 +119,35 @@ public class Utils {
             }
         } else if (theSameRow(cell1, cell2)) {
             for (int col = 0; col < SIZE; col++) {
-                if (col != cell1.getCol() && col != cell2.getCol()) {
-                    result.add(new Pair(cell1.getRow(), col));
+                if (col != cell1.col() && col != cell2.col()) {
+                    result.add(new Pair(cell1.row(), col));
                 }
             }
         } else if (theSameCol(cell1, cell2)) {
             for (int row = 0; row < SIZE; row++) {
-                if (row != cell1.getRow() && row != cell2.getRow()) {
-                    result.add(new Pair(row, cell1.getCol()));
+                if (row != cell1.row() && row != cell2.row()) {
+                    result.add(new Pair(row, cell1.col()));
                 }
             }
         } else if (theSameRowBlock(cell1, cell2)) {
-            for (int col : blockElems(cell1.getCol())) {
-                result.add(new Pair(cell2.getRow(), col));
+            for (int col : blockElems(cell1.col())) {
+                result.add(new Pair(cell2.row(), col));
             }
-            for (int col : blockElems(cell2.getCol())) {
-                result.add(new Pair(cell1.getRow(), col));
+            for (int col : blockElems(cell2.col())) {
+                result.add(new Pair(cell1.row(), col));
             }
 
         } else if (theSameColBlock(cell1, cell2)) {
-            for (int row : blockElems(cell1.getRow())) {
-                result.add(new Pair(row, cell2.getCol()));
+            for (int row : blockElems(cell1.row())) {
+                result.add(new Pair(row, cell2.col()));
             }
-            for (int row : blockElems(cell2.getRow())) {
-                result.add(new Pair(row, cell1.getCol()));
+            for (int row : blockElems(cell2.row())) {
+                result.add(new Pair(row, cell1.col()));
             }
 
         } else {
-            result.add(new Pair(cell1.getRow(), cell2.getCol()));
-            result.add(new Pair(cell2.getRow(), cell1.getCol()));
+            result.add(new Pair(cell1.row(), cell2.col()));
+            result.add(new Pair(cell2.row(), cell1.col()));
         }
 
         return result;
@@ -299,12 +299,12 @@ public class Utils {
 
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                String line = "";
+                StringBuilder line = new StringBuilder();
                 for (int item : matrix.getCandidates(row, col)) {
-                    line = line + item;
+                    line.append(item);
                 }
-                if (line.isEmpty()) {
-                    line = "[" + matrix.getValueAt(row, col) + "]";
+                if (line.length() == 0) {
+                    line = new StringBuilder("[" + matrix.getValueAt(row, col) + "]");
                 }
 
                 sb.append(String.format("%1$" + (maxLength > 0 ? maxLength + 3 : 3) + "s", line));
@@ -319,9 +319,7 @@ public class Utils {
             }
             sb.append(System.lineSeparator());
             if (row % 3 == 2 && row < SIZE - 1) {
-                for (int i = 0; i <= (((maxLength > 0 ? maxLength + 3 : 3) + 1) * 9) + 3; i++) {
-                    sb.append("-");
-                }
+                sb.append("-".repeat(Math.max(0, (((maxLength > 0 ? maxLength + 3 : 3) + 1) * 9) + 4)));
                 sb.append(System.lineSeparator());
             }
         }

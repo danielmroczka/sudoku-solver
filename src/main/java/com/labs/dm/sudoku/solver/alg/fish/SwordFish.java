@@ -43,8 +43,8 @@ public class SwordFish implements IAlgorithm {
         CounterHashMap<Integer> colMap = new CounterHashMap<>();
 
         for (Pair pair : pairs) {
-            rowMap.inc(pair.getRow());
-            colMap.inc(pair.getCol());
+            rowMap.inc(pair.row());
+            colMap.inc(pair.col());
         }
 
         if (rowMap.size() < SIZE || colMap.size() < SIZE) {
@@ -129,8 +129,8 @@ public class SwordFish implements IAlgorithm {
             CounterHashMap<Integer> colsMap = new CounterHashMap<>();
 
             for (Pair pair : entry.getValue()) {
-                rowsMap.inc(pair.getRow());
-                colsMap.inc(pair.getCol());
+                rowsMap.inc(pair.row());
+                colsMap.inc(pair.col());
             }
 
             if (rowsMap.size() < SIZE || colsMap.size() < SIZE) {
@@ -148,8 +148,8 @@ public class SwordFish implements IAlgorithm {
                     CounterHashMap<Integer> rowsTempMap = new CounterHashMap<>();
                     CounterHashMap<Integer> colsTempMap = new CounterHashMap<>();
                     for (Pair p : pair) {
-                        rowsTempMap.inc(p.getRow());
-                        colsTempMap.inc(p.getCol());
+                        rowsTempMap.inc(p.row());
+                        colsTempMap.inc(p.col());
                     }
 
                     if (pair.size() >= MIN_POINTS && accept(rowsTempMap, colsTempMap)) {

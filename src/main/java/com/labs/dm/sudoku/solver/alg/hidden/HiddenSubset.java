@@ -33,8 +33,8 @@ public abstract class HiddenSubset implements IAlgorithm {
             List<Subset> subsets = findSubsets(tab, subsetSize);
 
             for (Subset subset : subsets) {
-                for (int col : subset.getSubsetPosition()) {
-                    removeCandidates(matrix, row, col, subset.getSubsetNumber());
+                for (int col : subset.subsetPosition()) {
+                    removeCandidates(matrix, row, col, subset.subsetNumber());
                 }
             }
         }
@@ -46,8 +46,8 @@ public abstract class HiddenSubset implements IAlgorithm {
             List<Subset> subsets = findSubsets(tab, subsetSize);
 
             for (Subset subset : subsets) {
-                for (int row : subset.getSubsetPosition()) {
-                    removeCandidates(matrix, row, col, subset.getSubsetNumber());
+                for (int row : subset.subsetPosition()) {
+                    removeCandidates(matrix, row, col, subset.subsetNumber());
                 }
             }
         }
@@ -60,10 +60,10 @@ public abstract class HiddenSubset implements IAlgorithm {
                 List<Subset> subsets = findSubsets(tab, subsetSize);
 
                 for (Subset subset : subsets) {
-                    for (int pos : subset.getSubsetPosition()) {
+                    for (int pos : subset.subsetPosition()) {
                         int row = rowGroup * BLOCK_SIZE + pos / 3;
                         int col = colGroup * BLOCK_SIZE + pos % 3;
-                        removeCandidates(matrix, row, col, subset.getSubsetNumber());
+                        removeCandidates(matrix, row, col, subset.subsetNumber());
                     }
                 }
             }

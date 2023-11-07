@@ -80,7 +80,7 @@ public class OpenSingles implements IAlgorithm {
             if (tab[elem] == Matrix.EMPTY_VALUE) {
                 position = elem;
             } else {
-                list.remove(list.indexOf(tab[elem]));
+                list.remove((Integer) tab[elem]);
             }
         }
 

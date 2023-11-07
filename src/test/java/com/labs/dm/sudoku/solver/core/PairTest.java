@@ -41,9 +41,9 @@ public class PairTest {
 
         Collections.sort(pairs, new Pair.ComaparatorRows());
 
-        assertEquals(0, pairs.get(0).getRow());
-        assertEquals(0, pairs.get(0).getCol());
-        assertEquals(5, pairs.get(3).getRow());
-        assertEquals(5, pairs.get(3).getCol());
+        assertEquals(0, pairs.get(0).row());
+        assertEquals(0, pairs.get(0).col());
+        assertEquals(5, pairs.get(3).row());
+        assertEquals(5, pairs.get(3).col());
     }
 }

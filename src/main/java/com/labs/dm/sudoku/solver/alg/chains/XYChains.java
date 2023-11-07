@@ -36,7 +36,7 @@ public class XYChains implements IAlgorithm {
 
 
         for (int i = 0; i < set.size(); i++) {
-            Pair pair = set.toArray(new Pair[set.size()])[i];
+            Pair pair = set.toArray(new Pair[0])[i];
             if (pairs.contains(pair)) {
                 return;
             }

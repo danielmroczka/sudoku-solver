@@ -66,7 +66,7 @@ public class Matrix implements IMatrix, Serializable {
     private void initCandidates() {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                setCandidates(row, col, new ArrayList<Integer>());
+                setCandidates(row, col, new ArrayList<>());
             }
         }
     }
@@ -196,7 +196,7 @@ public class Matrix implements IMatrix, Serializable {
 
     @Override
     public final Iterator<Integer> iterator() {
-        return new Iterator<Integer>() {
+        return new Iterator<>() {
             private int currentIndex = 0;
 
             @Override
@@ -435,7 +435,7 @@ public class Matrix implements IMatrix, Serializable {
         for (int value : array) {
             validateInputValue(value);
         }
-        List<Integer> toAdd = Arrays.asList(array);
+        Integer[] toAdd = array;
         for (int item : toAdd) {
             if (!getCandidates(row, col).contains(item)) {
                 getCandidates(row, col).add(item);

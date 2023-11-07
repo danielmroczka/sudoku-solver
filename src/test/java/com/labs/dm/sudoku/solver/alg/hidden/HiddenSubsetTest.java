@@ -69,8 +69,8 @@ public class HiddenSubsetTest {
         //WHEN
         List<Subset> result = hiddenSubset.findSubsets(tab, 2);
         //THEN
-        assertEquals(Arrays.asList(1, 2), result.get(0).getSubsetNumber());
-        assertEquals(Arrays.asList(0, 1), result.get(0).getSubsetPosition());
+        assertEquals(Arrays.asList(1, 2), result.get(0).subsetNumber());
+        assertEquals(Arrays.asList(0, 1), result.get(0).subsetPosition());
     }
 
     @Test
@@ -87,8 +87,8 @@ public class HiddenSubsetTest {
         //WHEN
         List<Subset> result = hiddenSubset.findSubsets(tab, 3);
         //THEN
-        assertEquals(Arrays.asList(1, 3, 6), result.get(0).getSubsetNumber());
-        assertEquals(Arrays.asList(0, 3, 4), result.get(0).getSubsetPosition());
+        assertEquals(Arrays.asList(1, 3, 6), result.get(0).subsetNumber());
+        assertEquals(Arrays.asList(0, 3, 4), result.get(0).subsetPosition());
     }
 
     @Test
@@ -109,8 +109,8 @@ public class HiddenSubsetTest {
         List<Subset> result = hiddenSubset.findSubsets(tab, 3);
         //THEN
         assertEquals(1, result.size());
-        assertEquals(Arrays.asList(2, 4, 5), result.get(0).getSubsetNumber());
-        assertEquals(Arrays.asList(0, 4, 8), result.get(0).getSubsetPosition());
+        assertEquals(Arrays.asList(2, 4, 5), result.get(0).subsetNumber());
+        assertEquals(Arrays.asList(0, 4, 8), result.get(0).subsetPosition());
     }
 
     @Test
@@ -153,8 +153,8 @@ public class HiddenSubsetTest {
         List<Subset> result = hiddenSubset.findSubsets(tab, 2);
         //THEN
         assertEquals(1, result.size());
-        assertEquals(Arrays.asList(2, 3), result.get(0).getSubsetNumber());
-        assertEquals(Arrays.asList(0, 1), result.get(0).getSubsetPosition());
+        assertEquals(Arrays.asList(2, 3), result.get(0).subsetNumber());
+        assertEquals(Arrays.asList(0, 1), result.get(0).subsetPosition());
     }
 
     @Test
@@ -165,9 +165,9 @@ public class HiddenSubsetTest {
         matrix.addCandidates(0, 2, new Integer[]{3, 4, 5});
 
         Integer[][] tab = hiddenSubset.fillTabRows(matrix, 0);
-        assertEquals(new Integer(0), tab[0][0]);
-        assertEquals(new Integer(1), tab[1][1]);
-        assertEquals(new Integer(2), tab[2][2]);
+        assertEquals(Integer.valueOf(0), tab[0][0]);
+        assertEquals(Integer.valueOf(1), tab[1][1]);
+        assertEquals(Integer.valueOf(2), tab[2][2]);
     }
 
 }

@@ -28,7 +28,7 @@ import static com.labs.dm.sudoku.solver.executors.Executor.run;
  */
 public class Flow {
 
-    private Class<? extends IAlgorithm>[] all = new Class[]{NakedSingles.class};
+    private final Class<? extends IAlgorithm>[] all = new Class[]{NakedSingles.class};
 
     private final Logger logger = Logger.getLogger("Flow");
 

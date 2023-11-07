@@ -27,7 +27,7 @@ public class GenerateCandidates implements IAlgorithm {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 if (matrix.isCellSet(row, col)) {
-                    matrix.setCandidates(row, col, new ArrayList<Integer>());
+                    matrix.setCandidates(row, col, new ArrayList<>());
                     continue;
                 }
                 List<Integer> set = new ArrayList<>(GenerateCandidates.fullSet);

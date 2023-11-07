@@ -85,9 +85,8 @@ public class MatrixLoader {
      * @throws IOException
      */
     public void serialize(IMatrix matrix, String filename) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(filename)))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(matrix);
-            oos.close();
         }
     }
 
@@ -99,9 +98,8 @@ public class MatrixLoader {
      */
     public IMatrix deserialize(String filename) throws IOException, ClassNotFoundException {
         IMatrix matrix;
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(filename)))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
             matrix = (IMatrix) ois.readObject();
-            ois.close();
         }
         return matrix;
     }
