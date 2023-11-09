@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.labs.dm.sudoku.solver.core.Matrix.BLOCK_SIZE;
+import static com.labs.dm.sudoku.solver.utils.Utils.FULL_LIST;
 
 /**
  * Open Singles Algorithm.
  *
  * @author Daniel Mroczka
- *         http://www.learn-sudoku.com/open-singles.html
+ * @see <a href="http://www.learn-sudoku.com/open-singles.html">Open SIngles</a>
  */
 public class OpenSingles implements IAlgorithm {
 
@@ -24,6 +25,35 @@ public class OpenSingles implements IAlgorithm {
         fillOpenSinglesInRows(matrix);
         fillOpenSinglesInCols(matrix);
         fillOpenSinglesInBlocks(matrix);
+    }
+
+    /**
+     * Returns true if array has only one empty element
+     *
+     * @param tab
+     * @return
+     */
+    protected int fillOpenSingles(int[] tab) {
+        if (tab.length != Matrix.SIZE) {
+            throw new IllegalArgumentException("Invalid array size.");
+        }
+
+        List<Integer> list = new ArrayList<>(FULL_LIST);
+        int position = -1;
+
+        for (int idx = 0; idx < tab.length; idx++) {
+            if (tab[idx] == Matrix.EMPTY_VALUE) {
+                position = idx;
+            } else {
+                list.remove((Integer) tab[idx]);
+            }
+        }
+
+        if (list.size() == 1 && position >= 0) {
+            tab[position] = list.get(0);
+            return position;
+        }
+        return -1;
     }
 
     private void fillOpenSinglesInRows(IMatrix matrix) {
@@ -59,37 +89,5 @@ public class OpenSingles implements IAlgorithm {
             }
         }
     }
-
-    /**
-     * Returns true if array has only one empty element
-     *
-     * @param tab
-     * @return
-     */
-    protected int fillOpenSingles(int[] tab) {
-        if (tab.length != Matrix.SIZE) {
-            throw new IllegalArgumentException("Invalid array size.");
-        }
-
-        List<Integer> list = new ArrayList<>();
-        int position = -1;
-        for (int elem = 1; elem <= Matrix.SIZE; elem++) {
-            list.add(elem);
-        }
-        for (int elem = 0; elem < tab.length; elem++) {
-            if (tab[elem] == Matrix.EMPTY_VALUE) {
-                position = elem;
-            } else {
-                list.remove((Integer) tab[elem]);
-            }
-        }
-
-        if (list.size() == 1) {
-            tab[position] = list.get(0);
-            return position;
-        }
-        return -1;
-    }
-
 
 }

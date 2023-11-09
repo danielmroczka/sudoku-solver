@@ -23,9 +23,11 @@ public class MainCLI {
         }
         MatrixLoader loader = new MatrixLoader();
         IMatrix matrix = loader.load(args[0]);
+        long start = System.currentTimeMillis();
         Flow flow = new Flow();
         flow.execute(matrix);
         loader.save(matrix, "target/" + args[0] + ".solved");
         System.out.println("Loaded matrix: \n" + matrix);
+        System.out.println("Time elapsed: " + (System.currentTimeMillis() - start) + "ms");
     }
 }
