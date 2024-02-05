@@ -47,7 +47,6 @@ public class FlowFactory {
             ForcingChains.class
     };
 
-
     public static void main(String[] args) throws IOException {
         FlowFactory factory = new FlowFactory();
         MatrixLoader loader = new MatrixLoader();

@@ -30,8 +30,8 @@ public class ValidationTest {
     private final NakedSingles nakedSingles = new NakedSingles();
     private final OpenSingles openSingles = new OpenSingles();
     private final IAlgorithm cand = new GenerateCandidates();
-    private IMatrix matrix;
     private final int COUNT = 50;
+    private IMatrix matrix;
 
     @Before
     public void before() throws IOException {

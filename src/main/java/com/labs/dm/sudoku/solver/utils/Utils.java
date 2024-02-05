@@ -27,7 +27,6 @@ public class Utils {
     private Utils() {
     }
 
-
     /**
      * Returns factorial value
      * For example factorial(4) = 1 * 2 * 3 * 4
@@ -377,7 +376,6 @@ public class Utils {
             System.arraycopy(original[row], 0, copy[row], 0, SIZE);
         }
     }
-
 
     public static int match(List<Integer> original, List<Integer> match) {
         List<Integer> list = new ArrayList<>(original);

@@ -185,7 +185,6 @@ public class LockedCandidatesTest {
         assertFalse(matrix.getCandidates(7, 0).contains(1));
     }
 
-
     @Test
     public void testClaimingRows() throws Exception {
         //GIVEN

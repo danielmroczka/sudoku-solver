@@ -166,10 +166,10 @@ public abstract class HiddenSubset implements IAlgorithm {
             List<Integer> common = new ArrayList<>(matrix.getCandidates(row, col));
             common.retainAll(subset);
             /** Proceed when candidates and subset have at least minSize common digits **/
-            if (common.size() >= 1) {
+            if (!common.isEmpty()) {
                 List<Integer> diff = new ArrayList<>(matrix.getCandidates(row, col));
                 diff.removeAll(subset);
-                if (diff.size() > 0) {
+                if (!diff.isEmpty()) {
                     matrix.removeCandidates(row, col, diff);
                 }
             }

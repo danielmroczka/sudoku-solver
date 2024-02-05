@@ -66,7 +66,6 @@ public class MatrixTest {
         }
     }
 
-
     @Test
     @Ignore
     public void testRemoveCandidates2() {
@@ -103,7 +102,6 @@ public class MatrixTest {
         assertTrue(matrix.isCellSet(0, 0));
         assertFalse(matrix.isCellSet(0, 1));
     }
-
 
     @Test
     public void shouldIterateForAllItems() {

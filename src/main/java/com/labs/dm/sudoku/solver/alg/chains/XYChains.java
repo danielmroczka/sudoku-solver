@@ -34,7 +34,6 @@ public class XYChains implements IAlgorithm {
 
     private void findChains(IMatrix matrix, Set<Pair> set, List<Pair> pairs) {
 
-
         for (int i = 0; i < set.size(); i++) {
             Pair pair = set.toArray(new Pair[0])[i];
             if (pairs.contains(pair)) {
@@ -49,37 +48,9 @@ public class XYChains implements IAlgorithm {
                 common.addAll(matrix.getCandidates(pair));
                 if (common.size() == 3) {
                     pairs.add(pair);
-                }  //   else {
-                findChains(matrix, set, pairs);
-                // }
-            }
-        }
-    }
-
-    private void findChains2(IMatrix matrix, List<Pair> pairs) {
-        for (int row = 0; row < Matrix.SIZE; row++) {
-            for (int col = 0; col < Matrix.SIZE; col++) {
-                if (matrix.getCandidates(row, col).size() == 2) {
-                    Pair pair = new Pair(row, col);
-                    System.out.println(pair);
-
-                    if (pairs.contains(pair)) {
-                        return;
-                    }
-
-                    if (pairs.isEmpty()) {
-                        pairs.add(pair);
-                    } else {
-                        Set<Integer> set = new HashSet<>();
-                        set.addAll(matrix.getCandidates(pairs.get(pairs.size() - 1)));
-                        set.addAll(matrix.getCandidates(pair));
-                        if (set.size() == 3) {
-                            pairs.add(pair);
-                        }  //   else {
-                        //   findChains(matrix, set pairs);
-                        // }
-                    }
                 }
+                findChains(matrix, set, pairs);
+
             }
         }
     }
