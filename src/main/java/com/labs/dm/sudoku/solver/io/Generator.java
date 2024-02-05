@@ -15,7 +15,6 @@ public class Generator {
         new Generator().generateNew(77);
     }
 
-
     public IMatrix generateNew(int filledCount) {
         IMatrix matrix = new Matrix();
         IAlgorithm candidate = new GenerateCandidates();
@@ -42,8 +41,6 @@ public class Generator {
             }
         }
 
-        System.out.println(matrix);
-
         while (matrix.getSolvedItems() > filledCount) {
             int row = ThreadLocalRandom.current().nextInt(9);
             int col = ThreadLocalRandom.current().nextInt(9);
@@ -51,9 +48,6 @@ public class Generator {
                 matrix.setValueAt(row, col, Matrix.EMPTY_VALUE);
             }
         }
-        // System.out.println(matrix.validate());
-        System.out.println(matrix);
-        System.out.println(matrix.validate());
         return matrix;
     }
 
@@ -67,7 +61,6 @@ public class Generator {
         IAlgorithm candidate = new GenerateCandidates();
         candidate.execute(matrix);
 
-
         //   int probe = 0;
         while (matrix.getSolvedItems() < filledCount) {
             //int idx = rand.nextInt(81);
@@ -80,7 +73,6 @@ public class Generator {
 
             IMatrix clone = new Matrix(matrix);
             int value;
-
 
             List<Integer> candidates = matrix.getCandidates(row, col);
             assert (candidates.size() > 0);
@@ -101,12 +93,10 @@ public class Generator {
                 }
             }
 
-
         }
 
         System.out.println(matrix);
         return matrix;
     }
-
 
 }

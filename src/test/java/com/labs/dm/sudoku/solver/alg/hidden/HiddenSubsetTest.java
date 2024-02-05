@@ -121,7 +121,6 @@ public class HiddenSubsetTest {
         tab[1][0] = 0;
         tab[2][0] = 0;
 
-
         tab[0][1] = 1;
         tab[1][1] = 1;
         tab[2][1] = 1;
@@ -144,11 +143,9 @@ public class HiddenSubsetTest {
         tab[1][0] = 0;
         tab[2][0] = 0;
 
-
         tab[1][1] = 1;
         tab[2][1] = 1;
         tab[3][1] = 1;
-
 
         List<Subset> result = hiddenSubset.findSubsets(tab, 2);
         //THEN

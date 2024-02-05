@@ -17,7 +17,6 @@ public abstract class NakedSubset implements IAlgorithm {
 
     protected int subsetSize;
 
-
     @Override
     public void execute(IMatrix matrix) {
         findNakedPairsInRows(matrix);
@@ -170,7 +169,6 @@ public abstract class NakedSubset implements IAlgorithm {
                 return map;
             }
         }
-
 
         /**
          * Finds following pattern:
