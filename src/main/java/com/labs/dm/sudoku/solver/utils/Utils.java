@@ -302,7 +302,7 @@ public class Utils {
                 for (int item : matrix.getCandidates(row, col)) {
                     line.append(item);
                 }
-                if (line.length() == 0) {
+                if (line.isEmpty()) {
                     line = new StringBuilder("[" + matrix.getValueAt(row, col) + "]");
                 }
 

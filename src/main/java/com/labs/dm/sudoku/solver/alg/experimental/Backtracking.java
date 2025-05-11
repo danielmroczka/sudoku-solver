@@ -45,7 +45,7 @@ public class Backtracking implements IAlgorithm {
         List<Pair> list = new ArrayList<>();
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                if (matrix.getCandidates(row, col).size() > 0) {
+                if (!matrix.getCandidates(row, col).isEmpty()) {
                     list.add(new Pair(row, col));
                 }
             }
