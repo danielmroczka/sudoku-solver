@@ -16,7 +16,7 @@ public class LockedCandidatesTest {
     private final IAlgorithm reduction = new LockedCandidates();
 
     @Test
-    public void lockedInRowReduceInBlock() throws Exception {
+    public void lockedInRowReduceInBlock() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2});
         matrix.addCandidates(0, 1, new Integer[]{1, 2, 3});
@@ -29,7 +29,7 @@ public class LockedCandidatesTest {
     }
 
     @Test
-    public void lockedInColReduceInBlock() throws Exception {
+    public void lockedInColReduceInBlock() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2});
         matrix.addCandidates(1, 0, new Integer[]{1, 2, 3});
@@ -42,7 +42,7 @@ public class LockedCandidatesTest {
     }
 
     @Test
-    public void simple2() throws Exception {
+    public void simple2() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{4, 6});
         matrix.addCandidates(0, 1, new Integer[]{1, 4, 5, 6});
@@ -66,7 +66,7 @@ public class LockedCandidatesTest {
     }
 
     @Test
-    public void execute2() throws Exception {
+    public void execute2() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{4, 6});
         matrix.addCandidates(0, 1, new Integer[]{1, 4, 5, 6});
@@ -95,7 +95,7 @@ public class LockedCandidatesTest {
     }
 
     @Test
-    public void execute4() throws Exception {
+    public void execute4() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{4, 6});
         matrix.addCandidates(1, 0, new Integer[]{1, 4, 5, 6});
@@ -125,7 +125,7 @@ public class LockedCandidatesTest {
 
     @Test
     @Disabled
-    public void execute3() throws Exception {
+    public void execute3() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{4, 6});
         matrix.addCandidates(0, 1, new Integer[]{1, 4, 5, 6});
@@ -148,7 +148,7 @@ public class LockedCandidatesTest {
     }
 
     @Test
-    public void testPointingInRow() throws Exception {
+    public void testPointingInRow() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2});
@@ -167,7 +167,7 @@ public class LockedCandidatesTest {
     }
 
     @Test
-    public void testPointingInCol() throws Exception {
+    public void testPointingInCol() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2});
@@ -186,7 +186,7 @@ public class LockedCandidatesTest {
     }
 
     @Test
-    public void testClaimingRows() throws Exception {
+    public void testClaimingRows() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2});
@@ -205,7 +205,7 @@ public class LockedCandidatesTest {
     }
 
     @Test
-    public void testClaimingCols() throws Exception {
+    public void testClaimingCols() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2});

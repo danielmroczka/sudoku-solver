@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class NakedPairsTest {
 
     @Test
-    public void execute() throws Exception {
+    public void execute() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.setValueAt(0, 1, 9);
@@ -41,7 +41,7 @@ public class NakedPairsTest {
     }
 
     @Test
-    public void executeBlock() throws Exception {
+    public void executeBlock() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.setValueAt(3, 3, 9);

@@ -27,7 +27,7 @@ public class HiddenSubsetTest {
     };
 
     @Test
-    public void shouldRemove() throws Exception {
+    public void shouldRemove() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 4, 5, 6, 7, 8});
@@ -39,7 +39,7 @@ public class HiddenSubsetTest {
     }
 
     @Test
-    public void shouldNotRemove() throws Exception {
+    public void shouldNotRemove() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 3, 4, 5, 6});
@@ -51,7 +51,7 @@ public class HiddenSubsetTest {
     }
 
     @Test
-    public void testGroup() throws Exception {
+    public void testGroup() {
         //GIVEN
         Integer[][] tab = new Integer[9][9];
         //WHEN
@@ -61,7 +61,7 @@ public class HiddenSubsetTest {
     }
 
     @Test
-    public void findSubset1() throws Exception {
+    public void findSubset1() {
         //GIVEN
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
@@ -76,7 +76,7 @@ public class HiddenSubsetTest {
     }
 
     @Test
-    public void findSubset2() throws Exception {
+    public void findSubset2() {
         //GIVEN
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
@@ -94,7 +94,7 @@ public class HiddenSubsetTest {
     }
 
     @Test
-    public void findSubsetSmallBlock() throws Exception {
+    public void findSubsetSmallBlock() {
         //GIVEN
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
@@ -116,7 +116,7 @@ public class HiddenSubsetTest {
     }
 
     @Test
-    public void findSubset3() throws Exception {
+    public void findSubset3() {
         //GIVEN
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
@@ -138,7 +138,7 @@ public class HiddenSubsetTest {
     }
 
     @Test
-    public void findSubsetPair() throws Exception {
+    public void findSubsetPair() {
         //GIVEN
         Integer[][] tab = new Integer[9][9];
         tab[0][0] = 0;
@@ -157,7 +157,7 @@ public class HiddenSubsetTest {
     }
 
     @Test
-    public void fillTabRows() throws Exception {
+    public void fillTabRows() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 3});
         matrix.addCandidates(0, 1, new Integer[]{2, 3, 4});

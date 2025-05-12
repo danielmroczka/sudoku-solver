@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  */
 public class SandboxTest {
     @Test
-    public void name() throws Exception {
+    public void name() {
         //GIVEN
         IMatrix matrix = new Matrix();
 
