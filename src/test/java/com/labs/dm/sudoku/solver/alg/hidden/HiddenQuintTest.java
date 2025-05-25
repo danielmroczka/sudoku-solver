@@ -2,10 +2,10 @@ package com.labs.dm.sudoku.solver.alg.hidden;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by Daniel Mroczka on 2016-03-26.
@@ -15,7 +15,7 @@ public class HiddenQuintTest {
     private final HiddenQuint hiddenQuint = new HiddenQuint();
 
     @Test
-    @Ignore
+    @Disabled
     public void shouldFoundQuadsInRow() {
         //Should find hidden quad: 1,2,5,7,9
         //GIVEN

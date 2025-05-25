@@ -3,7 +3,7 @@ package com.labs.dm.sudoku.solver.alg;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.executors.Executor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Created by daniel on 2016-03-27.
@@ -23,3 +23,4 @@ public class SandboxTest {
         // assertEquals(1, matrix.getCandidates(2,0).size());
     }
 }
+

@@ -4,10 +4,10 @@ import com.labs.dm.sudoku.solver.alg.GenerateCandidates;
 import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Created by Daniel Mroczka on 2016-03-10.
@@ -17,7 +17,7 @@ public class BacktrackingTest {
     private final IAlgorithm back = new Backtracking();
 
     @Test
-    @Ignore
+    @Disabled
     public void easy() throws Exception {
         IMatrix matrix = new MatrixLoader().load("patterns/easy/001.txt");
         new GenerateCandidates().execute(matrix);
@@ -48,4 +48,5 @@ public class BacktrackingTest {
         assertTrue(matrix.isSolved());
     }
 }
+
 

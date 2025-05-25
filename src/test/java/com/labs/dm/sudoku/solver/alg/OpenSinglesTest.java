@@ -6,12 +6,12 @@ package com.labs.dm.sudoku.solver.alg;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Daniel Mroczka
@@ -21,7 +21,7 @@ public class OpenSinglesTest {
     private final OpenSingles singles = new OpenSingles();
     private IMatrix matrix;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         matrix = new Matrix();
     }
@@ -54,10 +54,10 @@ public class OpenSinglesTest {
         assertArrayEquals(new int[]{0, 1, 2, 3, 4, 5, 6, 7, 0}, input);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldThrowExceptionWhenInputInvalid() {
         int[] input = new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        assertEquals(-1, singles.fillOpenSingles(input));
+        assertThrows(IllegalArgumentException.class, () -> singles.fillOpenSingles(input));
     }
 
     @Test

@@ -15,8 +15,8 @@ import com.labs.dm.sudoku.solver.alg.naked.NakedSingles;
 import com.labs.dm.sudoku.solver.alg.naked.NakedTriplets;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
@@ -33,7 +33,7 @@ public class ValidationTest {
     private final int COUNT = 50;
     private IMatrix matrix;
 
-    @Before
+    @BeforeEach
     public void before() throws IOException {
         matrix = new MatrixLoader().load("patterns/hard/hard.txt");
         cand.execute(matrix);
@@ -170,3 +170,4 @@ public class ValidationTest {
         }
     }
 }
+

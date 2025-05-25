@@ -3,23 +3,25 @@
  */
 package com.labs.dm.sudoku.solver;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author Daniel Mroczka
  */
 public class MainCLITest {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldThrowExceptionWhenArgIsEmpty() throws Exception {
-        MainCLI.main(new String[]{});
+    @Test
+    public void shouldThrowExceptionWhenArgIsEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> MainCLI.main(new String[]{}));
     }
 
-    @Test(expected = FileNotFoundException.class)
-    public void shouldAcceptValidInput() throws Exception {
-        MainCLI.main(new String[]{"not.existed.file"});
+    @Test
+    public void shouldAcceptValidInput() {
+        assertThrows(FileNotFoundException.class, () -> MainCLI.main(new String[]{"not.existed.file"}));
     }
 
     @Test
