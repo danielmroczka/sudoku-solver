@@ -20,8 +20,6 @@ import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
  */
 public class GenerateCandidates implements IAlgorithm {
 
-    private static final List<Integer> fullSet = Utils.FULL_LIST;
-
     @Override
     public void execute(IMatrix matrix) {
         for (int row = 0; row < SIZE; row++) {
@@ -30,7 +28,7 @@ public class GenerateCandidates implements IAlgorithm {
                     matrix.setCandidates(row, col, new ArrayList<>());
                     continue;
                 }
-                List<Integer> set = new ArrayList<>(GenerateCandidates.fullSet);
+                List<Integer> set = new ArrayList<>(Utils.FULL_LIST);
 
                 int[] cols = matrix.getElemsInCol(col);
                 int[] rows = matrix.getElemsInRow(row);

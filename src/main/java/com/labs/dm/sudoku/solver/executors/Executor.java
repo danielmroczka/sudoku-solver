@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 public class Executor {
 
     private static final Logger LOGGER = Logger.getLogger("Executor");
-    private final Map<Class<? extends IAlgorithm>, IAlgorithm> map = new HashMap<>();
     private static Executor instance;
+    private final Map<Class<? extends IAlgorithm>, IAlgorithm> map = new HashMap<>();
 
     private Executor() {
     }

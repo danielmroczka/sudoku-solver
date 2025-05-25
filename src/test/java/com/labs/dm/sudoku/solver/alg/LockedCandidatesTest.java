@@ -2,11 +2,11 @@ package com.labs.dm.sudoku.solver.alg;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * Created by Daniel Mroczka on 2016-02-15.
@@ -124,7 +124,7 @@ public class LockedCandidatesTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void execute3() throws Exception {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{4, 6});
@@ -184,7 +184,6 @@ public class LockedCandidatesTest {
         assertFalse(matrix.getCandidates(4, 0).contains(1));
         assertFalse(matrix.getCandidates(7, 0).contains(1));
     }
-
 
     @Test
     public void testClaimingRows() throws Exception {

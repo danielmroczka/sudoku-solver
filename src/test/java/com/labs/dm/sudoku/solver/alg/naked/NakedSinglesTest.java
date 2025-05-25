@@ -5,12 +5,12 @@ package com.labs.dm.sudoku.solver.alg.naked;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Daniel Mroczka
@@ -37,3 +37,4 @@ public class NakedSinglesTest {
         assertArrayEquals(resolvedMatrix.toArray(), matrix.toArray());
     }
 }
+

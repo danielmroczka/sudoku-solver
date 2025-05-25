@@ -1,12 +1,15 @@
 # Sudoku solver
+
 Library designed to solving Sudoku problem written in Java.
 
 [![Build Status](https://travis-ci.org/danielmroczka/sudoku-solver.png?branch=master)](https://travis-ci.org/danielmroczka/sudoku-solver)
-[![Build Status](https://circleci.com/gh/danielmroczka/sudoku-solver.png?circle-token=3f8fd98345eb1b26fb8c83749fcefd6fdffb6f94)](https://circleci.com/gh/danielmroczka/sudoku-solver)
+[![Build Status](https://dl.circleci.com/status-badge/img/gh/danielmroczka/sudoku-solver/tree/develop.svg?style=svg)](https://circleci.com/gh/danielmroczka/sudoku-solver)
 [![Coverage Status](https://coveralls.io/repos/github/danielmroczka/sudoku-solver/badge.svg?branch=master)](https://coveralls.io/github/danielmroczka/sudoku-solver?branch=master)
 
 ## Features
+
 Implemented algorithms:
+
 - [x]  Lone Singles
 - [x]  Open Singles
 - [x]  Hidden Singles
@@ -20,7 +23,6 @@ Implemented algorithms:
 - [x]  Jelly-Fish
 - [x]  Forcing Chains
 
-                           
 ## Usage
 
 Maven:
@@ -32,6 +34,7 @@ Maven:
     <version>0.0.9-SNAPSHOT</version>
 </dependency>
 ```
+
 Command line:
 
 ```

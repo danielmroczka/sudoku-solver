@@ -13,10 +13,9 @@ import static com.labs.dm.sudoku.solver.core.Matrix.BLOCK_SIZE;
 /**
  * Created by Daniel Mroczka on 2016-03-15.
  */
-public abstract class NakedSubset implements IAlgorithm {
+abstract class NakedSubset implements IAlgorithm {
 
     protected int subsetSize;
-
 
     @Override
     public void execute(IMatrix matrix) {
@@ -170,7 +169,6 @@ public abstract class NakedSubset implements IAlgorithm {
                 return map;
             }
         }
-
 
         /**
          * Finds following pattern:

@@ -2,10 +2,10 @@ package com.labs.dm.sudoku.solver.alg.naked;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by Daniel Mroczka on 2016-03-26.
@@ -15,7 +15,7 @@ public class NakedQuintTest {
     private final NakedQuint nakedQuint = new NakedQuint();
 
     @Test
-    @Ignore
+    @Disabled
     public void test() {
         // 1,2,3,6,8
         //GIVEN

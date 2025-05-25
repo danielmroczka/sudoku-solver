@@ -4,16 +4,16 @@
 package com.labs.dm.sudoku.solver.core;
 
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
 
 import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Daniel Mroczka
@@ -22,7 +22,7 @@ public class MatrixTest {
 
     private IMatrix matrix;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         matrix = new Matrix();
     }
@@ -66,9 +66,8 @@ public class MatrixTest {
         }
     }
 
-
     @Test
-    @Ignore
+    @Disabled
     public void testRemoveCandidates2() {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
@@ -104,7 +103,6 @@ public class MatrixTest {
         assertFalse(matrix.isCellSet(0, 1));
     }
 
-
     @Test
     public void shouldIterateForAllItems() {
         Iterator it = matrix.iterator();
@@ -117,19 +115,19 @@ public class MatrixTest {
         assertEquals(SIZE * SIZE, counter);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotAcceptValueGreaterThanNine() {
-        matrix.setValueAt(0, 0, 10);
+        assertThrows(IllegalArgumentException.class, () -> matrix.setValueAt(0, 0, 10));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotAcceptValueLessThanZero() {
-        matrix.setValueAt(0, 0, -1);
+        assertThrows(IllegalArgumentException.class, () -> matrix.setValueAt(0, 0, -1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldNotAcceptPositionOutOfRange() {
-        matrix.setValueAt(10, 10, 1);
+        assertThrows(IllegalArgumentException.class, () -> matrix.setValueAt(10, 10, 1));
     }
 
     @Test
@@ -148,10 +146,10 @@ public class MatrixTest {
         assertEquals(5, matrix.getValueAt(1, 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void loadFromArrayWrongSize() {
         int[] tab = new int[0];
-        ((Matrix) matrix).loadFromArray(tab);
+        assertThrows(IllegalArgumentException.class, () -> ((Matrix) matrix).loadFromArray(tab));
     }
 
     @Test
@@ -231,9 +229,9 @@ public class MatrixTest {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldThrowExceptionInvalidCols() {
-        matrix.setCols(0, new int[]{1, 2, 3});
+        assertThrows(IllegalArgumentException.class, () -> matrix.setCols(0, new int[]{1, 2, 3}));
     }
 
     @Test
@@ -246,16 +244,16 @@ public class MatrixTest {
         assertTrue(matrix.validate());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void shouldNotValidateInvalidCol() {
         matrix.setCols(4, new int[]{1, 2, 3, 4, 4, 6, 7, 8, 9});
-        matrix.validate();
+        assertThrows(IllegalStateException.class, () -> matrix.validate());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void shouldNotValidateInvalidRow() {
         matrix.setRows(4, new int[]{1, 2, 3, 4, 4, 6, 7, 8, 9});
-        matrix.validate();
+        assertThrows(IllegalStateException.class, () -> matrix.validate());
     }
 
     @Test
@@ -264,25 +262,24 @@ public class MatrixTest {
         assertTrue(matrix.validate());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void validateInputRowIndex() throws Exception {
-        matrix.setValueAt(10, 0, 1);
-
+    @Test
+    public void validateInputRowIndex() {
+        assertThrows(IllegalArgumentException.class, () -> matrix.setValueAt(10, 0, 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void validateInputColIndex() throws Exception {
-        matrix.setValueAt(0, 10, 1);
+    @Test
+    public void validateInputColIndex() {
+        assertThrows(IllegalArgumentException.class, () -> matrix.setValueAt(0, 10, 1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void getCellValueBelowRange() {
-        matrix.getValueAt(-1, -1);
+        assertThrows(IllegalArgumentException.class, () -> matrix.getValueAt(-1, -1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void getCellValueAboveRange() {
-        matrix.getValueAt(10, 10);
+        assertThrows(IllegalArgumentException.class, () -> matrix.getValueAt(10, 10));
     }
 
     @Test

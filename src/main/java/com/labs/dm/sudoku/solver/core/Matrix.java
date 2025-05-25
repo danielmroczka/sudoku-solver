@@ -30,11 +30,9 @@ public class Matrix implements IMatrix, Serializable {
      * Size of the block
      */
     public static final int BLOCK_SIZE = SIZE / 3;
-
+    protected final Map<Pair, List<Integer>> possibleValues;
     private final List<ContextItem> context = new ArrayList<>();
     private final int[][] tab;
-    protected final Map<Pair, List<Integer>> possibleValues;
-
     private IMatrixListener listener;
 
     public Matrix() {

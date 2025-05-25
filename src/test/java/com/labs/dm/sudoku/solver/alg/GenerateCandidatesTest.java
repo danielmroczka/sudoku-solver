@@ -6,15 +6,15 @@ package com.labs.dm.sudoku.solver.alg;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author Daniel Mroczka
@@ -24,7 +24,7 @@ public class GenerateCandidatesTest {
     private final IAlgorithm alg = new GenerateCandidates();
     private IMatrix matrix;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         matrix = new Matrix();
     }
@@ -62,3 +62,4 @@ public class GenerateCandidatesTest {
         assertEquals(0, matrix.getCandidates(4, 4).size());
     }
 }
+

@@ -5,12 +5,12 @@ import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.io.MatrixLoader;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by Daniel Mroczka on 15-Mar-16.
@@ -129,7 +129,7 @@ public class HiddenQuadsTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void shouldFoundPairFromFile() throws IOException {
         MatrixLoader loader = new MatrixLoader();
         IMatrix matrix = loader.load("src/test/resources/patterns/hard/hard6.txt");
@@ -143,3 +143,4 @@ public class HiddenQuadsTest {
         assertEquals(count - 13, matrix.getCandidatesCount());
     }
 }
+

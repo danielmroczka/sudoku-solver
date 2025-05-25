@@ -3,15 +3,15 @@ package com.labs.dm.sudoku.solver.utils;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 import com.labs.dm.sudoku.solver.core.Pair;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static com.labs.dm.sudoku.solver.utils.Utils.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by Daniel Mroczka on 2016-02-13.
@@ -25,9 +25,9 @@ public class UtilsTest {
         assertEquals(6, factorial(3));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testFactorial2() {
-        factorial(-1);
+        assertThrows(IllegalArgumentException.class, () -> factorial(-1));
     }
 
     @Test
@@ -100,7 +100,7 @@ public class UtilsTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void compare() {
         // assertTrue(Utils.acceptPivotAndPincets(Arrays.asList(1, 2), Arrays.asList(2, 7), Arrays.asList(1, 7)));
         //  assertFalse(Utils.acceptPivotAndPincets(Arrays.asList(1, 2), Arrays.asList(2, 7), Arrays.asList(8, 7)));
@@ -127,7 +127,7 @@ public class UtilsTest {
         //WHEN
         Map<Integer, List<Pair>> result = Utils.getOccurencesInRow(matrix, 0, 1);
         //THEN
-        assertEquals(5, result.keySet().size());
+        assertEquals(5, result.size());
         assertEquals(1, result.get(1).size());
         assertEquals(2, result.get(2).size());
         assertEquals(3, result.get(3).size());
@@ -146,7 +146,7 @@ public class UtilsTest {
         //WHEN
         Map<Integer, List<Pair>> result = Utils.getOccurencesInCol(matrix, 0, 1);
         //THEN
-        assertEquals(5, result.keySet().size());
+        assertEquals(5, result.size());
         assertEquals(1, result.get(1).size());
         assertEquals(2, result.get(2).size());
         assertEquals(3, result.get(3).size());

@@ -1,13 +1,13 @@
 package com.labs.dm.sudoku.solver.alg.naked;
 
 import com.labs.dm.sudoku.solver.core.IMatrix;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 /**
  * Created by daniel on 2016-03-27.
@@ -25,7 +25,7 @@ public class NakedSubsetTest {
     public void nakedSubSet() throws Exception {
         //GIVEN
         List<List<Integer>> list = new ArrayList<>();
-        list.add(Arrays.asList(9));
+        list.add(List.of(9));
         list.add(Arrays.asList(1, 2));
         list.add(Arrays.asList(1, 2, 3));
         list.add(Arrays.asList(1, 2, 3));
@@ -98,3 +98,4 @@ public class NakedSubsetTest {
         assertArrayEquals(new Integer[]{1, 3, 5, 7}, ids.get(4).toArray(new Integer[0]));
     }
 }
+
