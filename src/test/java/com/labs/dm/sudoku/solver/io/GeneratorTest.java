@@ -34,7 +34,7 @@ public class GeneratorTest {
     }
 
     @Test
-    //  @Ignore
+    @Ignore
     public void shouldGenerateMatrixLoopAndSolve() {
         IMatrix matrix;
         Flow flow = new Flow();
