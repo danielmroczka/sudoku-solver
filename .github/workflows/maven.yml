@@ -1,0 +1,44 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: 
+      - '**'
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Sets up Java Development Kit (JDK) for Maven.
+      # You can change the 'java-version' and 'distribution' as needed for your project.
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin' # 'temurin' is a common and recommended distribution.
+          cache: 'maven' # Caches Maven dependencies to speed up subsequent builds.
+
+      # Caches Maven dependencies to improve build performance.
+      # The key ensures a unique cache for each combination of OS and Maven dependencies.
+      - name: Cache Maven dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Runs the Maven build command.
+      # `-B` (batch mode) prevents interactive prompts.
+      # `package` compiles the source code, runs tests, and packages the compiled code.
+      # `--file pom.xml` explicitly specifies the pom.xml file (optional if in root).
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
