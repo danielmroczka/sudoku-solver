@@ -2,8 +2,7 @@
 
 Library designed to solving Sudoku problem written in Java.
 
-[![Build Status](https://travis-ci.org/danielmroczka/sudoku-solver.png?branch=master)](https://travis-ci.org/danielmroczka/sudoku-solver)
-[![Build Status](https://dl.circleci.com/status-badge/img/gh/danielmroczka/sudoku-solver/tree/develop.svg?style=svg)](https://circleci.com/gh/danielmroczka/sudoku-solver)
+[![Java CI with Maven](https://github.com/danielmroczka/sudoku-solver/actions/workflows/maven.yml/badge.svg)](https://github.com/danielmroczka/sudoku-solver/actions/workflows/maven.yml)
 [![Coverage Status](https://coveralls.io/repos/github/danielmroczka/sudoku-solver/badge.svg?branch=master)](https://coveralls.io/github/danielmroczka/sudoku-solver?branch=master)
 
 ## Features

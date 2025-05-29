@@ -38,7 +38,7 @@ public class PairTest {
         pairs.add(pair3);
         pairs.add(pair4);
 
-        Collections.sort(pairs, new Pair.ComaparatorRows());
+        Collections.sort(pairs, new Pair.ComparatorRow());
 
         assertEquals(0, pairs.get(0).row());
         assertEquals(0, pairs.get(0).col());
