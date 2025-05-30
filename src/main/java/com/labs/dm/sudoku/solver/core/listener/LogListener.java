@@ -20,7 +20,7 @@ public class LogListener implements IMatrixListener, Serializable {
     }
 
     @Override
-    public void onRemoveCandidate(int row, int col, int removedCandidate) {
-        logger.info("Remove candid. " + removedCandidate + " at: " + row + ", " + col);
+    public void onRemoveCandidate(int row, int col, int candidate) {
+        logger.info("Remove candid. " + candidate + " at: " + row + ", " + col);
     }
 }
