@@ -1,6 +1,3 @@
-/*
- * Copyright Daniel Mroczka. All rights reserved.
- */
 package com.labs.dm.sudoku.solver.core;
 
 import com.labs.dm.sudoku.solver.io.MatrixLoader;

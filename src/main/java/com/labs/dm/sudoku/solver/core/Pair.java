@@ -12,15 +12,13 @@ public record Pair(int row, int col) {
         return "Pair{" + row + "," + col + "}";
     }
 
-    public static class ComaparatorRows implements Comparator<Pair> {
+    public static class ComparatorRow implements Comparator<Pair> {
 
         @Override
         public int compare(Pair o1, Pair o2) {
-            if (o1 == null || o2 == null) {
-                return 0;
-            }
-
-            return o1.row() != o2.row() ? o1.row() - o2.row() : o1.col() - o2.col();
+            return Comparator.nullsFirst(Comparator.comparingInt(Pair::row)
+                            .thenComparingInt(Pair::col))
+                    .compare(o1, o2);
         }
     }
 }

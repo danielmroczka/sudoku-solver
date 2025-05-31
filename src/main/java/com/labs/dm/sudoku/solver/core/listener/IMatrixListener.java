@@ -8,5 +8,5 @@ public interface IMatrixListener {
 
     void onResolved();
 
-    void onRemoveCandidate(int row, int col, int removedCandidate);
+    void onRemoveCandidate(int row, int col, int candidate);
 }

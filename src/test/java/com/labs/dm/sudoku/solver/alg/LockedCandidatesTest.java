@@ -125,7 +125,7 @@ public class LockedCandidatesTest {
 
     @Test
     @Disabled
-    public void execute3() {
+    public void execute3() throws Exception {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{4, 6});
         matrix.addCandidates(0, 1, new Integer[]{1, 4, 5, 6});

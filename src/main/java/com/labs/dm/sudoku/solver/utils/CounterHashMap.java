@@ -10,13 +10,11 @@ import java.util.HashMap;
 public class CounterHashMap<K> extends HashMap<K, Integer> {
 
     public void inc(K key) {
-        Integer value = get(key);
-        put(key, ++value);
+        put(key, get(key) + 1);
     }
 
     @Override
     public Integer get(Object key) {
-        Integer res = super.get(key);
-        return res == null ? 0 : res;
+        return getOrDefault(key, 0);
     }
 }

@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class PairTest {
 
     @Test
-    public void test() {
+    public void testEquality() {
         Pair pair1 = new Pair(0, 0);
         Pair pair2 = new Pair(0, 0);
         Pair pair3 = new Pair(1, 0);
@@ -27,22 +27,20 @@ public class PairTest {
     }
 
     @Test
-    public void testSort() {
-        List<Pair> pairs = new ArrayList<>();
-        Pair pair1 = new Pair(5, 5);
-        Pair pair2 = new Pair(0, 5);
-        Pair pair3 = new Pair(5, 0);
-        Pair pair4 = new Pair(0, 0);
-        pairs.add(pair1);
-        pairs.add(pair2);
-        pairs.add(pair3);
-        pairs.add(pair4);
+    public void testSorting() {
+        List<Pair> pairs = List.of(
+                new Pair(5, 5),
+                new Pair(0, 5),
+                new Pair(5, 0),
+                new Pair(0, 0)
+        );
 
-        pairs.sort(new Pair.ComaparatorRows());
+        List<Pair> sortedPairs = new ArrayList<>(pairs);
+        Collections.sort(sortedPairs, new Pair.ComparatorRow());
 
-        assertEquals(0, pairs.get(0).row());
-        assertEquals(0, pairs.get(0).col());
-        assertEquals(5, pairs.get(3).row());
-        assertEquals(5, pairs.get(3).col());
+        assertEquals(0, sortedPairs.get(0).row());
+        assertEquals(0, sortedPairs.get(0).col());
+        assertEquals(5, sortedPairs.get(3).row());
+        assertEquals(5, sortedPairs.get(3).col());
     }
 }
