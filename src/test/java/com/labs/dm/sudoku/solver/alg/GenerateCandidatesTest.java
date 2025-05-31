@@ -54,7 +54,7 @@ public class GenerateCandidatesTest {
     }
 
     @Test
-    public void shouldNotSetCandidatesIfCellHasValue() throws IOException {
+    public void shouldNotSetCandidatesIfCellHasValue() {
         int[] ones = new int[81];
         Arrays.fill(ones, 1);
         matrix = new Matrix(ones);

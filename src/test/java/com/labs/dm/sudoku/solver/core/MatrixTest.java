@@ -280,19 +280,19 @@ public class MatrixTest {
     }
 
     @Test
-    public void testGetCandidatesInRow() throws Exception {
+    public void testGetCandidatesInRow() {
         assertEquals(9, matrix.getCandidatesInRow(0).size());
         //TODO add cases
     }
 
     @Test
-    public void testGetCandidatesInCol() throws Exception {
+    public void testGetCandidatesInCol() {
         assertEquals(9, matrix.getCandidatesInCol(0).size());
         //TODO add cases
     }
 
     @Test
-    public void testGetCandidatesInBlock() throws Exception {
+    public void testGetCandidatesInBlock() {
         assertEquals(9, matrix.getCandidatesInBlock(0, 0).size());
         //TODO add cases
     }
@@ -327,7 +327,7 @@ public class MatrixTest {
     }
 
     @Test
-    public void changeValuePropagation() throws Exception {
+    public void changeValuePropagation() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 2, new Integer[]{1, 2});
         matrix.addCandidates(3, 2, new Integer[]{1, 4});

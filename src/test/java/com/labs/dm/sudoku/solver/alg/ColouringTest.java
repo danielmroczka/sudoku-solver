@@ -10,7 +10,7 @@ public class ColouringTest {
     private final Colouring colouring = new Colouring();
 
     @Test
-    public void execute() throws Exception {
+    public void execute() {
 
     }
 

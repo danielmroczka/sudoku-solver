@@ -22,7 +22,7 @@ public class NakedSubsetTest {
     };
 
     @Test
-    public void nakedSubSet() throws Exception {
+    public void nakedSubSet() {
         //GIVEN
         List<List<Integer>> list = new ArrayList<>();
         list.add(List.of(9));
@@ -41,7 +41,7 @@ public class NakedSubsetTest {
     }
 
     @Test
-    public void nakedSubSet2() throws Exception {
+    public void nakedSubSet2() {
         //GIVEN
         List<List<Integer>> list = new ArrayList<>();
         list.add(Arrays.asList(2, 4));
@@ -59,7 +59,7 @@ public class NakedSubsetTest {
     }
 
     @Test
-    public void nakedSubSet3() throws Exception {
+    public void nakedSubSet3() {
         //GIVEN
         List<List<Integer>> list = new ArrayList<>();
         list.add(Arrays.asList(1, 3, 8));
@@ -77,7 +77,7 @@ public class NakedSubsetTest {
     }
 
     @Test
-    public void nakedSubSet4() throws Exception {
+    public void nakedSubSet4() {
         //GIVEN
         List<List<Integer>> list = new ArrayList<>();
         list.add(Arrays.asList(5, 7));

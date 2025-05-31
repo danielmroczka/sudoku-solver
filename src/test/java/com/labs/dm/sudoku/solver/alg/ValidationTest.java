@@ -41,7 +41,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateXWing() throws IOException {
+    public void validateXWing() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -51,7 +51,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateXYWing() throws IOException {
+    public void validateXYWing() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -61,7 +61,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateXYZWing() throws IOException {
+    public void validateXYZWing() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -71,7 +71,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateHiddenPairs() throws IOException {
+    public void validateHiddenPairs() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -81,7 +81,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateHiddenTriples() throws IOException {
+    public void validateHiddenTriples() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -91,7 +91,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateHiddenQuads() throws IOException {
+    public void validateHiddenQuads() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -101,7 +101,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateNakedTriples() throws IOException {
+    public void validateNakedTriples() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -111,7 +111,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateNakedQuads() throws IOException {
+    public void validateNakedQuads() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -121,7 +121,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateHiddenSingles() throws IOException {
+    public void validateHiddenSingles() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -131,7 +131,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateNakedPairs() throws IOException {
+    public void validateNakedPairs() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -141,7 +141,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateReduction() throws IOException {
+    public void validateReduction() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -151,7 +151,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void validateSwordFish() throws IOException {
+    public void validateSwordFish() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);
@@ -161,7 +161,7 @@ public class ValidationTest {
     }
 
     @Test
-    public void forcingChain() throws IOException {
+    public void forcingChain() {
         for (int i = 0; i < COUNT; i++) {
             nakedSingles.execute(matrix);
             openSingles.execute(matrix);

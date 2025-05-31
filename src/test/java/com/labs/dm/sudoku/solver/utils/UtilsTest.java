@@ -31,7 +31,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testCombination() throws Exception {
+    public void testCombination() {
         assertEquals(6, combination(4, 2));
         assertEquals(10, combination(5, 2));
         assertEquals(10, combination(5, 3));
@@ -40,7 +40,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testCombinationList() throws Exception {
+    public void testCombinationList() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
         assertEquals(1, combinationList(list, 0).size());
         assertEquals(5, combinationList(list, 1).size());
@@ -52,7 +52,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void testTheSameBlock() throws Exception {
+    public void testTheSameBlock() {
         assertTrue(theSameBlock(0, 2));
         assertTrue(theSameBlock(0, 1, 2));
         assertFalse(theSameBlock(0, 3));
@@ -60,7 +60,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void intersection() throws Exception {
+    public void intersection() {
         //the same cell
         assertEquals(7, Utils.pairsOnIntersections(new Pair(0, 2), new Pair(2, 0)).size());
         //cells in the same row or col
@@ -109,7 +109,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void shouldMatch() throws Exception {
+    public void shouldMatch() {
         assertEquals(4, Utils.match(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2, 3, 4)));
         assertEquals(3, Utils.match(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2, 3)));
         assertEquals(2, Utils.match(Arrays.asList(1, 2), Arrays.asList(1, 2, 3, 4)));
@@ -118,7 +118,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void shouldGetOccurencesInRow() throws Exception {
+    public void shouldGetOccurencesInRow() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 3});
@@ -137,7 +137,7 @@ public class UtilsTest {
     }
 
     @Test
-    public void shouldGetOccurencesInCol() throws Exception {
+    public void shouldGetOccurencesInCol() {
         //GIVEN
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 0, new Integer[]{1, 2, 3});

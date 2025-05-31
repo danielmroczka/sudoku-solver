@@ -16,7 +16,7 @@ public class XYChainsTest {
 
     @Test
     @Disabled
-    public void execute() throws Exception {
+    public void execute() {
         IMatrix matrix = new Matrix();
         matrix.addCandidates(0, 1, new Integer[]{1, 5});
         matrix.addCandidates(5, 1, new Integer[]{4, 5});

@@ -34,6 +34,12 @@ Maven:
 </dependency>
 ```
 
+Gradle:
+
+```groovy
+implementation 'com.labs.dm:sudoku-solver:0.0.9-SNAPSHOT'
+```
+
 Command line:
 
 ```
@@ -41,5 +47,3 @@ java -jar sudoku-solver.jar <txt file with sudoku>
 ```
 
 JavaDoc: [javadoc](http://danielmroczka.github.io/sudoku-solver/api/)
-
-

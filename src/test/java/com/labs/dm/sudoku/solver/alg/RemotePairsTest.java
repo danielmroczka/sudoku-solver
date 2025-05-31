@@ -10,7 +10,7 @@ public class RemotePairsTest {
     private final RemotePairs remotePairs = new RemotePairs();
 
     @Test
-    public void execute() throws Exception {
+    public void execute() {
 
     }
 
