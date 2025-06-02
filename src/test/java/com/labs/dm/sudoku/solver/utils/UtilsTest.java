@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Created by Daniel Mroczka on 2016-02-13.
  */
 public class UtilsTest {
+
     @Test
     public void testFactorial() {
         assertEquals(1, factorial(0));

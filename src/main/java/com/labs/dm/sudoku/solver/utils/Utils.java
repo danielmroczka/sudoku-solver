@@ -333,19 +333,18 @@ public class Utils {
                     // matrix.setValueWithCandidate(row, col);
                     //throw new IllegalStateException("Cells cannot be in state having only one candidate!");
                 }
-                for (int candidate : matrix.getCandidates(row, col)) {
-
-                    List<Pair> list = map.get(candidate);
-                    if (list == null) {
-                        list = new ArrayList<>();
-                    }
-                    list.add(new Pair(row, col));
-                    map.put(candidate, list);
-                }
+                fillCandidates(matrix, map, row, col);
             }
         }
 
         return map;
+    }
+
+    private static void fillCandidates(IMatrix matrix, Map<Integer, List<Pair>> map, int row, int col) {
+        for (int candidate : matrix.getCandidates(row, col)) {
+            map.computeIfAbsent(candidate, k -> new ArrayList<>())
+                    .add(new Pair(row, col));
+        }
     }
 
     public static List<Pair> getSurroundings(int row, int col) {
@@ -426,13 +425,6 @@ public class Utils {
     }
 
     private static void count(IMatrix matrix, int col, Map<Integer, List<Pair>> map, int row) {
-        for (int candidate : matrix.getCandidates(row, col)) {
-            List<Pair> list = map.get(candidate);
-            if (list == null) {
-                list = new ArrayList<>();
-            }
-            list.add(new Pair(row, col));
-            map.put(candidate, list);
-        }
+        fillCandidates(matrix, map, row, col);
     }
 }
