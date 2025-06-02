@@ -1,5 +1,4 @@
 name: Java CI with Maven
-
 on:
   push:
     branches:
@@ -41,4 +40,4 @@ jobs:
       # `package` compiles the source code, runs tests, and packages the compiled code.
       # `--file pom.xml` explicitly specifies the pom.xml file (optional if in root).
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B test --file pom.xml

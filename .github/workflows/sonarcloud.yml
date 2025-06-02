@@ -1,4 +1,4 @@
-name: Build
+name: Sonar Build
 on:
   push:
     branches:
@@ -36,4 +36,4 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_ORGANIZATION: dummy
-        run: ./gradlew build sonar --info
+        run: mvn sonar:sonar -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dson
