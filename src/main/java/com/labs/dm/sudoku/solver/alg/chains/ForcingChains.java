@@ -19,7 +19,7 @@ public class ForcingChains implements IAlgorithm {
                     continue;
                 }
 
-                /** creates clone instances from matrix and set cell at row and col different value from candidate list **/
+                /** creates clone instances from matrix and set cell at row and col different value from a candidate list **/
                 IMatrix[] clones = new IMatrix[matrix.getCandidates(row, col).size()];
                 int index = 0;
 

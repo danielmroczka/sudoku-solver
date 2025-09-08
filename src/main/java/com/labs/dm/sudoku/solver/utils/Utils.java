@@ -20,7 +20,7 @@ import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
  */
 public class Utils {
 
-    public static final List<Integer> FULL_LIST = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    public static final List<Integer> FULL_LIST = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
 
     private static final Logger LOGGER = Logger.getAnonymousLogger();
 
@@ -436,3 +436,4 @@ public class Utils {
         }
     }
 }
+

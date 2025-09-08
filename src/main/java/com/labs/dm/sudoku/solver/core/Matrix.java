@@ -493,8 +493,9 @@ public class Matrix implements IMatrix, Serializable {
     }
 
     private void setValueWithCandidate(int row, int col) {
-        if (getCandidates(row, col).size() == 1) {
-            setValueAt(row, col, getCandidates(row, col).get(0));
+        List<Integer> candidates = getCandidates(row, col);
+        if (candidates.size() == 1) {
+            setValueAt(row, col, candidates.get(0));
         }
     }
 

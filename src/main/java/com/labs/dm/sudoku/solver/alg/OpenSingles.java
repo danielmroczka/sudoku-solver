@@ -28,7 +28,7 @@ public class OpenSingles implements IAlgorithm {
     }
 
     /**
-     * Returns true if array has only one empty element
+     * Returns true if an array has only one empty element
      *
      * @param tab
      * @return

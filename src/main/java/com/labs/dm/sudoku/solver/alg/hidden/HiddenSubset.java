@@ -71,20 +71,18 @@ public abstract class HiddenSubset implements IAlgorithm {
     }
 
     protected Integer[][] fillTabRows(IMatrix matrix, int row) {
-        Integer[][] tab = new Integer[SIZE][SIZE];
-        for (int col = 0; col < SIZE; col++) {
-            for (int candidate : matrix.getCandidates(row, col)) {
-                tab[candidate - 1][col] = col;
-            }
-        }
-        return tab;
+        return fillTab(matrix, row, true);
     }
 
     protected Integer[][] fillTabCols(IMatrix matrix, int col) {
+        return fillTab(matrix, col, false);
+    }
+
+    private Integer[][] fillTab(IMatrix matrix, int index, boolean isRow) {
         Integer[][] tab = new Integer[SIZE][SIZE];
-        for (int row = 0; row < SIZE; row++) {
-            for (int candidate : matrix.getCandidates(row, col)) {
-                tab[candidate - 1][row] = row;
+        for (int i = 0; i < SIZE; i++) {
+            for (int candidate : (isRow ? matrix.getCandidates(index, i) : matrix.getCandidates(i, index))) {
+                tab[candidate - 1][isRow ? i : index] = isRow ? i : index;
             }
         }
         return tab;
