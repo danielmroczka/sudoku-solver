@@ -105,7 +105,7 @@ public class MatrixTest {
 
     @Test
     public void shouldIterateForAllItems() {
-        Iterator it = matrix.iterator();
+        Iterator<Integer> it = matrix.iterator();
         int counter = 0;
         while (it.hasNext()) {
             it.next();

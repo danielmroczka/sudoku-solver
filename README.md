@@ -22,7 +22,7 @@ Implemented algorithms:
 - [x]  Sword-Fish
 - [x]  Jelly-Fish
 - [x]  Forcing Chains
- 
+
 ## Usage
 
 Maven:
@@ -38,8 +38,9 @@ Maven:
 Gradle:
 
 ```groovy
-implementation 'com.labs.dm:sudoku-solver:0.0.9-SNAPSHOT'
+implementation 'com.labs.dm:sudoku-solver:0.0.10-SNAPSHOT'
 ```
+
 Command line:
 
 ```

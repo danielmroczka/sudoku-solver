@@ -14,7 +14,7 @@ import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
 
 /**
  * Generates all possible candidates for each cell without value.
- * It takes into account surroundings cells with already set value and removes them from the list.
+ * It takes into account surrounding cells with already set value and removes them from the list.
  *
  * @author Daniel Mroczka
  */
