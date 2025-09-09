@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Created by Daniel Mroczka on 2016-03-26.
  */
-public class NakedQuintTest {
+public class NakedQuintsTest {
 
-    private final NakedQuint nakedQuint = new NakedQuint();
+    private final NakedQuints nakedQuints = new NakedQuints();
 
     @Test
     @Disabled
@@ -28,7 +28,7 @@ public class NakedQuintTest {
         matrix.addCandidates(0, 6, new Integer[]{1, 3, 6});
         matrix.addCandidates(0, 7, new Integer[]{1, 2, 3, 8});
         //WHEN
-        nakedQuint.execute(matrix);
+        nakedQuints.execute(matrix);
         //THEN
         assertEquals(2, matrix.getCandidates(0, 2).size());
         assertEquals(2, matrix.getCandidates(0, 3).size());

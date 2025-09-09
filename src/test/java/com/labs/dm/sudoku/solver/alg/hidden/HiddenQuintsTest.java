@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Created by Daniel Mroczka on 2016-03-26.
  */
-public class HiddenQuintTest {
+public class HiddenQuintsTest {
 
-    private final HiddenQuint hiddenQuint = new HiddenQuint();
+    private final HiddenQuints hiddenQuints = new HiddenQuints();
 
     @Test
     @Disabled
@@ -27,7 +27,7 @@ public class HiddenQuintTest {
         matrix.addCandidates(0, 4, new Integer[]{1, 2, 4, 5, 7});
         matrix.addCandidates(0, 5, new Integer[]{1, 2, 4, 7, 9});
         //WHEN
-        hiddenQuint.execute(matrix);
+        hiddenQuints.execute(matrix);
         //THEN
         //     assertEquals(1, matrix.getCandidates(0, 1).size());
         assertEquals(4, matrix.getCandidates(0, 3).size());

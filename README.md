@@ -13,8 +13,8 @@ Implemented algorithms:
 - [x]  Lone Singles
 - [x]  Open Singles
 - [x]  Hidden Singles
-- [x]  Hidden Pairs/Triples
-- [x]  Naked Subset (Pairs/Triples/Quads)
+- [x]  Hidden Pairs/Triples/Quads/Quints
+- [x]  Naked Subset (Pairs/Triples/Quads/Quints)
 - [x]  Locked Candidates (Pointing Pairs/Claiming)
 - [x]  X-Wing
 - [x]  XY-Wing
