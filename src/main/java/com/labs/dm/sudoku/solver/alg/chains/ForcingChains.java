@@ -4,9 +4,17 @@ import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 import com.labs.dm.sudoku.solver.core.Matrix;
 
+import java.util.List;
+
 import static com.labs.dm.sudoku.solver.core.Matrix.SIZE;
 
 /**
+ * Forcing Chains is a solving technique that explores conditional chains of logic.
+ * By assuming a candidate value and following all logical consequences,
+ * the solver can determine whether the candidate leads to a contradiction
+ * or must be true. This technique helps eliminate invalid candidates
+ * or confirm correct placements in the puzzle.
+ *
  * @author Daniel Mroczka
  */
 public class ForcingChains implements IAlgorithm {
@@ -15,15 +23,16 @@ public class ForcingChains implements IAlgorithm {
     public void execute(IMatrix matrix) {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
-                if (matrix.getCandidates(row, col).size() < 2) {
+                List<Integer> candidates = matrix.getCandidates(row, col);
+                if (candidates.size() < 2) {
                     continue;
                 }
 
                 /** creates clone instances from matrix and set cell at row and col different value from a candidate list **/
-                IMatrix[] clones = new IMatrix[matrix.getCandidates(row, col).size()];
+                IMatrix[] clones = new IMatrix[candidates.size()];
                 int index = 0;
 
-                for (int candidate : matrix.getCandidates(row, col)) {
+                for (int candidate : candidates) {
                     /** each clone will have different value cell at the same position **/
                     clones[index] = new Matrix(matrix);
                     clones[index++].setValueAt(row, col, candidate);

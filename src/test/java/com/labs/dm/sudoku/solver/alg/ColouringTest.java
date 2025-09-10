@@ -11,7 +11,7 @@ public class ColouringTest {
 
     @Test
     public void execute() {
-
+        colouring.execute(null);
     }
 
 }
