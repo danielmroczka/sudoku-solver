@@ -11,6 +11,12 @@ import java.util.*;
 import static com.labs.dm.sudoku.solver.core.Matrix.BLOCK_SIZE;
 
 /**
+ * Abstract class for Naked Subset algorithms.
+ * A naked subset is a set of N cells in a row, column, or block that have the same N candidates.
+ * This allows the removal of these candidates from other cells in the same row, column, or block.
+ *
+ * @see <a href="http://www.sudokuwiki.org/Naked_Candidates">Naked Candidates</a>
+ * <p>
  * Created by Daniel Mroczka on 2016-03-15.
  */
 abstract class NakedSubset implements IAlgorithm {
@@ -19,12 +25,17 @@ abstract class NakedSubset implements IAlgorithm {
 
     @Override
     public void execute(IMatrix matrix) {
-        findNakedPairsInRows(matrix);
-        findNakedPairsInCols(matrix);
-        findNakedPairsInBlocks(matrix);
+        findNakedSubsetsInRows(matrix);
+        findNakedSubsetsInCols(matrix);
+        findNakedSubsetsInBlocks(matrix);
     }
 
-    private void findNakedPairsInRows(IMatrix matrix) {
+    /**
+     * Finds naked subsets in each row and removes candidates from other cells in the same row.
+     *
+     * @param matrix The Sudoku matrix.
+     */
+    private void findNakedSubsetsInRows(IMatrix matrix) {
         for (int row = 0; row < Matrix.SIZE; row++) {
             List<List<Integer>> res = nakedSubset(matrix.getCandidatesInRow(row), subsetSize);
 
@@ -38,7 +49,12 @@ abstract class NakedSubset implements IAlgorithm {
         }
     }
 
-    private void findNakedPairsInCols(IMatrix matrix) {
+    /**
+     * Finds naked subsets in each column and removes candidates from other cells in the same column.
+     *
+     * @param matrix The Sudoku matrix.
+     */
+    private void findNakedSubsetsInCols(IMatrix matrix) {
         for (int col = 0; col < Matrix.SIZE; col++) {
             List<List<Integer>> res = nakedSubset(matrix.getCandidatesInCol(col), subsetSize);
 
@@ -52,7 +68,12 @@ abstract class NakedSubset implements IAlgorithm {
         }
     }
 
-    private void findNakedPairsInBlocks(IMatrix matrix) {
+    /**
+     * Finds naked subsets in each block and removes candidates from other cells in the same block.
+     *
+     * @param matrix The Sudoku matrix.
+     */
+    private void findNakedSubsetsInBlocks(IMatrix matrix) {
         for (int rowGroup = 0; rowGroup < BLOCK_SIZE; rowGroup++) {
             for (int colGroup = 0; colGroup < BLOCK_SIZE; colGroup++) {
                 List<List<Integer>> res = nakedSubset(matrix.getCandidatesInBlock(rowGroup, colGroup), subsetSize);
@@ -71,6 +92,14 @@ abstract class NakedSubset implements IAlgorithm {
         }
     }
 
+    /**
+     * Removes candidates from a cell if it's not part of the naked subset.
+     *
+     * @param matrix The Sudoku matrix.
+     * @param res    The result from the nakedSubset method.
+     * @param row    The row of the cell.
+     * @param col    The column of the cell.
+     */
     private void removeCandidate(IMatrix matrix, List<List<Integer>> res, int row, int col) {
         if (matrix.getCandidates(row, col).isEmpty()) {
             return;

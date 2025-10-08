@@ -10,5 +10,10 @@ import com.labs.dm.sudoku.solver.core.IMatrix;
  */
 public interface IAlgorithm {
 
+    /**
+     * Executes the algorithm on the given Sudoku matrix.
+     *
+     * @param matrix The Sudoku matrix.
+     */
     void execute(IMatrix matrix);
 }
