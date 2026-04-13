@@ -40,16 +40,25 @@ public class OpenSingles implements IAlgorithm {
         int emptyPos = -1;
         int emptyCount = 0;
         int sum = 0;
+        boolean[] seen = new boolean[Matrix.MAX_VALUE + 1];
         for (int i = 0; i < tab.length; i++) {
             if (tab[i] == Matrix.EMPTY_VALUE) {
                 emptyCount++;
                 emptyPos = i;
+            } else {
+                if (seen[tab[i]]) {
+                    return -1;
+                }
+                seen[tab[i]] = true;
             }
             sum += tab[i];
         }
 
         if (emptyCount == 1) {
             int missingNumber = SUM_1_TO_9 - sum;
+            if (missingNumber < Matrix.MIN_VALUE || missingNumber > Matrix.MAX_VALUE || seen[missingNumber]) {
+                return -1;
+            }
             tab[emptyPos] = missingNumber;
             return emptyPos;
         }

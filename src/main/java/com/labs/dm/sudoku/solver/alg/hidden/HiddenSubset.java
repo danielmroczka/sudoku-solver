@@ -82,7 +82,7 @@ public abstract class HiddenSubset implements IAlgorithm {
         Integer[][] tab = new Integer[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++) {
             for (int candidate : (isRow ? matrix.getCandidates(index, i) : matrix.getCandidates(i, index))) {
-                tab[candidate - 1][isRow ? i : index] = isRow ? i : index;
+                tab[candidate - 1][i] = i;
             }
         }
         return tab;
@@ -138,7 +138,7 @@ public abstract class HiddenSubset implements IAlgorithm {
 
             if (found && counterMap.size() == subsetSize) {
                 for (int value : counterMap.values()) {
-                    if (value < minSize && value > subsetSize) {
+                    if (value < minSize || value > subsetSize) {
                         found = false;
                         break;
                     }
