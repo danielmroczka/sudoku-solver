@@ -10,6 +10,9 @@ import java.util.*;
  * Created by Daniel Mroczka on 4/12/2016.
  * <p>
  * http://www.sadmansoftware.com/sudoku/remotepairs.php
+ * <p>
+ * Eliminates both digits of a bivalue pair from cells that see opposite colours
+ * in a remote-pairs chain built from the same two candidates.
  */
 public class RemotePairs implements IAlgorithm {
     @Override

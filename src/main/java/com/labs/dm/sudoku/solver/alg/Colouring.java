@@ -11,6 +11,9 @@ import java.util.*;
  * Created by Daniel Mroczka on 4/12/2016.
  * <p>
  * http://www.sadmansoftware.com/sudoku/colouring.php
+ * <p>
+ * Uses strong links to colour candidate chains and removes a digit from cells
+ * that can see both colours of the same chain.
  */
 public class Colouring implements IAlgorithm {
     @Override

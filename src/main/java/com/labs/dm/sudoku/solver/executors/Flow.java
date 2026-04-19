@@ -5,6 +5,7 @@ package com.labs.dm.sudoku.solver.executors;
 
 import com.labs.dm.sudoku.solver.alg.*;
 import com.labs.dm.sudoku.solver.alg.chains.ForcingChains;
+import com.labs.dm.sudoku.solver.alg.chains.TwoStringKite;
 import com.labs.dm.sudoku.solver.alg.fish.*;
 import com.labs.dm.sudoku.solver.alg.hidden.*;
 import com.labs.dm.sudoku.solver.alg.naked.*;
@@ -51,6 +52,7 @@ public class Flow {
             run(matrix, XYZWing.class);
             run(matrix, SwordFish.class);
             run(matrix, JellyFish.class);
+            run(matrix, TwoStringKite.class);
             run(matrix, RemotePairs.class);
             run(matrix, Colouring.class);
             run(matrix, ForcingChains.class);

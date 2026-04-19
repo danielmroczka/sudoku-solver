@@ -2,6 +2,7 @@ package com.labs.dm.sudoku.solver.executors;
 
 import com.labs.dm.sudoku.solver.alg.*;
 import com.labs.dm.sudoku.solver.alg.chains.ForcingChains;
+import com.labs.dm.sudoku.solver.alg.chains.TwoStringKite;
 import com.labs.dm.sudoku.solver.alg.fish.*;
 import com.labs.dm.sudoku.solver.alg.hidden.*;
 import com.labs.dm.sudoku.solver.alg.naked.*;
@@ -37,6 +38,7 @@ public class FlowFactory {
             XYZWing.class,
             SwordFish.class,
             JellyFish.class,
+            TwoStringKite.class,
             RemotePairs.class,
             Colouring.class,
             ForcingChains.class
