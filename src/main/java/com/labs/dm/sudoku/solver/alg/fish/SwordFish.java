@@ -30,10 +30,20 @@ public class SwordFish implements IAlgorithm {
 
     @Override
     public void execute(IMatrix matrix) {
-        Map<Integer, List<List<Pair>>> pairs = detectSwordfish(matrix);
-        for (Map.Entry<Integer, List<List<Pair>>> entry : pairs.entrySet()) {
-            for (List<Pair> pair : entry.getValue()) {
-                remove(matrix, entry.getKey(), pair);
+        boolean progress = true;
+        while (progress) {
+            progress = false;
+            Map<Integer, List<List<Pair>>> pairs = detectSwordfish(matrix);
+            outer:
+            for (Map.Entry<Integer, List<List<Pair>>> entry : pairs.entrySet()) {
+                for (List<Pair> pair : entry.getValue()) {
+                    int before = matrix.getCandidatesCount();
+                    remove(matrix, entry.getKey(), pair);
+                    if (matrix.getCandidatesCount() < before) {
+                        progress = true;
+                        break outer;  // re-detect: matrix changed
+                    }
+                }
             }
         }
     }

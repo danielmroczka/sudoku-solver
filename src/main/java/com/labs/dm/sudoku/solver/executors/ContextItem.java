@@ -16,6 +16,7 @@ public record ContextItem(String name, int solved, int reducedCandidate, int tim
 
     @Override
     public String toString() {
-        return String.format("%n%s, %s, %s, %.3f[ms]", name, solved, reducedCandidate, time / 1000000f);
+        return String.format("%n%-30s | %7d | %7d | %10.3f [ms]",
+                name, solved, reducedCandidate, time / 1000000f);
     }
 }

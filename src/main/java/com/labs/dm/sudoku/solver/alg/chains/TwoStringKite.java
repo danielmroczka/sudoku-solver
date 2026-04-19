@@ -38,13 +38,21 @@ public class TwoStringKite implements IAlgorithm {
             for (int colIndex = 0; colIndex < colEnds.length; colIndex++) {
                 Pair rowPivot = rowEnds[rowIndex];
                 Pair colPivot = colEnds[colIndex];
+                Pair rowEndpoint = rowEnds[1 - rowIndex];
+                Pair colEndpoint = colEnds[1 - colIndex];
 
                 if (!theSameBlock(rowPivot, colPivot)) {
                     continue;
                 }
-
-                Pair rowEndpoint = rowEnds[1 - rowIndex];
-                Pair colEndpoint = colEnds[1 - colIndex];
+                // Degenerate: same pivot cell shared by both links — not a valid kite
+                if (rowPivot.equals(colPivot)) {
+                    continue;
+                }
+                // The row endpoint must not be in the same column as the col link,
+                // and the col endpoint must not be in the same row as the row link
+                if (rowEndpoint.col() == colPivot.col() || colEndpoint.row() == rowPivot.row()) {
+                    continue;
+                }
 
                 Set<Pair> excluded = new HashSet<>(List.of(rowLink.first, rowLink.second, colLink.first, colLink.second));
                 removeFromCommonPeers(matrix, candidate, rowEndpoint, colEndpoint, excluded);
@@ -91,26 +99,19 @@ public class TwoStringKite implements IAlgorithm {
     }
 
     private void removeFromCommonPeers(IMatrix matrix, int candidate, Pair rowEndpoint, Pair colEndpoint, Set<Pair> excluded) {
-        for (int row = 0; row < Matrix.SIZE; row++) {
-            for (int col = 0; col < Matrix.SIZE; col++) {
-                Pair cell = new Pair(row, col);
-                if (excluded.contains(cell) || !matrix.getCandidates(row, col).contains(candidate)) {
-                    continue;
-                }
-                if (arePeers(cell, rowEndpoint) && arePeers(cell, colEndpoint)) {
-                    matrix.removeCandidate(row, col, candidate);
-                }
-            }
-        }
-    }
+        // The only valid elimination cell is at the intersection of:
+        //   - the row of the column-link's non-pivot end
+        //   - the column of the row-link's non-pivot end
+        int targetRow = colEndpoint.row();
+        int targetCol = rowEndpoint.col();
+        Pair target = new Pair(targetRow, targetCol);
 
-    private boolean arePeers(Pair first, Pair second) {
-        if (first.equals(second)) {
-            return false;
+        if (excluded.contains(target)) {
+            return;
         }
-        return first.row() == second.row()
-                || first.col() == second.col()
-                || theSameBlock(first, second);
+        if (matrix.getCandidates(targetRow, targetCol).contains(candidate)) {
+            matrix.removeCandidate(targetRow, targetCol, candidate);
+        }
     }
 
     private boolean theSameBlock(Pair first, Pair second) {

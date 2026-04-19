@@ -12,7 +12,7 @@ public class LogListener implements IMatrixListener, Serializable {
 
     @Override
     public void onChangeValue(int row, int col, int value) {
-        LOGGER.info(String.format("Set cell value %d at: %d, %d", value, row, col));
+        LOGGER.fine(String.format("Set cell value %d at: %d, %d", value, row, col));
     }
 
     @Override
@@ -22,6 +22,6 @@ public class LogListener implements IMatrixListener, Serializable {
 
     @Override
     public void onRemoveCandidate(int row, int col, int removedCandidate) {
-        LOGGER.info(String.format("Remove candidate %d at: %d, %d", removedCandidate, row, col));
+        LOGGER.fine(String.format("Remove candidate %d at: %d, %d", removedCandidate, row, col));
     }
 }

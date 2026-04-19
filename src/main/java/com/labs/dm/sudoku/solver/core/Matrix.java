@@ -346,7 +346,24 @@ public class Matrix implements IMatrix, Serializable {
     public boolean validate() {
         validateRows();
         validateCols();
+        validateBlocks();
         return true;
+    }
+
+    private void validateBlocks() {
+        Set<Integer> set = new HashSet<>();
+        for (int rowBlock = 0; rowBlock < BLOCK_SIZE; rowBlock++) {
+            for (int colBlock = 0; colBlock < BLOCK_SIZE; colBlock++) {
+                int[] block = getElemsInBlock(rowBlock, colBlock);
+                for (int b : block) {
+                    validateInputValue(b);
+                    if (!set.add(b) && isSetValue(b)) {
+                        throw new IllegalStateException("Value " + b + " is not unique in block: [" + rowBlock + "," + colBlock + "]");
+                    }
+                }
+                set.clear();
+            }
+        }
     }
 
     @Override

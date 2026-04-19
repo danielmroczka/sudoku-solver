@@ -1,5 +1,6 @@
 package com.labs.dm.sudoku.solver.executors;
 
+import com.labs.dm.sudoku.solver.alg.Disabled;
 import com.labs.dm.sudoku.solver.alg.IAlgorithm;
 import com.labs.dm.sudoku.solver.core.IMatrix;
 
@@ -25,6 +26,10 @@ public class Executor {
             instance = new Executor();
         }
         for (Class<? extends IAlgorithm> clazz : classes) {
+            if (clazz.isAnnotationPresent(Disabled.class)) {
+                LOGGER.fine("Skipping disabled algorithm: " + clazz.getSimpleName());
+                continue;
+            }
             instance.execute(matrix, clazz);
             if (!matrix.validate(true)) {
                 System.err.println("NotValid " + clazz);

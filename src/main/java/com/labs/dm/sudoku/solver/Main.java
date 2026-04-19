@@ -4,6 +4,9 @@
 
 package com.labs.dm.sudoku.solver;
 
+import com.labs.dm.sudoku.solver.core.IMatrix;
+import com.labs.dm.sudoku.solver.core.listener.LogListener;
+import com.labs.dm.sudoku.solver.executors.Flow;
 import com.labs.dm.sudoku.solver.io.Generator;
 
 import java.io.IOException;
@@ -18,12 +21,13 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Generator generator = new Generator();
-        generator.generate(70);
+        IMatrix matrix = generator.generate(70);
+
 //        MatrixLoader loader = new MatrixLoader();
-//        IMatrix matrix = loader.load("src/test/resources/patterns/hard/hard6.txt");
-//        matrix.addMatrixListener(new LogListener());
-//        Flow flow = new Flow();
-//        flow.execute(matrix);
-//        System.out.println(matrix.getContext());
+//        IMatrix matrix = loader.load("src/test/resources/patterns/hard/hard7.txt");
+        matrix.addMatrixListener(new LogListener());
+        Flow flow = new Flow();
+        flow.execute(matrix);
+        System.out.println(matrix.getContext());
     }
 }
