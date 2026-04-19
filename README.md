@@ -21,6 +21,7 @@ Implemented algorithms:
 - [x]  XYZ-Wing
 - [x]  Sword-Fish
 - [x]  Jelly-Fish
+- [x]  Remote Pairs
 - [x]  Forcing Chains
 
 ## Usage
