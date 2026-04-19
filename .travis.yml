@@ -1,3 +1,5 @@
 language: java
+jdk:
+  - temurin21
 script: mvn clean test
 # cobertura:cobertura coveralls:report

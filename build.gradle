@@ -17,11 +17,14 @@ repositories {
     mavenCentral() // Corresponds to Maven's central repository
 }
 
-// Configure Java compilation compatibility
+// Configure Java compilation to target Java 21 bytecode/API
 java {
-    // Using Java 17 as specified in the maven-compiler-plugin config, which overrides the property
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
 }
 
 // Define dependencies (similar to <dependencies> in Maven)

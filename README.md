@@ -2,6 +2,8 @@
 
 Library designed to solving Sudoku problem written in Java.
 
+Requires JDK 21 or newer to build and run.
+
 [![Build Status](https://travis-ci.org/danielmroczka/sudoku-solver.png?branch=master)](https://travis-ci.org/danielmroczka/sudoku-solver)
 [![Build Status](https://dl.circleci.com/status-badge/img/gh/danielmroczka/sudoku-solver/tree/develop.svg?style=svg)](https://circleci.com/gh/danielmroczka/sudoku-solver)
 [![Coverage Status](https://coveralls.io/repos/github/danielmroczka/sudoku-solver/badge.svg?branch=master)](https://coveralls.io/github/danielmroczka/sudoku-solver?branch=master)
@@ -48,6 +50,13 @@ Command line:
 
 ```
 java -jar sudoku-solver.jar <txt file with sudoku>
+```
+
+Build:
+
+```bash
+./gradlew build
+mvn clean test
 ```
 
 JavaDoc: [javadoc](http://danielmroczka.github.io/sudoku-solver/api/)
