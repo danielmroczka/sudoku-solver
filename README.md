@@ -22,6 +22,7 @@ Implemented algorithms:
 - [x]  Sword-Fish
 - [x]  Jelly-Fish
 - [x]  Remote Pairs
+- [x]  Colouring
 - [x]  Forcing Chains
 
 ## Usage
